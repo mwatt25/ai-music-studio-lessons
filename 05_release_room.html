@@ -59,17 +59,18 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .wave-divider{display:flex;align-items:center;gap:3px;padding:32px 0;opacity:.2;}
 .wave-bar{width:2px;background:var(--gold);border-radius:1px;flex-shrink:0;}
 
-/* ── DECISION CARDS ── */
-.decision-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:28px;}
-.decision-card{background:var(--navy-2);border-right:1px solid var(--bw2);padding:28px 24px;cursor:pointer;transition:background .15s;user-select:none;}
+/* ── 3-CARD DECISION GRID ── */
+.decision-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:28px;}
+.decision-card{background:var(--navy-2);border-right:1px solid var(--bw2);padding:28px 22px;cursor:pointer;transition:background .15s;user-select:none;}
 .decision-card:last-child{border-right:none;}
 .decision-card:hover{background:var(--navy-3);}
-.decision-card.selected-keep{background:var(--navy-3);border-top:3px solid var(--blue);}
-.decision-card.selected-release{background:rgba(245,166,35,0.07);border-top:3px solid var(--gold);}
+.decision-card.sel-keep{background:var(--navy-3);border-top:3px solid var(--blue);}
+.decision-card.sel-share{background:rgba(74,158,191,0.06);border-top:3px solid var(--blue);}
+.decision-card.sel-release{background:rgba(245,166,35,0.07);border-top:3px solid var(--gold);}
 .dc-icon{margin-bottom:12px;color:var(--gold);}
-.dc-title{font-size:18px;font-weight:900;color:var(--white);margin-bottom:6px;line-height:1.2;letter-spacing:-.01em;}
-.decision-card.selected-keep .dc-title{color:var(--blue);}
-.decision-card.selected-release .dc-title{color:var(--gold);}
+.dc-title{font-size:17px;font-weight:900;color:var(--white);margin-bottom:6px;line-height:1.2;letter-spacing:-.01em;}
+.decision-card.sel-keep .dc-title,.decision-card.sel-share .dc-title{color:var(--blue);}
+.decision-card.sel-release .dc-title{color:var(--gold);}
 .dc-sub{font-size:12px;color:var(--muted);line-height:1.6;}
 
 /* ── PATH PANELS ── */
@@ -77,21 +78,20 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .path-panel.show{display:block;animation:fadeIn .3s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
 
-/* ── DISTROKID BLOCK ── */
-.dk-block{background:var(--navy-3);border:1px solid var(--bw2);border-top:3px solid var(--gold);padding:28px 28px;margin-bottom:20px;}
-.dk-eyebrow{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
-.dk-heading{font-size:1.2rem;font-weight:900;color:var(--white);margin-bottom:12px;line-height:1.2;}
-.dk-body{font-size:14px;color:var(--card);line-height:1.75;margin-bottom:16px;}
-.dk-links{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
-.dk-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:11px 20px;text-decoration:none;box-shadow:var(--sh-sm);transition:transform .12s;font-family:'Inter',sans-serif;min-height:42px;}
-.dk-btn:hover{transform:translateY(-1px);}
-.dk-btn.outline{background:transparent;color:var(--gold);border:1px solid var(--gold);}
-.dk-btn.outline:hover{background:var(--gold-dim);}
-.dk-disc{font-size:11px;color:var(--muted);line-height:1.65;border-top:1px solid var(--bw);padding-top:12px;font-style:italic;}
+/* ── INFO BLOCKS ── */
+.info-block{background:var(--navy-3);border:1px solid var(--bw2);border-left:4px solid var(--blue);padding:22px 24px;margin-bottom:20px;}
+.info-block-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.info-block-heading{font-size:1.05rem;font-weight:900;color:var(--white);margin-bottom:10px;line-height:1.2;}
+.info-block-body{font-size:14px;color:var(--card);line-height:1.75;}
 
-/* ── SUNO RIGHTS NOTE ── */
 .rights-note{background:var(--navy-4);border:1px solid var(--bw);border-left:3px solid rgba(245,166,35,0.35);padding:16px 18px;margin-bottom:20px;}
 .rights-note-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(245,166,35,0.6);margin-bottom:8px;}
+
+/* ── HYPERFOLLOW EXAMPLE ── */
+.hyperfollow-block{background:var(--navy-3);border:1px solid var(--bw2);border-top:3px solid var(--gold);padding:20px 22px;margin-bottom:24px;}
+.hyperfollow-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.hyperfollow-heading{font-size:1rem;font-weight:900;color:var(--white);margin-bottom:8px;line-height:1.2;}
+.hyperfollow-body{font-size:13px;color:var(--card);line-height:1.7;margin-bottom:14px;}
 
 /* ── STEPS LIST ── */
 .steps-list{border:1px solid var(--bw2);border-top:2px solid var(--gold);background:var(--navy-4);margin-bottom:24px;}
@@ -101,6 +101,15 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .step-row-num{font-size:1rem;font-weight:900;color:rgba(245,166,35,0.4);flex-shrink:0;width:22px;line-height:1.5;font-family:'Courier New',monospace;}
 .step-row-text{font-size:13px;color:var(--card);line-height:1.7;}
 .step-row-text strong{color:var(--off);}
+
+/* ── DISTROKID ── */
+.dk-block{background:var(--navy-3);border:1px solid var(--bw2);border-top:3px solid var(--gold);padding:24px 24px;margin-bottom:16px;}
+.dk-eyebrow{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.dk-heading{font-size:1.1rem;font-weight:900;color:var(--white);margin-bottom:10px;line-height:1.2;}
+.dk-body{font-size:14px;color:var(--card);line-height:1.75;margin-bottom:14px;}
+.dk-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:11px 20px;text-decoration:none;box-shadow:var(--sh-sm);transition:transform .12s;font-family:'Inter',sans-serif;min-height:42px;margin-bottom:12px;}
+.dk-btn:hover{transform:translateY(-1px);}
+.dk-disc{font-size:11px;color:var(--muted);line-height:1.65;border-top:1px solid var(--bw);padding-top:10px;font-style:italic;}
 
 /* ── LINK INPUT ── */
 .link-wrap{margin-bottom:24px;}
@@ -112,8 +121,8 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 /* ── BUTTONS ── */
 .primary-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .12s,box-shadow .12s;min-height:48px;}
 .primary-btn:hover{transform:translateY(-2px);box-shadow:6px 6px 0 rgba(0,0,0,.6);}
-.outline-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:11px 22px;border:1px solid var(--blue);cursor:pointer;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;text-decoration:none;transition:all .15s;min-height:42px;}
-.outline-btn:hover{background:var(--blue);color:var(--navy);}
+.link-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--blue);text-decoration:none;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;transition:all .15s;min-height:42px;}
+.link-btn:hover{background:var(--blue);color:var(--navy);}
 
 /* ── COMPLETION ── */
 .completion{display:none;background:var(--green-dim);border:1px solid rgba(39,174,96,0.2);border-top:3px solid var(--green);padding:44px 32px;box-shadow:var(--sh);margin-top:48px;position:relative;overflow:hidden;}
@@ -136,8 +145,6 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   .decision-grid{grid-template-columns:1fr;}
   .decision-card{border-right:none;border-bottom:1px solid var(--bw2);}
   .decision-card:last-child{border-bottom:none;}
-  .dk-links{flex-direction:column;}
-  .dk-links .dk-btn{width:100%;}
   .completion{padding:28px 20px;}
   .wave-divider{padding:20px 0;}
 }
@@ -195,12 +202,12 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 
 <div class="body-wrap">
 
-  <!-- SONG SO FAR -->
+  <!-- OPENING — adapts to Session 4 completion -->
   <div class="session-opening reveal">
     <div class="session-bg-num">05</div>
     <div class="session-eyebrow">The Release Room &nbsp;/&nbsp; Session 05</div>
     <div class="session-big-q">You made something real.</div>
-    <div class="session-sub">You started with an idea. You built a song, a video, and a visual world. Now one question remains.</div>
+    <div class="session-sub" id="opening-sub">You started with an idea. You built a song. Now one question remains.</div>
     <div id="ssf-card-container"></div>
   </div>
 
@@ -209,114 +216,153 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <!-- DECISION -->
   <div class="studio-label reveal">The Decision</div>
   <div class="studio-heading reveal">What are you doing with this?</div>
-  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:24px;line-height:1.65;">Both are valid. There is no wrong answer here.</p>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:24px;line-height:1.65;">All three are valid. There is no wrong answer here.</p>
 
   <div class="decision-grid reveal">
     <div class="decision-card" id="card-keep" onclick="chooseDecision('keep')">
       <div class="dc-icon">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </div>
       <div class="dc-title">Keep It Personal</div>
-      <div class="dc-sub">This one is for you, or for someone specific. It does not need to be on Spotify to matter.</div>
+      <div class="dc-sub">Keep it for yourself or share it privately with someone.</div>
+    </div>
+    <div class="decision-card" id="card-share" onclick="chooseDecision('share')">
+      <div class="dc-icon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      </div>
+      <div class="dc-title">Share It</div>
+      <div class="dc-sub">Post it, send it, or share your song or video without a streaming release.</div>
     </div>
     <div class="decision-card" id="card-release" onclick="chooseDecision('release')">
       <div class="dc-icon">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg>
       </div>
-      <div class="dc-title">Put It Out There</div>
-      <div class="dc-sub">Release it to streaming platforms. Let the world hear what you made.</div>
+      <div class="dc-title">Release It</div>
+      <div class="dc-sub">Distribute your song to streaming platforms.</div>
     </div>
   </div>
 
-  <!-- PATH: KEEP IT PERSONAL -->
+  <!-- ── PATH: KEEP IT PERSONAL ── -->
   <div class="path-panel" id="path-keep">
-    <div style="background:var(--navy-3);border:1px solid var(--bw2);border-left:4px solid var(--blue);padding:24px 24px;margin-bottom:28px;">
-      <div style="font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">Keep It Personal</div>
-      <p style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:10px;line-height:1.5;">That is a complete and valid choice.</p>
-      <p style="font-size:14px;color:var(--card);line-height:1.75;margin-bottom:14px;">Not every song needs an audience. A song made for someone's birthday, a tribute to a person you love, a story only your family would understand — these are complete works. They do not need Spotify to be real.</p>
-      <p style="font-size:14px;color:var(--card);line-height:1.75;">You can always change your mind later. The song is yours. The decision is yours.</p>
+    <div class="info-block">
+      <div class="info-block-label">Keep It Personal</div>
+      <div class="info-block-heading">That is a complete and valid choice.</div>
+      <div class="info-block-body">
+        <p style="margin-bottom:10px;">Not every song needs an audience. A song made for someone's birthday, a tribute to a person you love, a story only your family would understand — these are complete works. They do not need Spotify to be real.</p>
+        <p>You can always change your mind later. The song is yours. The decision is yours.</p>
+      </div>
     </div>
-
     <div class="link-wrap">
       <label>Where is your song saved? (optional)</label>
       <input type="text" class="link-input" id="personal-link" placeholder="Suno link, Google Drive, anywhere you want to keep it..." oninput="AISProject.update('release.info',this.value)">
     </div>
-
     <button class="primary-btn" onclick="completeSession('keep')">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      I'm Done. Take Me to The Premiere.
+      Take Me to The Premiere
     </button>
   </div>
 
-  <!-- PATH: PUT IT OUT THERE -->
+  <!-- ── PATH: SHARE IT ── -->
+  <div class="path-panel" id="path-share">
+    <div class="info-block">
+      <div class="info-block-label">Share It</div>
+      <div class="info-block-heading">You made something worth sharing.</div>
+      <div class="info-block-body">
+        <p style="margin-bottom:12px;">You can share your song or video without distributing it to streaming platforms. A few ways to do that:</p>
+        <ul style="padding-left:18px;margin-bottom:12px;line-height:2;">
+          <li>Share your <strong style="color:var(--off);">Suno link</strong> directly — anyone with the link can listen</li>
+          <li>Post your <strong style="color:var(--off);">sample video</strong> to Instagram, TikTok, YouTube, or anywhere you share content</li>
+          <li>Send the song or video privately to the person it was made for</li>
+        </ul>
+        <p>If your song was created on Suno's free plan, sharing it in a personal, non-commercial context is permitted. Monetizing or commercially distributing a free-plan song is not. If you want to monetize, see the Release It path instead.</p>
+      </div>
+    </div>
+    <div class="link-wrap">
+      <label>Your Suno link or video link (optional)</label>
+      <input type="text" class="link-input" id="share-link" placeholder="Paste your Suno link, video link, or note where it is saved..." oninput="AISProject.update('release.info',this.value)">
+    </div>
+    <button class="primary-btn" onclick="completeSession('share')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Take Me to The Premiere
+    </button>
+  </div>
+
+  <!-- ── PATH: RELEASE IT ── -->
   <div class="path-panel" id="path-release">
 
-    <!-- Suno commercial rights reminder -->
-    <div class="rights-note reveal">
-      <div class="rights-note-label">Before You Distribute</div>
-      <p style="font-size:13px;color:var(--card);line-height:1.75;margin-bottom:8px;"><strong style="color:var(--off);">Commercial rights matter here.</strong> Songs created on Suno's free plan are for personal, non-commercial use and cannot be monetized or commercially distributed.</p>
-      <p style="font-size:13px;color:var(--card);line-height:1.75;margin-bottom:10px;">To release your song commercially, you need to have generated it while subscribed to an eligible paid Suno plan. Upgrading after the fact generally does not apply retroactively.</p>
-      <p style="font-size:13px;color:var(--card);line-height:1.75;margin-bottom:10px;">If you created your song on a free plan and want to release it, the cleanest path is to subscribe to an eligible Suno plan and regenerate your final version before distributing.</p>
-      <a href="https://suno.com/pricing" target="_blank" style="font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.5px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Check Suno's current plans <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <!-- Rights checkpoint -->
+    <div class="rights-note">
+      <div class="rights-note-label">Before You Release</div>
+      <p style="font-size:13px;color:var(--card);line-height:1.75;margin-bottom:10px;"><strong style="color:var(--off);">Commercial rights matter here.</strong> Songs created on Suno's free plan are for personal, non-commercial use and cannot be monetized or commercially distributed.</p>
+      <p style="font-size:13px;color:var(--card);line-height:1.75;margin-bottom:10px;">Songs created while subscribed to an eligible paid Suno plan (Pro or Premier) receive commercial-use rights for that song. Upgrading after the fact generally does not retroactively apply to songs already generated on the free plan.</p>
+      <p style="font-size:13px;color:var(--card);line-height:1.75;margin-bottom:10px;">If you generated your song on the free plan and want to release it commercially, the cleanest path is to subscribe to an eligible plan and regenerate your final version before distributing.</p>
+      <p style="font-size:12px;color:var(--muted);line-height:1.65;font-style:italic;">Note: commercial-use rights from Suno do not guarantee copyright protection. Suno's own documentation notes this distinction.</p>
+      <a href="https://suno.com/pricing" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--blue);text-decoration:none;margin-top:10px;">Check Suno's current plans <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
 
-    <!-- What distribution means -->
-    <div class="studio-label reveal">Distribution</div>
-    <div class="studio-heading reveal">How streaming distribution works.</div>
-    <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">A distribution service takes your song and delivers it to Spotify, Apple Music, Amazon Music, YouTube Music, and dozens of other platforms. You keep your rights. They handle the delivery.</p>
+    <!-- Distribution walkthrough -->
+    <div class="studio-label" style="margin-top:8px;">Distribution</div>
+    <div class="studio-heading">How streaming distribution works.</div>
+    <p style="font-size:13px;color:var(--card);margin-bottom:20px;margin-top:6px;line-height:1.65;">A distribution service takes your song and delivers it to Spotify, Apple Music, Amazon Music, YouTube Music, and dozens of other platforms. You keep your rights. They handle the delivery.</p>
 
-    <div class="steps-list reveal">
+    <div class="steps-list">
       <div class="steps-header">What Happens When You Distribute</div>
-      <div class="step-row"><div class="step-row-num">01</div><div class="step-row-text"><strong>You upload your audio file</strong> — typically an MP3 or WAV from Suno.</div></div>
-      <div class="step-row"><div class="step-row-num">02</div><div class="step-row-text"><strong>You upload your cover art</strong> — square format, at least 3000 x 3000 pixels. The prompt you built in Session 4 can help you generate this.</div></div>
-      <div class="step-row"><div class="step-row-num">03</div><div class="step-row-text"><strong>You fill in your song details</strong> — title, artist name, genre, release date.</div></div>
-      <div class="step-row"><div class="step-row-num">04</div><div class="step-row-text"><strong>You choose your platforms</strong> — most distributors send to all major platforms by default.</div></div>
-      <div class="step-row"><div class="step-row-num">05</div><div class="step-row-text"><strong>You wait</strong> — delivery typically takes 3 to 7 days. Spotify and Apple Music have their own review timelines.</div></div>
+      <div class="step-row"><div class="step-row-num">01</div><div class="step-row-text"><strong>Upload your audio file</strong> — typically an MP3 or WAV exported from Suno.</div></div>
+      <div class="step-row"><div class="step-row-num">02</div><div class="step-row-text"><strong>Upload your cover art</strong> — square format, at least 3000 x 3000 pixels. The prompt you built in Session 4 can help generate this.</div></div>
+      <div class="step-row"><div class="step-row-num">03</div><div class="step-row-text"><strong>Fill in your song details</strong> — title, artist name, genre, release date.</div></div>
+      <div class="step-row"><div class="step-row-num">04</div><div class="step-row-text"><strong>Choose your platforms</strong> — most distributors send to all major platforms by default.</div></div>
+      <div class="step-row"><div class="step-row-num">05</div><div class="step-row-text"><strong>Wait</strong> — delivery typically takes 3 to 7 days. Spotify and Apple Music have their own review timelines.</div></div>
       <div class="step-row"><div class="step-row-num">06</div><div class="step-row-text"><strong>Your song goes live</strong> — you get a streaming link you can share anywhere.</div></div>
     </div>
 
-    <!-- DistroKid -->
+    <!-- HyperFollow example -->
+    <div class="hyperfollow-block">
+      <div class="hyperfollow-label">See What a Release Looks Like</div>
+      <div class="hyperfollow-heading">This is where the Studio example ended up.</div>
+      <div class="hyperfollow-body">"My Kind of Man" — the song you heard at the beginning of this experience — went through this same process. It started as an idea, became a song, got a visual, and was distributed. Here is the release page.</div>
+      <a href="https://distrokid.com/hyperfollow/vonnevayle/my-kind-of-man" target="_blank" class="link-btn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        View "My Kind of Man" Release Page
+      </a>
+    </div>
+
     <div class="wave-divider" id="wave2"></div>
 
-    <div class="studio-label reveal">DistroKid</div>
-    <div class="studio-heading reveal">The distributor used for this experience.</div>
-    <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">DistroKid is one of the most widely used music distribution services. It is what was used to release the example song you heard at the beginning of this experience.</p>
+    <!-- DistroKid -->
+    <div class="studio-label">DistroKid</div>
+    <div class="studio-heading">The distributor used for this experience.</div>
+    <p style="font-size:13px;color:var(--card);margin-bottom:20px;margin-top:6px;line-height:1.65;">DistroKid is one of the most widely used music distribution services. It is what was used to release "My Kind of Man."</p>
 
-    <div class="dk-block reveal">
-      <div class="dk-eyebrow">General Access</div>
-      <div class="dk-heading">DistroKid — 7% off</div>
-      <div class="dk-body">Use this link for standard access to DistroKid. You get 7% off your first year.</div>
-      <div class="dk-links">
-        <a href="https://distrokid.com/invite/10111695" target="_blank" class="dk-btn">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Get 7% Off DistroKid
-        </a>
-      </div>
+    <div class="dk-block">
+      <div class="dk-eyebrow">General Referral</div>
+      <div class="dk-heading">DistroKid — 7% off your first year</div>
+      <div class="dk-body">New users receive 7% off their first year through this referral link.</div>
+      <a href="https://distrokid.com/invite/10111695" target="_blank" class="dk-btn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Get 7% Off DistroKid
+      </a>
       <div class="dk-disc">This is a referral link. A benefit may be received if you sign up through it. The discount applies to your first year.</div>
     </div>
 
-    <div class="dk-block reveal">
-      <div class="dk-eyebrow">Educators and Students</div>
+    <div class="dk-block">
+      <div class="dk-eyebrow">Student and Educator Referral</div>
       <div class="dk-heading">DistroKid — 50% off</div>
-      <div class="dk-body">If you are an educator or student, use this link for 50% off. This is the same full DistroKid service — just a deeper discount for the education community.</div>
-      <div class="dk-links">
-        <a href="https://distrokid.com/student/10111695" target="_blank" class="dk-btn">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Get 50% Off — Educators and Students
-        </a>
-      </div>
-      <div class="dk-disc">This is a referral link. A benefit may be received if you sign up through it. The 50% discount is for educators and students.</div>
+      <div class="dk-body">Students and educators can receive 50% off through this referral link.</div>
+      <a href="https://distrokid.com/student/10111695" target="_blank" class="dk-btn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Get 50% Off — Students and Educators
+      </a>
+      <div class="dk-disc">This is a referral link. A benefit may be received if you sign up through it. The 50% discount is for eligible students and educators.</div>
     </div>
 
-    <!-- Release link -->
-    <div class="link-wrap reveal" style="margin-top:8px;">
+    <div class="link-wrap" style="margin-top:8px;">
       <label>Your streaming link (once it is live)</label>
-      <input type="text" class="link-input" id="release-link" placeholder="Paste your Spotify, Apple Music, or DistroKid link here..." oninput="AISProject.update('release.info',this.value)">
+      <input type="text" class="link-input" id="release-link" placeholder="Paste your Spotify, Apple Music, or DistroKid HyperFollow link here..." oninput="AISProject.update('release.info',this.value)">
     </div>
 
-    <button class="primary-btn reveal" onclick="completeSession('release')">
+    <button class="primary-btn" onclick="completeSession('release')">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      I'm Ready. Take Me to The Premiere.
+      Take Me to The Premiere
     </button>
 
   </div>
@@ -346,51 +392,70 @@ function buildWave(id){var el=document.getElementById(id);if(!el)return;var h=[3
 
 (function(){
   var p=AISProject.get();
-  AISProject.renderSongCard('ssf-card-container',['concept','lyrics','production','visuals'],'Now one question remains.');
+
+  // Adaptive opening copy based on Session 4 completion
+  var hasVideo=!!(p.visuals&&(p.visuals.videoLink||p.visuals.selectedVersion));
+  var subEl=document.getElementById('opening-sub');
+  if(subEl){
+    if(hasVideo){
+      subEl.textContent='You started with an idea. You built a song and gave it a visual world. Now one question remains.';
+    } else {
+      subEl.textContent='You started with an idea. You built a song. Now one question remains.';
+    }
+  }
+
+  // Song So Far card — show video only if it actually exists
+  var stages=['concept','lyrics','production'];
+  if(hasVideo)stages.push('visuals');
+  AISProject.renderSongCard('ssf-card-container',stages,'Now one question remains.');
+
   // Restore decision
   if(p.release&&p.release.decision){
     chooseDecision(p.release.decision,true);
   }
+  // Restore saved links
   if(p.release&&p.release.info){
-    var el=document.getElementById('personal-link')||document.getElementById('release-link');
+    var decision=p.release.decision||'';
+    var el=document.getElementById(decision==='release'?'release-link':decision==='share'?'share-link':'personal-link');
     if(el)el.value=p.release.info;
   }
 })();
 
-function chooseDecision(choice, silent){
-  AISProject.update('release.decision', choice);
-  var cardKeep=document.getElementById('card-keep');
-  var cardRelease=document.getElementById('card-release');
-  var pathKeep=document.getElementById('path-keep');
-  var pathRelease=document.getElementById('path-release');
-  if(cardKeep)cardKeep.classList.remove('selected-keep','selected-release');
-  if(cardRelease)cardRelease.classList.remove('selected-keep','selected-release');
-  if(pathKeep)pathKeep.classList.remove('show');
-  if(pathRelease)pathRelease.classList.remove('show');
-  if(choice==='keep'){
-    if(cardKeep)cardKeep.classList.add('selected-keep');
-    if(pathKeep){pathKeep.classList.add('show');if(!silent)setTimeout(function(){pathKeep.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}
-  } else {
-    if(cardRelease)cardRelease.classList.add('selected-release');
-    if(pathRelease){pathRelease.classList.add('show');if(!silent)setTimeout(function(){pathRelease.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}
-  }
+function chooseDecision(choice,silent){
+  AISProject.update('release.decision',choice);
+  ['keep','share','release'].forEach(function(c){
+    var card=document.getElementById('card-'+c);
+    var panel=document.getElementById('path-'+c);
+    if(card)card.classList.remove('sel-keep','sel-share','sel-release');
+    if(panel)panel.classList.remove('show');
+  });
+  var card=document.getElementById('card-'+choice);
+  var panel=document.getElementById('path-'+choice);
+  if(card)card.classList.add('sel-'+choice);
+  if(panel){panel.classList.add('show');if(!silent)setTimeout(function(){panel.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}
 }
 
 function completeSession(choice){
-  AISProject.update('release.completed', true);
+  AISProject.update('release.completed',true);
   var comp=document.getElementById('completion');
   var title=document.getElementById('completion-title');
   var sub=document.getElementById('completion-sub');
   if(!comp)return;
-  if(choice==='release'){
-    if(title)title.textContent='You made something and put it out there.';
-    if(sub)sub.textContent='That is not a small thing. Time for The Premiere.';
-  } else {
-    if(title)title.textContent='You made something real.';
-    if(sub)sub.textContent='Whether it stays personal or goes public someday — you built it. Time for The Premiere.';
-  }
+  var messages={
+    keep:{title:'You made something real.',sub:'Whether it stays personal or goes public someday — you built it. Time for The Premiere.'},
+    share:{title:'You made something worth sharing.',sub:'Go put it out there. Time for The Premiere.'},
+    release:{title:'You made something and put it out there.',sub:'That is not a small thing. Time for The Premiere.'}
+  };
+  var m=messages[choice]||messages.keep;
+  if(title)title.textContent=m.title;
+  if(sub)sub.textContent=m.sub;
   comp.classList.add('show');
-  AISProject.renderSongCard('completion-ssf',['concept','lyrics','production','visuals','release'],'You built the whole thing.');
+  var p=AISProject.get();
+  var hasVideo=!!(p.visuals&&(p.visuals.videoLink||p.visuals.selectedVersion));
+  var stages=['concept','lyrics','production'];
+  if(hasVideo)stages.push('visuals');
+  stages.push('release');
+  AISProject.renderSongCard('completion-ssf',stages,'You built the whole thing.');
   setTimeout(function(){comp.scrollIntoView({behavior:'smooth',block:'nearest'});},100);
 }
 
