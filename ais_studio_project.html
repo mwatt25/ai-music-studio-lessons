@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Project — AI Music Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ais_shared.css">
+<script src="ais_project.js"></script>
+<style>
+:root{
+  --navy:#0D1117;--navy-2:#131A22;--navy-3:#1A2332;--navy-4:#080C12;
+  --gold:#F5A623;--gold-lt:#FBCF7A;--gold-dim:rgba(245,166,35,0.1);
+  --green:#27AE60;--green-dim:rgba(39,174,96,0.08);
+  --white:#FFFFFF;--off:#E8EDF2;--card:#C4CDD6;--muted:#7A8A9A;
+  --bw:rgba(255,255,255,0.07);--bw2:rgba(255,255,255,0.12);
+  --sh:4px 4px 0 rgba(0,0,0,0.6);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;}
+.brand-bar{display:flex;align-items:center;gap:10px;padding:10px 20px;background:var(--navy-2);border-bottom:1px solid var(--bw);}
+.brand-logo{height:24px;opacity:.9;}
+.brand-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+.hero-content{padding:40px 48px 28px;border-bottom:1px solid var(--bw);}
+.hero-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.hero-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:6px;}
+.hero-sub{font-size:14px;color:var(--card);line-height:1.6;}
+.body-wrap{max-width:860px;margin:0 auto;padding:40px 48px 80px;}
+.section{margin-bottom:40px;}
+.section-label{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.section-label::before{content:'';width:20px;height:2px;background:var(--gold);}
+.section-heading{font-size:1.3rem;font-weight:900;color:var(--white);margin-bottom:16px;letter-spacing:-.01em;}
+.project-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--bw2);}
+.pg-cell{padding:12px 16px;border-right:1px solid var(--bw);border-bottom:1px solid var(--bw);}
+.pg-cell:nth-child(even){border-right:none;}
+.pg-key{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.pg-val{font-size:13px;color:var(--off);word-break:break-word;font-family:'Courier New',monospace;line-height:1.5;max-height:80px;overflow:hidden;text-overflow:ellipsis;}
+.pg-val.empty{color:rgba(122,138,154,0.4);font-style:italic;}
+.pg-val.filled{color:var(--gold-lt);}
+.status-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.status-chip{font-size:11px;font-weight:700;padding:5px 12px;border:1px solid var(--bw);}
+.status-chip.ok{border-color:rgba(39,174,96,0.4);color:var(--green);background:var(--green-dim);}
+.status-chip.empty{border-color:var(--bw);color:var(--muted);}
+.divider{height:1px;background:var(--bw);margin:32px 0;}
+@media(max-width:660px){
+  .hero-content{padding:24px 20px;}
+  .body-wrap{padding:24px 20px 60px;}
+  .project-grid{grid-template-columns:1fr;}
+  .pg-cell{border-right:none;}
+  .pg-cell:nth-child(even){border-right:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="brand-bar">
+  <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/NHEGRhlODnmTUAVf.png" alt="Imagine That AI" class="brand-logo">
+  <span class="brand-label">An Imagine That AI Creative Experience</span>
+</div>
+
+<div class="hero-content">
+  <div class="hero-eyebrow">Studio Project</div>
+  <div class="hero-title">Your Song Project</div>
+  <div class="hero-sub">Your Studio project saves automatically in this browser. Switching devices? Save a project backup first.</div>
+</div>
+
+<div class="body-wrap">
+
+  <!-- YOUR SONG SO FAR CARD (populated by JS) -->
+  <div class="section">
+    <div id="ssf-container"></div>
+  </div>
+
+  <!-- PROJECT STATUS -->
+  <div class="section">
+    <div class="section-label">Progress</div>
+    <div class="section-heading">What you've made so far</div>
+    <div class="status-row" id="status-row"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT DATA -->
+  <div class="section">
+    <div class="section-label">Concept</div>
+    <div class="section-heading">Your story and direction</div>
+    <div class="project-grid" id="concept-grid"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BLUEPRINT -->
+  <div class="section">
+    <div class="section-label">Blueprint</div>
+    <div class="section-heading">Your Song Blueprint</div>
+    <div class="project-grid" id="blueprint-grid"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- LYRICS -->
+  <div class="section">
+    <div class="section-label">Lyrics</div>
+    <div class="section-heading">Your lyrics</div>
+    <div class="project-grid" id="lyrics-grid"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SAVE / RESTORE -->
+  <div class="section">
+    <div class="section-label">Backup</div>
+    <div class="section-heading">Save or restore your project</div>
+    <div id="sr-container"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SESSION LINKS -->
+  <div class="section">
+    <div class="section-label">Sessions</div>
+    <div class="section-heading">Continue where you left off</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+      <a href="01_concept.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy-2);border:1px solid var(--bw);color:var(--card);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:10px 18px;text-decoration:none;transition:border-color .15s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">Session 1: The Concept</a>
+      <a href="02_writing_room.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy-2);border:1px solid var(--bw);color:var(--card);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:10px 18px;text-decoration:none;transition:border-color .15s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">Session 2: The Writing Room</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function renderProjectPage() {
+  var p = AISProject.get();
+
+  // ── SONG SO FAR CARD ──
+  var stages = [];
+  if (p.concept.about || p.concept.genre) stages.push('concept');
+  if (p.lyrics.ready || p.lyrics.approved) stages.push('lyrics');
+  if (p.production.selectedVersion || p.production.sunoPrompt) stages.push('production');
+  if (p.visuals.videoLink || p.visuals.direction) stages.push('visuals');
+
+  var nextPrompts = {
+    0: 'Start with Session 1 to build your concept.',
+    1: 'Head to Session 2 to write your lyrics.',
+    2: 'Head to Session 3 to produce your song.',
+    3: 'Head to Session 4 to create your video.',
+    4: 'Head to Session 5 to release your song.'
+  };
+  AISProject.renderSongCard('ssf-container', stages, nextPrompts[stages.length] || 'Your song is ready.');
+
+  // ── STATUS CHIPS ──
+  var sr = document.getElementById('status-row');
+  if (sr) {
+    var checks = [
+      {label:'Concept', ok: !!(p.concept.about || p.concept.genre)},
+      {label:'Blueprint', ok: !!p.blueprint.approved},
+      {label:'Lyrics', ok: !!p.lyrics.approved},
+      {label:'Song', ok: !!p.production.selectedVersion},
+      {label:'Video', ok: !!p.visuals.videoLink},
+      {label:'Released', ok: !!p.release.completed}
+    ];
+    sr.innerHTML = checks.map(function(c) {
+      return '<div class="status-chip ' + (c.ok ? 'ok' : 'empty') + '">' +
+        (c.ok ? '✓ ' : '') + c.label + '</div>';
+    }).join('');
+  }
+
+  // ── CONCEPT GRID ──
+  renderGrid('concept-grid', [
+    {key:'About', val: p.concept.about},
+    {key:'Why', val: p.concept.why},
+    {key:'Genre', val: p.concept.genre},
+    {key:'Mood', val: p.concept.mood},
+    {key:'Feeling', val: p.concept.feeling},
+    {key:'Avoid', val: p.concept.avoid},
+    {key:'Details', val: p.concept.details},
+    {key:'Memory / Moment', val: p.concept.memory}
+  ]);
+
+  // ── BLUEPRINT GRID ──
+  renderGrid('blueprint-grid', [
+    {key:'Approved Blueprint', val: p.blueprint.approved, full: true},
+    {key:'Working Version', val: p.blueprint.working, full: true}
+  ]);
+
+  // ── LYRICS GRID ──
+  renderGrid('lyrics-grid', [
+    {key:'Approved Lyrics', val: p.lyrics.approved, full: true},
+    {key:'Ready', val: p.lyrics.ready ? 'Yes' : 'Not yet'}
+  ]);
+
+  // ── SAVE / RESTORE ──
+  AISProject.renderSaveRestoreUI('sr-container');
+}
+
+function renderGrid(id, fields) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = fields.map(function(f) {
+    var val = f.val || '';
+    var isEmpty = !val;
+    var display = isEmpty ? 'Not filled in yet' : (val.length > 120 ? val.substring(0, 120) + '…' : val);
+    return '<div class="pg-cell" ' + (f.full ? 'style="grid-column:1/-1;"' : '') + '>' +
+      '<div class="pg-key">' + f.key + '</div>' +
+      '<div class="pg-val ' + (isEmpty ? 'empty' : 'filled') + '">' + escHtml(String(display)) + '</div>' +
+      '</div>';
+  }).join('');
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+renderProjectPage();
+</script>
+</body>
+</html>
