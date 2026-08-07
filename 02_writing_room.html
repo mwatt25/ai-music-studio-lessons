@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Writing Room — The AI Music Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold: #F5A623; --gold-light: #FFB84D;
+  --navy: #080E1A; --navy-2: #0D1525; --navy-3: #111D30; --navy-4: #16243A;
+  --white: #FFFFFF; --off-white: #D8E0EE;
+  --body: #C4D0E2; --card: #B8C6D8;
+  --muted: #7A8EA8;
+  --bw: rgba(255,255,255,0.1); --bg: rgba(245,166,35,0.35);
+  --sh: 6px 6px 0 rgba(0,0,0,0.55);
+}
+
+/* STUDIO SHELL — all dark styles scoped inside this wrapper only */
+.studio-shell {
+  background: #080E1A;
+  min-height: 60vh;
+  width: 100%;
+  margin: -20px -20px 0 -20px;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  color: #C4D0E2;
+}
+
+/* ONE FONT FAMILY: Inter */
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--navy); color: var(--body);
+  line-height: 1.7; font-size: 16px;
+}
+
+/* ── HERO ── */
+.hero { position: relative; width: 100%; min-height: 320px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+.hero-bg { position: absolute; inset: 0; background-image: url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/GxOhZnRhIOoScchN.jpg'); background-size: cover; background-position: center 20%; filter: brightness(0.25) saturate(0.6); }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(8,14,26,0.65) 55%, var(--navy) 100%); }
+.hero-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--gold); z-index: 3; }
+.hero-content { position: relative; z-index: 2; padding: 32px 48px 40px 56px; }
+.brand-row { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.brand-logo { height: 32px; width: auto;  }
+.brand-sep { width: 1px; height: 22px; background: var(--muted); }
+.brand-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+.session-tag { display: inline-block; background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; padding: 4px 12px; margin-bottom: 12px; }
+
+/* HERO TITLE — Inter ExtraBold, readable */
+.hero-title { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; line-height: 1.05; color: var(--white); letter-spacing: -0.5px; margin-bottom: 12px; }
+.hero-title .accent { color: var(--gold); }
+.hero-rule { width: 48px; height: 4px; background: var(--gold); margin-bottom: 12px; }
+.hero-tagline { font-size: 1.05rem; font-style: italic; color: var(--gold-light); margin-bottom: 18px; font-weight: 400; }
+.meta-row { display: flex; gap: 0; flex-wrap: wrap; }
+.meta-chip { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--off-white); opacity: 0.65; padding: 5px 14px; border: 1px solid var(--bw); margin-right: -1px; }
+
+/* TICKER */
+.ticker { background: var(--gold); padding: 9px 48px; display: flex; align-items: center; gap: 20px; overflow: hidden; }
+.ticker-text { font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--navy); white-space: nowrap; }
+.ticker-sep { width: 4px; height: 4px; background: var(--navy); opacity: 0.35; flex-shrink: 0; }
+
+/* BODY */
+.body-wrap { max-width: 900px; margin: 0 auto; padding: 52px 48px 80px; }
+
+/* SECTION HEAD — Inter Bold, not condensed */
+.sh { margin: 52px 0 22px; display: flex; align-items: flex-start; gap: 16px; }
+.sh-bar { width: 4px; background: var(--gold); flex-shrink: 0; align-self: stretch; min-height: 44px; }
+.sh-text .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.sh-text h2 { font-size: 1.55rem; font-weight: 800; color: var(--white); letter-spacing: -0.3px; line-height: 1.15; }
+
+/* PULL QUOTE */
+.pq { border-left: 4px solid var(--gold); padding: 18px 24px; margin: 0 0 24px; background: var(--navy-3); box-shadow: var(--sh); }
+.pq p { font-size: 17px; font-weight: 400; color: var(--off-white); line-height: 1.8; }
+.pq strong { font-weight: 700; color: var(--gold-light); }
+.pq.plain p { font-size: 15px; color: var(--card); }
+.pq.optional { border-left-color: var(--muted); background: rgba(122,142,168,0.06); }
+.pq.optional p { font-size: 15px; color: var(--muted); }
+
+/* TEACHING POINT */
+.tp { background: var(--navy-3); border: 1px solid var(--bw); border-left: 3px solid var(--gold); padding: 18px 20px; margin: 0 0 20px; box-shadow: var(--sh); }
+.tp-eye { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.tp p { font-size: 16px; font-weight: 400; color: var(--card); line-height: 1.75; }
+.tp em { color: var(--gold-light); font-style: italic; }
+
+/* LESSON BLOCK */
+.lb { background: var(--navy-2); border: 1px solid var(--bw); margin-bottom: -1px; box-shadow: var(--sh); }
+.lb-head { display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-left: 3px solid var(--gold); background: var(--navy-3); }
+.lb-num { width: 36px; height: 36px; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 800; color: var(--navy); flex-shrink: 0; box-shadow: 2px 2px 0 rgba(0,0,0,0.4); }
+.lb-eye { font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.lb-title { font-size: 1rem; font-weight: 700; color: var(--white); }
+.lb-body { padding: 22px 22px 26px; border-top: 1px solid var(--bw); }
+
+/* PROMPT BOX — Inter Mono for code, larger and readable */
+.pb { background: #050B15; border: 1px solid var(--bw); margin: 16px 0; box-shadow: var(--sh); }
+.pb-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--navy-3); border-bottom: 1px solid var(--bw); }
+.pb-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); }
+.copy-btn { background: var(--gold); border: none; color: var(--navy); font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; cursor: pointer; box-shadow: 2px 2px 0 rgba(0,0,0,0.4); transition: opacity 0.15s; font-family: 'Inter', sans-serif; }
+.copy-btn:hover { opacity: 0.85; }
+/* PROMPT TEXT — Inter Mono, 14px, well-spaced — NOT Courier */
+.pb-text { padding: 18px 20px; font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; font-size: 14px; color: var(--off-white); line-height: 1.85; white-space: pre-wrap; }
+
+/* CHECKLIST */
+.cl { list-style: none; border: 1px solid var(--bw); box-shadow: var(--sh); }
+.cl li { display: flex; align-items: flex-start; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--bw); background: var(--navy-2); font-size: 15px; color: var(--card); transition: background 0.15s; }
+.cl li:last-child { border-bottom: none; }
+.cl li:hover { background: var(--navy-3); }
+.cl li input[type=checkbox] { width: 17px; height: 17px; accent-color: var(--gold); margin-top: 3px; flex-shrink: 0; cursor: pointer; }
+.cl li label { cursor: pointer; line-height: 1.6; }
+
+/* COMPARE */
+.cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 16px 0; box-shadow: var(--sh); }
+@media (max-width: 560px) { .cmp { grid-template-columns: 1fr; } }
+.cmp-cell { background: var(--navy-2); border: 1px solid var(--bw); padding: 20px 20px; }
+.cmp-cell.warn { border-left: 3px solid #C0392B; }
+.cmp-cell.good { border-left: 3px solid #27AE60; }
+.cmp-eye { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+.cmp-cell.warn .cmp-eye { color: #E74C3C; }
+.cmp-cell.good .cmp-eye { color: #2ECC71; }
+.cmp-cell p { font-size: 15px; color: var(--card); line-height: 1.75; }
+.cmp-cell em { color: var(--off-white); font-style: italic; }
+
+/* CARD GRID */
+.cg { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; box-shadow: var(--sh); }
+.cg-card { background: var(--navy-2); border: 1px solid var(--bw); padding: 22px 18px; transition: background 0.15s; }
+.cg-card:hover { background: var(--navy-3); }
+.cg-n { font-size: 2.2rem; font-weight: 800; color: var(--gold); opacity: 0.2; line-height: 1; margin-bottom: 8px; }
+.cg-title { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--bw); }
+.cg-card p { font-size: 14px; color: var(--card); line-height: 1.65; margin-top: 8px; }
+
+/* TAG ROW */
+.tags { display: flex; flex-wrap: wrap; gap: 0; margin: 12px 0; }
+.tag { background: var(--navy-3); border: 1px solid var(--bw); color: var(--off-white); font-size: 14px; font-weight: 500; padding: 6px 14px; margin: -1px -1px 0 0; }
+.tag.gold { background: rgba(245,166,35,0.08); border-color: var(--bg); color: var(--gold); }
+
+/* VIDEO PLACEHOLDER */
+.vid-placeholder { background: var(--navy-3); border: 2px dashed rgba(245,166,35,0.35); padding: 32px 24px; margin: 20px 0; text-align: center; box-shadow: var(--sh); }
+.vid-icon { font-size: 2.5rem; margin-bottom: 10px; opacity: 0.4; }
+.vid-label { font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; opacity: 0.8; }
+.vid-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* TOOL BUTTON */
+.tbtn { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--navy); font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; padding: 12px 24px; margin: 10px 8px 0 0; box-shadow: 4px 4px 0 rgba(0,0,0,0.5); transition: opacity 0.15s; font-family: 'Inter', sans-serif; }
+.tbtn:hover { opacity: 0.88; }
+.tbtn svg { width: 15px; height: 15px; flex-shrink: 0; }
+.tbtn.out { background: transparent; color: var(--gold); border: 2px solid var(--gold); box-shadow: 4px 4px 0 rgba(245,166,35,0.2); }
+
+/* DISTROKID */
+.dk { background: var(--navy-3); border: 1px solid var(--bg); border-left: 4px solid var(--gold); padding: 24px 26px; margin: 20px 0; box-shadow: var(--sh); }
+.dk h4 { font-size: 1.05rem; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+.dk p { font-size: 15px; color: var(--card); line-height: 1.7; margin-bottom: 12px; }
+.dk .disc { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 10px; border-top: 1px solid var(--bw); padding-top: 10px; }
+.dk-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; padding: 10px 20px; margin: 4px 6px 4px 0; box-shadow: 3px 3px 0 rgba(0,0,0,0.5); transition: opacity 0.15s; font-family: 'Inter', sans-serif; }
+.dk-btn:hover { opacity: 0.88; }
+.dk-btn.out { background: transparent; color: var(--gold); border: 2px solid var(--gold); box-shadow: 3px 3px 0 rgba(245,166,35,0.2); }
+
+/* CASE STUDY */
+.cs { background: var(--navy-2); border: 1px solid var(--bw); border-top: 4px solid var(--gold); padding: 28px 28px; margin: 20px 0; box-shadow: var(--sh); }
+.cs-eye { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.cs h3 { font-size: 1.25rem; font-weight: 800; color: var(--white); margin-bottom: 12px; }
+.cs p { font-size: 15px; color: var(--card); line-height: 1.75; margin-bottom: 12px; }
+
+/* YOUTUBE */
+.yt { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; box-shadow: var(--sh); border: 1px solid var(--bw); margin-bottom: 8px; }
+.yt iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.yt-cap { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); padding: 7px 0 0; opacity: 0.75; }
+
+/* WRITING PATH */
+.path-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; box-shadow: var(--sh); margin-bottom: 24px; }
+@media (max-width: 600px) { .path-grid { grid-template-columns: 1fr; } }
+.path-card { background: var(--navy-2); border: 1px solid var(--bw); border-top: 3px solid var(--gold); padding: 22px 18px; }
+.path-title { font-size: 1rem; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+.path-desc { font-size: 14px; color: var(--card); line-height: 1.6; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--bw); }
+
+/* INLINE HEADING */
+.ch3 { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white); margin: 20px 0 10px; padding-left: 12px; border-left: 3px solid var(--gold); }
+
+/* DIVIDER */
+.div { height: 1px; background: var(--bw); margin: 48px 0; position: relative; }
+.div::after { content: ''; position: absolute; left: 0; top: 0; width: 36px; height: 1px; background: var(--gold); }
+
+/* CTA */
+.cta { margin-top: 48px; background: var(--navy-3); border: 1px solid var(--bw); border-left: 4px solid var(--gold); padding: 28px 30px; display: flex; align-items: center; gap: 22px; box-shadow: var(--sh); }
+@media (max-width: 560px) { .cta { flex-direction: column; gap: 14px; } }
+.cta-icon { width: 48px; height: 48px; background: var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 3px 3px 0 rgba(0,0,0,0.5); }
+.cta-icon svg { width: 22px; height: 22px; color: var(--navy); stroke-width: 3; }
+.cta h3 { font-size: 1.1rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+.cta p { font-size: 15px; color: var(--body); line-height: 1.6; }
+
+/* JOURNEY RECAP */
+.jr { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--bw); box-shadow: var(--sh); }
+@media (max-width: 600px) { .jr { grid-template-columns: 1fr 1fr; } }
+.jr-step { background: var(--navy-2); border-right: 1px solid var(--bw); padding: 20px 14px; text-align: center; }
+.jr-step:last-child { border-right: none; }
+.jr-step.done { background: var(--navy-3); border-top: 3px solid var(--gold); }
+.jr-num { font-size: 2rem; font-weight: 800; color: var(--gold); opacity: 0.25; line-height: 1; margin-bottom: 6px; }
+.jr-step.done .jr-num { opacity: 0.65; }
+.jr-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--off-white); line-height: 1.3; }
+.jr-check { font-size: 18px; color: var(--gold); margin-top: 6px; }
+
+/* CLOSING */
+.closing { background: var(--navy-3); border: 1px solid var(--bg); border-top: 4px solid var(--gold); padding: 36px 36px; margin: 28px 0; box-shadow: var(--sh); text-align: center; }
+.closing-q { font-size: 1.35rem; font-weight: 700; font-style: italic; color: var(--white); line-height: 1.55; margin-bottom: 14px; }
+.closing-s { font-size: 16px; color: var(--card); line-height: 1.75; }
+.closing-s strong { color: var(--gold-light); font-weight: 700; }
+
+/* NEXT GRID */
+.ng { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; box-shadow: var(--sh); }
+@media (max-width: 560px) { .ng { grid-template-columns: 1fr; } }
+.ng-card { background: var(--navy-2); border: 1px solid var(--bw); padding: 24px 20px; transition: background 0.15s; }
+.ng-card:hover { background: var(--navy-3); }
+.ng-title { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--bw); }
+.ng-card p { font-size: 14px; color: var(--card); line-height: 1.65; margin-top: 8px; }
+
+/* FINAL CTA */
+.fcta { margin-top: 52px; background: rgba(245,166,35,0.07); border: 1px solid var(--bg); border-left: 4px solid var(--gold); padding: 32px 32px; box-shadow: var(--sh); }
+.fcta h3 { font-size: 1.4rem; font-weight: 800; color: var(--gold-light); margin-bottom: 10px; }
+.fcta p { font-size: 16px; color: var(--card); line-height: 1.75; }
+</style>
+</head>
+<body>
+<div class="studio-shell">
+<div class="hero">
+  <div class="hero-bg"></div><div class="hero-overlay"></div><div class="hero-accent"></div>
+  <div class="hero-content">
+    <div class="brand-row">
+      <img class="brand-logo" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/heMUaEGiQuGCzfpG.png" alt="Imagine That AI">
+      <div class="brand-sep"></div>
+      <span class="brand-label">An Imagine That AI Creative Experience</span>
+    </div>
+    <div class="session-tag">Session 2 of 5</div>
+    <div class="hero-title">The Writing Room</div>
+    <div class="hero-rule"></div>
+    <div class="hero-tagline">What am I saying?</div>
+    <div class="meta-row"><div class="meta-chip">10 to 12 Minutes</div><div class="meta-chip">ChatGPT</div><div class="meta-chip">Output: Finished Lyrics</div></div>
+  </div>
+</div>
+<div class="ticker">
+  <span class="ticker-text">Session 2 of 5</span>
+  <div class="ticker-sep"></div>
+  <span class="ticker-text">The AI Music Studio</span>
+  <div class="ticker-sep"></div>
+  <span class="ticker-text">Make the Song. Create the Video. Put It Out There.</span>
+</div>
+<div class="body-wrap">
+
+<div class="sh"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Session Goal</div><h2>From Blueprint to Lyrics</h2></div></div>
+<div class="vid-placeholder">
+  <div class="vid-icon">&#9654;</div>
+  <div class="vid-label">Video Demo</div>
+  <div class="vid-desc">Demo video: Overview of the three writing paths — coming soon</div>
+</div>
+<div class="pq"><p>Your Song Blueprint is the map. Now you are going to use it to generate real lyrics that are personalized, emotionally resonant, and ready for Suno. You have three paths. Pick the one that fits where you are right now.</p></div>
+
+<div class="div"></div>
+<div class="sh"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Three Writing Paths</div><h2>Choose Your Approach</h2></div></div>
+<p style="font-size:16px;color:var(--body);line-height:1.7;margin-bottom:24px;">All three paths are shown below. Select the one that matches your comfort level and time. You can always switch paths on your next song.</p>
+
+<div class="path-grid">
+  <div class="path-card">
+    <div class="path-title">Path 1: Write It For Me</div>
+    <div class="path-desc">Give ChatGPT your Blueprint and let it write the full lyrics. You review, refine, and approve.</div>
+    <div class="vid-placeholder">
+  <div class="vid-icon">&#9654;</div>
+  <div class="vid-label">Video Demo</div>
+  <div class="vid-desc">Demo video: Write It For Me walkthrough — coming soon</div>
+</div>
+    <div class="pb">
+  <div class="pb-head"><span class="pb-label">ChatGPT Prompt: Full Lyrics</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+  <div class="pb-text">Using the Song Blueprint below, write complete lyrics for my song.
+
+[PASTE YOUR SONG BLUEPRINT HERE]
+
+Requirements:
+- Write Verse 1, Chorus, Verse 2, Bridge, and final Chorus
+- Use the key phrases and hook options from the Blueprint
+- Match the emotional tone exactly. Do not make it generic.
+- Each verse should feel like a different moment in the story
+- The chorus should be singable and emotionally direct
+- Avoid cliches. Make it specific to my story.</div>
+</div>
+    <a class="tbtn" href="https://chat.openai.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Open ChatGPT</a>
+  </div>
+  <div class="path-card">
+    <div class="path-title">Path 2: Write It With Me</div>
+    <div class="path-desc">Co-write section by section. You write a line, ChatGPT responds with options. You stay in control.</div>
+    <div class="vid-placeholder">
+  <div class="vid-icon">&#9654;</div>
+  <div class="vid-label">Video Demo</div>
+  <div class="vid-desc">Demo video: Co-writing walkthrough — coming soon</div>
+</div>
+    <div class="pb">
+  <div class="pb-head"><span class="pb-label">ChatGPT Prompt: Co-Write</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+  <div class="pb-text">I want to co-write my song with you, section by section.
+
+Here is my Song Blueprint: [PASTE BLUEPRINT]
+
+Let us start with Verse 1. I will give you a starting line or idea, and you give me 3 options for the next line that match the tone and story. We will build it together.
+
+My starting idea for Verse 1: [YOUR IDEA]
+
+Give me 3 options for the next line. Keep each option under 10 words. Match the emotional tone from my Blueprint.</div>
+</div>
+    <a class="tbtn" href="https://chat.openai.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Open ChatGPT</a>
+  </div>
+  <div class="path-card">
+    <div class="path-title">Path 3: Polish It</div>
+    <div class="path-desc">You already have lyrics or a rough draft. Use ChatGPT to refine, strengthen, and Suno-optimize them.</div>
+    <div class="vid-placeholder">
+  <div class="vid-icon">&#9654;</div>
+  <div class="vid-label">Video Demo</div>
+  <div class="vid-desc">Demo video: Polishing existing lyrics — coming soon</div>
+</div>
+    <div class="pb">
+  <div class="pb-head"><span class="pb-label">ChatGPT Prompt: Polish Existing Lyrics</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+  <div class="pb-text">I have a rough draft of song lyrics I want to polish.
+
+My Song Blueprint: [PASTE BLUEPRINT]
+My rough lyrics: [PASTE YOUR LYRICS]
+
+Please:
+1. Identify the 3 weakest lines and suggest stronger alternatives
+2. Check that the chorus is emotionally direct and singable
+3. Flag any lines that feel generic or cliched
+4. Suggest one small change that would make the biggest impact
+5. Format the final version cleanly with section labels</div>
+</div>
+    <a class="tbtn" href="https://chat.openai.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Open ChatGPT</a>
+  </div>
+</div>
+
+<div class="div"></div>
+<div class="sh"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Before You Move On</div><h2>Lyrics Check</h2></div></div>
+<div class="pq plain"><p>Run your lyrics through this check. If you cannot check all five, ask ChatGPT to help you fix the ones that are missing.</p></div>
+<ul class="cl"><li><input type="checkbox" id="c0"><label for="c0">The lyrics tell a specific story, not a generic one</label></li><li><input type="checkbox" id="c1"><label for="c1">The chorus is emotionally direct and easy to remember</label></li><li><input type="checkbox" id="c2"><label for="c2">At least one line feels uniquely mine</label></li><li><input type="checkbox" id="c3"><label for="c3">The structure is labeled: Verse 1, Chorus, Verse 2, Bridge, Chorus</label></li><li><input type="checkbox" id="c4"><label for="c4">I would be proud to hear someone sing these words</label></li></ul>
+
+<div class="div"></div>
+<div class="cta"><div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><h3>Session 2 Complete</h3><p>You have finished lyrics. Head to Session 3: The Recording Studio, where you will turn these words into an actual song.</p></div></div>
+
+</div>
+<script>
+function copyPrompt(btn) {
+  var text = btn.closest('.pb').querySelector('.pb-text').innerText;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.textContent = 'COPIED!';
+    setTimeout(function(){ btn.textContent = 'COPY PROMPT'; }, 2000);
+  });
+}
+</script>
+</div><!-- /studio-shell -->
+</body>
+</html>
