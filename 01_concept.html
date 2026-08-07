@@ -207,6 +207,11 @@ body { background: var(--navy); color: var(--off); font-family: 'Inter', sans-se
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.45s ease, transform 0.45s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; } }
+
+/* ── FIX CHIPS ── */
+.fix-chip { background: var(--navy-3); border: 1px solid var(--bw); color: var(--card); font-size: 12px; font-weight: 600; padding: 6px 12px; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.15s, border-color 0.15s; }
+.fix-chip:hover { background: var(--navy-2); border-color: rgba(245,166,35,0.4); }
+.fix-chip.active { background: rgba(245,166,35,0.1); border-color: var(--gold); color: var(--gold); font-weight: 700; }
 </style>
 </head>
 <body>
@@ -435,20 +440,37 @@ Please create a Song Blueprint that includes:
     <p>Your Song Blueprint is locked in. <strong>Head to Session 2.</strong></p>
   </div>
   <div class="pifi-result" id="pifi-fix">
-    <p style="margin-bottom:12px;">Tell ChatGPT exactly what to change. Your Blueprint is already included — just describe what needs to be different.</p>
-    <div class="field" style="margin-bottom:12px;">
-      <label>What needs to change?</label>
-      <textarea id="fix-note-input" placeholder="e.g. The tone feels too sad. I want it to feel proud and celebratory instead." oninput="updateFixRevision()"></textarea>
+    <!-- STEP 1: Paste ChatGPT's Blueprint -->
+    <div class="field" style="margin-bottom:14px;">
+      <label style="color:var(--off);font-weight:700;">Paste ChatGPT's Blueprint here</label>
+      <textarea id="fix-blueprint-paste" rows="6" placeholder="Paste the Song Blueprint ChatGPT just gave you..." oninput="updateFixRevision()" style="font-size:13px;"></textarea>
     </div>
+
+    <!-- STEP 2: Quick-choice buttons -->
+    <div style="margin-bottom:14px;">
+      <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">What needs to change?</div>
+      <div id="fix-chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+        <button class="fix-chip" onclick="toggleChip(this,'Too generic')">Too generic</button>
+        <button class="fix-chip" onclick="toggleChip(this,'Wrong tone')">Wrong tone</button>
+        <button class="fix-chip" onclick="toggleChip(this,'Missing something important')">Missing something important</button>
+        <button class="fix-chip" onclick="toggleChip(this,'Too cheesy')">Too cheesy</button>
+        <button class="fix-chip" onclick="toggleChip(this,'Doesn\'t sound like me')">Doesn't sound like me</button>
+        <button class="fix-chip" onclick="toggleChip(this,'Don\'t like the title or hook')">Don't like the title or hook</button>
+        <button class="fix-chip" onclick="toggleChip(this,'Something else')">Something else</button>
+      </div>
+      <textarea id="fix-note-input" placeholder="Add any specific details... (optional)" oninput="updateFixRevision()" rows="2" style="font-size:13px;"></textarea>
+    </div>
+
+    <!-- STEP 3: Auto-built revision prompt -->
     <div class="pb" style="margin-bottom:0;">
       <div class="pb-label">ChatGPT Prompt: Revision Request</div>
       <div class="pb-text" id="fix-prompt">Here is the Song Blueprint you just created for me:
 
-<span id="fix-blueprint-echo" style="color:var(--gold-lt);font-style:italic;">[Your Blueprint will appear here as you fill in the Story Bank above]</span>
+<span id="fix-blueprint-echo" style="color:var(--muted);font-style:italic;">[Paste your Blueprint above]</span>
 
 I want you to revise it. Here is what needs to change:
 
-<span class="ph" data-field="fix-note" id="fix-note-display">[describe what needs to change]</span>
+<span id="fix-note-display" style="color:var(--muted);font-style:italic;">[Select what needs to change above]</span>
 
 Keep everything else the same. Just update the parts I mentioned.</div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
@@ -460,6 +482,21 @@ Keep everything else the same. Just update the parts I mentioned.</div>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           Open ChatGPT
         </a>
+      </div>
+    </div>
+
+    <!-- STEP 4: That's It / Fix It Again -->
+    <div style="margin-top:18px;border-top:1px solid var(--bw);padding-top:16px;">
+      <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">After ChatGPT revises it:</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button onclick="pickOrFix('pick',this)" style="display:inline-flex;align-items:center;gap:8px;background:var(--green);color:var(--white);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:10px 18px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          That's It
+        </button>
+        <button onclick="resetFix()" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--gold);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:10px 18px;border:1px solid var(--gold);box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3"/></svg>
+          Fix It Again
+        </button>
       </div>
     </div>
   </div>
@@ -630,46 +667,69 @@ function pickOrFix(choice, btn) {
   if (choice === 'fix') { updateBlueprintEcho(); }
 }
 
-// ── FIX REVISION AUTO-FILL (pulls live Blueprint + note) ──
+// ── FIX REVISION: paste field + chips → auto-build revision prompt ──
+var activeChips = [];
+
+function toggleChip(btn, label) {
+  var idx = activeChips.indexOf(label);
+  if (idx === -1) { activeChips.push(label); btn.classList.add('active'); }
+  else { activeChips.splice(idx, 1); btn.classList.remove('active'); }
+  updateFixRevision();
+}
+
 function updateFixRevision() {
+  var pasteEl = document.getElementById('fix-blueprint-paste');
+  var blueprintEcho = document.getElementById('fix-blueprint-echo');
   var noteInput = document.getElementById('fix-note-input');
   var noteDisplay = document.getElementById('fix-note-display');
-  var blueprintEcho = document.getElementById('fix-blueprint-echo');
 
-  // Pull the current live Blueprint text
-  var livePrompt = document.getElementById('live-prompt');
-  if (livePrompt && blueprintEcho) {
-    var bpText = livePrompt.innerText.trim();
-    // Remove the header line "Your Song Blueprint" if present
-    bpText = bpText.replace(/^Your Song Blueprint[^\n]*\n?/i, '').trim();
-    if (bpText && bpText.length > 20) {
-      blueprintEcho.textContent = bpText;
+  // Blueprint from paste field
+  if (pasteEl && blueprintEcho) {
+    var bp = pasteEl.value.trim();
+    if (bp) {
+      blueprintEcho.textContent = bp;
       blueprintEcho.style.color = 'var(--off)';
       blueprintEcho.style.fontStyle = 'normal';
+    } else {
+      blueprintEcho.textContent = '[Paste your Blueprint above]';
+      blueprintEcho.style.color = 'var(--muted)';
+      blueprintEcho.style.fontStyle = 'italic';
     }
   }
 
-  // Update the note placeholder
-  if (noteDisplay && noteInput) {
-    var val = noteInput.value.trim();
-    if (val) { noteDisplay.textContent = val; noteDisplay.classList.add('filled'); }
-    else { noteDisplay.textContent = '[describe what needs to change]'; noteDisplay.classList.remove('filled'); }
+  // Build note from chips + textarea
+  if (noteDisplay) {
+    var parts = activeChips.slice();
+    var extra = noteInput ? noteInput.value.trim() : '';
+    if (extra) parts.push(extra);
+    if (parts.length > 0) {
+      noteDisplay.textContent = parts.join('. ') + '.';
+      noteDisplay.style.color = 'var(--off)';
+      noteDisplay.style.fontStyle = 'normal';
+    } else {
+      noteDisplay.textContent = '[Select what needs to change above]';
+      noteDisplay.style.color = 'var(--muted)';
+      noteDisplay.style.fontStyle = 'italic';
+    }
   }
 }
 
-// Also update Blueprint echo whenever the main prompt updates
-function updateBlueprintEcho() {
-  var livePrompt = document.getElementById('live-prompt');
-  var blueprintEcho = document.getElementById('fix-blueprint-echo');
-  if (!livePrompt || !blueprintEcho) return;
-  var bpText = livePrompt.innerText.trim();
-  bpText = bpText.replace(/^Your Song Blueprint[^\n]*\n?/i, '').trim();
-  if (bpText && bpText.length > 20) {
-    blueprintEcho.textContent = bpText;
-    blueprintEcho.style.color = 'var(--off)';
-    blueprintEcho.style.fontStyle = 'normal';
-  }
+function resetFix() {
+  // Clear paste field, chips, note
+  var pasteEl = document.getElementById('fix-blueprint-paste');
+  var noteInput = document.getElementById('fix-note-input');
+  if (pasteEl) pasteEl.value = '';
+  if (noteInput) noteInput.value = '';
+  activeChips = [];
+  document.querySelectorAll('.fix-chip').forEach(function(c) { c.classList.remove('active'); });
+  updateFixRevision();
+  // Scroll to top of Fix It panel
+  var fixPanel = document.getElementById('pifi-fix');
+  if (fixPanel) fixPan
 }
+
+// Legacy stub — no longer needed but kept to avoid errors
+function updateBlueprintEcho() {}
 
 // ── CHECKLIST ──
 function toggleCheck(li) { li.classList.toggle('checked'); }
