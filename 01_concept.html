@@ -858,6 +858,13 @@ body {
   .hero-title { font-size: clamp(1.6rem, 4vw, 2.4rem) !important; }
 }
 
+
+/* Session preview and step tracker always visible - no fade in */
+.session-preview, .step-tracker {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 </style>
 </head>
 <body>
@@ -885,7 +892,7 @@ body {
   <span class="ticker-text">Make It. Release It.</span>
 </div>
 <div class="body-wrap">
-<div class="session-preview reveal">
+<div class="session-preview">
   <div class="session-preview-eye">Session 1 — 7 to 10 Minutes</div>
   <h3>In this session you will</h3>
   <ol>
@@ -897,7 +904,7 @@ body {
 </div>
 
 
-<div class="step-tracker reveal">
+<div class="step-tracker">
   <div class="step-tracker-item active"><span class="step-tracker-num">01</span>THE CONCEPT</div>
   <div class="step-tracker-item"><span class="step-tracker-num">02</span>WRITING ROOM</div>
   <div class="step-tracker-item"><span class="step-tracker-num">03</span>RECORDING</div>
@@ -1024,6 +1031,13 @@ function copyPrompt(btn) {
       }
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  // Immediately show elements already in viewport on load
+  document.querySelectorAll('.reveal, .reveal-stagger > *').forEach(function(el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    }
+  });
 
   function initReveal() {
     // Add reveal class to all major sections
