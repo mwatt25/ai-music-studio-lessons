@@ -12,11 +12,12 @@
   --gold:#F5A623;--gold-lt:#FBCF7A;--gold-dim:rgba(245,166,35,0.1);
   --blue:#4A9EBF;--blue-dim:rgba(74,158,191,0.08);
   --green:#27AE60;--green-dim:rgba(39,174,96,0.08);
-  --white:#FFFFFF;--off:#E8EDF2;--card:#B0BEC8;--muted:#6B7A8A;
+  --white:#FFFFFF;--off:#E8EDF2;--card:#C4CDD6;--muted:#7A8A9A;
   --bw:rgba(255,255,255,0.07);--bw2:rgba(255,255,255,0.12);
   --sh:4px 4px 0 rgba(0,0,0,0.6);--sh-sm:2px 2px 0 rgba(0,0,0,0.5);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;}
 
 /* ── BRAND BAR ── */
@@ -30,7 +31,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(13,17,23,0.95) 100%);}
 .hero-content{position:relative;z-index:2;padding:40px 48px 36px;}
 .hero-session{display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;margin-bottom:12px;box-shadow:var(--sh);}
-.hero-title{font-size:clamp(2.2rem,5vw,3.2rem);font-weight:900;color:var(--white);line-height:1.05;margin-bottom:8px;}
+.hero-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--white);line-height:1.05;margin-bottom:8px;}
 .hero-tagline{font-size:1rem;font-style:italic;color:var(--gold);margin-bottom:16px;}
 .meta-row{display:flex;flex-wrap:wrap;}
 .meta-chip{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:5px 14px;border-right:1px solid var(--bw);}
@@ -53,120 +54,75 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 /* ── BODY ── */
 .body-wrap{max-width:900px;margin:0 auto;padding:0 48px 80px;}
 
-/* ── EDITORIAL OPENING: oversized session number ── */
-.session-opening{position:relative;padding:48px 0 0;overflow:hidden;}
-.session-bg-num{
-  position:absolute;top:-20px;right:-20px;
-  font-size:clamp(160px,22vw,260px);font-weight:900;
-  color:rgba(245,166,35,0.04);line-height:1;
-  pointer-events:none;user-select:none;letter-spacing:-0.04em;
-  z-index:0;
-}
-.session-opening-content{position:relative;z-index:1;}
+/* ── EDITORIAL OPENING ── */
+.session-opening{position:relative;padding:52px 0 0;overflow:visible;}
 .session-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
 .session-eyebrow::after{content:'';flex:1;height:1px;background:var(--bw);}
-.session-big-q{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:10px;letter-spacing:-.02em;}
-.session-sub{font-size:15px;color:var(--card);margin-bottom:32px;line-height:1.6;}
+.session-big-q{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:8px;letter-spacing:-.02em;}
+.session-sub{font-size:15px;color:var(--card);margin-bottom:36px;line-height:1.6;}
 
 /* ── EDITORIAL CHOICE COMPOSITION ── */
 .sp-composition{
   position:relative;
   margin-bottom:0;
-  /* crop marks at corners */
 }
-.sp-composition::before,
-.sp-composition::after{
-  content:'';
-  position:absolute;
-  width:12px;height:12px;
-  border-color:rgba(245,166,35,0.25);
-  border-style:solid;
-  pointer-events:none;
-  z-index:10;
+/* Crop marks */
+.sp-composition::before,.sp-composition::after{
+  content:'';position:absolute;width:12px;height:12px;
+  border-color:rgba(245,166,35,0.2);border-style:solid;
+  pointer-events:none;z-index:10;
 }
 .sp-composition::before{top:-6px;left:-6px;border-width:1px 0 0 1px;}
 .sp-composition::after{top:-6px;right:-6px;border-width:1px 1px 0 0;}
 
-/* Lyric artifact — the editorial motif */
-.lyric-artifact{
-  position:absolute;
-  top:-18px;
-  right:-24px;
-  width:220px;
-  z-index:2;
-  pointer-events:none;
-  opacity:.55;
-  transform:rotate(2.5deg);
-}
-
-/* 01 overlapping the grid */
+/* Ghost 01 behind grid */
 .sp-bg-num{
-  position:absolute;
-  bottom:-40px;
-  left:-30px;
-  font-size:clamp(140px,20vw,220px);
-  font-weight:900;
-  color:rgba(245,166,35,0.035);
-  line-height:1;
-  pointer-events:none;
-  user-select:none;
-  letter-spacing:-0.04em;
-  z-index:0;
+  position:absolute;bottom:-50px;left:-36px;
+  font-size:clamp(140px,20vw,220px);font-weight:900;
+  color:rgba(245,166,35,0.03);line-height:1;
+  pointer-events:none;user-select:none;letter-spacing:-0.04em;z-index:0;
 }
 
-/* Grid: 3 cols, intentionally unequal height via padding */
+/* Lyric artifact */
+.lyric-artifact{
+  position:absolute;top:-14px;right:-20px;
+  width:200px;z-index:2;pointer-events:none;
+  opacity:.45;transform:rotate(2.5deg);
+}
+
+/* Desktop grid */
 .sp-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:0;
-  border:1px solid var(--bw2);
-  box-shadow:var(--sh);
-  margin-bottom:0;
-  position:relative;
-  z-index:1;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);
+  position:relative;z-index:1;
 }
 .sp-card{
   background:var(--navy-2);border-right:1px solid var(--bw2);
-  cursor:pointer;
-  transition:background .2s,border-color .2s;
+  cursor:pointer;transition:background .2s;
   user-select:none;display:flex;flex-direction:column;gap:14px;
   position:relative;overflow:hidden;
 }
-/* Asymmetric padding: each card slightly different */
 .sp-card:nth-child(1){padding:32px 22px 28px;}
 .sp-card:nth-child(2){padding:24px 22px 36px;}
 .sp-card:nth-child(3){padding:28px 22px 22px;}
 .sp-card:last-child{border-right:none;}
 .sp-card:hover{background:var(--navy-3);}
-
-/* Hover annotation — appears like a creative director's note */
-.sp-card .sp-hover-note{
-  position:absolute;
-  bottom:10px;right:10px;
-  font-family:'Courier New',monospace;
-  font-size:9px;font-weight:700;
-  letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--gold);
-  opacity:0;
-  transform:rotate(-1.5deg) translateY(4px);
-  transition:opacity .25s,transform .25s;
-  pointer-events:none;
-  white-space:nowrap;
+/* Hover annotation */
+.sp-hover-note{
+  position:absolute;bottom:10px;right:10px;
+  font-family:'Courier New',monospace;font-size:9px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);
+  opacity:0;transform:rotate(-1.5deg) translateY(4px);
+  transition:opacity .25s,transform .25s;pointer-events:none;white-space:nowrap;
 }
-.sp-card:hover .sp-hover-note{opacity:.7;transform:rotate(-1.5deg) translateY(0);}
+.sp-card:hover .sp-hover-note{opacity:.65;transform:rotate(-1.5deg) translateY(0);}
 .sp-card.selected .sp-hover-note{opacity:0;}
-
-/* Offset accent line on first card */
-.sp-card:nth-child(1)::after{
-  content:'';
-  position:absolute;
-  top:0;left:0;
-  width:3px;height:100%;
-  background:rgba(245,166,35,0);
-  transition:background .2s;
+/* Left accent line on card 1 */
+.sp-card:nth-child(1)::before{
+  content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  background:rgba(245,166,35,0);transition:background .2s;
 }
-.sp-card:nth-child(1):hover::after{background:rgba(245,166,35,0.3);}
-
+.sp-card:nth-child(1):hover::before{background:rgba(245,166,35,0.25);}
 .sp-card.selected{
   background:rgba(245,166,35,0.07);
   border-top:3px solid var(--gold);
@@ -174,22 +130,22 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   border-right:1px solid rgba(245,166,35,0.3);
   border-bottom:1px solid rgba(245,166,35,0.3);
 }
-.sp-icon{display:flex;align-items:center;height:38px;color:var(--gold);}
+.sp-icon{
+  display:flex;align-items:center;height:38px;color:var(--gold);
+}
+/* SVG icon draw-on hover */
+.sp-icon svg{transition:stroke-dashoffset .4s ease;}
 .sp-card.selected .sp-icon{color:var(--gold-lt);}
 .sp-title{font-size:15px;font-weight:900;color:var(--white);line-height:1.2;letter-spacing:-.01em;}
 .sp-card.selected .sp-title{color:var(--gold);}
 .sp-sub{font-size:12px;color:var(--muted);line-height:1.65;font-style:italic;}
 .sp-card.selected .sp-sub{color:var(--card);}
 
-/* ── COLLAPSED SELECTOR (after selection) ── */
+/* ── COLLAPSED SELECTOR ── */
 .sp-collapsed{
-  display:none;
-  align-items:center;gap:14px;
-  padding:10px 16px;
-  background:var(--gold-dim);
-  border:1px solid rgba(245,166,35,0.25);
-  border-left:3px solid var(--gold);
-  margin-bottom:0;
+  display:none;align-items:center;gap:14px;
+  padding:10px 16px;background:var(--gold-dim);
+  border:1px solid rgba(245,166,35,0.25);border-left:3px solid var(--gold);
   cursor:pointer;
 }
 .sp-collapsed:hover{background:rgba(245,166,35,0.14);}
@@ -203,7 +159,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .path-panel.visible{opacity:1;transform:none;}
 
 /* ── STUDIO SECTION HEADER ── */
-.studio-section{padding:40px 0 0;position:relative;}
+.studio-section{padding:44px 0 0;position:relative;}
 .studio-label{
   display:inline-flex;align-items:center;gap:8px;
   font-size:9px;font-weight:900;letter-spacing:4px;text-transform:uppercase;
@@ -213,90 +169,10 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .studio-heading{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:6px;letter-spacing:-.02em;}
 .studio-sub{font-size:13px;color:var(--card);margin-bottom:24px;line-height:1.6;}
 
-/* ── HANDWRITTEN ANNOTATION ── */
-.annotation{
-  font-family:'Courier New',monospace;
-  font-size:11px;color:rgba(245,166,35,0.55);
-  transform:rotate(-1.5deg);display:inline-block;
-  margin-bottom:4px;letter-spacing:.5px;
-}
-.annotation-right{float:right;transform:rotate(1deg);margin-top:-8px;}
-
 /* ── VIDEO PLACEHOLDER ── */
-.vid-slot{background:var(--navy-3);border:1px solid var(--bw);border-left:3px solid var(--muted);padding:12px 16px;margin-bottom:28px;display:flex;align-items:center;gap:12px;}
+.vid-slot{border:1px solid var(--bw);border-left:3px solid var(--muted);padding:12px 16px;margin-bottom:28px;display:flex;align-items:center;gap:12px;}
 .vid-slot svg{width:16px;height:16px;color:var(--muted);flex-shrink:0;}
 .vid-slot p{font-size:12px;color:var(--muted);margin:0;font-style:italic;}
-
-/* ── LYRIC SHEET WORKSPACE ── */
-.lyric-sheet{
-  background:var(--navy-4);
-  border:1px solid var(--bw2);
-  border-top:2px solid rgba(245,166,35,0.4);
-  margin-bottom:24px;
-  position:relative;
-  overflow:hidden;
-}
-.lyric-sheet::before{
-  content:'';position:absolute;top:0;left:48px;bottom:0;width:1px;
-  background:rgba(245,166,35,0.08);pointer-events:none;z-index:0;
-}
-.lyric-sheet-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 16px 10px 16px;
-  border-bottom:1px solid var(--bw);
-  background:rgba(245,166,35,0.04);
-}
-.lyric-sheet-title{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;}
-.lyric-sheet-title::before{content:'';width:6px;height:6px;background:var(--gold);opacity:.6;}
-.lyric-sheet-meta{font-size:10px;color:var(--muted);font-family:'Courier New',monospace;}
-.lyric-sheet-body{position:relative;z-index:1;}
-.lyric-textarea{
-  width:100%;min-height:260px;
-  background:transparent;border:none;
-  color:var(--white);
-  font-family:'Courier New',monospace;font-size:14px;
-  line-height:2.1;padding:16px 16px 16px 64px;
-  outline:none;resize:vertical;
-  transition:none;
-}
-.lyric-textarea::placeholder{color:rgba(107,122,138,0.6);font-style:italic;font-size:13px;line-height:1.8;}
-.lyric-sheet-footer{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:8px 16px;border-top:1px solid var(--bw);
-  background:rgba(0,0,0,0.2);
-}
-.lyric-sheet-footer-note{font-size:10px;color:var(--muted);font-family:'Courier New',monospace;}
-
-/* ── STORY BANK WORKSPACE ── */
-.story-bank{
-  background:var(--navy-4);
-  border:1px solid var(--bw2);
-  border-top:2px solid rgba(245,166,35,0.4);
-  padding:0;margin-bottom:24px;
-  position:relative;overflow:hidden;
-}
-.story-bank-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 16px;border-bottom:1px solid var(--bw);
-  background:rgba(245,166,35,0.04);
-}
-.story-bank-title{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;}
-.story-bank-title::before{content:'';width:6px;height:6px;background:var(--gold);opacity:.6;}
-.story-bank-body{padding:20px 20px 8px;}
-
-/* ── FIELDS ── */
-.field{margin-bottom:18px;}
-.field label{display:block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
-.field input,.field textarea{
-  width:100%;background:transparent;
-  border:none;border-bottom:1px solid rgba(255,255,255,0.1);
-  color:var(--white);font-family:'Inter',sans-serif;font-size:14px;
-  padding:8px 0;outline:none;resize:vertical;transition:border-color .2s;line-height:1.6;
-}
-.field input:focus,.field textarea:focus{border-bottom-color:var(--gold);}
-.field input::placeholder,.field textarea::placeholder{color:rgba(107,122,138,0.7);font-style:italic;font-size:13px;}
-.field textarea{min-height:64px;}
-.field-hint{font-size:11px;color:var(--muted);margin-top:4px;font-style:italic;}
 
 /* ── EXAMPLE TOGGLE ── */
 .example-toggle{display:flex;align-items:center;gap:8px;background:none;border:none;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;padding:6px 0;margin-bottom:14px;text-decoration:underline;text-underline-offset:3px;font-family:'Inter',sans-serif;}
@@ -311,16 +187,71 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .ex-label.strong{color:var(--green);}
 .ex-cell p{color:var(--card);margin:0;}
 
+/* ── STORY BANK ── */
+.story-bank{
+  position:relative;margin-bottom:24px;
+  /* Atmospheric: faint ruled lines behind the workspace */
+}
+.story-bank::before{
+  content:'';position:absolute;
+  top:50px;left:0;right:0;bottom:0;
+  background:repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 31px,
+    rgba(245,166,35,0.04) 31px,
+    rgba(245,166,35,0.04) 32px
+  );
+  pointer-events:none;z-index:0;border-radius:0;
+}
+.story-bank-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;border-bottom:1px solid var(--bw);
+  background:rgba(245,166,35,0.04);border-top:2px solid rgba(245,166,35,0.4);
+  position:relative;z-index:1;
+}
+.story-bank-title{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;}
+.story-bank-title::before{content:'';width:6px;height:6px;background:var(--gold);opacity:.6;}
+.story-bank-meta{font-size:10px;color:rgba(122,138,154,0.8);font-family:'Courier New',monospace;letter-spacing:1px;}
+.story-bank-body{padding:20px 20px 8px;position:relative;z-index:1;background:var(--navy-4);}
+
+/* Story Bank field groups */
+.sb-group{margin-bottom:20px;}
+.sb-group-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(122,138,154,0.6);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bw);}
+
+/* ── FIELDS ── */
+.field{margin-bottom:18px;}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--card);margin-bottom:7px;}
+.field input,.field textarea{
+  width:100%;background:transparent;
+  border:none;border-bottom:1px solid rgba(255,255,255,0.12);
+  color:var(--white);font-family:'Inter',sans-serif;font-size:14px;
+  padding:9px 0;outline:none;resize:vertical;
+  transition:border-color .25s,padding-left .25s;line-height:1.6;
+}
+.field input:focus,.field textarea:focus{
+  border-bottom-color:var(--gold);
+  padding-left:4px;
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(196,205,214,0.45);font-style:italic;font-size:13px;}
+.field textarea{min-height:64px;}
+.field-hint{font-size:11px;color:var(--muted);margin-top:5px;font-style:italic;line-height:1.5;}
+
 /* ── WAVEFORM DIVIDER ── */
-.wave-divider{display:flex;align-items:center;gap:3px;padding:28px 0;opacity:.25;}
-.wave-bar{width:2px;background:var(--gold);border-radius:1px;}
+.wave-divider{display:flex;align-items:center;gap:3px;padding:32px 0;opacity:.2;}
+.wave-bar{width:2px;background:var(--gold);border-radius:1px;flex-shrink:0;}
 
 /* ── TAG SELECTOR ── */
 .tag-section{margin-bottom:28px;}
-.tag-section-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.tag-section-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--card);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
 .tag-section-label::after{content:'';flex:1;height:1px;background:var(--bw);}
 .tag-grid{display:flex;flex-wrap:wrap;gap:6px;}
-.tag-btn{background:var(--navy-3);border:1px solid var(--bw2);color:var(--card);font-size:12px;font-weight:600;padding:8px 16px;cursor:pointer;transition:all .15s;user-select:none;font-family:'Inter',sans-serif;}
+.tag-btn{
+  background:var(--navy-3);border:1px solid var(--bw2);color:var(--card);
+  font-size:12px;font-weight:600;padding:8px 16px;cursor:pointer;
+  transition:all .15s;user-select:none;font-family:'Inter',sans-serif;
+  min-height:40px;
+}
 .tag-btn:hover{border-color:var(--gold);color:var(--gold);}
 .tag-btn.selected{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:800;}
 .tag-btn.not-sure{border-style:dashed;}
@@ -333,7 +264,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .cheat-toggle.open .cheat-toggle-icon{transform:rotate(180deg);}
 .cheat-body{display:none;padding:12px 0 4px;}
 .cheat-body.open{display:block;}
-.cheat-row{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid var(--bw);}
+.cheat-row{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--bw);}
 .cheat-row:last-of-type{border-bottom:none;}
 .cheat-term{font-size:12px;font-weight:800;color:var(--gold);min-width:64px;}
 .cheat-def{font-size:13px;color:var(--card);}
@@ -342,8 +273,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 /* ── PROMPT CONSOLE ── */
 .prompt-console{
   background:var(--navy-4);
-  border:1px solid var(--bw2);
-  border-top:2px solid var(--blue);
+  border:1px solid var(--bw2);border-top:2px solid var(--blue);
   margin-bottom:16px;overflow:hidden;
 }
 .prompt-console-header{
@@ -352,29 +282,66 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   background:var(--blue-dim);
 }
 .prompt-console-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;}
-.prompt-console-label::before{content:'';width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.prompt-console-label::before{content:'';width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulse 2.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
 .prompt-console-status{font-size:10px;font-weight:700;color:var(--muted);font-family:'Courier New',monospace;}
 .prompt-console-body{font-family:'Courier New',monospace;font-size:12px;color:var(--off);line-height:1.9;padding:16px;white-space:pre-wrap;}
-.ph{color:var(--muted);font-style:italic;}
+.ph{color:rgba(122,138,154,0.7);font-style:italic;}
 .ph.filled{color:var(--gold-lt);font-style:normal;font-weight:500;}
 .prompt-actions{display:flex;align-items:center;gap:10px;padding:12px 16px;border-top:1px solid var(--bw);background:rgba(74,158,191,0.04);flex-wrap:wrap;}
 
 /* ── BUTTONS ── */
-.copy-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:var(--navy);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:9px 18px;border:none;cursor:pointer;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;transition:all .15s;}
-.copy-btn:hover{background:var(--gold);}
+.copy-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--blue);color:var(--navy);
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:10px 20px;border:none;cursor:pointer;
+  box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;
+  transition:background .15s,transform .1s;min-height:42px;
+}
+.copy-btn:hover{background:var(--gold);transform:translateY(-1px);}
 .copy-btn.copied{background:var(--green);color:white;}
-.chatgpt-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:9px 18px;border:1px solid var(--blue);cursor:pointer;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;text-decoration:none;transition:all .15s;}
+.chatgpt-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--blue);
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  padding:10px 20px;border:1px solid var(--blue);cursor:pointer;
+  box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;
+  text-decoration:none;transition:all .15s;min-height:42px;
+}
 .chatgpt-btn:hover{background:var(--blue);color:var(--navy);}
-.primary-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:13px 26px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .1s,box-shadow .1s;}
-.primary-btn:hover{transform:translateY(-1px);box-shadow:6px 6px 0 rgba(0,0,0,.6);}
-.green-btn{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:var(--white);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:12px 22px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .1s;}
+.primary-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gold);color:var(--navy);
+  font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;
+  padding:14px 28px;border:none;box-shadow:var(--sh);cursor:pointer;
+  font-family:'Inter',sans-serif;transition:transform .12s,box-shadow .12s;
+  min-height:48px;
+}
+.primary-btn:hover{transform:translateY(-2px);box-shadow:6px 6px 0 rgba(0,0,0,.6);}
+.green-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--green);color:var(--white);
+  font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:12px 24px;border:none;box-shadow:var(--sh);cursor:pointer;
+  font-family:'Inter',sans-serif;transition:transform .12s;min-height:46px;
+}
 .green-btn:hover{transform:translateY(-1px);}
-.outline-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--gold);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:10px 18px;border:1px solid var(--gold);box-shadow:var(--sh-sm);cursor:pointer;font-family:'Inter',sans-serif;}
+.outline-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--gold);
+  font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:10px 20px;border:1px solid var(--gold);box-shadow:var(--sh-sm);cursor:pointer;
+  font-family:'Inter',sans-serif;min-height:44px;
+}
 
 /* ── PICK IT / FIX IT ── */
 .pifi{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:12px;}
-.pifi-btn{padding:24px 20px;background:var(--navy-2);border:none;cursor:pointer;text-align:center;transition:background .15s;border-right:1px solid var(--bw2);font-family:'Inter',sans-serif;}
+.pifi-btn{
+  padding:24px 20px;background:var(--navy-2);border:none;cursor:pointer;
+  text-align:center;transition:background .15s;border-right:1px solid var(--bw2);
+  font-family:'Inter',sans-serif;min-height:100px;
+}
 .pifi-btn:last-child{border-right:none;}
 .pifi-btn:hover{background:var(--navy-3);}
 .pifi-btn.sel-pick{background:var(--green-dim);border-top:3px solid var(--green);}
@@ -388,15 +355,59 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .pifi-result.show{display:block;}
 
 /* ── FIX CHIPS ── */
-.fix-chip{background:var(--navy-3);border:1px solid var(--bw);color:var(--card);font-size:12px;font-weight:600;padding:7px 14px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
+.fix-chip{
+  background:var(--navy-3);border:1px solid var(--bw);color:var(--card);
+  font-size:12px;font-weight:600;padding:8px 14px;cursor:pointer;
+  font-family:'Inter',sans-serif;transition:all .15s;min-height:38px;
+}
 .fix-chip:hover{border-color:rgba(245,166,35,0.4);color:var(--gold);}
 .fix-chip.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);font-weight:700;}
+
+/* ── LYRIC SHEET WORKSPACE ── */
+.lyric-sheet{
+  background:var(--navy-4);border:1px solid var(--bw2);
+  border-top:2px solid rgba(245,166,35,0.4);
+  margin-bottom:24px;position:relative;overflow:hidden;
+}
+.lyric-sheet::before{
+  content:'';position:absolute;top:0;left:52px;bottom:0;width:1px;
+  background:rgba(245,166,35,0.07);pointer-events:none;z-index:0;
+}
+.lyric-sheet-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;border-bottom:1px solid var(--bw);
+  background:rgba(245,166,35,0.04);
+}
+.lyric-sheet-title{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;}
+.lyric-sheet-title::before{content:'';width:6px;height:6px;background:var(--gold);opacity:.6;}
+.lyric-sheet-meta{font-size:10px;color:rgba(122,138,154,0.7);font-family:'Courier New',monospace;}
+.lyric-textarea{
+  width:100%;min-height:260px;background:transparent;border:none;
+  color:var(--white);font-family:'Courier New',monospace;font-size:14px;
+  line-height:2.1;padding:16px 16px 16px 68px;
+  outline:none;resize:vertical;position:relative;z-index:1;
+}
+.lyric-textarea::placeholder{color:rgba(196,205,214,0.35);font-style:italic;font-size:13px;line-height:1.8;}
+.lyric-sheet-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 16px;border-top:1px solid var(--bw);background:rgba(0,0,0,0.2);
+}
+.lyric-sheet-footer-note{font-size:10px;color:var(--muted);font-family:'Courier New',monospace;}
+.annotation{
+  font-family:'Courier New',monospace;font-size:10px;
+  color:rgba(245,166,35,0.5);transform:rotate(-1.5deg);
+  display:inline-block;letter-spacing:.5px;
+}
 
 /* ── COACHING TOOLS ── */
 .coach-strip{margin-top:16px;padding-top:14px;border-top:1px solid var(--bw);}
 .coach-strip-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
 .coach-tools{display:flex;flex-wrap:wrap;gap:8px;}
-.coach-btn{background:transparent;border:1px solid var(--bw);color:var(--muted);font-size:11px;font-weight:700;padding:7px 14px;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;}
+.coach-btn{
+  background:transparent;border:1px solid var(--bw);color:var(--muted);
+  font-size:11px;font-weight:700;padding:8px 14px;cursor:pointer;
+  transition:all .15s;font-family:'Inter',sans-serif;min-height:38px;
+}
 .coach-btn:hover{border-color:var(--blue);color:var(--blue);}
 .coach-btn.active{border-color:var(--blue);color:var(--blue);background:var(--blue-dim);}
 .coach-response{display:none;background:var(--navy-3);border:1px solid var(--bw);border-left:3px solid var(--blue);padding:16px 18px;margin-top:14px;font-size:13px;color:var(--card);line-height:1.75;}
@@ -406,7 +417,11 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 
 /* ── KEEP / POLISH ── */
 .kp-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:12px;}
-.kp-btn{padding:20px 18px;background:var(--navy-2);border:none;cursor:pointer;text-align:center;transition:background .15s;border-right:1px solid var(--bw2);font-family:'Inter',sans-serif;}
+.kp-btn{
+  padding:20px 18px;background:var(--navy-2);border:none;cursor:pointer;
+  text-align:center;transition:background .15s;border-right:1px solid var(--bw2);
+  font-family:'Inter',sans-serif;min-height:90px;
+}
 .kp-btn:last-child{border-right:none;}
 .kp-btn:hover{background:var(--navy-3);}
 .kp-btn.sel{background:var(--gold-dim);border-top:3px solid var(--gold);}
@@ -416,42 +431,130 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .polish-reveal{display:none;margin-top:16px;border-top:1px solid var(--bw);padding-top:16px;}
 .polish-reveal.show{display:block;}
 
-/* ── CONVERGENCE ── */
-.convergence{display:none;background:var(--green-dim);border:1px solid rgba(39,174,96,0.2);border-top:3px solid var(--green);padding:36px 32px;box-shadow:var(--sh);margin-top:40px;position:relative;overflow:hidden;}
-.convergence::before{content:'01';position:absolute;right:-10px;bottom:-20px;font-size:140px;font-weight:900;color:rgba(39,174,96,0.04);line-height:1;pointer-events:none;}
-.convergence.show{display:block;}
-.convergence-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:12px;}
+/* ── CONVERGENCE (milestone card) ── */
+.convergence{
+  display:none;
+  background:var(--green-dim);
+  border:1px solid rgba(39,174,96,0.2);border-top:3px solid var(--green);
+  padding:40px 32px;box-shadow:var(--sh);margin-top:48px;
+  position:relative;overflow:hidden;
+}
+.convergence::before{
+  content:'01';position:absolute;right:-10px;bottom:-20px;
+  font-size:140px;font-weight:900;color:rgba(39,174,96,0.04);
+  line-height:1;pointer-events:none;
+}
+.convergence.show{display:block;animation:fadeUp .5s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.convergence-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:14px;}
 .convergence-title{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:900;color:var(--white);margin-bottom:10px;line-height:1.15;letter-spacing:-.02em;}
 .convergence-sub{font-size:14px;color:var(--card);line-height:1.65;margin-bottom:28px;}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;}
 .reveal.visible{opacity:1;transform:none;}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;}.path-panel{transition:none!important;}}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1!important;transform:none!important;}
+  .path-panel{transition:none!important;}
+  @keyframes fadeUp{from{}to{}}
+}
 
-/* ── RESPONSIVE ── */
+/* ══════════════════════════════════════════════
+   MOBILE — intentionally designed, not shrunk
+══════════════════════════════════════════════ */
 @media(max-width:820px){
   .hero-content{padding:28px 28px 28px;}
   .body-wrap{padding:0 28px 60px;}
 }
+
 @media(max-width:660px){
-  .sp-grid{grid-template-columns:1fr;}
-  .sp-card{border-right:none;border-bottom:1px solid var(--bw2);}
-  .sp-card:last-child{border-bottom:none;}
-  .pifi{grid-template-columns:1fr 1fr;}.kp-grid{grid-template-columns:1fr 1fr;}
-  .ex-row{grid-template-columns:1fr;}.ex-cell{border-right:none;border-bottom:1px solid var(--bw);}
-  .wave-divider{display:none;}
-}
-@media(max-width:560px){
-  .hero{min-height:0!important;}.hero-bg{display:none!important;}.hero-overlay{display:none!important;}
-  .hero-content{background:var(--navy-2);border-bottom:3px solid var(--gold);padding:18px 16px 20px;}
-  .hero-title{font-size:1.9rem;}.hero-tagline{font-size:.9rem;}
-  .body-wrap{padding:0 16px 48px;}.step-tracker{display:none;}
-  .lyric-textarea{padding-left:20px;font-size:13px;min-height:200px;}
+  /* Hide desktop grid, show mobile stack */
+  .sp-grid{display:none;}
+  .sp-mobile-stack{display:flex;flex-direction:column;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);}
+  /* Lyric artifact: hidden on mobile, too noisy */
+  .lyric-artifact{display:none;}
+  .sp-bg-num{display:none;}
+  .sp-composition::before,.sp-composition::after{display:none;}
+
+  /* Mobile horizontal cards */
+  .sp-mobile-card{
+    display:flex;align-items:center;gap:16px;
+    padding:18px 20px;background:var(--navy-2);
+    border-bottom:1px solid var(--bw2);cursor:pointer;
+    transition:background .18s;position:relative;
+    min-height:76px;
+  }
+  .sp-mobile-card:last-child{border-bottom:none;}
+  .sp-mobile-card:hover{background:var(--navy-3);}
+  .sp-mobile-card.selected{
+    background:rgba(245,166,35,0.07);
+    border-left:3px solid var(--gold);
+    padding-left:17px;
+  }
+  .sp-mobile-icon{color:var(--gold);flex-shrink:0;display:flex;align-items:center;}
+  .sp-mobile-card.selected .sp-mobile-icon{color:var(--gold-lt);}
+  .sp-mobile-text{flex:1;}
+  .sp-mobile-title{font-size:14px;font-weight:900;color:var(--white);line-height:1.2;margin-bottom:2px;}
+  .sp-mobile-card.selected .sp-mobile-title{color:var(--gold);}
+  .sp-mobile-sub{font-size:11px;color:var(--muted);line-height:1.5;}
+  .sp-mobile-arrow{color:var(--muted);flex-shrink:0;transition:color .15s;}
+  .sp-mobile-card.selected .sp-mobile-arrow{color:var(--gold);}
+  .sp-mobile-card:hover .sp-mobile-arrow{color:var(--card);}
+
+  /* Story Bank: more breathing room on mobile */
+  .story-bank-body{padding:16px 16px 8px;}
+  .field{margin-bottom:22px;}
+  .field input,.field textarea{font-size:16px;padding:10px 0;} /* 16px prevents iOS zoom */
+  .field textarea{min-height:80px;}
+
+  /* Lyric sheet: remove margin line on mobile */
   .lyric-sheet::before{display:none;}
+  .lyric-textarea{padding:14px 14px;font-size:15px;min-height:200px;}
+
+  /* Buttons: full width on mobile */
   .primary-btn,.green-btn{width:100%;justify-content:center;}
-  .session-bg-num{font-size:120px;}
-  .session-big-q{font-size:1.5rem;}
+  .copy-btn,.chatgpt-btn{flex:1;justify-content:center;}
+  .prompt-actions{flex-direction:column;}
+  .prompt-actions .copy-btn,.prompt-actions .chatgpt-btn{width:100%;}
+
+  /* Pick It / Fix It: keep 2 cols but taller */
+  .pifi-btn{padding:20px 12px;min-height:110px;}
+  .pifi-label{font-size:15px;}
+  .kp-btn{padding:18px 12px;min-height:100px;}
+
+  /* Fix chips: wrap nicely */
+  .fix-chip{padding:9px 12px;font-size:11px;}
+
+  /* Coach tools */
+  .coach-btn{padding:9px 12px;font-size:11px;}
+
+  /* Session heading */
+  .session-big-q{font-size:1.6rem;}
+  .session-sub{font-size:14px;}
+
+  /* Example toggle */
+  .ex-row{grid-template-columns:1fr;}
+  .ex-cell{border-right:none;border-bottom:1px solid var(--bw);}
+
+  /* Wave divider: shorter on mobile */
+  .wave-divider{padding:20px 0;}
+
+  /* Convergence */
+  .convergence{padding:28px 20px;}
+  .convergence-title{font-size:1.4rem;}
+}
+
+@media(max-width:560px){
+  .hero{min-height:0!important;}
+  .hero-bg{display:none!important;}
+  .hero-overlay{display:none!important;}
+  .hero-content{background:var(--navy-2);border-bottom:3px solid var(--gold);padding:18px 16px 20px;}
+  .hero-title{font-size:1.8rem;}
+  .hero-tagline{font-size:.9rem;}
+  .body-wrap{padding:0 16px 48px;}
+  .step-tracker{display:none;}
+  .studio-heading{font-size:1.3rem;}
+  .tag-btn{font-size:11px;padding:7px 12px;}
 }
 </style>
 </head>
@@ -499,71 +602,54 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 
   <!-- ── EDITORIAL OPENING ── -->
   <div class="session-opening reveal">
-    <div class="session-opening-content">
-      <div class="session-eyebrow">The Concept &nbsp;/&nbsp; Session 01</div>
-      <div class="session-big-q">What do you have so far?</div>
-      <div class="session-sub">Start wherever you are. No songwriting résumé required.</div>
-    </div>
+    <div class="session-eyebrow">The Concept &nbsp;/&nbsp; Session 01</div>
+    <div class="session-big-q">What do you have so far?</div>
+    <div class="session-sub">Start wherever you are. No songwriting résumé required.</div>
   </div>
 
-  <!-- ── EDITORIAL CHOICE COMPOSITION ── -->
+  <!-- ── CHOICE: DESKTOP EDITORIAL COMPOSITION ── -->
   <div id="sp-expanded" class="reveal">
     <div class="sp-composition">
 
-      <!-- Ghost 01 layered behind and below the grid -->
       <div class="sp-bg-num">01</div>
 
-      <!-- Lyric artifact: SVG marked-up lyric sheet fragment, bleeds off right edge -->
+      <!-- Lyric artifact: desktop only -->
       <svg class="lyric-artifact" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Paper lines -->
         <line x1="10" y1="28" x2="190" y2="28" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
         <line x1="10" y1="48" x2="190" y2="48" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
         <line x1="10" y1="68" x2="190" y2="68" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
         <line x1="10" y1="88" x2="190" y2="88" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
         <line x1="10" y1="108" x2="190" y2="108" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
         <line x1="10" y1="128" x2="190" y2="128" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
-        <!-- Lyric text fragments -->
         <text x="14" y="24" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.5)">I remember the way you</text>
         <text x="14" y="44" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.35)">always burned the toast but</text>
-        <!-- Crossed-out line -->
-        <text x="14" y="64" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.25)">made it anyway every morning</text>
-        <line x1="14" y1="61" x2="178" y2="61" stroke="rgba(245,166,35,0.4)" stroke-width="1"/>
-        <!-- Circled phrase -->
+        <text x="14" y="64" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.22)">made it anyway every morning</text>
+        <line x1="14" y1="61" x2="178" y2="61" stroke="rgba(245,166,35,0.38)" stroke-width="1"/>
         <text x="14" y="84" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.45)">called everyone baby</text>
-        <ellipse cx="76" cy="80" rx="42" ry="8" stroke="rgba(245,166,35,0.35)" stroke-width="1" fill="none"/>
-        <!-- Arrow annotation -->
-        <text x="122" y="78" font-family="'Courier New',monospace" font-size="8" fill="rgba(245,166,35,0.5)">← KEEP THIS</text>
-        <!-- More lines -->
-        <text x="14" y="104" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.3)">never missed a single game</text>
-        <text x="14" y="124" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.2)">the road trip where everything</text>
-        <!-- Margin note -->
-        <text x="155" y="104" font-family="'Courier New',monospace" font-size="7" fill="rgba(245,166,35,0.4)" transform="rotate(-90,155,104)">v.2 draft</text>
+        <ellipse cx="76" cy="80" rx="42" ry="8" stroke="rgba(245,166,35,0.3)" stroke-width="1" fill="none"/>
+        <text x="122" y="78" font-family="'Courier New',monospace" font-size="8" fill="rgba(245,166,35,0.45)">← KEEP THIS</text>
+        <text x="14" y="104" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.28)">never missed a single game</text>
+        <text x="14" y="124" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.18)">the road trip where everything</text>
+        <text x="155" y="104" font-family="'Courier New',monospace" font-size="7" fill="rgba(245,166,35,0.35)" transform="rotate(-90,155,104)">v.2 draft</text>
       </svg>
 
+      <!-- Desktop 3-column grid -->
       <div class="sp-grid">
-
         <div class="sp-card" id="card-idea" onclick="selectStart('idea',this)">
           <div class="sp-icon">
-            <!-- Lightbulb with a slightly more editorial treatment: open base, spark line -->
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 21h6"/>
-              <path d="M12 3a6 6 0 0 1 6 6c0 2.4-1.4 4.5-3.5 5.6V17H9.5v-2.4C7.4 13.5 6 11.4 6 9a6 6 0 0 1 6-6z"/>
-              <line x1="12" y1="3" x2="12" y2="1.5" stroke-width="1.2"/>
-              <line x1="18.4" y1="5.6" x2="19.4" y2="4.6" stroke-width="1.2"/>
-              <line x1="5.6" y1="5.6" x2="4.6" y2="4.6" stroke-width="1.2"/>
+              <path d="M9 21h6"/><path d="M12 3a6 6 0 0 1 6 6c0 2.4-1.4 4.5-3.5 5.6V17H9.5v-2.4C7.4 13.5 6 11.4 6 9a6 6 0 0 1 6-6z"/>
+              <line x1="12" y1="3" x2="12" y2="1.5" stroke-width="1.2"/><line x1="18.4" y1="5.6" x2="19.4" y2="4.6" stroke-width="1.2"/><line x1="5.6" y1="5.6" x2="4.6" y2="4.6" stroke-width="1.2"/>
             </svg>
           </div>
           <div class="sp-title">I Have an Idea</div>
           <div class="sp-sub">It's in my head. That's about as far as we've gotten.</div>
           <div class="sp-hover-note">WE CAN WORK WITH THIS.</div>
         </div>
-
         <div class="sp-card" id="card-write" onclick="selectStart('write',this)">
           <div class="sp-icon">
-            <!-- Pen nib with a ruled line beneath it -->
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 20h9"/>
-              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
               <line x1="3" y1="22" x2="21" y2="22" stroke-width="0.8" stroke-dasharray="2 2"/>
             </svg>
           </div>
@@ -571,14 +657,10 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
           <div class="sp-sub">My words. My story. AI can help when I ask.</div>
           <div class="sp-hover-note">YOU'VE GOT THE PEN.</div>
         </div>
-
         <div class="sp-card" id="card-ready" onclick="selectStart('ready',this)">
           <div class="sp-icon">
-            <!-- Document with check and a small edit mark -->
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <polyline points="9 15 11 17 15 13"/>
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/>
               <line x1="8" y1="10" x2="13" y2="10" stroke-width="0.9"/>
             </svg>
           </div>
@@ -586,12 +668,58 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
           <div class="sp-sub">Look at you coming prepared. Let's make them sound like a song.</div>
           <div class="sp-hover-note">WELL, LOOK AT YOU.</div>
         </div>
-
       </div>
+
+      <!-- Mobile horizontal stack (hidden on desktop via CSS) -->
+      <div class="sp-mobile-stack" id="sp-mobile-stack">
+        <div class="sp-mobile-card" id="mob-card-idea" onclick="selectStart('idea',this)">
+          <div class="sp-mobile-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21h6"/><path d="M12 3a6 6 0 0 1 6 6c0 2.4-1.4 4.5-3.5 5.6V17H9.5v-2.4C7.4 13.5 6 11.4 6 9a6 6 0 0 1 6-6z"/>
+            </svg>
+          </div>
+          <div class="sp-mobile-text">
+            <div class="sp-mobile-title">I Have an Idea</div>
+            <div class="sp-mobile-sub">Help me turn my idea into lyrics.</div>
+          </div>
+          <div class="sp-mobile-arrow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+        <div class="sp-mobile-card" id="mob-card-write" onclick="selectStart('write',this)">
+          <div class="sp-mobile-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+          </div>
+          <div class="sp-mobile-text">
+            <div class="sp-mobile-title">I Want to Write the Lyrics</div>
+            <div class="sp-mobile-sub">My words. AI helps when I ask.</div>
+          </div>
+          <div class="sp-mobile-arrow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+        <div class="sp-mobile-card" id="mob-card-ready" onclick="selectStart('ready',this)">
+          <div class="sp-mobile-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/>
+            </svg>
+          </div>
+          <div class="sp-mobile-text">
+            <div class="sp-mobile-title">My Lyrics Are Ready</div>
+            <div class="sp-mobile-sub">I already have lyrics I want to use.</div>
+          </div>
+          <div class="sp-mobile-arrow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- ── COLLAPSED SELECTOR (shown after selection) ── -->
+  <!-- ── COLLAPSED SELECTOR ── -->
   <div id="sp-collapsed" class="sp-collapsed" onclick="expandSelector()">
     <div class="sp-collapsed-icon">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="collapsed-icon"></svg>
@@ -611,9 +739,9 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
         <p>WATCH ME: From Story Bank to Song Blueprint — 2 to 3 min demo — coming soon</p>
       </div>
-      <div class="studio-label">Story Bank</div>
-      <div class="studio-heading">Tell me about the song.</div>
-      <div class="studio-sub">The more specific you are here, the more your song will sound like yours.</div>
+      <div class="studio-label">Tell me about the song</div>
+      <div class="studio-heading">What's this song about?</div>
+      <p style="font-size:14px;color:var(--card);margin-bottom:20px;line-height:1.65;">The more specific you are, the more your song will sound like yours.</p>
 
       <button class="example-toggle" onclick="toggleExample(this)">
         <span>See the difference specificity makes</span><span>▾</span>
@@ -621,22 +749,29 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
       <div class="example-box">
         <div class="ex-row">
           <div class="ex-cell"><div class="ex-label weak">Weak — Generic</div><p>"Make a love song for my husband."<br><br>ChatGPT has nothing real to work with. The result will be generic.</p></div>
-          <div class="ex-cell"><div class="ex-label strong">Strong — Specific</div><p>How long you have been together, how you met, a recurring habit, a funny memory, the emotional tone you want, and what the song should avoid.</p></div>
+          <div class="ex-cell"><div class="ex-label strong">Strong — Specific</div><p>How long you've been together, how you met, a recurring habit, a funny memory, the emotional tone you want, and what the song should avoid.</p></div>
         </div>
       </div>
 
+      <!-- Story Bank: two field groups -->
       <div class="story-bank">
         <div class="story-bank-header">
           <div class="story-bank-title">Story Bank</div>
-          <div style="font-size:10px;color:var(--muted);font-family:'Courier New',monospace;">RAW MATERIAL</div>
+          <div class="story-bank-meta">RAW MATERIAL</div>
         </div>
         <div class="story-bank-body">
-          <div class="field"><label>Who or what is this song about?</label><input type="text" id="sb-about" placeholder="e.g. My mom, my best friend, a chapter of my life..." oninput="updateBlueprint();ls('sb_about',this.value)"></div>
-          <div class="field"><label>Why are you making this song?</label><input type="text" id="sb-why" placeholder="e.g. Her 70th birthday, a breakup I never processed, just because..." oninput="updateBlueprint();ls('sb_why',this.value)"></div>
-          <div class="field"><label>2 to 3 details only you would know</label><textarea id="sb-details" placeholder="e.g. She always burned the toast but made it anyway. She called everyone 'baby.' She never missed a single game." oninput="updateBlueprint();ls('sb_details',this.value)"></textarea><div class="field-hint">These are the details that keep ChatGPT from writing Generic Love Song #8,472.</div></div>
-          <div class="field"><label>A memory, phrase, place, joke, or moment that belongs in this song</label><textarea id="sb-memory" placeholder="e.g. The last time we danced in the kitchen. The road trip where everything went wrong. 'Just keep going.'" oninput="updateBlueprint();ls('sb_memory',this.value)"></textarea></div>
-          <div class="field"><label>How should this song feel?</label><input type="text" id="sb-feeling" placeholder="e.g. Nostalgic, proud, celebratory, bittersweet, joyful..." oninput="updateBlueprint();ls('sb_feeling',this.value)"></div>
-          <div class="field" style="margin-bottom:4px;"><label>Anything you absolutely do not want</label><input type="text" id="sb-avoid" placeholder="e.g. No sad endings, no clichés, nothing too slow..." oninput="updateBlueprint();ls('sb_avoid',this.value)"></div>
+          <div class="sb-group">
+            <div class="sb-group-label">The basics</div>
+            <div class="field"><label>Who or what is this song about?</label><input type="text" id="sb-about" placeholder="e.g. My mom, my best friend, a chapter of my life..." oninput="updateBlueprint();ls('sb_about',this.value)"></div>
+            <div class="field"><label>Why are you making this song?</label><input type="text" id="sb-why" placeholder="e.g. Her 70th birthday, a breakup I never processed, just because..." oninput="updateBlueprint();ls('sb_why',this.value)"></div>
+            <div class="field"><label>How should it feel?</label><input type="text" id="sb-feeling" placeholder="e.g. Nostalgic, proud, celebratory, bittersweet, joyful..." oninput="updateBlueprint();ls('sb_feeling',this.value)"></div>
+          </div>
+          <div class="sb-group">
+            <div class="sb-group-label">The details that make it yours</div>
+            <div class="field"><label>2 to 3 details only you would know</label><textarea id="sb-details" placeholder="e.g. She always burned the toast but made it anyway. She called everyone 'baby.' She never missed a single game." oninput="updateBlueprint();ls('sb_details',this.value)"></textarea><div class="field-hint">These are the details that keep ChatGPT from writing Generic Love Song #8,472.</div></div>
+            <div class="field"><label>A memory, phrase, place, joke, or moment that belongs in this song</label><textarea id="sb-memory" placeholder="e.g. The last time we danced in the kitchen. The road trip where everything went wrong. 'Just keep going.'" oninput="updateBlueprint();ls('sb_memory',this.value)"></textarea></div>
+            <div class="field" style="margin-bottom:4px;"><label>Anything you absolutely do not want</label><input type="text" id="sb-avoid" placeholder="e.g. No sad endings, no clichés, nothing too slow..." oninput="updateBlueprint();ls('sb_avoid',this.value)"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -695,16 +830,15 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
     <!-- Waveform divider -->
     <div class="wave-divider" id="wave2"></div>
 
-    <!-- BUILD BLUEPRINT PROMPT -->
+    <!-- BLUEPRINT PROMPT -->
     <div>
       <div class="studio-label">Blueprint Prompt</div>
       <div class="studio-heading">Copy this into ChatGPT.</div>
       <p style="font-size:13px;color:var(--card);margin-bottom:20px;">Your answers fill in as you type.</p>
-
       <div class="prompt-console" id="blueprint-pb">
         <div class="prompt-console-header">
           <div class="prompt-console-label">ChatGPT Prompt: Song Blueprint</div>
-          <div class="prompt-console-status" id="fill-status">filling in as you type...</div>
+          <div class="prompt-console-status" id="fill-status">filling in...</div>
         </div>
         <div class="prompt-console-body" id="live-prompt">I am creating a song using AI tools and I need your help building a Song Blueprint before I write any lyrics.
 
@@ -746,7 +880,6 @@ Please create a Song Blueprint that includes:
       <div class="studio-label">Review</div>
       <div class="studio-heading">Does this sound like your song?</div>
       <p style="font-size:13px;color:var(--card);margin-bottom:20px;">Read what ChatGPT gave you. Trust your gut.</p>
-
       <div class="pifi">
         <button class="pifi-btn" onclick="pickBlueprint('pick',this)">
           <div class="pifi-icon">✓</div>
@@ -759,10 +892,9 @@ Please create a Song Blueprint that includes:
           <div class="pifi-sub">Something is off. I need to adjust.</div>
         </button>
       </div>
-
       <div class="pifi-result" id="pifi-fix-panel">
         <div class="field" style="margin-bottom:14px;">
-          <label style="color:var(--off);font-size:11px;letter-spacing:1.5px;">Paste ChatGPT's Blueprint here</label>
+          <label style="color:var(--off);">Paste ChatGPT's Blueprint here</label>
           <textarea id="fix-blueprint-paste" rows="5" placeholder="Paste the Song Blueprint ChatGPT gave you..." oninput="updateFixRevision()" style="font-size:13px;width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Courier New',monospace;padding:8px 0;outline:none;resize:vertical;"></textarea>
         </div>
         <div style="margin-bottom:14px;">
@@ -784,11 +916,11 @@ Please create a Song Blueprint that includes:
           </div>
           <div class="prompt-console-body" id="fix-prompt">Here is the Song Blueprint you just created for me:
 
-<span id="fix-blueprint-echo" style="color:var(--muted);font-style:italic;">[Paste your Blueprint above]</span>
+<span id="fix-blueprint-echo" style="color:rgba(122,138,154,0.7);font-style:italic;">[Paste your Blueprint above]</span>
 
 I want you to revise it. Here is what needs to change:
 
-<span id="fix-note-display" style="color:var(--muted);font-style:italic;">[Select what needs to change above]</span>
+<span id="fix-note-display" style="color:rgba(122,138,154,0.7);font-style:italic;">[Select what needs to change above]</span>
 
 Keep everything else the same. Just update the parts I mentioned.</div>
           <div class="prompt-actions">
@@ -837,7 +969,7 @@ Keep everything else the same. Just update the parts I mentioned.</div>
         </div>
         <div class="prompt-console-body" id="lyrics-prompt">Here is my Song Blueprint:
 
-<span id="lyrics-blueprint-echo" style="color:var(--muted);font-style:italic;">[Paste your Blueprint above]</span>
+<span id="lyrics-blueprint-echo" style="color:rgba(122,138,154,0.7);font-style:italic;">[Paste your Blueprint above]</span>
 
 Using everything in this Blueprint, write complete song lyrics for me.
 
@@ -873,12 +1005,10 @@ Rules:
           <div class="lyric-sheet-title">Lyrics Draft</div>
           <div class="lyric-sheet-meta">v1.0 — AI GENERATED</div>
         </div>
-        <div class="lyric-sheet-body">
-          <textarea class="lyric-textarea" id="lyrics-from-ai" placeholder="Paste the lyrics ChatGPT wrote for you..." oninput="ls('lyrics',this.value);updateChangePrompt()"></textarea>
-        </div>
+        <textarea class="lyric-textarea" id="lyrics-from-ai" placeholder="Paste the lyrics ChatGPT wrote for you..." oninput="ls('lyrics',this.value);updateChangePrompt()"></textarea>
         <div class="lyric-sheet-footer">
           <div class="lyric-sheet-footer-note">your words go here</div>
-          <div class="annotation" style="transform:rotate(1.5deg);opacity:.6;">We can work with this. ↑</div>
+          <div class="annotation" style="transform:rotate(1.5deg);">We can work with this. ↑</div>
         </div>
       </div>
       <div class="kp-grid" id="keep-or-change">
@@ -902,11 +1032,11 @@ Rules:
           </div>
           <div class="prompt-console-body" id="change-prompt">Here are my current lyrics:
 
-<span id="change-lyrics-echo" style="color:var(--muted);font-style:italic;">[Paste lyrics above]</span>
+<span id="change-lyrics-echo" style="color:rgba(122,138,154,0.7);font-style:italic;">[Paste lyrics above]</span>
 
 Here is what I want to change:
 
-<span id="change-note-echo" style="color:var(--muted);font-style:italic;">[Describe the change above]</span>
+<span id="change-note-echo" style="color:rgba(122,138,154,0.7);font-style:italic;">[Describe the change above]</span>
 
 Please revise only the parts I mentioned. Keep everything else exactly as it is. Do not rewrite the whole song.</div>
           <div class="prompt-actions">
@@ -936,26 +1066,21 @@ Please revise only the parts I mentioned. Keep everything else exactly as it is.
        PATH B: I WANT TO WRITE THE LYRICS
   ══════════════════════════════════════════════ -->
   <div class="path-panel" id="path-write">
-
     <div class="studio-section">
       <div class="studio-label">Writing Studio</div>
       <div class="studio-heading">Your lyrics. Your voice.</div>
       <p style="font-size:13px;color:var(--card);margin-bottom:24px;line-height:1.65;">Start wherever you are — a line, a chorus idea, a feeling, a few rough verses. You can always add more.</p>
-
       <div class="lyric-sheet">
         <div class="lyric-sheet-header">
           <div class="lyric-sheet-title">Lyrics</div>
           <div class="lyric-sheet-meta">DRAFT — IN PROGRESS</div>
         </div>
-        <div class="lyric-sheet-body">
-          <textarea class="lyric-textarea" id="own-lyrics" placeholder="Write here..." oninput="ls('lyrics',this.value)"></textarea>
-        </div>
+        <textarea class="lyric-textarea" id="own-lyrics" placeholder="Write here..." oninput="ls('lyrics',this.value)"></textarea>
         <div class="lyric-sheet-footer">
           <div class="lyric-sheet-footer-note">your words go here</div>
-          <div class="annotation" style="transform:rotate(1.5deg);opacity:.5;">Keep this. ↑</div>
+          <div class="annotation" style="transform:rotate(1.5deg);">Keep this. ↑</div>
         </div>
       </div>
-
       <div class="coach-strip">
         <div class="coach-strip-label">Optional help</div>
         <div class="coach-tools">
@@ -965,33 +1090,12 @@ Please revise only the parts I mentioned. Keep everything else exactly as it is.
           <button class="coach-btn" onclick="showCoach('hook',this)">Brainstorm a Hook</button>
           <button class="coach-btn" onclick="showCoach('feedback',this)">Get Feedback</button>
         </div>
-        <div class="coach-response" id="coach-line">
-          <strong>Help With a Line</strong><br><br>
-          Copy the line you are stuck on, then paste it into ChatGPT with this:<br><br>
-          <em>"Here is a line from a song I am writing: [YOUR LINE]. Help me make it more specific and emotionally honest without changing the meaning."</em>
-        </div>
-        <div class="coach-response" id="coach-rhyme">
-          <strong>Find a Rhyme</strong><br><br>
-          Paste this into ChatGPT:<br><br>
-          <em>"I need a word or phrase that rhymes with [YOUR WORD] and fits this emotional tone: [DESCRIBE THE FEELING]. Give me 5 to 10 options."</em>
-        </div>
-        <div class="coach-response" id="coach-structure">
-          <strong>Help With Structure</strong><br><br>
-          Paste this into ChatGPT:<br><br>
-          <em>"Here are my lyrics so far: [YOUR LYRICS]. Help me organize them into a song structure with [Verse 1], [Chorus], [Verse 2], [Bridge], [Final Chorus]. Keep my exact words wherever they work. Only fill in what is genuinely missing."</em>
-        </div>
-        <div class="coach-response" id="coach-hook">
-          <strong>Brainstorm a Hook</strong><br><br>
-          Paste this into ChatGPT:<br><br>
-          <em>"Here is what my song is about: [DESCRIBE YOUR SONG]. Give me 5 possible hook lines — the one memorable phrase that captures the whole emotional idea. Keep them specific to my story, not generic."</em>
-        </div>
-        <div class="coach-response" id="coach-feedback">
-          <strong>Get Feedback</strong><br><br>
-          Paste this into ChatGPT:<br><br>
-          <em>"Here are my lyrics: [YOUR LYRICS]. Without rewriting anything, tell me: What is working well? What feels incomplete? What might be missing for this to feel like a complete song?"</em>
-        </div>
+        <div class="coach-response" id="coach-line"><strong>Help With a Line</strong><br><br>Copy the line you are stuck on, then paste it into ChatGPT with this:<br><br><em>"Here is a line from a song I am writing: [YOUR LINE]. Help me make it more specific and emotionally honest without changing the meaning."</em></div>
+        <div class="coach-response" id="coach-rhyme"><strong>Find a Rhyme</strong><br><br>Paste this into ChatGPT:<br><br><em>"I need a word or phrase that rhymes with [YOUR WORD] and fits this emotional tone: [DESCRIBE THE FEELING]. Give me 5 to 10 options."</em></div>
+        <div class="coach-response" id="coach-structure"><strong>Help With Structure</strong><br><br>Paste this into ChatGPT:<br><br><em>"Here are my lyrics so far: [YOUR LYRICS]. Help me organize them into a song structure with [Verse 1], [Chorus], [Verse 2], [Bridge], [Final Chorus]. Keep my exact words wherever they work. Only fill in what is genuinely missing."</em></div>
+        <div class="coach-response" id="coach-hook"><strong>Brainstorm a Hook</strong><br><br>Paste this into ChatGPT:<br><br><em>"Here is what my song is about: [DESCRIBE YOUR SONG]. Give me 5 possible hook lines — the one memorable phrase that captures the whole emotional idea. Keep them specific to my story, not generic."</em></div>
+        <div class="coach-response" id="coach-feedback"><strong>Get Feedback</strong><br><br>Paste this into ChatGPT:<br><br><em>"Here are my lyrics: [YOUR LYRICS]. Without rewriting anything, tell me: What is working well? What feels incomplete? What might be missing for this to feel like a complete song?"</em></div>
       </div>
-
       <div style="margin-top:24px;">
         <button onclick="lyricsReady()" class="green-btn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -999,7 +1103,6 @@ Please revise only the parts I mentioned. Keep everything else exactly as it is.
         </button>
       </div>
     </div>
-
   </div><!-- /path-write -->
 
 
@@ -1007,25 +1110,20 @@ Please revise only the parts I mentioned. Keep everything else exactly as it is.
        PATH C: MY LYRICS ARE READY
   ══════════════════════════════════════════════ -->
   <div class="path-panel" id="path-ready">
-
     <div class="studio-section">
       <div class="studio-label">Bring In Your Lyrics</div>
       <div class="studio-heading">Paste what you've got.</div>
-
-      <div class="lyric-sheet" style="margin-bottom:20px;">
+      <div class="lyric-sheet" style="margin-bottom:20px;margin-top:16px;">
         <div class="lyric-sheet-header">
           <div class="lyric-sheet-title">Your Lyrics</div>
           <div class="lyric-sheet-meta">FINAL DRAFT</div>
         </div>
-        <div class="lyric-sheet-body">
-          <textarea class="lyric-textarea" id="ready-lyrics" placeholder="Paste your lyrics here..." oninput="ls('lyrics',this.value);updatePolishPrompts()"></textarea>
-        </div>
+        <textarea class="lyric-textarea" id="ready-lyrics" placeholder="Paste your lyrics here..." oninput="ls('lyrics',this.value);updatePolishPrompts()"></textarea>
         <div class="lyric-sheet-footer">
           <div class="lyric-sheet-footer-note">your words go here</div>
-          <div class="annotation" style="transform:rotate(1.5deg);opacity:.5;">Okay, that's actually good.</div>
+          <div class="annotation" style="transform:rotate(1.5deg);">Okay, that's actually good.</div>
         </div>
       </div>
-
       <div style="margin-bottom:20px;">
         <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">Would you like any feedback before moving on?</div>
         <div class="kp-grid">
@@ -1039,7 +1137,6 @@ Please revise only the parts I mentioned. Keep everything else exactly as it is.
           </button>
         </div>
       </div>
-
       <div class="polish-reveal" id="polish-panel">
         <div class="prompt-console">
           <div class="prompt-console-header">
@@ -1047,7 +1144,7 @@ Please revise only the parts I mentioned. Keep everything else exactly as it is.
           </div>
           <div class="prompt-console-body" id="polish-prompt">Here are my lyrics:
 
-<span id="polish-lyrics-echo" style="color:var(--muted);font-style:italic;">[Your lyrics will appear here]</span>
+<span id="polish-lyrics-echo" style="color:rgba(122,138,154,0.7);font-style:italic;">[Your lyrics will appear here]</span>
 
 Before you change anything, give me feedback only. Tell me:
 - Which lines are the strongest
@@ -1081,11 +1178,11 @@ Do NOT rewrite anything yet. Just give me the feedback so I can decide what I wa
               </div>
               <div class="prompt-console-body" id="polish-change-prompt">Here are my lyrics:
 
-<span id="polish-change-lyrics-echo" style="color:var(--muted);font-style:italic;">[Your lyrics will appear here]</span>
+<span id="polish-change-lyrics-echo" style="color:rgba(122,138,154,0.7);font-style:italic;">[Your lyrics will appear here]</span>
 
 Here is what I want changed:
 
-<span id="polish-change-note-echo" style="color:var(--muted);font-style:italic;">[Your note will appear here]</span>
+<span id="polish-change-note-echo" style="color:rgba(122,138,154,0.7);font-style:italic;">[Your note will appear here]</span>
 
 Please make only these changes. Keep everything else exactly as I wrote it. Do not rewrite the whole song.</div>
               <div class="prompt-actions">
@@ -1109,11 +1206,10 @@ Please make only these changes. Keep everything else exactly as I wrote it. Do n
         </div>
       </div>
     </div>
-
   </div><!-- /path-ready -->
 
 
-  <!-- ══ COMPLETION ══════════════════════════════ -->
+  <!-- ══ COMPLETION MILESTONE ══════════════════════ -->
   <div class="convergence" id="convergence">
     <div class="convergence-eyebrow">Session 01 — Complete</div>
     <div class="convergence-title">Your lyrics are ready.<br>Now let's decide how your song should sound.</div>
@@ -1137,15 +1233,15 @@ document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);var r=
 // ── WAVEFORM GENERATOR ──
 function buildWave(id){
   var el=document.getElementById(id);if(!el)return;
-  var heights=[3,5,8,12,18,24,16,10,6,4,8,14,22,28,20,14,8,5,10,16,24,32,22,14,8,5,3,6,10,16,24,20,14,8,5,3,6,12,18,26,20,12,6,4,8,14,22,16,10,5,3,6,10,18,26,20,12,6,4,8];
-  heights.forEach(function(h){var b=document.createElement('div');b.className='wave-bar';b.style.height=h+'px';el.appendChild(b);});
+  var h=[3,5,8,12,18,24,16,10,6,4,8,14,22,28,20,14,8,5,10,16,24,32,22,14,8,5,3,6,10,16,24,20,14,8,5,3,6,12,18,26,20,12,6,4,8,14,22,16,10,5,3,6,10,18,26,20,12,6,4,8];
+  h.forEach(function(v){var b=document.createElement('div');b.className='wave-bar';b.style.height=v+'px';el.appendChild(b);});
 }
 ['wave1','wave2','wave3'].forEach(buildWave);
 
 // ── LOCALSTORAGE ──
 function ls(k,v){try{if(v===undefined)return localStorage.getItem('ais_'+k);localStorage.setItem('ais_'+k,v);}catch(e){return null;}}
 
-// ── CARD LABELS FOR COLLAPSED STATE ──
+// ── CARD METADATA ──
 var cardLabels={idea:'I Have an Idea',write:'I Want to Write the Lyrics',ready:'My Lyrics Are Ready'};
 var cardIcons={
   idea:'<path d="M9 21h6"/><path d="M12 3a6 6 0 0 1 6 6c0 2.4-1.4 4.5-3.5 5.6V17H9.5v-2.4C7.4 13.5 6 11.4 6 9a6 6 0 0 1 6-6z"/>',
@@ -1156,15 +1252,19 @@ var cardIcons={
 // ── STARTING POINT SELECTOR ──
 var currentPath=null;
 function selectStart(path,card){
-  document.querySelectorAll('.sp-card').forEach(function(c){c.classList.remove('selected');});
+  // Deselect all desktop + mobile cards
+  document.querySelectorAll('.sp-card,.sp-mobile-card').forEach(function(c){c.classList.remove('selected');});
   document.querySelectorAll('.path-panel').forEach(function(p){
     p.classList.remove('show','visible');
     setTimeout(function(){if(!p.classList.contains('show'))p.style.display='none';},350);
   });
-  card.classList.add('selected');
-  currentPath=path;
-  ls('start_path',path);
-  // Collapse the card grid
+  // Select both desktop and mobile version of the same card
+  var desktopCard=document.getElementById('card-'+path);
+  var mobileCard=document.getElementById('mob-card-'+path);
+  if(desktopCard)desktopCard.classList.add('selected');
+  if(mobileCard)mobileCard.classList.add('selected');
+  currentPath=path;ls('start_path',path);
+  // Collapse selector
   var exp=document.getElementById('sp-expanded');
   var col=document.getElementById('sp-collapsed');
   if(exp)exp.style.display='none';
@@ -1176,13 +1276,11 @@ function selectStart(path,card){
   var panel=document.getElementById('path-'+path);
   if(panel){
     panel.style.display='block';
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){
-        panel.classList.add('show');
-        setTimeout(function(){panel.classList.add('visible');},10);
-        panel.scrollIntoView({behavior:'smooth',block:'nearest'});
-      });
-    });
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      panel.classList.add('show');
+      setTimeout(function(){panel.classList.add('visible');},10);
+      panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });});
     restorePath(path);
   }
 }
@@ -1191,19 +1289,16 @@ function expandSelector(){
   var exp=document.getElementById('sp-expanded');
   var col=document.getElementById('sp-collapsed');
   document.querySelectorAll('.path-panel').forEach(function(p){p.classList.remove('show','visible');setTimeout(function(){if(!p.classList.contains('show'))p.style.display='none';},350);});
-  document.querySelectorAll('.sp-card').forEach(function(c){c.classList.remove('selected');});
+  document.querySelectorAll('.sp-card,.sp-mobile-card').forEach(function(c){c.classList.remove('selected');});
   if(exp)exp.style.display='block';
   if(col)col.style.display='none';
-  currentPath=null;
-  ls('start_path','');
+  currentPath=null;ls('start_path','');
   if(exp)exp.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
 function restorePath(path){
   if(path==='idea'){
-    ['about','why','details','memory','feeling','avoid'].forEach(function(f){
-      var el=document.getElementById('sb-'+f);if(el){var v=ls('sb_'+f);if(v)el.value=v;}
-    });
+    ['about','why','details','memory','feeling','avoid'].forEach(function(f){var el=document.getElementById('sb-'+f);if(el){var v=ls('sb_'+f);if(v)el.value=v;}});
     var g=ls('genre');var m=ls('mood');
     if(g)document.querySelectorAll('#genre-grid .tag-btn').forEach(function(b){if(b.textContent.trim()===g){b.classList.add('selected');selectedGenre=g;}});
     if(m)document.querySelectorAll('#mood-grid .tag-btn').forEach(function(b){if(b.textContent.trim()===m){b.classList.add('selected');selectedMood=m;}});
@@ -1216,13 +1311,7 @@ function restorePath(path){
   if(ls('lyrics_ready')==='1'){var conv=document.getElementById('convergence');if(conv)conv.classList.add('show');}
 }
 
-(function(){
-  var saved=ls('start_path');
-  if(saved){
-    var card=document.getElementById('card-'+saved);
-    if(card)selectStart(saved,card);
-  }
-})();
+(function(){var saved=ls('start_path');if(saved){var card=document.getElementById('card-'+saved);if(card)selectStart(saved,card);}})();
 
 // ── STORY BANK → BLUEPRINT ──
 var selectedGenre='',selectedMood='';
@@ -1239,7 +1328,7 @@ function updateBlueprint(){
   var mph=document.querySelector('.ph[data-field="mood"]');
   if(mph){if(selectedMood){mph.textContent=selectedMood;mph.classList.add('filled');filled++;}else{mph.textContent='[choose above]';mph.classList.remove('filled');}}
   var status=document.getElementById('fill-status');
-  if(status){if(filled===total){status.textContent='ready to copy';status.style.color='var(--green)';}else{status.textContent=filled+' of '+total+' filled';}}
+  if(status){if(filled===total){status.textContent='ready to copy';status.style.color='var(--green)';}else{status.textContent=filled+' of '+total+' filled';status.style.color='';}}
 }
 function selectTag(btn,group){
   btn.closest('.tag-grid').querySelectorAll('.tag-btn').forEach(function(b){b.classList.remove('selected');});
@@ -1263,8 +1352,8 @@ function toggleChip(btn,label){var idx=activeChips.indexOf(label);if(idx===-1){a
 function updateFixRevision(){
   var p=document.getElementById('fix-blueprint-paste');var e=document.getElementById('fix-blueprint-echo');
   var n=document.getElementById('fix-note-input');var nd=document.getElementById('fix-note-display');
-  if(p&&e){var bp=p.value.trim();if(bp){e.textContent=bp;e.style.color='var(--off)';e.style.fontStyle='normal';}else{e.textContent='[Paste your Blueprint above]';e.style.color='var(--muted)';e.style.fontStyle='italic';}}
-  if(nd){var parts=activeChips.slice();var extra=n?n.value.trim():'';if(extra)parts.push(extra);if(parts.length>0){nd.textContent=parts.join('. ')+'.';nd.style.color='var(--off)';nd.style.fontStyle='normal';}else{nd.textContent='[Select what needs to change above]';nd.style.color='var(--muted)';nd.style.fontStyle='italic';}}
+  if(p&&e){var bp=p.value.trim();if(bp){e.textContent=bp;e.style.color='var(--off)';e.style.fontStyle='normal';}else{e.textContent='[Paste your Blueprint above]';e.style.color='rgba(122,138,154,0.7)';e.style.fontStyle='italic';}}
+  if(nd){var parts=activeChips.slice();var extra=n?n.value.trim():'';if(extra)parts.push(extra);if(parts.length>0){nd.textContent=parts.join('. ')+'.';nd.style.color='var(--off)';nd.style.fontStyle='normal';}else{nd.textContent='[Select what needs to change above]';nd.style.color='rgba(122,138,154,0.7)';nd.style.fontStyle='italic';}}
 }
 function resetFix(){var p=document.getElementById('fix-blueprint-paste');var n=document.getElementById('fix-note-input');if(p)p.value='';if(n)n.value='';activeChips=[];document.querySelectorAll('.fix-chip').forEach(function(c){c.classList.remove('active');});updateFixRevision();}
 
@@ -1272,7 +1361,7 @@ function resetFix(){var p=document.getElementById('fix-blueprint-paste');var n=d
 function updateLyricsPrompt(){
   var el=document.getElementById('blueprint-for-lyrics');var echo=document.getElementById('lyrics-blueprint-echo');
   if(!el||!echo)return;var val=el.value.trim();ls('blueprint_for_lyrics',val);
-  if(val){echo.textContent=val;echo.style.color='var(--off)';echo.style.fontStyle='normal';}else{echo.textContent='[Paste your Blueprint above]';echo.style.color='var(--muted)';echo.style.fontStyle='italic';}
+  if(val){echo.textContent=val;echo.style.color='var(--off)';echo.style.fontStyle='normal';}else{echo.textContent='[Paste your Blueprint above]';echo.style.color='rgba(122,138,154,0.7)';echo.style.fontStyle='italic';}
 }
 
 // ── KEEP OR CHANGE (Path A) ──
@@ -1285,8 +1374,8 @@ function keepOrChange(choice,btn){
 function updateChangePrompt(){
   var lyrEl=document.getElementById('lyrics-from-ai');var noteEl=document.getElementById('change-note');
   var lyrEcho=document.getElementById('change-lyrics-echo');var noteEcho=document.getElementById('change-note-echo');
-  if(lyrEl&&lyrEcho){var v=lyrEl.value.trim();if(v){lyrEcho.textContent=v;lyrEcho.style.color='var(--off)';lyrEcho.style.fontStyle='normal';}else{lyrEcho.textContent='[Paste lyrics above]';lyrEcho.style.color='var(--muted)';lyrEcho.style.fontStyle='italic';}}
-  if(noteEl&&noteEcho){var v=noteEl.value.trim();if(v){noteEcho.textContent=v;noteEcho.style.color='var(--off)';noteEcho.style.fontStyle='normal';}else{noteEcho.textContent='[Describe the change above]';noteEcho.style.color='var(--muted)';noteEcho.style.fontStyle='italic';}}
+  if(lyrEl&&lyrEcho){var v=lyrEl.value.trim();if(v){lyrEcho.textContent=v;lyrEcho.style.color='var(--off)';lyrEcho.style.fontStyle='normal';}else{lyrEcho.textContent='[Paste lyrics above]';lyrEcho.style.color='rgba(122,138,154,0.7)';lyrEcho.style.fontStyle='italic';}}
+  if(noteEl&&noteEcho){var v=noteEl.value.trim();if(v){noteEcho.textContent=v;noteEcho.style.color='var(--off)';noteEcho.style.fontStyle='normal';}else{noteEcho.textContent='[Describe the change above]';noteEcho.style.color='rgba(122,138,154,0.7)';noteEcho.style.fontStyle='italic';}}
 }
 
 // ── COACHING TOOLS ──
@@ -1308,7 +1397,7 @@ function keepOrPolish(choice,btn){
 function updatePolishPrompts(){
   var lyrEl=document.getElementById('ready-lyrics');var val=lyrEl?lyrEl.value.trim():'';
   ['polish-lyrics-echo','polish-change-lyrics-echo'].forEach(function(id){
-    var e=document.getElementById(id);if(e){if(val){e.textContent=val;e.style.color='var(--off)';e.style.fontStyle='normal';}else{e.textContent='[Your lyrics will appear here]';e.style.color='var(--muted)';e.style.fontStyle='italic';}}
+    var e=document.getElementById(id);if(e){if(val){e.textContent=val;e.style.color='var(--off)';e.style.fontStyle='normal';}else{e.textContent='[Your lyrics will appear here]';e.style.color='rgba(122,138,154,0.7)';e.style.fontStyle='italic';}}
   });
 }
 function updatePolishChangePrompt(){
