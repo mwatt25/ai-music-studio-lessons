@@ -266,12 +266,11 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <!-- STAGE 2: SOUND BOARD -->
   <div class="studio-label reveal">Sound Board</div>
   <div class="studio-heading reveal">Refine the sound.</div>
-  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Your genre and mood are already set. These three choices add the final layer of direction before Suno builds your song.</p>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Your genre and mood are already here. Add a few details to shape the sound.</p>
 
   <div class="sound-board reveal">
     <div class="sb-header">
       <div class="sb-header-label">Sound Board</div>
-      <div id="sb-fill-status" style="font-size:10px;color:var(--muted);font-family:'Courier New',monospace;">0 of 3 selected</div>
     </div>
     <div class="sb-section">
       <div class="sb-section-label">Energy</div>
@@ -443,13 +442,18 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
         That's It
       </button>
     </div>
+    <div style="margin-top:12px;font-size:11px;color:var(--muted);line-height:1.6;">Made a second version? Use <strong style="color:var(--card);">Compare My Versions</strong> below to pick the one you want.</div>
   </div>
 
   <!-- OPTIONAL: COMPARE VERSIONS -->
-  <button class="compare-toggle" onclick="toggleCompare()">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-    Compare My Versions
-  </button>
+  <div style="margin-bottom:8px;">
+    <div style="font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">Have two you love?</div>
+    <button class="compare-toggle" onclick="toggleCompare()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      Compare My Versions
+    </button>
+    <div style="font-size:11px;color:var(--muted);margin-top:6px;font-style:italic;">Can't decide? Put them side by side.</div>
+  </div>
   <div class="compare-panel" id="compare-panel">
     <p style="font-size:13px;color:var(--card);margin-bottom:16px;line-height:1.65;">Paste links to two versions and pick the one that feels like your song.</p>
     <div class="compare-grid">
@@ -527,10 +531,17 @@ var selectedEnergy='', selectedFeel='', selectedVocal='';
     updateSbStatus();
   }
 
-  // Restore lyrics display
+  // Restore lyrics display — always read the latest approved lyrics on load
+  // This ensures that if they went back to Session 2 and revised, the update is here
   var lyrics = AISProject.approvedLyrics();
   var lyrEl = document.getElementById('suno-lyrics-display');
-  if(lyrEl && lyrics){lyrEl.textContent = lyrics;}
+  if(lyrEl){
+    if(lyrics){
+      lyrEl.textContent = lyrics;
+    } else {
+      lyrEl.textContent = '[Your approved lyrics will appear here — complete Session 2 first]';
+    }
+  }
 
   // Restore title
   var titleLine = extractTitle(AISProject.approvedBlueprint());
@@ -587,12 +598,7 @@ function selectTag(btn, group, value){
 }
 
 function updateSbStatus(){
-  var count = [selectedEnergy,selectedFeel,selectedVocal].filter(Boolean).length;
-  var el = document.getElementById('sb-fill-status');
-  if(el){
-    el.textContent = count + ' of 3 selected';
-    el.style.color = count === 3 ? 'var(--green)' : 'var(--muted)';
-  }
+  // Counter removed — selections build the style description silently
 }
 
 function buildStyleDescription(){
