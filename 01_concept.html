@@ -68,17 +68,105 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .session-big-q{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:10px;letter-spacing:-.02em;}
 .session-sub{font-size:15px;color:var(--card);margin-bottom:32px;line-height:1.6;}
 
-/* ── CHOICE CARDS — expanded state ── */
-.sp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:0;}
+/* ── EDITORIAL CHOICE COMPOSITION ── */
+.sp-composition{
+  position:relative;
+  margin-bottom:0;
+  /* crop marks at corners */
+}
+.sp-composition::before,
+.sp-composition::after{
+  content:'';
+  position:absolute;
+  width:12px;height:12px;
+  border-color:rgba(245,166,35,0.25);
+  border-style:solid;
+  pointer-events:none;
+  z-index:10;
+}
+.sp-composition::before{top:-6px;left:-6px;border-width:1px 0 0 1px;}
+.sp-composition::after{top:-6px;right:-6px;border-width:1px 1px 0 0;}
+
+/* Lyric artifact — the editorial motif */
+.lyric-artifact{
+  position:absolute;
+  top:-18px;
+  right:-24px;
+  width:220px;
+  z-index:2;
+  pointer-events:none;
+  opacity:.55;
+  transform:rotate(2.5deg);
+}
+
+/* 01 overlapping the grid */
+.sp-bg-num{
+  position:absolute;
+  bottom:-40px;
+  left:-30px;
+  font-size:clamp(140px,20vw,220px);
+  font-weight:900;
+  color:rgba(245,166,35,0.035);
+  line-height:1;
+  pointer-events:none;
+  user-select:none;
+  letter-spacing:-0.04em;
+  z-index:0;
+}
+
+/* Grid: 3 cols, intentionally unequal height via padding */
+.sp-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border:1px solid var(--bw2);
+  box-shadow:var(--sh);
+  margin-bottom:0;
+  position:relative;
+  z-index:1;
+}
 .sp-card{
   background:var(--navy-2);border-right:1px solid var(--bw2);
-  padding:28px 22px 26px;cursor:pointer;
-  transition:background .18s;
+  cursor:pointer;
+  transition:background .2s,border-color .2s;
   user-select:none;display:flex;flex-direction:column;gap:14px;
-  position:relative;
+  position:relative;overflow:hidden;
 }
+/* Asymmetric padding: each card slightly different */
+.sp-card:nth-child(1){padding:32px 22px 28px;}
+.sp-card:nth-child(2){padding:24px 22px 36px;}
+.sp-card:nth-child(3){padding:28px 22px 22px;}
 .sp-card:last-child{border-right:none;}
 .sp-card:hover{background:var(--navy-3);}
+
+/* Hover annotation — appears like a creative director's note */
+.sp-card .sp-hover-note{
+  position:absolute;
+  bottom:10px;right:10px;
+  font-family:'Courier New',monospace;
+  font-size:9px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gold);
+  opacity:0;
+  transform:rotate(-1.5deg) translateY(4px);
+  transition:opacity .25s,transform .25s;
+  pointer-events:none;
+  white-space:nowrap;
+}
+.sp-card:hover .sp-hover-note{opacity:.7;transform:rotate(-1.5deg) translateY(0);}
+.sp-card.selected .sp-hover-note{opacity:0;}
+
+/* Offset accent line on first card */
+.sp-card:nth-child(1)::after{
+  content:'';
+  position:absolute;
+  top:0;left:0;
+  width:3px;height:100%;
+  background:rgba(245,166,35,0);
+  transition:background .2s;
+}
+.sp-card:nth-child(1):hover::after{background:rgba(245,166,35,0.3);}
+
 .sp-card.selected{
   background:rgba(245,166,35,0.07);
   border-top:3px solid var(--gold);
@@ -86,7 +174,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   border-right:1px solid rgba(245,166,35,0.3);
   border-bottom:1px solid rgba(245,166,35,0.3);
 }
-.sp-icon{display:flex;align-items:center;height:40px;color:var(--gold);}
+.sp-icon{display:flex;align-items:center;height:38px;color:var(--gold);}
 .sp-card.selected .sp-icon{color:var(--gold-lt);}
 .sp-title{font-size:15px;font-weight:900;color:var(--white);line-height:1.2;letter-spacing:-.01em;}
 .sp-card.selected .sp-title{color:var(--gold);}
@@ -411,48 +499,95 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 
   <!-- ── EDITORIAL OPENING ── -->
   <div class="session-opening reveal">
-    <div class="session-bg-num">01</div>
     <div class="session-opening-content">
       <div class="session-eyebrow">The Concept &nbsp;/&nbsp; Session 01</div>
       <div class="session-big-q">What do you have so far?</div>
-      <div class="session-sub">Start wherever you are. We will take it from there.</div>
+      <div class="session-sub">Start wherever you are. No songwriting résumé required.</div>
     </div>
   </div>
 
-  <!-- ── CHOICE CARDS (expanded) ── -->
+  <!-- ── EDITORIAL CHOICE COMPOSITION ── -->
   <div id="sp-expanded" class="reveal">
-    <div class="sp-grid">
+    <div class="sp-composition">
 
-      <div class="sp-card" id="card-idea" onclick="selectStart('idea',this)">
-        <div class="sp-icon">
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 21h6"/><path d="M12 3a6 6 0 0 1 6 6c0 2.4-1.4 4.5-3.5 5.6V17H9.5v-2.4C7.4 13.5 6 11.4 6 9a6 6 0 0 1 6-6z"/>
-          </svg>
+      <!-- Ghost 01 layered behind and below the grid -->
+      <div class="sp-bg-num">01</div>
+
+      <!-- Lyric artifact: SVG marked-up lyric sheet fragment, bleeds off right edge -->
+      <svg class="lyric-artifact" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Paper lines -->
+        <line x1="10" y1="28" x2="190" y2="28" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
+        <line x1="10" y1="48" x2="190" y2="48" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
+        <line x1="10" y1="68" x2="190" y2="68" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
+        <line x1="10" y1="88" x2="190" y2="88" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
+        <line x1="10" y1="108" x2="190" y2="108" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
+        <line x1="10" y1="128" x2="190" y2="128" stroke="rgba(245,166,35,0.18)" stroke-width="0.8"/>
+        <!-- Lyric text fragments -->
+        <text x="14" y="24" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.5)">I remember the way you</text>
+        <text x="14" y="44" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.35)">always burned the toast but</text>
+        <!-- Crossed-out line -->
+        <text x="14" y="64" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.25)">made it anyway every morning</text>
+        <line x1="14" y1="61" x2="178" y2="61" stroke="rgba(245,166,35,0.4)" stroke-width="1"/>
+        <!-- Circled phrase -->
+        <text x="14" y="84" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.45)">called everyone baby</text>
+        <ellipse cx="76" cy="80" rx="42" ry="8" stroke="rgba(245,166,35,0.35)" stroke-width="1" fill="none"/>
+        <!-- Arrow annotation -->
+        <text x="122" y="78" font-family="'Courier New',monospace" font-size="8" fill="rgba(245,166,35,0.5)">← KEEP THIS</text>
+        <!-- More lines -->
+        <text x="14" y="104" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.3)">never missed a single game</text>
+        <text x="14" y="124" font-family="'Courier New',monospace" font-size="9" fill="rgba(245,166,35,0.2)">the road trip where everything</text>
+        <!-- Margin note -->
+        <text x="155" y="104" font-family="'Courier New',monospace" font-size="7" fill="rgba(245,166,35,0.4)" transform="rotate(-90,155,104)">v.2 draft</text>
+      </svg>
+
+      <div class="sp-grid">
+
+        <div class="sp-card" id="card-idea" onclick="selectStart('idea',this)">
+          <div class="sp-icon">
+            <!-- Lightbulb with a slightly more editorial treatment: open base, spark line -->
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21h6"/>
+              <path d="M12 3a6 6 0 0 1 6 6c0 2.4-1.4 4.5-3.5 5.6V17H9.5v-2.4C7.4 13.5 6 11.4 6 9a6 6 0 0 1 6-6z"/>
+              <line x1="12" y1="3" x2="12" y2="1.5" stroke-width="1.2"/>
+              <line x1="18.4" y1="5.6" x2="19.4" y2="4.6" stroke-width="1.2"/>
+              <line x1="5.6" y1="5.6" x2="4.6" y2="4.6" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div class="sp-title">I Have an Idea</div>
+          <div class="sp-sub">It's in my head. That's about as far as we've gotten.</div>
+          <div class="sp-hover-note">WE CAN WORK WITH THIS.</div>
         </div>
-        <div class="sp-title">I Have an Idea</div>
-        <div class="sp-sub">It's in my head. That's about as far as we've gotten.</div>
-      </div>
 
-      <div class="sp-card" id="card-write" onclick="selectStart('write',this)">
-        <div class="sp-icon">
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-          </svg>
+        <div class="sp-card" id="card-write" onclick="selectStart('write',this)">
+          <div class="sp-icon">
+            <!-- Pen nib with a ruled line beneath it -->
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              <line x1="3" y1="22" x2="21" y2="22" stroke-width="0.8" stroke-dasharray="2 2"/>
+            </svg>
+          </div>
+          <div class="sp-title">I Want to Write the Lyrics</div>
+          <div class="sp-sub">My words. My story. AI can help when I ask.</div>
+          <div class="sp-hover-note">YOU'VE GOT THE PEN.</div>
         </div>
-        <div class="sp-title">I Want to Write the Lyrics</div>
-        <div class="sp-sub">My words. My story. AI can help when I ask.</div>
-      </div>
 
-      <div class="sp-card" id="card-ready" onclick="selectStart('ready',this)">
-        <div class="sp-icon">
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/>
-          </svg>
+        <div class="sp-card" id="card-ready" onclick="selectStart('ready',this)">
+          <div class="sp-icon">
+            <!-- Document with check and a small edit mark -->
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <polyline points="9 15 11 17 15 13"/>
+              <line x1="8" y1="10" x2="13" y2="10" stroke-width="0.9"/>
+            </svg>
+          </div>
+          <div class="sp-title">My Lyrics Are Ready</div>
+          <div class="sp-sub">Look at you coming prepared. Let's make them sound like a song.</div>
+          <div class="sp-hover-note">WELL, LOOK AT YOU.</div>
         </div>
-        <div class="sp-title">My Lyrics Are Ready</div>
-        <div class="sp-sub">Look at you coming prepared. Let's make them sound like a song.</div>
-      </div>
 
+      </div>
     </div>
   </div>
 
