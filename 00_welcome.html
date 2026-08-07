@@ -663,6 +663,123 @@ body {
   white-space: nowrap;
 }
 
+
+/* ═══════════════════════════════════════════════
+   MOBILE UX FIXES & COLOR VARIETY
+   ═══════════════════════════════════════════════ */
+
+/* ── COLOR VARIETY: Teaching points get a cool blue tint ── */
+.tp {
+  border-left-color: #4A9EBF !important;
+  background: rgba(74,158,191,0.06) !important;
+}
+.tp-eye { color: #4A9EBF !important; }
+
+/* ── COLOR VARIETY: Action blocks stay gold ── */
+.action-block { border-left-color: var(--gold); }
+
+/* ── COLOR VARIETY: Optional/muted blocks get a teal tint ── */
+.pq.optional { border-left-color: #3A8A7A; background: rgba(58,138,122,0.06) !important; }
+
+/* ── COLOR VARIETY: Compare cells ── */
+.cmp-cell.warn { background: rgba(192,57,43,0.06); }
+.cmp-cell.good { background: rgba(39,174,96,0.06); }
+
+/* ── HOW THIS WORKS: compact icon-row style ── */
+.how-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--bw);
+  box-shadow: var(--sh);
+  margin: 16px 0;
+}
+.how-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--navy-2);
+  border-bottom: 1px solid var(--bw);
+}
+.how-item:last-child { border-bottom: none; }
+.how-icon {
+  width: 32px; height: 32px;
+  background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+}
+.how-icon svg { width: 15px; height: 15px; color: var(--navy); }
+.how-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 3px;
+}
+.how-desc {
+  font-size: 14px; color: var(--card); line-height: 1.6; margin: 0;
+}
+
+/* ── YOUTUBE: mobile fallback ── */
+.yt-fallback {
+  display: none;
+  background: var(--navy-2);
+  border: 1px solid var(--bw);
+  border-left: 4px solid var(--gold);
+  padding: 14px 18px;
+  margin-bottom: 8px;
+  box-shadow: var(--sh);
+}
+.yt-fallback a {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--gold); font-size: 13px; font-weight: 700;
+  text-decoration: none;
+}
+.yt-fallback a:hover { text-decoration: underline; }
+@media (max-width: 560px) {
+  /* On mobile, hide iframe and show fallback link */
+  .yt { display: none !important; }
+  .yt-fallback { display: block !important; }
+  .yt-cap { display: none; }
+}
+
+/* ── MOBILE: reduce card/block padding significantly ── */
+@media (max-width: 560px) {
+  .cg-card { padding: 14px 12px; }
+  .cg-n { font-size: 1.3rem; margin-bottom: 4px; }
+  .cg-title { font-size: 0.75rem; }
+  .cg-card p { font-size: 13px; }
+  .lb-body { padding: 14px 12px 16px; }
+  .lb-head { padding: 10px 12px; gap: 10px; }
+  .tp { padding: 12px 12px; }
+  .tp p { font-size: 13px; }
+  .pq { padding: 12px 14px; }
+  .pq p { font-size: 13px; }
+  .session-preview { padding: 14px 16px; }
+  .session-preview ol li { font-size: 13px; padding: 5px 0; }
+  .step-tracker-item { padding: 8px 4px; font-size: 9px; }
+  .step-tracker-num { font-size: 0.9rem; }
+  .momentum { padding: 12px 14px; }
+  .momentum p { font-size: 13px; }
+  .how-item { padding: 12px 14px; gap: 12px; }
+  .how-icon { width: 28px; height: 28px; }
+  .how-icon svg { width: 13px; height: 13px; }
+  .how-desc { font-size: 13px; }
+  .pb-text { font-size: 11px; padding: 12px 12px; }
+  .copy-btn { font-size: 9px; padding: 6px 12px; }
+  .tbtn { height: 38px; font-size: 10px; }
+  .tbtn-icon { width: 38px; height: 38px; }
+  .tbtn-label { padding-left: 46px; }
+  .dk { padding: 16px 14px; }
+  .dk p { font-size: 13px; }
+  .cs { padding: 18px 14px; }
+  .cs p { font-size: 13px; }
+  .closing { padding: 18px 14px; }
+  .closing-q { font-size: 1rem; }
+  .closing-s { font-size: 13px; }
+  .tags { gap: 4px; }
+  .tag { font-size: 11px; padding: 4px 8px; }
+}
+
 </style>
 </head>
 <body>
@@ -731,10 +848,19 @@ body {
 <div class="div"></div>
 <div class="sh"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Studio Design</div><h2>How This Works</h2></div></div>
 <div class="pq"><p><strong>This is a create-along experience.</strong> Every few minutes, you will pause the video, open a tool, and make something. Do not binge-watch. Pause. Make. Return. That is the process.</p></div>
-<div class="cg">
-  <div class="cg-card"><div class="cg-title">Pause</div><p>When you see a prompt or activity, stop the video and complete it before moving on.</p></div>
-  <div class="cg-card"><div class="cg-title">Make</div><p>Open ChatGPT, Suno, or Google Flow and create your version of the output.</p></div>
-  <div class="cg-card"><div class="cg-title">Return</div><p>Come back to the creative experience when you are ready for the next step. No rushing.</p></div>
+<div class="how-row reveal">
+  <div class="how-item">
+    <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></div>
+    <div><div class="how-label">Pause</div><p class="how-desc">When you see a prompt or activity, stop the video and complete it before moving on.</p></div>
+  </div>
+  <div class="how-item">
+    <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg></div>
+    <div><div class="how-label">Make</div><p class="how-desc">Open ChatGPT, Suno, or Google Flow and create your version of the output.</p></div>
+  </div>
+  <div class="how-item">
+    <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></div>
+    <div><div class="how-label">Return</div><p class="how-desc">Come back to the creative experience when you are ready for the next step. No rushing.</p></div>
+  </div>
 </div>
 
 <div class="div"></div>

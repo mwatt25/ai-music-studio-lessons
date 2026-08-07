@@ -663,6 +663,123 @@ body {
   white-space: nowrap;
 }
 
+
+/* ═══════════════════════════════════════════════
+   MOBILE UX FIXES & COLOR VARIETY
+   ═══════════════════════════════════════════════ */
+
+/* ── COLOR VARIETY: Teaching points get a cool blue tint ── */
+.tp {
+  border-left-color: #4A9EBF !important;
+  background: rgba(74,158,191,0.06) !important;
+}
+.tp-eye { color: #4A9EBF !important; }
+
+/* ── COLOR VARIETY: Action blocks stay gold ── */
+.action-block { border-left-color: var(--gold); }
+
+/* ── COLOR VARIETY: Optional/muted blocks get a teal tint ── */
+.pq.optional { border-left-color: #3A8A7A; background: rgba(58,138,122,0.06) !important; }
+
+/* ── COLOR VARIETY: Compare cells ── */
+.cmp-cell.warn { background: rgba(192,57,43,0.06); }
+.cmp-cell.good { background: rgba(39,174,96,0.06); }
+
+/* ── HOW THIS WORKS: compact icon-row style ── */
+.how-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--bw);
+  box-shadow: var(--sh);
+  margin: 16px 0;
+}
+.how-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--navy-2);
+  border-bottom: 1px solid var(--bw);
+}
+.how-item:last-child { border-bottom: none; }
+.how-icon {
+  width: 32px; height: 32px;
+  background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+}
+.how-icon svg { width: 15px; height: 15px; color: var(--navy); }
+.how-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 3px;
+}
+.how-desc {
+  font-size: 14px; color: var(--card); line-height: 1.6; margin: 0;
+}
+
+/* ── YOUTUBE: mobile fallback ── */
+.yt-fallback {
+  display: none;
+  background: var(--navy-2);
+  border: 1px solid var(--bw);
+  border-left: 4px solid var(--gold);
+  padding: 14px 18px;
+  margin-bottom: 8px;
+  box-shadow: var(--sh);
+}
+.yt-fallback a {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--gold); font-size: 13px; font-weight: 700;
+  text-decoration: none;
+}
+.yt-fallback a:hover { text-decoration: underline; }
+@media (max-width: 560px) {
+  /* On mobile, hide iframe and show fallback link */
+  .yt { display: none !important; }
+  .yt-fallback { display: block !important; }
+  .yt-cap { display: none; }
+}
+
+/* ── MOBILE: reduce card/block padding significantly ── */
+@media (max-width: 560px) {
+  .cg-card { padding: 14px 12px; }
+  .cg-n { font-size: 1.3rem; margin-bottom: 4px; }
+  .cg-title { font-size: 0.75rem; }
+  .cg-card p { font-size: 13px; }
+  .lb-body { padding: 14px 12px 16px; }
+  .lb-head { padding: 10px 12px; gap: 10px; }
+  .tp { padding: 12px 12px; }
+  .tp p { font-size: 13px; }
+  .pq { padding: 12px 14px; }
+  .pq p { font-size: 13px; }
+  .session-preview { padding: 14px 16px; }
+  .session-preview ol li { font-size: 13px; padding: 5px 0; }
+  .step-tracker-item { padding: 8px 4px; font-size: 9px; }
+  .step-tracker-num { font-size: 0.9rem; }
+  .momentum { padding: 12px 14px; }
+  .momentum p { font-size: 13px; }
+  .how-item { padding: 12px 14px; gap: 12px; }
+  .how-icon { width: 28px; height: 28px; }
+  .how-icon svg { width: 13px; height: 13px; }
+  .how-desc { font-size: 13px; }
+  .pb-text { font-size: 11px; padding: 12px 12px; }
+  .copy-btn { font-size: 9px; padding: 6px 12px; }
+  .tbtn { height: 38px; font-size: 10px; }
+  .tbtn-icon { width: 38px; height: 38px; }
+  .tbtn-label { padding-left: 46px; }
+  .dk { padding: 16px 14px; }
+  .dk p { font-size: 13px; }
+  .cs { padding: 18px 14px; }
+  .cs p { font-size: 13px; }
+  .closing { padding: 18px 14px; }
+  .closing-q { font-size: 1rem; }
+  .closing-s { font-size: 13px; }
+  .tags { gap: 4px; }
+  .tag { font-size: 11px; padding: 4px 8px; }
+}
+
 </style>
 </head>
 <body>
