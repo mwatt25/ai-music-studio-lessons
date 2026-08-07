@@ -22,7 +22,7 @@
   background: #080E1A;
   min-height: 60vh;
   width: 100%;
-  margin: -20px -20px 0 -20px;
+  margin: 0; padding: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
   color: #C4D0E2;
@@ -267,6 +267,76 @@ body {
 .fcta { margin-top: 52px; background: rgba(245,166,35,0.07); border: 1px solid var(--bg); border-left: 4px solid var(--gold); padding: 32px 32px; box-shadow: var(--sh); }
 .fcta h3 { font-size: 1.4rem; font-weight: 800; color: var(--gold-light); margin-bottom: 10px; }
 .fcta p { font-size: 16px; color: var(--card); line-height: 1.75; }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════ */
+
+/* TABLET (max 820px) */
+@media (max-width: 820px) {
+  .hero-content { padding: 24px 28px 32px 28px; }
+  .body-wrap { padding: 40px 28px 60px; }
+  .hero-title { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+  .ticker { padding: 9px 28px; }
+  .cg { grid-template-columns: repeat(2, 1fr) !important; }
+  .jr { grid-template-columns: repeat(3, 1fr); }
+  .path-grid { grid-template-columns: 1fr 1fr; }
+  .ng { grid-template-columns: 1fr 1fr; }
+  .cta { flex-direction: column; gap: 14px; }
+  .tbtn { font-size: 11px; padding: 0 18px 0 0; height: 40px; }
+  .tbtn-icon { width: 40px; height: 40px; }
+  .tbtn-label { padding-left: 50px; }
+}
+
+/* MOBILE (max 560px) */
+@media (max-width: 560px) {
+  .hero-content { padding: 18px 16px 24px 16px; }
+  .body-wrap { padding: 32px 16px 48px; }
+  .hero-title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+  .meta-row { flex-direction: column; gap: 0; }
+  .meta-chip { width: 100%; border-right: 1px solid var(--bw); margin-right: 0; }
+  .ticker { padding: 8px 16px; gap: 12px; }
+  .ticker-text { font-size: 10px; letter-spacing: 1.5px; }
+  .sh { margin: 36px 0 16px; }
+  .sh-text h2 { font-size: 1.25rem; }
+  /* Cards: 1-column on mobile */
+  .cg { grid-template-columns: 1fr !important; }
+  .cmp { grid-template-columns: 1fr; }
+  .jr { grid-template-columns: repeat(2, 1fr); }
+  .jr-step:last-child { border-right: none; }
+  .path-grid { grid-template-columns: 1fr; }
+  .ng { grid-template-columns: 1fr; }
+  /* Buttons: full width on mobile */
+  .tbtn { width: 100%; margin: 8px 0 0 0; justify-content: flex-start; }
+  .tbtn-label { padding-left: 52px; }
+  /* Prompt box */
+  .pb-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .pb-text { font-size: 13px; padding: 14px 14px; }
+  /* Pull quote */
+  .pq p { font-size: 15px; }
+  /* Lesson block */
+  .lb-head { padding: 12px 14px; gap: 12px; }
+  .lb-body { padding: 16px 14px 20px; }
+  /* Section divider */
+  .div { margin: 32px 0; }
+  /* CTA */
+  .cta { padding: 20px 16px; }
+  .cta-icon { width: 40px; height: 40px; }
+  /* Closing */
+  .closing { padding: 24px 18px; }
+  .closing-q { font-size: 1.1rem; }
+  /* Journey recap */
+  .jr-step { padding: 14px 8px; }
+  .jr-num { font-size: 1.5rem; }
+  .jr-label { font-size: 10px; }
+  /* Tags */
+  .tag { font-size: 12px; padding: 4px 10px; }
+  /* Brand row */
+  .brand-row { gap: 10px; }
+  .brand-logo { height: 26px; }
+  .brand-label { font-size: 9px; letter-spacing: 2px; }
+}
+
 </style>
 </head>
 <body>
