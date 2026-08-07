@@ -3,1130 +3,499 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Concept — The AI Music Studio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Session 1: The Concept — AI Music Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── VARIABLES ── */
 :root {
-  --gold: #F5A623; --gold-light: #FFB84D;
-  --navy: #080E1A; --navy-2: #0D1525; --navy-3: #111D30; --navy-4: #16243A;
-  --white: #FFFFFF; --off-white: #D8E0EE;
-  --body: #C4D0E2; --card: #B8C6D8;
-  --muted: #7A8EA8;
-  --bw: rgba(255,255,255,0.1); --bg: rgba(245,166,35,0.35);
-  --sh: 6px 6px 0 rgba(0,0,0,0.55);
+  --navy:    #0D1117;
+  --navy-2:  #131A22;
+  --navy-3:  #1A2332;
+  --gold:    #F5A623;
+  --gold-lt: #FBCF7A;
+  --blue:    #4A9EBF;
+  --green:   #27AE60;
+  --red:     #C0392B;
+  --white:   #FFFFFF;
+  --off:     #E8EDF2;
+  --card:    #B0BEC8;
+  --muted:   #6B7A8A;
+  --bw:      rgba(255,255,255,0.08);
+  --sh:      4px 4px 0 rgba(0,0,0,0.5);
 }
 
-/* STUDIO SHELL — all dark styles scoped inside this wrapper only */
-.studio-shell {
-  background: #080E1A;
-  min-height: 0;
-  width: 100%;
-  margin: 0; padding: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  color: #C4D0E2;
-}
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--navy); color: var(--off); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.7; }
 
-/* ONE FONT FAMILY: Inter */
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--navy); color: var(--body);
-  line-height: 1.7; font-size: 16px;
-}
+/* ── SHELL ── */
+.studio-shell { background: var(--navy); min-height: 0; }
+
+/* ── BRAND BAR ── */
+.brand-bar { display: flex; align-items: center; gap: 10px; padding: 10px 20px; background: var(--navy-2); border-bottom: 1px solid var(--bw); }
+.brand-logo { height: 24px; opacity: 0.9; }
+.brand-label { font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
 
 /* ── HERO ── */
-.hero { position: relative; width: 100%; min-height: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
-.hero-bg { position: absolute; inset: 0; background-image: url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/GxOhZnRhIOoScchN.jpg'); background-size: cover; background-position: center 20%; filter: brightness(0.25) saturate(0.6); }
-.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(8,14,26,0.65) 55%, var(--navy) 100%); }
-.hero-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--gold); z-index: 3; }
-.hero-content { position: relative; z-index: 2; padding: 28px 48px 36px 48px; }
-.brand-row { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-.brand-logo { height: 32px; width: auto;  }
-.brand-sep { width: 1px; height: 22px; background: var(--muted); }
-.brand-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
-.session-tag { display: inline-block; background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; padding: 4px 12px; margin-bottom: 12px; }
+.hero { position: relative; width: 100%; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+.hero-bg { position: absolute; inset: 0; background-image: url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/GxOhZnRhIOoScchN.jpg'); background-size: cover; background-position: center 20%; filter: brightness(0.22) saturate(0.5); }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 30%, rgba(13,17,23,0.95) 100%); }
+.hero-content { position: relative; z-index: 2; padding: 40px 48px 36px; }
+.hero-session { display: inline-block; background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; margin-bottom: 12px; box-shadow: var(--sh); }
+.hero-title { font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 900; color: var(--white); line-height: 1.05; margin-bottom: 8px; }
+.hero-tagline { font-size: 1rem; font-style: italic; color: var(--gold); margin-bottom: 16px; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 0; }
+.meta-chip { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); padding: 5px 14px; border-right: 1px solid var(--bw); }
+.meta-chip:first-child { padding-left: 0; }
 
-/* HERO TITLE — Inter ExtraBold, readable */
-.hero-title { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; line-height: 1.05; color: var(--white); letter-spacing: -0.5px; margin-bottom: 12px; }
-.hero-title .accent { color: var(--gold); }
-.hero-rule { width: 48px; height: 4px; background: var(--gold); margin-bottom: 12px; }
-.hero-tagline { font-size: 1.05rem; font-style: italic; color: var(--gold-light); margin-bottom: 18px; font-weight: 400; }
-.meta-row { display: flex; gap: 0; flex-wrap: wrap; }
-.meta-chip { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--off-white); opacity: 0.65; padding: 5px 14px; border: 1px solid var(--bw); margin-right: -1px; }
+/* ── TICKER ── */
+.ticker { background: var(--gold); padding: 8px 0; overflow: hidden; }
+.ticker-inner { display: flex; gap: 40px; white-space: nowrap; animation: ticker-scroll 20s linear infinite; }
+.ticker-text { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--navy); }
+@keyframes ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* TICKER */
-.ticker { background: var(--gold); padding: 9px 48px; display: flex; align-items: center; gap: 20px; overflow: hidden; }
-.ticker-text { font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--navy); white-space: nowrap; }
-.ticker-sep { width: 4px; height: 4px; background: var(--navy); opacity: 0.35; flex-shrink: 0; }
+/* ── STEP TRACKER ── */
+.step-tracker { display: flex; align-items: stretch; gap: 0; border: 1px solid var(--bw); box-shadow: var(--sh); overflow: hidden; }
+.st-item { flex: 1; text-align: center; padding: 10px 4px; background: var(--navy-2); border-right: 1px solid var(--bw); font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); line-height: 1.4; }
+.st-item:last-child { border-right: none; }
+.st-item.active { background: var(--navy-3); color: var(--gold); border-top: 3px solid var(--gold); }
+.st-item.done { opacity: 0.4; }
+.st-num { font-size: 1rem; font-weight: 900; display: block; margin-bottom: 2px; }
+.st-item.active .st-num { color: var(--gold); }
 
-/* BODY */
-.body-wrap { max-width: 900px; margin: 0 auto; padding: 48px 48px 80px; box-sizing: border-box; }
+/* ── BODY ── */
+.body-wrap { max-width: 860px; margin: 0 auto; padding: 40px 48px 48px; }
 
-/* SECTION HEAD — Inter Bold, not condensed */
-.sh { margin: 52px 0 22px; display: flex; align-items: flex-start; gap: 16px; }
-.sh-bar { width: 6px; background: var(--gold); flex-shrink: 0; align-self: stretch; min-height: 44px; }
-.sh-text .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-.sh-text h2 { font-size: 1.55rem; font-weight: 800; color: var(--white); letter-spacing: -0.3px; line-height: 1.15; }
+/* ── SECTION HEADER ── */
+.sh { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; margin-top: 36px; }
+.sh:first-child { margin-top: 0; }
+.sh-bar { width: 5px; background: var(--gold); flex-shrink: 0; align-self: stretch; min-height: 40px; }
+.sh-text .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.sh-text h2 { font-size: 1.5rem; font-weight: 800; color: var(--white); line-height: 1.2; }
 
-/* PULL QUOTE */
-.pq { border-left: 4px solid var(--gold); padding: 18px 24px; margin: 0 0 24px; background: var(--navy-3); box-shadow: var(--sh); }
-.pq p { font-size: 17px; font-weight: 400; color: var(--off-white); line-height: 1.8; }
-.pq strong { font-weight: 700; color: var(--gold-light); }
-.pq.plain p { font-size: 15px; color: var(--card); }
-.pq.optional { border-left-color: var(--muted); background: rgba(122,142,168,0.06); }
-.pq.optional p { font-size: 15px; color: var(--muted); }
+/* ── TEACHING POINT ── */
+.tp { background: rgba(74,158,191,0.07); border: 1px solid rgba(74,158,191,0.2); border-left: 4px solid var(--blue); padding: 14px 18px; margin-bottom: 16px; }
+.tp-eye { font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+.tp p { font-size: 14px; color: var(--card); line-height: 1.7; margin: 0; }
 
-/* TEACHING POINT */
-.tp { background: var(--navy-3); border: 1px solid var(--bw); border-left: 3px solid var(--gold); padding: 18px 20px; margin: 0 0 20px; box-shadow: var(--sh); }
-.tp-eye { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-.tp p { font-size: 16px; font-weight: 400; color: var(--card); line-height: 1.75; }
-.tp em { color: var(--gold-light); font-style: italic; }
+/* ── YOUR TURN LABEL ── */
+.yt-label { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; margin-top: 24px; }
+.yt-badge { background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 900; letter-spacing: 2.5px; text-transform: uppercase; padding: 5px 12px; box-shadow: var(--sh); }
+.yt-desc { font-size: 13px; color: var(--card); }
 
-/* LESSON BLOCK */
-.lb { background: var(--navy-2); border: 1px solid var(--bw); margin-bottom: -1px; box-shadow: var(--sh); }
-.lb-head { display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-left: 3px solid var(--gold); background: var(--navy-3); }
-.lb-num { width: 36px; height: 36px; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 800; color: var(--navy); flex-shrink: 0; box-shadow: 2px 2px 0 rgba(0,0,0,0.4); }
-.lb-eye { font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
-.lb-title { font-size: 1rem; font-weight: 700; color: var(--white); }
-.lb-body { padding: 22px 22px 26px; border-top: 1px solid var(--bw); }
+/* ── INTERACTIVE CARD ── */
+.ic { background: var(--navy-2); border: 1px solid var(--bw); border-top: 3px solid var(--gold); padding: 20px; margin-bottom: 20px; box-shadow: var(--sh); }
+.ic-title { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
 
-/* PROMPT BOX — Inter Mono for code, larger and readable */
-.pb { background: #050B15; border: 1px solid var(--bw); margin: 16px 0; box-shadow: var(--sh); }
-.pb-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--navy-3); border-bottom: 1px solid var(--bw); }
-.pb-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); }
-/* ── COPY PROMPT BUTTON ── */
-.copy-btn {
-  background: var(--navy);
-  border: 1px solid var(--gold);
-  border-left: 3px solid var(--gold);
-  color: var(--gold);
-  font-size: 10px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
-  padding: 7px 16px;
-  cursor: pointer;
-  box-shadow: 3px 3px 0 rgba(245,166,35,0.3);
-  transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
-  font-family: 'Inter', sans-serif;
-  display: flex; align-items: center; gap: 7px;
+/* ── TEXT INPUTS ── */
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.field input, .field textarea {
+  width: 100%; background: var(--navy-3); border: 1px solid var(--bw); border-bottom: 2px solid var(--gold);
+  color: var(--white); font-family: 'Inter', sans-serif; font-size: 14px; padding: 10px 14px;
+  outline: none; resize: vertical; transition: border-color 0.2s;
 }
-.copy-btn::before { content: '⊕'; font-size: 12px; opacity: 0.7; }
-.copy-btn:hover { background: var(--gold); color: var(--navy); transform: translate(1px, 1px); box-shadow: 2px 2px 0 rgba(0,0,0,0.5); }
-/* PROMPT TEXT — Inter Mono, 14px, well-spaced — NOT Courier */
-.pb-text { padding: 18px 20px; font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; font-size: 14px; color: var(--off-white); line-height: 1.85; white-space: pre-wrap; }
+.field input:focus, .field textarea:focus { border-color: var(--gold); border-bottom-color: var(--gold-lt); }
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); font-style: italic; }
+.field textarea { min-height: 70px; }
+.field-hint { font-size: 12px; color: var(--muted); margin-top: 4px; font-style: italic; }
 
-/* CHECKLIST */
-.cl { list-style: none; border: 1px solid var(--bw); box-shadow: var(--sh); }
-.cl li { display: flex; align-items: flex-start; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--bw); background: var(--navy-2); font-size: 15px; color: var(--card); transition: background 0.15s; }
+/* ── CHOICE CARDS ── */
+.choice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0; border: 1px solid var(--bw); box-shadow: var(--sh); margin-bottom: 16px; }
+.choice-card { background: var(--navy-2); border-right: 1px solid var(--bw); border-bottom: 1px solid var(--bw); padding: 14px 12px; cursor: pointer; transition: background 0.15s, border-top 0.15s; text-align: center; user-select: none; }
+.choice-card:hover { background: var(--navy-3); }
+.choice-card.selected { background: var(--navy-3); border-top: 3px solid var(--gold); }
+.choice-card .cc-label { font-size: 12px; font-weight: 700; color: var(--white); }
+.choice-card .cc-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.choice-card.selected .cc-label { color: var(--gold); }
+
+/* ── TAG SELECTOR ── */
+.tag-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.tag-btn { background: var(--navy-2); border: 1px solid var(--bw); color: var(--card); font-size: 12px; font-weight: 600; padding: 6px 14px; cursor: pointer; transition: all 0.15s; user-select: none; }
+.tag-btn:hover { border-color: var(--gold); color: var(--gold); }
+.tag-btn.selected { background: var(--gold); color: var(--navy); border-color: var(--gold); font-weight: 800; }
+
+/* ── PICK IT OR FIX IT ── */
+.pifi { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--bw); box-shadow: var(--sh); margin-bottom: 16px; }
+.pifi-btn { padding: 20px 16px; background: var(--navy-2); border: none; cursor: pointer; text-align: center; transition: background 0.15s; border-right: 1px solid var(--bw); }
+.pifi-btn:last-child { border-right: none; }
+.pifi-btn:hover { background: var(--navy-3); }
+.pifi-btn.selected-pick { background: rgba(39,174,96,0.12); border-top: 3px solid var(--green); }
+.pifi-btn.selected-fix { background: rgba(245,166,35,0.1); border-top: 3px solid var(--gold); }
+.pifi-icon { font-size: 1.4rem; margin-bottom: 6px; }
+.pifi-label { font-size: 13px; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+.pifi-sub { font-size: 12px; color: var(--muted); }
+.pifi-btn.selected-pick .pifi-label { color: var(--green); }
+.pifi-btn.selected-fix .pifi-label { color: var(--gold); }
+.pifi-result { display: none; background: var(--navy-3); border: 1px solid var(--bw); border-left: 4px solid var(--gold); padding: 14px 16px; margin-top: 12px; }
+.pifi-result.show { display: block; }
+.pifi-result p { font-size: 14px; color: var(--off); line-height: 1.65; margin: 0; }
+
+/* ── PROMPT BOX ── */
+.pb { background: var(--navy-3); border: 1px solid var(--bw); border-left: 4px solid var(--gold); margin-bottom: 16px; }
+.pb-label { font-size: 9px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); padding: 8px 16px; border-bottom: 1px solid var(--bw); }
+.pb-text { font-family: 'Courier New', monospace; font-size: 12px; color: var(--off); line-height: 1.8; padding: 14px 16px; white-space: pre-wrap; }
+.copy-btn { display: flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 8px 16px; cursor: pointer; margin: 0 16px 14px; transition: all 0.15s; box-shadow: 2px 2px 0 rgba(0,0,0,0.4); }
+.copy-btn:hover { background: var(--gold); color: var(--navy); }
+.copy-btn.copied { background: var(--green); border-color: var(--green); color: white; }
+
+/* ── TOOL BUTTON ── */
+.tbtn { display: flex; align-items: center; background: var(--navy-2); border: 1px solid var(--bw); box-shadow: var(--sh); cursor: pointer; text-decoration: none; overflow: hidden; margin-bottom: 20px; transition: transform 0.1s, box-shadow 0.1s; height: 44px; }
+.tbtn:hover { transform: translateY(-1px); box-shadow: 6px 6px 0 rgba(0,0,0,0.5); }
+.tbtn:active { transform: translateY(2px); box-shadow: 2px 2px 0 rgba(0,0,0,0.5); }
+.tbtn-icon { width: 44px; height: 44px; background: var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.tbtn-icon svg { width: 18px; height: 18px; color: var(--navy); }
+.tbtn-label { padding: 0 16px; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--white); }
+
+/* ── CHECKLIST ── */
+.cl { list-style: none; padding: 0; margin-bottom: 16px; }
+.cl li { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--bw); cursor: pointer; user-select: none; }
 .cl li:last-child { border-bottom: none; }
-.cl li:hover { background: var(--navy-3); }
-.cl li input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--gold); margin-top: 3px; flex-shrink: 0; cursor: pointer; border: 1px solid var(--gold); }
-.cl li label { cursor: pointer; line-height: 1.6; }
+.cl-box { width: 18px; height: 18px; border: 2px solid var(--gold); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+.cl li.checked .cl-box { background: var(--gold); }
+.cl li.checked .cl-box::after { content: '✓'; font-size: 11px; color: var(--navy); font-weight: 900; }
+.cl-text { font-size: 14px; color: var(--card); line-height: 1.6; transition: opacity 0.2s; }
+.cl li.checked .cl-text { opacity: 0.45; text-decoration: line-through; }
 
-/* COMPARE */
-.cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 16px 0; box-shadow: var(--sh); }
-@media (max-width: 560px) { .cmp { grid-template-columns: 1fr; } }
-.cmp-cell { background: var(--navy-2); border: 1px solid var(--bw); padding: 20px 20px; }
-.cmp-cell.warn { border-left: 3px solid #C0392B; }
-.cmp-cell.good { border-left: 3px solid #27AE60; }
-.cmp-eye { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
-.cmp-cell.warn .cmp-eye { color: #E74C3C; }
-.cmp-cell.good .cmp-eye { color: #2ECC71; }
-.cmp-cell p { font-size: 15px; color: var(--card); line-height: 1.75; }
-.cmp-cell em { color: var(--off-white); font-style: italic; }
+/* ── MOMENTUM ── */
+.momentum { background: var(--navy-3); border-left: 4px solid var(--gold); border: 1px solid var(--bw); border-left: 4px solid var(--gold); padding: 14px 18px; margin: 24px 0 8px; box-shadow: var(--sh); }
+.momentum p { font-size: 14px; font-weight: 500; color: var(--off); line-height: 1.65; margin: 0; font-style: italic; }
+.momentum strong { color: var(--gold-lt); font-style: normal; font-weight: 700; }
 
-/* CARD GRID */
-.cg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; box-shadow: var(--sh); align-items: stretch; }
-.cg-card { background: var(--navy-2); border: 1px solid var(--bw); padding: 22px 18px; transition: background 0.15s; }
-.cg-card:hover { background: var(--navy-3); }
-.cg-n { font-size: 2.2rem; font-weight: 800; color: var(--gold); opacity: 0.5; line-height: 1; margin-bottom: 8px; }
-.cg-title { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--bw); }
-.cg-card p { font-size: 15px; color: var(--card); line-height: 1.65; margin-top: 8px; }
+/* ── DIVIDER ── */
+.div { height: 1px; background: var(--bw); margin: 32px 0; }
 
-/* TAG ROW */
-.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
-.tag { background: var(--navy-3); border: 1px solid rgba(255,255,255,0.12); color: var(--off-white); font-size: 13px; font-weight: 500; padding: 5px 13px; margin: 0 6px 6px 0; display: inline-block; }
-.tag.gold { background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.4); color: var(--gold); }
+/* ── VIDEO PLACEHOLDER ── */
+.vid { background: var(--navy-2); border: 1px solid var(--bw); border-left: 3px solid var(--muted); padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.vid svg { width: 16px; height: 16px; color: var(--muted); flex-shrink: 0; }
+.vid p { font-size: 12px; color: var(--muted); margin: 0; font-style: italic; }
 
-/* VIDEO PLACEHOLDER */
-.vid-placeholder { background: var(--navy-2); border: 1px solid var(--bw); border-left: 4px solid var(--gold); padding: 16px 20px; margin: 20px 0; display: flex; align-items: center; gap: 16px; box-shadow: var(--sh); }
-.vid-icon { font-size: 1rem; opacity: 0.5; flex-shrink: 0; }
-.vid-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 0; opacity: 0.9; }
-.vid-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
-
-/* TOOL BUTTON */
-/* ── BRAND TOOL BUTTONS ── */
-.tbtn {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--gold);
-  color: var(--navy);
-  font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
-  text-decoration: none;
-  padding: 0 22px 0 0;
-  margin: 14px 12px 0 0;
-  box-shadow: 4px 4px 0 #000;
-  transition: transform 0.1s, box-shadow 0.1s;
-  font-family: 'Inter', sans-serif;
-  height: 44px;
-  position: relative;
-  overflow: hidden;
-}
-.tbtn::before {
-  content: '';
-  display: flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px;
-  background: rgba(0,0,0,0.18);
-  flex-shrink: 0;
-  margin-right: 12px;
-}
-.tbtn-icon {
-  position: absolute; left: 0; top: 0;
-  width: 44px; height: 44px;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,0.18);
-  flex-shrink: 0;
-}
-.tbtn-icon svg { width: 18px; height: 18px; }
-.tbtn-label { padding-left: 56px; }
-.tbtn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
-.tbtn.out {
-  background: transparent; color: var(--gold);
-  border: 2px solid var(--gold);
-  box-shadow: 4px 4px 0 rgba(245,166,35,0.3);
-}
-.tbtn.out::before { background: rgba(245,166,35,0.12); }
-.tbtn.out:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 rgba(245,166,35,0.3); }
-
-/* DISTROKID */
-.dk { background: var(--navy-3); border: 1px solid var(--bg); border-left: 4px solid var(--gold); padding: 24px 26px; margin: 20px 0; box-shadow: var(--sh); }
-.dk h4 { font-size: 1.05rem; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
-.dk p { font-size: 15px; color: var(--card); line-height: 1.7; margin-bottom: 12px; }
-.dk .disc { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 10px; border-top: 1px solid var(--bw); padding-top: 10px; }
-.dk-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; padding: 10px 20px; margin: 4px 6px 4px 0; box-shadow: 3px 3px 0 rgba(0,0,0,0.5); transition: opacity 0.15s; font-family: 'Inter', sans-serif; }
-.dk-btn:hover { opacity: 0.88; }
-.dk-btn.out { background: transparent; color: var(--gold); border: 2px solid var(--gold); box-shadow: 3px 3px 0 rgba(245,166,35,0.2); }
-
-/* CASE STUDY */
-.cs { background: var(--navy-2); border: 1px solid var(--bw); border-top: 4px solid var(--gold); padding: 28px 28px; margin: 20px 0; box-shadow: var(--sh); }
-.cs-eye { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-.cs h3 { font-size: 1.25rem; font-weight: 800; color: var(--white); margin-bottom: 12px; }
-.cs p { font-size: 15px; color: var(--card); line-height: 1.75; margin-bottom: 12px; }
-
-/* YOUTUBE */
-.yt { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; box-shadow: var(--sh); border: 1px solid var(--bw); margin-bottom: 8px; }
-.yt iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-.yt-cap { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); padding: 7px 0 0; opacity: 0.75; }
-
-/* WRITING PATH */
-.path-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; box-shadow: var(--sh); margin-bottom: 24px; }
-@media (max-width: 600px) { .path-grid { grid-template-columns: 1fr; } }
-.path-card { background: var(--navy-2); border: 1px solid var(--bw); border-top: 3px solid var(--gold); padding: 22px 18px; }
-.path-title { font-size: 1rem; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
-.path-desc { font-size: 14px; color: var(--card); line-height: 1.6; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--bw); }
-
-/* INLINE HEADING */
-.ch3 { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white); margin: 20px 0 10px; padding-left: 12px; border-left: 3px solid var(--gold); }
-
-/* DIVIDER */
-.div { height: 1px; background: var(--bw); margin: 48px 0; position: relative; }
-.div::after { content: ''; position: absolute; left: 0; top: 0; width: 36px; height: 1px; background: var(--gold); }
-
-/* CTA */
-.cta { margin-top: 48px; background: var(--navy-3); border: 1px solid var(--bw); border-left: 4px solid var(--gold); padding: 28px 30px; display: flex; align-items: center; gap: 22px; box-shadow: var(--sh); }
-@media (max-width: 560px) { .cta { flex-direction: column; gap: 14px; } }
-.cta-icon { width: 48px; height: 48px; background: var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 3px 3px 0 rgba(0,0,0,0.5); }
-.cta-icon svg { width: 22px; height: 22px; color: var(--navy); stroke-width: 3; }
-.cta h3 { font-size: 1.1rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
-.cta p { font-size: 15px; color: var(--body); line-height: 1.6; }
-
-/* JOURNEY RECAP */
-.jr { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--bw); box-shadow: var(--sh); }
-@media (max-width: 600px) { .jr { grid-template-columns: 1fr 1fr; } }
-.jr-step { background: var(--navy-2); border-right: 1px solid var(--bw); padding: 20px 14px; text-align: center; }
-.jr-step:last-child { border-right: none; }
-.jr-step.done { background: var(--navy-3); border-top: 3px solid var(--gold); }
-.jr-num { font-size: 2rem; font-weight: 800; color: var(--gold); opacity: 0.25; line-height: 1; margin-bottom: 6px; }
-.jr-step.done .jr-num { opacity: 0.65; }
-.jr-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--off-white); line-height: 1.3; }
-.jr-check { font-size: 18px; color: var(--gold); margin-top: 6px; }
-
-/* CLOSING */
-.closing { background: var(--navy-3); border: 1px solid var(--bg); border-top: 4px solid var(--gold); padding: 36px 36px; margin: 28px 0; box-shadow: var(--sh); text-align: center; }
-.closing-q { font-size: 1.35rem; font-weight: 700; font-style: italic; color: var(--white); line-height: 1.55; margin-bottom: 14px; }
-.closing-s { font-size: 16px; color: var(--card); line-height: 1.75; }
-.closing-s strong { color: var(--gold-light); font-weight: 700; }
-
-/* NEXT GRID */
-.ng { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; box-shadow: var(--sh); }
-@media (max-width: 560px) { .ng { grid-template-columns: 1fr; } }
-.ng-card { background: var(--navy-2); border: 1px solid var(--bw); padding: 24px 20px; transition: background 0.15s; }
-.ng-card:hover { background: var(--navy-3); }
-.ng-title { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--bw); }
-.ng-card p { font-size: 14px; color: var(--card); line-height: 1.65; margin-top: 8px; }
-
-/* FINAL CTA */
-.fcta { margin-top: 52px; background: rgba(245,166,35,0.07); border: 1px solid var(--bg); border-left: 4px solid var(--gold); padding: 32px 32px; box-shadow: var(--sh); }
-.fcta h3 { font-size: 1.4rem; font-weight: 800; color: var(--gold-light); margin-bottom: 10px; }
-.fcta p { font-size: 16px; color: var(--card); line-height: 1.75; }
-
-/* ═══════════════════════════════════════════════
-   RESPONSIVE BREAKPOINTS
-   ═══════════════════════════════════════════════ */
-
-/* TABLET (max 820px) */
+/* ── RESPONSIVE ── */
 @media (max-width: 820px) {
-  .hero-content { padding: 24px 28px 32px 28px; }
-  .body-wrap { padding: 40px 28px 60px; }
-  .hero-title { font-size: clamp(1.8rem, 5vw, 2.8rem); }
-  .ticker { padding: 9px 28px; }
-  .cg { grid-template-columns: repeat(2, 1fr) !important; }
-  .jr { grid-template-columns: repeat(3, 1fr); }
-  .path-grid { grid-template-columns: 1fr 1fr; }
-  .ng { grid-template-columns: 1fr 1fr; }
-  .cta { flex-direction: column; gap: 14px; }
-  .tbtn { font-size: 11px; padding: 0 18px 0 0; height: 40px; }
-  .tbtn-icon { width: 40px; height: 40px; }
-  .tbtn-label { padding-left: 50px; }
+  .hero-content { padding: 28px 28px 28px; }
+  .body-wrap { padding: 32px 28px 40px; }
 }
-
-/* MOBILE (max 560px) */
 @media (max-width: 560px) {
-  .hero-content { padding: 18px 16px 24px 16px; }
-  .body-wrap { padding: 32px 16px 48px; }
-  .hero-title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
-  .meta-row { flex-direction: column; gap: 0; }
-  .meta-chip { width: 100%; border-right: 1px solid var(--bw); margin-right: 0; }
-  .ticker { padding: 8px 16px; gap: 12px; }
-  .ticker-text { font-size: 10px; letter-spacing: 1.5px; }
-  .sh { margin: 36px 0 16px; }
-  .sh-text h2 { font-size: 1.25rem; }
-  /* Cards: 1-column on mobile */
-  .cg { grid-template-columns: 1fr !important; }
-  .cmp { grid-template-columns: 1fr; }
-  .jr { grid-template-columns: repeat(2, 1fr); }
-  .jr-step:last-child { border-right: none; }
-  .path-grid { grid-template-columns: 1fr; }
-  .ng { grid-template-columns: 1fr; }
-  /* Buttons: full width on mobile */
-  .tbtn { width: 100%; margin: 8px 0 0 0; justify-content: flex-start; }
-  .tbtn-label { padding-left: 52px; }
-  /* Prompt box */
-  .pb-head { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .pb-text { font-size: 13px; padding: 14px 14px; }
-  /* Pull quote */
-  .pq p { font-size: 15px; }
-  /* Lesson block */
-  .lb-head { padding: 12px 14px; gap: 12px; }
-  .lb-body { padding: 16px 14px 20px; }
-  /* Section divider */
-  .div { margin: 32px 0; }
-  /* CTA */
-  .cta { padding: 20px 16px; }
-  .cta-icon { width: 40px; height: 40px; }
-  /* Closing */
-  .closing { padding: 24px 18px; }
-  .closing-q { font-size: 1.1rem; }
-  /* Journey recap */
-  .jr-step { padding: 14px 8px; }
-  .jr-num { font-size: 1.5rem; }
-  .jr-label { font-size: 10px; }
-  /* Tags */
-  .tag { font-size: 12px; padding: 4px 10px; }
-  /* Brand row */
-  .brand-row { gap: 10px; }
-  .brand-logo { height: 26px; }
-  .brand-label { font-size: 9px; letter-spacing: 2px; }
-}
-
-
-/* ═══════════════════════════════════════════════
-   TYPOGRAPHY HIERARCHY REFINEMENTS
-   ═══════════════════════════════════════════════ */
-
-/* Desktop: refined line heights and spacing */
-.sh-text .eyebrow { line-height: 1.4; }
-.sh-text h2 { line-height: 1.2; }
-.pq p { line-height: 1.85; }
-.tp p { line-height: 1.8; }
-.lb-body p, .lb-body li { line-height: 1.75; font-size: 15px; }
-.cg-card p { line-height: 1.7; }
-
-/* Tablet typography */
-@media (max-width: 820px) {
-  .sh-text .eyebrow { font-size: 9px; letter-spacing: 2.5px; }
-  .sh-text h2 { font-size: 1.35rem; line-height: 1.25; }
-  .pq p { font-size: 15px; }
-  .cg-n { font-size: 1.8rem; }
-}
-
-/* Mobile typography */
-@media (max-width: 560px) {
-  /* Eyebrow labels — reduce letter spacing to prevent wrapping */
-  .sh-text .eyebrow { font-size: 9px; letter-spacing: 1.8px; }
-  .sh-text h2 { font-size: 1.2rem; line-height: 1.3; }
-  /* Card numbers smaller on mobile */
-  .cg-n { font-size: 1.5rem; margin-bottom: 6px; }
-  .cg-title { font-size: 0.8rem; letter-spacing: 1px; }
-  /* Pull quote */
-  .pq p { font-size: 14px; line-height: 1.75; }
-  .pq { padding: 14px 16px; }
-  /* Teaching point */
-  .tp p { font-size: 14px; }
-  .tp { padding: 14px 14px; }
-  /* Body text */
-  body { font-size: 15px; line-height: 1.7; }
-  /* Lesson block */
-  .lb-title { font-size: 0.95rem; }
-  .lb-num { width: 30px; height: 30px; font-size: 0.8rem; }
-  /* Journey tracker — single column on mobile */
-  .jr { grid-template-columns: 1fr !important; }
-  .jr-step { border-right: none !important; border-bottom: 1px solid var(--bw); text-align: left; display: flex; align-items: center; gap: 14px; padding: 12px 14px; }
-  .jr-step:last-child { border-bottom: none; }
-  .jr-num { font-size: 1.4rem; margin-bottom: 0; flex-shrink: 0; width: 36px; }
-  .jr-label { font-size: 12px; letter-spacing: 0.5px; }
-  .jr-check { margin-top: 0; margin-left: auto; }
-  /* Section heading bar */
-  .sh-bar { min-height: 36px; }
-  /* Prompt box text */
-  .pb-text { font-size: 12px; line-height: 1.8; }
-  /* Checklist */
-  .cl li { font-size: 14px; padding: 11px 14px; }
-  /* Compare cells */
-  .cmp-cell { padding: 16px 14px; }
-  .cmp-cell p { font-size: 14px; }
-  /* DK button */
-  .dk-btn { width: 100%; margin: 6px 0 0 0; justify-content: center; }
-  /* Section divider gold accent */
-  .div::after { width: 28px; }
-}
-
-
-/* ═══════════════════════════════════════════════
-   ANIMATIONS & VISUAL ENERGY
-   ═══════════════════════════════════════════════ */
-
-/* Hero accent bar pulse */
-@keyframes accent-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-.hero-accent { animation: accent-pulse 3s ease-in-out infinite; }
-
-/* Gold rule shimmer */
-@keyframes rule-shimmer {
-  0% { width: 48px; opacity: 1; }
-  50% { width: 72px; opacity: 0.7; }
-  100% { width: 48px; opacity: 1; }
-}
-.hero-rule { animation: rule-shimmer 4s ease-in-out infinite; }
-
-/* Ticker scroll animation */
-@keyframes ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.ticker-inner {
-  display: flex;
-  gap: 40px;
-  animation: ticker-scroll 18s linear infinite;
-  white-space: nowrap;
-  width: max-content;
-}
-.ticker { overflow: hidden; padding: 9px 0; }
-
-/* Scroll-reveal: sections fade up on enter */
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Staggered children */
-.reveal-stagger > * {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1), transform 0.45s cubic-bezier(0.22,1,0.36,1);
-}
-.reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
-.reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.08s; }
-.reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
-.reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.24s; }
-.reveal-stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.32s; }
-.reveal-stagger.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.40s; }
-
-/* Card hover lift */
-.cg-card {
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s !important;
-}
-.cg-card:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 6px 9px 0 rgba(0,0,0,0.6) !important;
-  border-color: rgba(245,166,35,0.4) !important;
-}
-
-/* Lesson block hover */
-.lb {
-  transition: border-color 0.2s;
-}
-.lb:hover {
-  border-color: rgba(245,166,35,0.3);
-}
-
-/* Checklist checked state animation */
-.cl li.checked {
-  background: rgba(245,166,35,0.06);
-}
-.cl li.checked label {
-  text-decoration: line-through;
-  color: var(--muted);
-  transition: color 0.3s, text-decoration 0.3s;
-}
-
-/* Copy button flash confirmation */
-@keyframes copy-flash {
-  0% { background: var(--gold); color: var(--navy); }
-  30% { background: #2ECC71; color: #fff; }
-  100% { background: var(--navy); color: var(--gold); }
-}
-.copy-btn.copied {
-  animation: copy-flash 0.8s ease forwards;
-}
-
-/* Section heading bar slide in */
-@keyframes bar-slide {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
-}
-.sh-bar {
-  transform-origin: top;
-  animation: bar-slide 0.4s cubic-bezier(0.22,1,0.36,1) both;
-  animation-play-state: paused;
-}
-.reveal.visible .sh-bar {
-  animation-play-state: running;
-}
-
-/* Tool button press feel */
-.tbtn {
-  transition: transform 0.1s, box-shadow 0.1s !important;
-}
-.tbtn:active {
-  transform: translate(4px, 4px) !important;
-  box-shadow: 0 0 0 rgba(0,0,0,0.6) !important;
-}
-
-/* Path card hover */
-.path-card {
-  transition: background 0.2s, border-color 0.2s;
-}
-.path-card:hover {
-  background: var(--navy-3);
-  border-top-color: var(--gold-light);
-}
-
-/* Journey step hover */
-.jr-step {
-  transition: background 0.2s;
-}
-.jr-step:hover {
-  background: var(--navy-3);
-}
-
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-stagger > *, .hero-accent, .hero-rule, .ticker-inner { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
-}
-
-
-/* ── SESSION PREVIEW BOX ── */
-.session-preview {
-  background: var(--navy-2);
-  border: 1px solid var(--bw);
-  border-top: 3px solid var(--gold);
-  padding: 20px 24px;
-  margin-bottom: 36px;
-  box-shadow: var(--sh);
-}
-.session-preview-eye {
-  font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 10px;
-}
-.session-preview h3 {
-  font-size: 1rem; font-weight: 800; color: var(--white); margin-bottom: 12px;
-}
-.session-preview ol {
-  list-style: none; padding: 0; margin: 0;
-  counter-reset: preview-counter;
-}
-.session-preview ol li {
-  counter-increment: preview-counter;
-  display: flex; align-items: flex-start; gap: 12px;
-  font-size: 14px; color: var(--card); line-height: 1.6;
-  padding: 6px 0; border-bottom: 1px solid var(--bw);
-}
-.session-preview ol li:last-child { border-bottom: none; }
-.session-preview ol li::before {
-  content: counter(preview-counter);
-  min-width: 22px; height: 22px;
-  background: var(--gold); color: var(--navy);
-  font-size: 10px; font-weight: 800;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 1px;
-}
-
-/* ── STEP PROGRESS TRACKER ── */
-.step-tracker {
-  display: flex; align-items: center; gap: 0;
-  margin-bottom: 32px;
-  border: 1px solid var(--bw);
-  box-shadow: var(--sh);
-  overflow: hidden;
-}
-.step-tracker-item {
-  flex: 1; text-align: center; padding: 10px 6px;
-  background: var(--navy-2);
-  border-right: 1px solid var(--bw);
-  font-size: 10px; font-weight: 700; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--muted);
-  line-height: 1.4;
-}
-.step-tracker-item:last-child { border-right: none; }
-.step-tracker-item.active {
-  background: var(--navy-3);
-  color: var(--gold);
-  border-top: 2px solid var(--gold);
-}
-.step-tracker-item.done {
-  background: var(--navy-2);
-  color: var(--muted);
-  opacity: 0.5;
-}
-.step-tracker-num {
-  font-size: 1.1rem; font-weight: 800; color: var(--gold);
-  opacity: 0.3; display: block; margin-bottom: 2px;
-}
-.step-tracker-item.active .step-tracker-num { opacity: 1; }
-
-/* ── STOP AND DO THIS ── */
-.action-block {
-  background: rgba(245,166,35,0.07);
-  border: 1px solid rgba(245,166,35,0.3);
-  border-left: 4px solid var(--gold);
-  padding: 16px 20px;
-  margin: 20px 0;
-  box-shadow: var(--sh);
-  display: flex; align-items: flex-start; gap: 14px;
-}
-.action-block-icon {
-  width: 28px; height: 28px; background: var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 1px;
-}
-.action-block-icon svg { width: 14px; height: 14px; color: var(--navy); }
-.action-block-label {
-  font-size: 9px; font-weight: 800; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
-}
-.action-block p {
-  font-size: 14px; color: var(--off-white); line-height: 1.65; margin: 0;
-}
-
-/* ── MOMENTUM CALLOUT (earned, not cheesy) ── */
-.momentum {
-  background: var(--navy-3);
-  border-left: 4px solid var(--gold);
-  border-bottom: 1px solid var(--bw);
-  border-right: 1px solid var(--bw);
-  border-top: 1px solid var(--bw);
-  padding: 14px 20px;
-  margin: 28px 0 8px;
-  box-shadow: var(--sh);
-}
-.momentum p {
-  font-size: 14px; font-weight: 500; color: var(--off-white);
-  line-height: 1.65; margin: 0; font-style: italic;
-}
-.momentum strong { color: var(--gold-light); font-style: normal; font-weight: 700; }
-
-/* ── VISUAL RHYTHM BREAKER ── */
-.rhythm-break {
-  display: flex; align-items: center; gap: 14px;
-  margin: 36px 0 28px;
-}
-.rhythm-break-line { flex: 1; height: 1px; background: var(--bw); }
-.rhythm-break-label {
-  font-size: 9px; font-weight: 800; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--muted);
-  white-space: nowrap;
-}
-
-
-/* ═══════════════════════════════════════════════
-   MOBILE UX FIXES & COLOR VARIETY
-   ═══════════════════════════════════════════════ */
-
-/* ── COLOR VARIETY: Teaching points get a cool blue tint ── */
-.tp {
-  border-left-color: #4A9EBF !important;
-  background: rgba(74,158,191,0.06) !important;
-}
-.tp-eye { color: #4A9EBF !important; }
-
-/* ── COLOR VARIETY: Action blocks stay gold ── */
-.action-block { border-left-color: var(--gold); }
-
-/* ── COLOR VARIETY: Optional/muted blocks get a teal tint ── */
-.pq.optional { border-left-color: #3A8A7A; background: rgba(58,138,122,0.06) !important; }
-
-/* ── COLOR VARIETY: Compare cells ── */
-.cmp-cell.warn { background: rgba(192,57,43,0.06); }
-.cmp-cell.good { background: rgba(39,174,96,0.06); }
-
-/* ── HOW THIS WORKS: compact icon-row style ── */
-.how-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: 1px solid var(--bw);
-  box-shadow: var(--sh);
-  margin: 16px 0;
-}
-.how-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 14px 18px;
-  background: var(--navy-2);
-  border-bottom: 1px solid var(--bw);
-}
-.how-item:last-child { border-bottom: none; }
-.how-icon {
-  width: 32px; height: 32px;
-  background: var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 1px;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
-}
-.how-icon svg { width: 15px; height: 15px; color: var(--navy); }
-.how-label {
-  font-size: 11px; font-weight: 800; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 3px;
-}
-.how-desc {
-  font-size: 14px; color: var(--card); line-height: 1.6; margin: 0;
-}
-
-/* ── YOUTUBE: mobile fallback ── */
-.yt-fallback {
-  display: none;
-  background: var(--navy-2);
-  border: 1px solid var(--bw);
-  border-left: 4px solid var(--gold);
-  padding: 14px 18px;
-  margin-bottom: 8px;
-  box-shadow: var(--sh);
-}
-.yt-fallback a {
-  display: inline-flex; align-items: center; gap: 10px;
-  color: var(--gold); font-size: 13px; font-weight: 700;
-  text-decoration: none;
-}
-.yt-fallback a:hover { text-decoration: underline; }
-@media (max-width: 560px) {
-  /* On mobile, hide iframe and show fallback link */
-  .yt { display: none !important; }
-  .yt-fallback { display: block !important; }
-  .yt-cap { display: none; }
-}
-
-/* ── MOBILE: reduce card/block padding significantly ── */
-@media (max-width: 560px) {
-  .cg-card { padding: 14px 12px; }
-  .cg-n { font-size: 1.3rem; margin-bottom: 4px; }
-  .cg-title { font-size: 0.75rem; }
-  .cg-card p { font-size: 13px; }
-  .lb-body { padding: 14px 12px 16px; }
-  .lb-head { padding: 10px 12px; gap: 10px; }
-  .tp { padding: 12px 12px; }
-  .tp p { font-size: 13px; }
-  .pq { padding: 12px 14px; }
-  .pq p { font-size: 13px; }
-  .session-preview { padding: 14px 16px; }
-  .session-preview ol li { font-size: 13px; padding: 5px 0; }
-  .step-tracker-item { padding: 8px 4px; font-size: 9px; }
-  .step-tracker-num { font-size: 0.9rem; }
-  .momentum { padding: 12px 14px; }
-  .momentum p { font-size: 13px; }
-  .how-item { padding: 12px 14px; gap: 12px; }
-  .how-icon { width: 28px; height: 28px; }
-  .how-icon svg { width: 13px; height: 13px; }
-  .how-desc { font-size: 13px; }
-  .pb-text { font-size: 11px; padding: 12px 12px; }
-  .copy-btn { font-size: 9px; padding: 6px 12px; }
-  .tbtn { height: 38px; font-size: 10px; }
-  .tbtn-icon { width: 38px; height: 38px; }
-  .tbtn-label { padding-left: 46px; }
-  .dk { padding: 16px 14px; }
-  .dk p { font-size: 13px; }
-  .cs { padding: 18px 14px; }
-  .cs p { font-size: 13px; }
-  .closing { padding: 18px 14px; }
-  .closing-q { font-size: 1rem; }
-  .closing-s { font-size: 13px; }
-  .tags { gap: 4px; }
-  .tag { font-size: 11px; padding: 4px 8px; }
-}
-
-
-/* ═══════════════════════════════════════════════
-   HERO MOBILE FIX — eliminate blank space
-   ═══════════════════════════════════════════════ */
-@media (max-width: 560px) {
-  /* Studio shell: no min-height on mobile */
   .studio-shell { min-height: 0 !important; }
-
-  /* Hero: compact on mobile — no tall background image area */
-  .hero {
-    min-height: 0 !important;
-    height: auto !important;
-  }
-  /* Hide the background image on mobile — it just creates blank space */
+  .hero { min-height: 0 !important; }
   .hero-bg { display: none !important; }
   .hero-overlay { display: none !important; }
-  .hero-accent { display: none !important; }
-
-  /* Hero content: flat dark panel, no background image needed */
-  .hero-content {
-    background: var(--navy-2) !important;
-    border-bottom: 3px solid var(--gold) !important;
-    padding: 20px 16px 20px 16px !important;
-    position: relative !important;
-  }
-
-  /* Brand row: tighten up */
-  .brand-row { margin-bottom: 10px; }
-  .brand-logo { height: 22px; }
-
-  /* Hero title: smaller on mobile */
-  .hero-title {
-    font-size: 1.8rem !important;
-    line-height: 1.1 !important;
-    margin-bottom: 6px !important;
-  }
-
-  /* Hero rule: hide the animated gold line */
-  .hero-rule { display: none !important; }
-
-  /* Hero tagline: tighter */
-  .hero-tagline {
-    font-size: 0.9rem !important;
-    margin-bottom: 10px !important;
-  }
-
-  /* Meta row: horizontal scroll if needed */
-  .meta-row {
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 6px !important;
-  }
-  .meta-chip {
-    font-size: 9px !important;
-    padding: 4px 10px !important;
-    border-right: none !important;
-    border: 1px solid var(--bw) !important;
-  }
-
-  /* Ticker: tighter on mobile */
-  .ticker { padding: 7px 16px !important; }
-  .ticker-text { font-size: 10px !important; letter-spacing: 1.5px !important; }
-
-  /* Body wrap: tighter top padding */
-  .body-wrap { padding-top: 24px !important; }
-
-  /* Video demo placeholder: shorter on mobile */
-  .vid-placeholder { min-height: 60px !important; padding: 14px 14px !important; }
-  .vid-placeholder p { font-size: 12px !important; }
+  .hero-content { background: var(--navy-2); border-bottom: 3px solid var(--gold); padding: 18px 16px 20px; }
+  .hero-title { font-size: 1.9rem; }
+  .hero-tagline { font-size: 0.9rem; }
+  .meta-row { flex-direction: column; gap: 4px; }
+  .meta-chip { border-right: none; border-bottom: 1px solid var(--bw); padding: 5px 0; font-size: 9px; }
+  .body-wrap { padding: 24px 16px 36px; }
+  .sh-text h2 { font-size: 1.25rem; }
+  .choice-grid { grid-template-columns: 1fr 1fr; }
+  .pifi { grid-template-columns: 1fr 1fr; }
+  .tbtn { height: 40px; }
+  .tbtn-icon { width: 40px; height: 40px; }
+  .tbtn-label { font-size: 10px; }
+  .step-tracker { display: none; }
 }
 
-@media (max-width: 820px) {
-  /* Tablet: reduce hero height */
-  .hero { min-height: 0 !important; }
-  .hero-content { padding: 22px 28px 28px 28px !important; }
-  .hero-title { font-size: clamp(1.6rem, 4vw, 2.4rem) !important; }
-}
-
-
-/* Session preview and step tracker always visible - no fade in */
-.session-preview, .step-tracker {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
+/* ── ANIMATIONS ── */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.session-preview, .step-tracker { opacity: 1 !important; transform: none !important; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; } }
 </style>
 </head>
 <body>
 <div class="studio-shell">
+
+<!-- BRAND BAR -->
+<div class="brand-bar">
+  <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/white_logo.png" alt="Imagine That AI" class="brand-logo">
+  <span class="brand-label">An Imagine That AI Creative Experience</span>
+</div>
+
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-bg"></div><div class="hero-overlay"></div><div class="hero-accent"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="brand-row">
-      <img class="brand-logo" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/heMUaEGiQuGCzfpG.png" alt="Imagine That AI">
-      <div class="brand-sep"></div>
-      <span class="brand-label">An Imagine That AI Creative Experience</span>
-    </div>
-    <div class="session-tag">Session 1 of 5</div>
+    <div class="hero-session">Session 1 of 5</div>
     <div class="hero-title">The Concept</div>
-    <div class="hero-rule"></div>
     <div class="hero-tagline">What am I making?</div>
-    <div class="meta-row"><div class="meta-chip">7 to 10 Minutes</div><div class="meta-chip">ChatGPT</div><div class="meta-chip">Output: Song Blueprint</div></div>
+    <div class="meta-row">
+      <div class="meta-chip">7 to 10 Minutes</div>
+      <div class="meta-chip">ChatGPT</div>
+      <div class="meta-chip">Output: Song Blueprint</div>
+    </div>
   </div>
 </div>
+
+<!-- TICKER -->
 <div class="ticker">
-  <span class="ticker-text">Session 1 of 5</span>
-  <div class="ticker-sep"></div>
-  <span class="ticker-text">The AI Music Studio</span>
-  <div class="ticker-sep"></div>
-  <span class="ticker-text">Make It. Release It.</span>
-</div>
-<div class="body-wrap">
-<div class="session-preview">
-  <div class="session-preview-eye">Session 1 — 7 to 10 Minutes</div>
-  <h3>In this session you will</h3>
-  <ol>
-    <li>Pull the raw material from your real story before touching any AI tool</li>
-    <li>Choose the genre and mood that will shape how your song sounds</li>
-    <li>Understand the basic structure of a song so you can direct the AI</li>
-    <li>Run one ChatGPT prompt and walk away with a complete Song Blueprint</li>
-  </ol>
+  <div class="ticker-inner">
+    <span class="ticker-text">Session 1 of 5</span><span class="ticker-text">·</span>
+    <span class="ticker-text">The AI Music Studio</span><span class="ticker-text">·</span>
+    <span class="ticker-text">Make It. Release It.</span><span class="ticker-text">·</span>
+    <span class="ticker-text">Session 1 of 5</span><span class="ticker-text">·</span>
+    <span class="ticker-text">The AI Music Studio</span><span class="ticker-text">·</span>
+    <span class="ticker-text">Make It. Release It.</span><span class="ticker-text">·</span>
+  </div>
 </div>
 
-
+<!-- STEP TRACKER -->
 <div class="step-tracker">
-  <div class="step-tracker-item active"><span class="step-tracker-num">01</span>THE CONCEPT</div>
-  <div class="step-tracker-item"><span class="step-tracker-num">02</span>WRITING ROOM</div>
-  <div class="step-tracker-item"><span class="step-tracker-num">03</span>RECORDING</div>
-  <div class="step-tracker-item"><span class="step-tracker-num">04</span>VISUALS</div>
-  <div class="step-tracker-item"><span class="step-tracker-num">05</span>RELEASE</div>
-</div>
-<div class="sh"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Core Principle</div><h2>Before You Prompt Anything</h2></div></div>
-<div class="vid-placeholder">
-  <div class="vid-icon">&#9654;</div>
-  <div class="vid-label">Video Demo</div>
-  <div class="vid-desc">Demo video: Why raw material matters — coming soon</div>
-</div>
-<div class="tp"><div class="tp-eye">Why This Matters</div><p>AI can make a song, but it cannot know what makes <em>your</em> song worth hearing unless you supply meaningful raw material. The quality of what comes out depends entirely on the quality of what you put in.</p></div>
-<div class="cmp">
-  <div class="cmp-cell warn"><div class="cmp-eye">Weak Starting Idea</div><p><em>"Make a love song for my husband."</em><br><br>ChatGPT has nothing real to work with. The result will be generic.</p></div>
-  <div class="cmp-cell good"><div class="cmp-eye">Strong Raw Material</div><p>How long you have been together, how you met, a recurring habit, a funny memory, the emotional tone you want, and what the song should avoid.</p></div>
+  <div class="st-item active"><span class="st-num">01</span>CONCEPT</div>
+  <div class="st-item"><span class="st-num">02</span>WRITING</div>
+  <div class="st-item"><span class="st-num">03</span>RECORDING</div>
+  <div class="st-item"><span class="st-num">04</span>VISUALS</div>
+  <div class="st-item"><span class="st-num">05</span>RELEASE</div>
 </div>
 
-<div class="div"></div>
-<div class="sh"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Lessons 1A through 1E</div><h2>The Concept Sessions</h2></div></div>
+<!-- BODY -->
+<div class="body-wrap">
 
-<div class="lb">
-  <div class="lb-head">
-    <div class="lb-num">1A</div>
-    <div><div class="lb-eye">Lesson 1A</div><div class="lb-title">Before You Prompt Anything</div></div>
+  <!-- SESSION GOAL -->
+  <div class="sh"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Session Goal</div><h2>Build Your Song Blueprint</h2></div></div>
+  <div class="tp reveal"><div class="tp-eye">Why This Matters</div><p>AI can make a song, but it cannot know what makes your song worth hearing unless you give it real raw material. This session is about gathering that material before you open a single tool.</p></div>
+
+  <div class="vid reveal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+    <p>Video Demo: Why raw material matters — coming soon</p>
   </div>
-  <div class="lb-body"><div class="vid-placeholder">
-  <div class="vid-icon">&#9654;</div>
-  <div class="vid-label">Video Demo</div>
-  <div class="vid-desc">Demo video: Building your Story Bank — coming soon</div>
-</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>The gap between a generic AI song and a meaningful one is not the AI. It is the quality of your input. This lesson is about gathering that input before you open a single tool.</p></div><div class="ch3">Your Story Bank</div><p style="font-size:15px;color:var(--card);margin-bottom:14px;">Answer these in a notes app, doc, or voice memo. Do not overthink. Just write what is true.</p><ul class="cl"><li><input type="checkbox" id="c0"><label for="c0">Who is this song for, or what is it about?</label></li><li><input type="checkbox" id="c1"><label for="c1">What specific memory, moment, or detail makes this unique?</label></li><li><input type="checkbox" id="c2"><label for="c2">What emotion do you want the listener to feel?</label></li><li><input type="checkbox" id="c3"><label for="c3">What should the song definitely NOT say or sound like?</label></li><li><input type="checkbox" id="c4"><label for="c4">Is there a phrase, nickname, or inside reference that belongs in it?</label></li></ul></div>
-</div>
 
-<div class="lb">
-  <div class="lb-head">
-    <div class="lb-num">1B</div>
-    <div><div class="lb-eye">Lesson 1B</div><div class="lb-title">Pick Your Genre and Mood</div></div>
-  </div>
-  <div class="lb-body"><div class="vid-placeholder">
-  <div class="vid-icon">&#9654;</div>
-  <div class="vid-label">Video Demo</div>
-  <div class="vid-desc">Demo video: Choosing genre and mood — coming soon</div>
-</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>Genre and mood are the two most powerful controls you have over how your song sounds. Suno responds best when you give it both, not just one.</p></div><div class="ch3">Genre Options</div><div class="tags"><span class="tag">R&amp;B / Soul</span><span class="tag">Pop Ballad</span><span class="tag">Hip-Hop</span><span class="tag">Gospel</span><span class="tag">Country</span><span class="tag">Afrobeats</span><span class="tag">Lo-fi Chill</span><span class="tag">Jazz</span><span class="tag">Latin Pop</span></div><div class="ch3">Mood Options</div><div class="tags"><span class="tag gold">Warm and Nostalgic</span><span class="tag gold">Celebratory</span><span class="tag gold">Bittersweet</span><span class="tag gold">Playful</span><span class="tag gold">Powerful and Uplifting</span><span class="tag gold">Tender and Intimate</span></div></div>
-</div>
+  <div class="div"></div>
 
-<div class="lb">
-  <div class="lb-head">
-    <div class="lb-num">1C</div>
-    <div><div class="lb-eye">Lesson 1C</div><div class="lb-title">Song Structure Basics</div></div>
-  </div>
-  <div class="lb-body"><div class="vid-placeholder">
-  <div class="vid-icon">&#9654;</div>
-  <div class="vid-label">Video Demo</div>
-  <div class="vid-desc">Demo video: Understanding song structure — coming soon</div>
-</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>You do not need music theory. You just need to know what the pieces of a song are called so you can tell ChatGPT and Suno what to build.</p></div><div class="cg"><div class="cg-card"><div class="cg-title">Verse</div><p>Tells the story. Sets the scene. Each verse usually covers different details.</p></div><div class="cg-card"><div class="cg-title">Chorus</div><p>The emotional core. Repeated. This is the part people remember and sing along to.</p></div><div class="cg-card"><div class="cg-title">Bridge</div><p>A shift in perspective or emotion. Creates contrast before the final chorus.</p></div><div class="cg-card"><div class="cg-title">Hook</div><p>A short, catchy phrase, often the title, that anchors the whole piece.</p></div></div></div>
-</div>
+  <!-- STORY BANK -->
+  <div class="sh reveal"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Step 1 of 4</div><h2>Build Your Story Bank</h2></div></div>
+  <div class="tp reveal"><div class="tp-eye">The Idea</div><p>Your song needs to come from something real. Answer these questions honestly — not perfectly. Just write what is true.</p></div>
 
-<div class="lb">
-  <div class="lb-head">
-    <div class="lb-num">1D</div>
-    <div><div class="lb-eye">Lesson 1D</div><div class="lb-title">Your Song Blueprint Prompt</div></div>
+  <div class="yt-label reveal">
+    <div class="yt-badge">Your Turn</div>
+    <span class="yt-desc">Fill in your Story Bank below</span>
   </div>
-  <div class="lb-body"><div class="vid-placeholder">
-  <div class="vid-icon">&#9654;</div>
-  <div class="vid-label">Video Demo</div>
-  <div class="vid-desc">Demo video: Building the Song Blueprint in ChatGPT — coming soon</div>
-</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>This prompt takes everything from your Story Bank and turns it into a structured Song Blueprint. That document is what you will use in every session that follows.</p></div><div class="pb">
-  <div class="pb-head"><span class="pb-label">ChatGPT Prompt: Song Blueprint</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
-  <div class="pb-text">I am creating a song using AI tools and I need your help building a Song Blueprint before I write any lyrics.
+
+  <div class="ic reveal">
+    <div class="ic-title">Story Bank</div>
+    <div class="field">
+      <label>Who or what is this song about?</label>
+      <input type="text" placeholder="e.g. My mom, my best friend, a chapter of my life...">
+    </div>
+    <div class="field">
+      <label>Why are you making this song?</label>
+      <input type="text" placeholder="e.g. Her 70th birthday, a breakup I never processed, just because...">
+    </div>
+    <div class="field">
+      <label>Give me 2 to 3 details only you would know</label>
+      <textarea placeholder="e.g. She always burned the toast but made it anyway. She called everyone 'baby.' She never missed a game."></textarea>
+      <div class="field-hint">These are the details that keep ChatGPT from writing Generic Love Song #8,472.</div>
+    </div>
+    <div class="field">
+      <label>A memory, phrase, place, joke, or moment that belongs in this song</label>
+      <textarea placeholder="e.g. The last time we danced in the kitchen. The road trip where everything went wrong. 'Just keep going.'"></textarea>
+    </div>
+    <div class="field">
+      <label>How should this song feel when someone hears it?</label>
+      <input type="text" placeholder="e.g. Nostalgic, proud, celebratory, bittersweet, joyful...">
+    </div>
+    <div class="field">
+      <label>Anything you absolutely do not want in this song</label>
+      <input type="text" placeholder="e.g. No sad endings, no clichés, nothing too slow, no generic love song vibes...">
+    </div>
+  </div>
+
+  <div class="div"></div>
+
+  <!-- GENRE & MOOD -->
+  <div class="sh reveal"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Step 2 of 4</div><h2>Pick Your Genre and Mood</h2></div></div>
+  <div class="tp reveal"><div class="tp-eye">The Idea</div><p>Genre and mood are the two most powerful controls you have over how your song sounds. Suno responds best when you give it both, not just one.</p></div>
+
+  <div class="yt-label reveal">
+    <div class="yt-badge">Choose One</div>
+    <span class="yt-desc">Select the genre that fits your song</span>
+  </div>
+
+  <div class="tag-grid reveal" id="genre-grid">
+    <button class="tag-btn" onclick="selectTag(this,'genre')">R&amp;B / Soul</button>
+    <button class="tag-btn" onclick="selectTag(this,'genre')">Pop Ballad</button>
+    <button class="tag-btn" onclick="selectTag(this,'genre')">Hip-Hop</button>
+    <button class="tag-btn" onclick="selectTag(this,'genre')">Gospel</button>
+    <button class="tag-btn" onclick="selectTag(this,'genre')">Country</button>
+    <button class="tag-btn" onclick="selectTag(this,'genre')">Afrobeats</button>
+    <button class="tag-btn" onclick="selectTag(this,'genre')">Lo-Fi Chill</button>
+    <button class="tag-btn" onclick="selectTag(this,'genre')">Jazz</button>
+    <button class="tag-btn" onclick="selectTag(this,'genre')">Latin Pop</button>
+    <button class="tag-btn" onclick="selectTag(this,'genre')">Other</button>
+    <button class="tag-btn" onclick="selectTag(this,'genre')">Not Sure Yet</button>
+  </div>
+
+  <div class="yt-label reveal">
+    <div class="yt-badge">Choose One</div>
+    <span class="yt-desc">Select the mood</span>
+  </div>
+
+  <div class="tag-grid reveal" id="mood-grid">
+    <button class="tag-btn" onclick="selectTag(this,'mood')">Warm and Nostalgic</button>
+    <button class="tag-btn" onclick="selectTag(this,'mood')">Celebratory</button>
+    <button class="tag-btn" onclick="selectTag(this,'mood')">Bittersweet</button>
+    <button class="tag-btn" onclick="selectTag(this,'mood')">Playful</button>
+    <button class="tag-btn" onclick="selectTag(this,'mood')">Powerful and Uplifting</button>
+    <button class="tag-btn" onclick="selectTag(this,'mood')">Tender and Intimate</button>
+    <button class="tag-btn" onclick="selectTag(this,'mood')">Confident and Bold</button>
+    <button class="tag-btn" onclick="selectTag(this,'mood')">Reflective and Honest</button>
+  </div>
+
+  <div class="div"></div>
+
+  <!-- SONG BLUEPRINT PROMPT -->
+  <div class="sh reveal"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Step 3 of 4</div><h2>Run Your Song Blueprint Prompt</h2></div></div>
+  <div class="tp reveal"><div class="tp-eye">The Idea</div><p>This prompt takes everything from your Story Bank and turns it into a structured Song Blueprint. That document is what you will use in every session that follows.</p></div>
+
+  <div class="vid reveal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+    <p>Video Demo: Building the Song Blueprint in ChatGPT — coming soon</p>
+  </div>
+
+  <div class="yt-label reveal">
+    <div class="yt-badge">Studio Challenge</div>
+    <span class="yt-desc">Copy this prompt, fill in your answers, paste into ChatGPT</span>
+  </div>
+
+  <div class="pb reveal">
+    <div class="pb-label">ChatGPT Prompt: Song Blueprint</div>
+    <div class="pb-text">I am creating a song using AI tools and I need your help building a Song Blueprint before I write any lyrics.
 
 Here is my raw material:
 - Who or what the song is about: [YOUR ANSWER]
 - Key memory or detail: [YOUR ANSWER]
 - Emotional tone I want: [YOUR ANSWER]
-- Genre: [YOUR ANSWER]
 - Mood: [YOUR ANSWER]
+- Genre: [YOUR ANSWER]
 - What to avoid: [YOUR ANSWER]
 - Any specific phrases or references: [YOUR ANSWER]
 
 Please create a Song Blueprint that includes:
 1. A working title
-2. The core emotional message (1 to 2 sentences)
-3. A suggested song structure (Verse 1, Chorus, Verse 2, Bridge, Chorus)
+2. The core emotional message (1 to 3 sentences)
+3. Song structure using Verse 1, Chorus, Verse 2, Bridge, Chorus
 4. A brief description of what each section should accomplish
 5. Three possible hook and title options
 6. Key words and phrases to use throughout</div>
-</div><a href="https://chat.openai.com" class="tbtn" target="_blank">
-  <span class="tbtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></span>
-  <span class="tbtn-label">Open ChatGPT</span>
-</a></div>
-</div>
-
-<div class="lb">
-  <div class="lb-head">
-    <div class="lb-num">1E</div>
-    <div><div class="lb-eye">Lesson 1E</div><div class="lb-title">Review Your Blueprint</div></div>
+    <button class="copy-btn" onclick="copyPrompt(this, 'blueprint')">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="0"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy Prompt
+    </button>
   </div>
-  <div class="lb-body"><div class="tp"><div class="tp-eye">Teaching Point</div><p>Before you move on, read your Blueprint out loud. Does it sound like your story? If something feels off, tell ChatGPT what to adjust. This is your foundation. It is worth getting right.</p></div><div class="ch3">Song Blueprint Check</div><ul class="cl"><li><input type="checkbox" id="c0"><label for="c0">The working title feels right for the song</label></li><li><input type="checkbox" id="c1"><label for="c1">The core message captures what I actually want to say</label></li><li><input type="checkbox" id="c2"><label for="c2">The structure makes sense for the story I am telling</label></li><li><input type="checkbox" id="c3"><label for="c3">At least one hook option excites me</label></li><li><input type="checkbox" id="c4"><label for="c4">The key phrases sound like me, not like a template</label></li></ul></div>
-</div>
 
-<div class="div"></div>
-<div class="cta"><div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><h3>Session 1 Complete</h3><p>You have a Song Blueprint. Head to Session 2: The Writing Room, where you will turn this blueprint into real lyrics.</p></div></div>
+  <a class="tbtn reveal" href="https://chat.openai.com" target="_blank">
+    <div class="tbtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+    <div class="tbtn-label">Open ChatGPT</div>
+  </a>
 
-</div>
-<script>
-function copyPrompt(btn) {
-  var text = btn.closest('.pb').querySelector('.pb-text').innerText;
-  navigator.clipboard.writeText(text).then(function(){
-    btn.textContent = 'COPIED!';
-    setTimeout(function(){ btn.textContent = 'COPY PROMPT'; }, 2000);
-  });
-}
-</script>
+  <div class="div"></div>
+
+  <!-- PICK IT OR FIX IT -->
+  <div class="sh reveal"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Step 4 of 4</div><h2>Pick It or Fix It</h2></div></div>
+  <div class="tp reveal"><div class="tp-eye">The Idea</div><p>Read your Song Blueprint out loud. Does it sound like your story? If something feels off, tell ChatGPT what to adjust. This is your foundation — it is worth getting right.</p></div>
+
+  <div class="yt-label reveal">
+    <div class="yt-badge">Choose One</div>
+    <span class="yt-desc">What does your Song Blueprint feel like?</span>
+  </div>
+
+  <div class="pifi reveal">
+    <button class="pifi-btn" onclick="pickOrFix('pick', this)">
+      <div class="pifi-icon">✓</div>
+      <div class="pifi-label">Pick It</div>
+      <div class="pifi-sub">This sounds like my story. I am ready to write.</div>
+    </button>
+    <button class="pifi-btn" onclick="pickOrFix('fix', this)">
+      <div class="pifi-icon">↩</div>
+      <div class="pifi-label">Fix It</div>
+      <div class="pifi-sub">Something is off. I need to adjust before moving on.</div>
+    </button>
+  </div>
+
+  <div class="pifi-result" id="pifi-result-pick">
+    <p><strong>Your Song Blueprint is locked in.</strong> That is your raw material. Every prompt you run from here will reference what you just built. Head to Session 2.</p>
+  </div>
+  <div class="pifi-result" id="pifi-result-fix">
+    <p>Tell ChatGPT exactly what to change. Be specific — "the emotional tone feels too sad, I want it to feel proud instead" works better than "make it better." Run the revision, then come back and Pick It.</p>
+  </div>
+
+  <!-- SONG BLUEPRINT CHECK -->
+  <div class="sh reveal" style="margin-top:32px;"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Before You Move On</div><h2>Song Blueprint Check</h2></div></div>
+
+  <div class="yt-label reveal">
+    <div class="yt-badge">Rate It</div>
+    <span class="yt-desc">Check off each item before moving to Session 2</span>
+  </div>
+
+  <ul class="cl reveal" id="blueprint-check">
+    <li onclick="toggleCheck(this)"><div class="cl-box"></div><div class="cl-text">The working title feels right for the song</div></li>
+    <li onclick="toggleCheck(this)"><div class="cl-box"></div><div class="cl-text">The core message captures what I actually want to say</div></li>
+    <li onclick="toggleCheck(this)"><div class="cl-box"></div><div class="cl-text">The structure makes sense for the story I am telling</div></li>
+    <li onclick="toggleCheck(this)"><div class="cl-box"></div><div class="cl-text">I can hear this song in my head when I read it</div></li>
+  </ul>
+
+  <div class="momentum reveal">
+    <p>Your Song Blueprint is done. <strong>This is the document that makes everything else possible.</strong> Every prompt you run from here will reference what you just built. Head to Session 2.</p>
+  </div>
+
+</div><!-- /body-wrap -->
 </div><!-- /studio-shell -->
 
 <script>
-// ── SCROLL REVEAL ──────────────────────────────────────────────────────────
-(function() {
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  // Immediately show elements already in viewport on load
-  document.querySelectorAll('.reveal, .reveal-stagger > *').forEach(function(el) {
-    var rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      el.classList.add('visible');
-    }
+// ── REVEAL ON SCROLL ──
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+// Show elements already in viewport
+document.querySelectorAll('.reveal').forEach(function(el) {
+  var r = el.getBoundingClientRect();
+  if (r.top < window.innerHeight && r.bottom > 0) { el.classList.add('visible'); }
+});
+
+// ── TAG SELECTOR ──
+function selectTag(btn, group) {
+  var grid = btn.closest('.tag-grid');
+  grid.querySelectorAll('.tag-btn').forEach(function(b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+}
+
+// ── PICK IT OR FIX IT ──
+function pickOrFix(choice, btn) {
+  document.querySelectorAll('.pifi-btn').forEach(function(b) {
+    b.classList.remove('selected-pick', 'selected-fix');
   });
-
-  function initReveal() {
-    // Add reveal class to all major sections
-    document.querySelectorAll('.sh, .pq, .tp, .lb, .cg, .cmp, .cl, .vid-placeholder, .tbtn, .cta, .closing, .jr, .path-grid, .ng, .fcta, .dk, .cs, .yt').forEach(function(el) {
-      if (!el.classList.contains('reveal') && !el.classList.contains('reveal-stagger')) {
-        el.classList.add('reveal');
-        observer.observe(el);
-      }
-    });
-    // Stagger card grids
-    document.querySelectorAll('.cg, .ng, .path-grid').forEach(function(el) {
-      el.classList.add('reveal-stagger');
-      el.classList.remove('reveal');
-      observer.observe(el);
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initReveal);
+  document.querySelectorAll('.pifi-result').forEach(function(r) { r.classList.remove('show'); });
+  if (choice === 'pick') {
+    btn.classList.add('selected-pick');
+    document.getElementById('pifi-result-pick').classList.add('show');
   } else {
-    initReveal();
+    btn.classList.add('selected-fix');
+    document.getElementById('pifi-result-fix').classList.add('show');
   }
-})();
+}
 
-// ── TICKER ANIMATION ───────────────────────────────────────────────────────
-(function() {
-  function initTicker() {
-    var ticker = document.querySelector('.ticker');
-    if (!ticker) return;
-    var inner = ticker.innerHTML;
-    // Wrap in scrolling inner div and duplicate for seamless loop
-    ticker.innerHTML = '<div class="ticker-inner">' + inner + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + inner + '</div>';
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTicker);
-  } else {
-    initTicker();
-  }
-})();
+// ── CHECKLIST ──
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+}
 
-// ── CHECKLIST INTERACTIONS ─────────────────────────────────────────────────
-(function() {
-  function initChecklists() {
-    document.querySelectorAll('.cl li input[type=checkbox]').forEach(function(cb) {
-      cb.addEventListener('change', function() {
-        var li = cb.closest('li');
-        if (cb.checked) {
-          li.classList.add('checked');
-        } else {
-          li.classList.remove('checked');
-        }
-      });
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initChecklists);
-  } else {
-    initChecklists();
-  }
-})();
-
-// ── COPY BUTTON FLASH ──────────────────────────────────────────────────────
-(function() {
-  function initCopyBtns() {
-    document.querySelectorAll('.copy-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var pb = btn.closest('.pb');
-        var text = pb ? (pb.querySelector('.pb-text') || {}).innerText : '';
-        if (navigator.clipboard && text) {
-          navigator.clipboard.writeText(text.trim()).then(function() {
-            var orig = btn.textContent;
-            btn.textContent = 'COPIED';
-            btn.classList.add('copied');
-            setTimeout(function() {
-              btn.textContent = orig;
-              btn.classList.remove('copied');
-            }, 1800);
-          });
-        }
-      });
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCopyBtns);
-  } else {
-    initCopyBtns();
-  }
-})();
+// ── COPY PROMPT ──
+function copyPrompt(btn, id) {
+  var pb = btn.closest('.pb');
+  var text = pb.querySelector('.pb-text').innerText;
+  navigator.clipboard.writeText(text).then(function() {
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+    setTimeout(function() {
+      btn.classList.remove('copied');
+      btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="0"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt';
+    }, 2000);
+  }).catch(function() {
+    btn.textContent = 'Select & Copy Manually';
+  });
+}
 </script>
-
 </body>
 </html>
