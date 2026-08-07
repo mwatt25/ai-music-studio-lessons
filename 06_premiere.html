@@ -26,7 +26,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .brand-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
 
 /* ── PREMIERE HERO ── */
-.premiere-hero{position:relative;width:100%;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;min-height:280px;}
+.premiere-hero{position:relative;width:100%;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;min-height:260px;}
 .premiere-hero-bg{position:absolute;inset:0;background-image:url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/GxOhZnRhIOoScchN.jpg');background-size:cover;background-position:center 20%;filter:brightness(0.22) saturate(0.5);}
 .premiere-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 20%,rgba(13,17,23,0.98) 100%);}
 .premiere-hero-content{position:relative;z-index:2;padding:52px 48px 44px;}
@@ -34,7 +34,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .premiere-eyebrow::after{content:'';flex:1;height:1px;background:rgba(245,166,35,0.2);}
 .premiere-title{font-size:clamp(2.8rem,7vw,5rem);font-weight:900;color:var(--white);line-height:1.0;margin-bottom:12px;letter-spacing:-.03em;}
 .premiere-title span{color:var(--gold);}
-.premiere-sub{font-size:1.1rem;color:var(--card);line-height:1.6;max-width:560px;}
+.premiere-sub{font-size:1.05rem;color:var(--card);line-height:1.6;max-width:560px;}
 
 .ticker{background:var(--gold);padding:8px 0;overflow:hidden;}
 .ticker-inner{display:flex;gap:40px;white-space:nowrap;animation:ts 22s linear infinite;}
@@ -46,10 +46,8 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .st-item{flex:1;text-align:center;padding:10px 4px;background:var(--navy-2);border-right:1px solid var(--bw);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);line-height:1.4;}
 .st-item:last-child{border-right:none;}
 .st-item.done{color:var(--green);border-top:3px solid var(--green);}
-.st-item.premiere{background:var(--navy-3);color:var(--gold);border-top:3px solid var(--gold);}
 .st-num{font-size:1rem;font-weight:900;display:block;margin-bottom:2px;}
 .st-item.done .st-num{color:var(--green);}
-.st-item.premiere .st-num{color:var(--gold);}
 
 .body-wrap{max-width:900px;margin:0 auto;padding:0 48px 80px;}
 .wave-divider{display:flex;align-items:center;gap:3px;padding:32px 0;opacity:.2;}
@@ -58,44 +56,59 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .studio-label::before{content:'';width:20px;height:2px;background:var(--gold);}
 .studio-heading{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:6px;letter-spacing:-.02em;}
 
-/* ── JOURNEY RECAP ── */
-.journey{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:32px;}
-.journey-step{background:var(--navy-2);border-right:1px solid var(--bw2);padding:20px 14px;text-align:center;}
+/* ── NOW PLAY IT — THE PREMIERE MOMENT ── */
+.now-play-block{background:var(--navy-3);border:1px solid var(--bw2);border-top:4px solid var(--gold);padding:40px 36px;margin-bottom:0;position:relative;overflow:hidden;}
+.now-play-block::before{content:'▶';position:absolute;right:-10px;bottom:-30px;font-size:160px;color:rgba(245,166,35,0.03);line-height:1;pointer-events:none;}
+.now-play-label{font-size:9px;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.now-play-heading{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;color:var(--white);margin-bottom:6px;line-height:1.1;letter-spacing:-.02em;}
+.now-play-title{font-size:1.1rem;font-weight:700;color:var(--gold-lt);margin-bottom:24px;font-style:italic;}
+.now-play-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.play-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:16px 32px;text-decoration:none;box-shadow:var(--sh);transition:transform .12s,box-shadow .12s;font-family:'Inter',sans-serif;min-height:52px;}
+.play-btn:hover{transform:translateY(-2px);box-shadow:6px 6px 0 rgba(0,0,0,.6);}
+.watch-btn{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--blue);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;border:1px solid var(--blue);text-decoration:none;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;transition:all .15s;min-height:52px;}
+.watch-btn:hover{background:var(--blue);color:var(--navy);}
+
+/* ── JOURNEY GRID ── */
+.journey{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid rgba(39,174,96,0.2);margin-bottom:28px;}
+.journey-step{background:var(--navy-2);border-right:1px solid rgba(39,174,96,0.15);padding:18px 12px;text-align:center;border-top:2px solid var(--green);}
 .journey-step:last-child{border-right:none;}
-.journey-step.done{background:var(--navy-3);border-top:3px solid var(--green);}
-.journey-num{font-size:1.8rem;font-weight:900;color:var(--gold);opacity:.25;line-height:1;margin-bottom:6px;}
-.journey-step.done .journey-num{opacity:.55;color:var(--green);}
-.journey-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--card);line-height:1.3;}
-.journey-check{font-size:1.2rem;color:var(--green);margin-top:6px;display:none;}
-.journey-step.done .journey-check{display:block;}
+.journey-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);line-height:1.3;margin-bottom:6px;}
+.journey-check{font-size:1rem;color:var(--green);}
 
 /* ── WHAT YOU BUILT ── */
-.built-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--bw2);margin-bottom:32px;}
+.built-grid{display:grid;gap:0;border:1px solid var(--bw2);margin-bottom:32px;}
+.built-grid.two-col{grid-template-columns:1fr 1fr;}
+.built-grid.three-col{grid-template-columns:repeat(3,1fr);}
 .built-item{background:var(--navy-2);border-right:1px solid var(--bw2);padding:22px 18px;}
 .built-item:last-child{border-right:none;}
 .built-icon{color:var(--gold);margin-bottom:10px;}
 .built-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
 .built-value{font-size:14px;font-weight:700;color:var(--white);line-height:1.4;}
-.built-value.empty{color:var(--muted);font-weight:400;font-style:italic;}
 
 /* ── CLOSING STATEMENT ── */
-.closing-block{background:var(--navy-3);border:1px solid var(--bw2);border-top:3px solid var(--gold);padding:40px 36px;margin-bottom:32px;position:relative;overflow:hidden;}
+.closing-block{background:var(--navy-3);border:1px solid var(--bw2);border-top:3px solid var(--gold);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;}
 .closing-block::before{content:'"';position:absolute;top:-20px;left:20px;font-size:160px;font-weight:900;color:rgba(245,166,35,0.04);line-height:1;pointer-events:none;font-family:Georgia,serif;}
 .closing-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
 .closing-quote{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:700;color:var(--white);line-height:1.4;margin-bottom:16px;font-style:italic;}
-.closing-body{font-size:14px;color:var(--card);line-height:1.8;}
+.closing-body{font-size:14px;color:var(--card);line-height:1.85;}
+.closing-body p{margin-bottom:12px;}
+.closing-body p:last-child{margin-bottom:0;}
+.closing-final{font-size:15px;font-weight:700;color:var(--off);margin-top:16px;}
 
-/* ── SHARE / NEXT STEPS ── */
-.share-block{background:var(--navy-4);border:1px solid var(--bw2);border-left:4px solid var(--gold);padding:24px 24px;margin-bottom:24px;}
-.share-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
-.share-text{font-size:14px;color:var(--card);line-height:1.7;margin-bottom:14px;}
-.share-actions{display:flex;gap:10px;flex-wrap:wrap;}
+/* ── RELEASE BLOCK ── */
+.release-block{background:var(--navy-4);border:1px solid var(--bw2);border-left:4px solid var(--gold);padding:22px 24px;margin-bottom:28px;}
+.release-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.release-text{font-size:14px;color:var(--card);line-height:1.7;margin-bottom:14px;}
+.release-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.release-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:11px 20px;text-decoration:none;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;transition:transform .12s;min-height:42px;}
+.release-btn:hover{transform:translateY(-1px);}
+.copy-share-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:10px 18px;border:1px solid var(--blue);cursor:pointer;font-family:'Inter',sans-serif;box-shadow:var(--sh-sm);transition:all .15s;min-height:42px;}
+.copy-share-btn:hover{background:var(--blue);color:var(--navy);}
+.copy-share-btn.copied{background:var(--green);color:white;border-color:var(--green);}
 
 /* ── BUTTONS ── */
 .primary-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .12s,box-shadow .12s;min-height:48px;text-decoration:none;}
 .primary-btn:hover{transform:translateY(-2px);box-shadow:6px 6px 0 rgba(0,0,0,.6);}
-.outline-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:11px 22px;border:1px solid var(--blue);cursor:pointer;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;text-decoration:none;transition:all .15s;min-height:42px;}
-.outline-btn:hover{background:var(--blue);color:var(--navy);}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;}
@@ -106,11 +119,16 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 @media(max-width:820px){.premiere-hero-content{padding:36px 28px 36px;}.body-wrap{padding:0 28px 60px;}}
 @media(max-width:660px){
   .journey{grid-template-columns:repeat(3,1fr);}
-  .built-grid{grid-template-columns:1fr;}
+  .built-grid.two-col,.built-grid.three-col{grid-template-columns:1fr;}
   .built-item{border-right:none;border-bottom:1px solid var(--bw2);}
   .built-item:last-child{border-bottom:none;}
-  .share-actions{flex-direction:column;}
+  .now-play-actions{flex-direction:column;}
+  .now-play-actions .play-btn,.now-play-actions .watch-btn{width:100%;}
+  .release-actions{flex-direction:column;}
+  .release-actions .release-btn,.release-actions .copy-share-btn{width:100%;}
   .wave-divider{padding:20px 0;}
+  .closing-block{padding:28px 20px;}
+  .now-play-block{padding:28px 20px;}
 }
 @media(max-width:560px){
   .premiere-hero{min-height:0;}
@@ -120,7 +138,6 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   .premiere-title{font-size:2.4rem;}
   .body-wrap{padding:0 16px 48px;}
   .step-tracker{display:none;}
-  .closing-block{padding:28px 20px;}
   .journey{grid-template-columns:1fr 1fr;}
 }
 </style>
@@ -146,10 +163,10 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <div class="ticker-inner">
     <span class="ticker-text">The Premiere</span><span class="ticker-text">·</span>
     <span class="ticker-text">You Made It</span><span class="ticker-text">·</span>
-    <span class="ticker-text">Idea → Song → Video → Release</span><span class="ticker-text">·</span>
+    <span class="ticker-text">Idea → Song → Release</span><span class="ticker-text">·</span>
     <span class="ticker-text">The Premiere</span><span class="ticker-text">·</span>
     <span class="ticker-text">You Made It</span><span class="ticker-text">·</span>
-    <span class="ticker-text">Idea → Song → Video → Release</span><span class="ticker-text">·</span>
+    <span class="ticker-text">Idea → Song → Release</span><span class="ticker-text">·</span>
   </div>
 </div>
 
@@ -163,63 +180,38 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 
 <div class="body-wrap">
 
-  <!-- SONG SO FAR — COMPLETE -->
-  <div style="padding:52px 0 0;position:relative;">
-    <div style="position:absolute;bottom:-40px;left:-36px;font-size:clamp(140px,20vw,220px);font-weight:900;color:rgba(245,166,35,0.03);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.04em;">★</div>
+  <!-- SONG SO FAR -->
+  <div style="padding:52px 0 28px;position:relative;">
     <div id="ssf-card-container" class="reveal"></div>
+  </div>
+
+  <!-- NOW PLAY IT -->
+  <div class="now-play-block reveal" id="now-play-block">
+    <div class="now-play-label">The Premiere</div>
+    <div class="now-play-heading">Now play it.</div>
+    <div class="now-play-title" id="now-play-title">&nbsp;</div>
+    <div class="now-play-actions" id="now-play-actions">
+      <!-- Rendered by JS -->
+    </div>
   </div>
 
   <div class="wave-divider reveal" id="wave1"></div>
 
-  <!-- JOURNEY RECAP -->
+  <!-- JOURNEY -->
   <div class="studio-label reveal">The Journey</div>
   <div class="studio-heading reveal">Look what you built.</div>
 
   <div class="journey reveal">
-    <div class="journey-step done">
-      <div class="journey-num">01</div>
-      <div class="journey-label">Concept</div>
-      <div class="journey-check">✓</div>
-    </div>
-    <div class="journey-step done">
-      <div class="journey-num">02</div>
-      <div class="journey-label">Writing</div>
-      <div class="journey-check">✓</div>
-    </div>
-    <div class="journey-step done">
-      <div class="journey-num">03</div>
-      <div class="journey-label">Production</div>
-      <div class="journey-check">✓</div>
-    </div>
-    <div class="journey-step done">
-      <div class="journey-num">04</div>
-      <div class="journey-label">Visuals</div>
-      <div class="journey-check">✓</div>
-    </div>
-    <div class="journey-step done">
-      <div class="journey-num">05</div>
-      <div class="journey-label">Release</div>
-      <div class="journey-check">✓</div>
-    </div>
+    <div class="journey-step"><div class="journey-label">Concept</div><div class="journey-check">✓</div></div>
+    <div class="journey-step"><div class="journey-label">Writing</div><div class="journey-check">✓</div></div>
+    <div class="journey-step"><div class="journey-label">Production</div><div class="journey-check">✓</div></div>
+    <div class="journey-step" id="journey-visuals"><div class="journey-label">Visuals</div><div class="journey-check">✓</div></div>
+    <div class="journey-step"><div class="journey-label">Release</div><div class="journey-check">✓</div></div>
   </div>
 
   <!-- WHAT YOU BUILT -->
   <div class="built-grid reveal" id="built-grid">
-    <div class="built-item">
-      <div class="built-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-      <div class="built-label">Your Song</div>
-      <div class="built-value" id="built-song">A song you made.</div>
-    </div>
-    <div class="built-item">
-      <div class="built-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="15" rx="1"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
-      <div class="built-label">Your Video</div>
-      <div class="built-value" id="built-video">A visual story.</div>
-    </div>
-    <div class="built-item">
-      <div class="built-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-      <div class="built-label">Your Decision</div>
-      <div class="built-value" id="built-release">Made and decided.</div>
-    </div>
+    <!-- Rendered by JS — 2 or 3 columns depending on video -->
   </div>
 
   <div class="wave-divider reveal" id="wave2"></div>
@@ -227,22 +219,24 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <!-- CLOSING STATEMENT -->
   <div class="closing-block reveal">
     <div class="closing-eyebrow">The AI Music Studio</div>
-    <div class="closing-quote" id="closing-quote">"You came here with an idea. You're leaving with something you made."</div>
+    <div class="closing-quote" id="closing-quote">&nbsp;</div>
     <div class="closing-body">
-      <p style="margin-bottom:12px;">That is not a small thing. Most people have ideas. Most people do not finish them. You did.</p>
-      <p style="margin-bottom:12px;">You wrote something personal. You gave it a sound. You gave it a visual world. You made a decision about what to do with it. That is a complete creative process — from idea to artifact.</p>
-      <p>Whatever you make next, you now know the path.</p>
+      <p id="closing-body-1">&nbsp;</p>
+      <p>That's the whole point.</p>
+    </div>
+    <div class="closing-final">Whatever you make next, you know how to get there.</div>
+  </div>
+
+  <!-- RELEASE BLOCK — only for release decision with a link -->
+  <div class="release-block reveal" id="release-block" style="display:none;">
+    <div class="release-label">Your Song Is Out There</div>
+    <div class="release-text">Your song has officially left the Studio.</div>
+    <div class="release-actions" id="release-actions">
+      <!-- Rendered by JS -->
     </div>
   </div>
 
-  <!-- SHARE / NEXT STEPS -->
-  <div class="share-block reveal" id="share-block" style="display:none;">
-    <div class="share-label">Your Song Is Out There</div>
-    <div class="share-text" id="share-text">Your song is live on streaming platforms. Share it.</div>
-    <div class="share-actions" id="share-actions"></div>
-  </div>
-
-  <!-- FINAL CTA -->
+  <!-- MAKE ANOTHER SONG -->
   <div class="reveal" style="padding-top:16px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
     <a href="00_welcome.html" class="primary-btn">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -259,59 +253,104 @@ document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);var r=
 function buildWave(id){var el=document.getElementById(id);if(!el)return;var h=[3,5,8,12,18,24,16,10,6,4,8,14,22,28,20,14,8,5,10,16,24,32,22,14,8,5,3,6,10,16,24,20,14,8,5,3,6,12,18,26,20,12,6,4,8,14,22,16,10,5,3,6,10,18,26,20,12,6,4,8];h.forEach(function(v){var b=document.createElement('div');b.className='wave-bar';b.style.height=v+'px';el.appendChild(b);});}
 ['wave1','wave2'].forEach(buildWave);
 
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
 (function(){
   var p=AISProject.get();
 
-  // Full Song So Far card — all 5 stages
-  AISProject.renderSongCard('ssf-card-container',['concept','lyrics','production','visuals','release'],'You built the whole thing.');
-
-  // Extract working title
+  // Extract title
   var bp=AISProject.approvedBlueprint();var title='';
   if(bp){var m=bp.match(/working title[:\s]+([^\n]+)/i);if(m)title=m[1].trim().replace(/^["']|["']$/g,'');}
 
-  // Built grid — song
-  var songEl=document.getElementById('built-song');
-  if(songEl){
-    if(title)songEl.textContent='"'+title+'"';
-    else if(p.production.selectedVersion)songEl.textContent='Your song is ready.';
-    else songEl.innerHTML='<span class="empty">Song not yet selected</span>';
+  // Has video?
+  var hasVideo=!!(p.visuals&&(p.visuals.videoLink||p.visuals.selectedVersion));
+  // Has song link?
+  var songLink=p.production&&p.production.selectedVersion?p.production.selectedVersion:'';
+  // Has video link?
+  var videoLink=p.visuals&&p.visuals.videoLink?p.visuals.videoLink:'';
+  // Release decision and link
+  var decision=p.release&&p.release.decision?p.release.decision:'';
+  var releaseLink=p.release&&p.release.info?p.release.info:'';
+
+  // Song So Far card — stages based on what actually exists
+  var stages=['concept','lyrics','production'];
+  if(hasVideo)stages.push('visuals');
+  stages.push('release');
+  AISProject.renderSongCard('ssf-card-container',stages,'You built the whole thing.');
+
+  // Journey grid — dim visuals step if skipped
+  if(!hasVideo){
+    var jv=document.getElementById('journey-visuals');
+    if(jv){jv.style.opacity='0.35';jv.style.borderTopColor='rgba(255,255,255,0.1)';}
   }
 
-  // Built grid — video
-  var vidEl=document.getElementById('built-video');
-  if(vidEl){
-    if(p.visuals.direction)vidEl.textContent=p.visuals.direction.split('—')[0].trim()+' style';
-    else if(p.visuals.videoLink)vidEl.textContent='Your video is ready.';
-    else vidEl.innerHTML='<span class="empty">Video not yet created</span>';
+  // NOW PLAY IT
+  var titleEl=document.getElementById('now-play-title');
+  if(titleEl)titleEl.textContent=title?'"'+title+'"':'Your song';
+  var actionsEl=document.getElementById('now-play-actions');
+  if(actionsEl){
+    var html='';
+    if(songLink){
+      html+='<a href="'+escHtml(songLink)+'" target="_blank" class="play-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>Listen to Your Song</a>';
+    } else {
+      html+='<span style="font-size:13px;color:var(--muted);font-style:italic;">Your song link will appear here once saved in Session 3.</span>';
+    }
+    if(hasVideo&&videoLink){
+      html+='<a href="'+escHtml(videoLink)+'" target="_blank" class="watch-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>Watch Your Visual Sample</a>';
+    }
+    actionsEl.innerHTML=html;
   }
 
-  // Built grid — release
-  var relEl=document.getElementById('built-release');
-  if(relEl){
-    if(p.release.decision==='release')relEl.textContent='Released to streaming.';
-    else if(p.release.decision==='keep')relEl.textContent='Kept personal.';
-    else relEl.innerHTML='<span class="empty">Decision not yet made</span>';
+  // WHAT YOU BUILT grid
+  var builtGrid=document.getElementById('built-grid');
+  if(builtGrid){
+    var items=[];
+    // Song
+    var songVal=title?'"'+title+'"':'Your song is ready.';
+    items.push('<div class="built-item"><div class="built-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="built-label">Your Song</div><div class="built-value">'+escHtml(songVal)+'</div></div>');
+    // Video — only if exists
+    if(hasVideo){
+      var vidVal=p.visuals.direction?p.visuals.direction.split('—')[0].trim()+' style':'Visual sample ready.';
+      items.push('<div class="built-item"><div class="built-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="15" rx="1"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><div class="built-label">Your Video</div><div class="built-value">'+escHtml(vidVal)+'</div></div>');
+    }
+    // Decision
+    var decisionMap={keep:'Kept personal.',share:'Shared.',release:'Released to streaming.'};
+    var decVal=decisionMap[decision]||'Decision made.';
+    items.push('<div class="built-item"><div class="built-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div class="built-label">Your Decision</div><div class="built-value">'+escHtml(decVal)+'</div></div>');
+    builtGrid.className='built-grid reveal '+(hasVideo?'three-col':'two-col');
+    builtGrid.innerHTML=items.join('');
   }
 
-  // Closing quote — personalized if title exists
+  // CLOSING COPY — adaptive
   var quoteEl=document.getElementById('closing-quote');
-  if(quoteEl&&title){
-    quoteEl.textContent='"'+title+'" started as an idea. Now it is something you made.';
-  }
+  var bodyEl=document.getElementById('closing-body-1');
+  var quoteText=title?'"'+title+'" started as an idea. Now it\'s something you made.':'You started with an idea. Now it\'s something you made.';
+  var bodyText=hasVideo?'You took an idea that existed only in your head and turned it into something you can actually hear and see.':'You took an idea that existed only in your head and turned it into something you can actually hear.';
+  if(quoteEl)quoteEl.textContent=quoteText;
+  if(bodyEl)bodyEl.textContent=bodyText;
 
-  // Share block — only if they chose to release
-  if(p.release.decision==='release'){
-    var sb=document.getElementById('share-block');
-    var st=document.getElementById('share-text');
-    var sa=document.getElementById('share-actions');
-    if(sb)sb.style.display='block';
-    if(p.release.info&&sa){
-      sa.innerHTML='<a href="'+escHtml(p.release.info)+'" target="_blank" class="primary-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Listen on Streaming</a>';
+  // RELEASE BLOCK — only if decision is release
+  if(decision==='release'){
+    var rb=document.getElementById('release-block');
+    var ra=document.getElementById('release-actions');
+    if(rb)rb.style.display='block';
+    if(ra&&releaseLink){
+      var html='<a href="'+escHtml(releaseLink)+'" target="_blank" class="release-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>View My Release</a>';
+      html+='<button class="copy-share-btn" onclick="copyShareLink(this,\''+escHtml(releaseLink)+'\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Share Link</button>';
+      ra.innerHTML=html;
+    } else if(ra){
+      ra.innerHTML='<span style="font-size:13px;color:var(--muted);font-style:italic;">Add your streaming link in Session 5 to share it here.</span>';
     }
   }
 })();
 
-function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function copyShareLink(btn,url){
+  var orig=btn.innerHTML;
+  function ok(){btn.classList.add('copied');btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!';setTimeout(function(){btn.classList.remove('copied');btn.innerHTML=orig;},2500);}
+  function fb(){btn.innerHTML='Press Ctrl+C / Cmd+C';setTimeout(function(){btn.innerHTML=orig;},4000);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(ok).catch(function(){doFallback(url,ok,fb);});}else{doFallback(url,ok,fb);}
+}
+function doFallback(text,ok,fb){var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0;';document.body.appendChild(ta);ta.focus();ta.select();var res=false;try{res=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);if(res){ok();}else{fb();}}
 </script>
 </body>
 </html>
