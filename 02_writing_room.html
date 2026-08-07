@@ -299,7 +299,7 @@ Rules:
         <div class="lyric-sheet-title">Lyrics</div>
         <div class="lyric-sheet-meta">YOUR DRAFT</div>
       </div>
-      <textarea class="lyric-textarea" id="lyrics-b" placeholder="Your lyrics from Session 1 will load here..." oninput="ls('lyrics',this.value)"></textarea>
+      <textarea class="lyric-textarea" id="lyrics-b" placeholder="Your lyrics from Session 1 will load here..." oninput="ls('lyrics',this.value);populateCoachPrompts();updateFixPrompt()"></textarea>
       <div class="lyric-sheet-footer">
         <div class="lyric-sheet-footer-note">your words go here</div>
         <div class="annotation" style="transform:rotate(1.5deg);">Keep this. ↑</div>
@@ -314,11 +314,81 @@ Rules:
         <button class="coach-btn" onclick="showCoach('hook',this)">Brainstorm a Hook</button>
         <button class="coach-btn" onclick="showCoach('missing',this)">What Might Be Missing?</button>
       </div>
-      <div class="coach-response" id="coach-line"><strong>Help With a Line</strong><br><br>Copy the line you are stuck on, then paste it into ChatGPT with this:<br><br><em>"Here is a line from a song I am writing: [YOUR LINE]. Help me make it more specific and emotionally honest without changing the meaning."</em></div>
-      <div class="coach-response" id="coach-rhyme"><strong>Find a Rhyme</strong><br><br>Paste this into ChatGPT:<br><br><em>"I need a word or phrase that rhymes with [YOUR WORD] and fits this emotional tone: [DESCRIBE THE FEELING]. Give me 5 to 10 options."</em></div>
-      <div class="coach-response" id="coach-structure"><strong>Help With Structure</strong><br><br>Paste this into ChatGPT:<br><br><em>"Here are my lyrics so far: [YOUR LYRICS]. Help me organize them into a song structure with [Verse 1], [Chorus], [Verse 2], [Bridge], [Final Chorus]. Keep my exact words wherever they work. Only fill in what is genuinely missing."</em></div>
-      <div class="coach-response" id="coach-hook"><strong>Brainstorm a Hook</strong><br><br>Paste this into ChatGPT:<br><br><em>"Here is what my song is about: [DESCRIBE YOUR SONG]. Give me 5 possible hook lines — the one memorable phrase that captures the whole emotional idea. Keep them specific to my story, not generic."</em></div>
-      <div class="coach-response" id="coach-missing"><strong>What Might Be Missing?</strong><br><br>Paste this into ChatGPT:<br><br><em>"Here are my lyrics: [YOUR LYRICS]. Without rewriting anything, tell me: What is working well? What feels incomplete? What might be missing for this to feel like a complete song?"</em></div>
+      <!-- Coach: Help With a Line -->
+      <div class="coach-response" id="coach-line">
+        <div class="prompt-console" style="margin-top:0;">
+          <div class="prompt-console-header"><div class="prompt-console-label">ChatGPT Prompt: Help With a Line</div></div>
+          <div class="prompt-console-body" id="coach-line-prompt">Here is a line from a song I am writing:
+
+[PASTE THE LINE YOU ARE STUCK ON HERE]
+
+Help me make it more specific and emotionally honest without changing the meaning. Give me 3 to 5 alternatives.</div>
+          <div class="prompt-actions">
+            <button class="copy-btn" onclick="copyPrompt(this,'coach-line-prompt')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+            <a class="chatgpt-btn" href="https://chat.openai.com" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Open ChatGPT</a>
+          </div>
+        </div>
+      </div>
+      <!-- Coach: Find a Rhyme -->
+      <div class="coach-response" id="coach-rhyme">
+        <div class="prompt-console" style="margin-top:0;">
+          <div class="prompt-console-header"><div class="prompt-console-label">ChatGPT Prompt: Find a Rhyme</div></div>
+          <div class="prompt-console-body" id="coach-rhyme-prompt">I need a word or phrase that rhymes with [YOUR WORD] and fits this emotional tone:
+
+<span id="coach-rhyme-feeling" class="ph">[emotional tone from Session 1 will appear here]</span>
+
+Give me 5 to 10 options that feel natural in a song lyric, not forced.</div>
+          <div class="prompt-actions">
+            <button class="copy-btn" onclick="copyPrompt(this,'coach-rhyme-prompt')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+            <a class="chatgpt-btn" href="https://chat.openai.com" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Open ChatGPT</a>
+          </div>
+        </div>
+      </div>
+      <!-- Coach: Help With Structure -->
+      <div class="coach-response" id="coach-structure">
+        <div class="prompt-console" style="margin-top:0;">
+          <div class="prompt-console-header"><div class="prompt-console-label">ChatGPT Prompt: Help With Structure</div></div>
+          <div class="prompt-console-body" id="coach-structure-prompt">Here are my lyrics so far:
+
+<span id="coach-structure-lyrics" class="ph">[your lyrics will appear here automatically]</span>
+
+Help me organize them into a song structure with [Verse 1], [Chorus], [Verse 2], [Bridge], [Final Chorus]. Keep my exact words wherever they work. Only fill in what is genuinely missing. Do not replace my specific details with generic lines.</div>
+          <div class="prompt-actions">
+            <button class="copy-btn" onclick="copyPrompt(this,'coach-structure-prompt')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+            <a class="chatgpt-btn" href="https://chat.openai.com" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Open ChatGPT</a>
+          </div>
+        </div>
+      </div>
+      <!-- Coach: Brainstorm a Hook -->
+      <div class="coach-response" id="coach-hook">
+        <div class="prompt-console" style="margin-top:0;">
+          <div class="prompt-console-header"><div class="prompt-console-label">ChatGPT Prompt: Brainstorm a Hook</div></div>
+          <div class="prompt-console-body" id="coach-hook-prompt">Here is what my song is about:
+
+<span id="coach-hook-about" class="ph">[your story context from Session 1 will appear here]</span>
+
+Give me 5 possible hook lines — the one memorable phrase that captures the whole emotional idea. Keep them specific to my story, not generic. Each option should be something I could actually imagine singing.</div>
+          <div class="prompt-actions">
+            <button class="copy-btn" onclick="copyPrompt(this,'coach-hook-prompt')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+            <a class="chatgpt-btn" href="https://chat.openai.com" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Open ChatGPT</a>
+          </div>
+        </div>
+      </div>
+      <!-- Coach: What Might Be Missing -->
+      <div class="coach-response" id="coach-missing">
+        <div class="prompt-console" style="margin-top:0;">
+          <div class="prompt-console-header"><div class="prompt-console-label">ChatGPT Prompt: What Might Be Missing?</div></div>
+          <div class="prompt-console-body" id="coach-missing-prompt">Here are my lyrics:
+
+<span id="coach-missing-lyrics" class="ph">[your lyrics will appear here automatically]</span>
+
+Without rewriting anything, tell me: What is working well? What feels incomplete? What might be missing for this to feel like a complete song? Give me specific observations, not general writing advice.</div>
+          <div class="prompt-actions">
+            <button class="copy-btn" onclick="copyPrompt(this,'coach-missing-prompt')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+            <a class="chatgpt-btn" href="https://chat.openai.com" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Open ChatGPT</a>
+          </div>
+        </div>
+      </div>
     </div>
     <div style="margin-top:20px;">
       <button onclick="showReview(true)" class="green-btn">
@@ -522,7 +592,38 @@ function resetFix(){activeChips=[];document.querySelectorAll('.fix-chip').forEac
 
 function lyricsApproved(){ls('lyrics_ready','1');var conv=document.getElementById('convergence');if(conv){conv.classList.add('show');setTimeout(function(){conv.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}}
 
-function showCoach(type,btn){var wasActive=btn.classList.contains('active');document.querySelectorAll('.coach-btn').forEach(function(b){b.classList.remove('active');});document.querySelectorAll('.coach-response').forEach(function(r){r.classList.remove('show');});if(!wasActive){btn.classList.add('active');var el=document.getElementById('coach-'+type);if(el)el.classList.add('show');}}
+function populateCoachPrompts(){
+  var lyrEl=document.getElementById('lyrics-b');
+  var lyrVal=lyrEl?lyrEl.value.trim():(ls('lyrics')||'');
+  var feeling=ls('sb_feeling')||'';
+  var about=ls('sb_about')||'';
+  var why=ls('sb_why')||'';
+  var memory=ls('sb_memory')||'';
+  var details=ls('sb_details')||'';
+  // Structure prompt — auto-fill lyrics
+  var structEl=document.getElementById('coach-structure-lyrics');
+  if(structEl){if(lyrVal){structEl.textContent=lyrVal;structEl.classList.add('filled');}else{structEl.textContent='[your lyrics will appear here automatically]';structEl.classList.remove('filled');}}
+  // Missing prompt — auto-fill lyrics
+  var missEl=document.getElementById('coach-missing-lyrics');
+  if(missEl){if(lyrVal){missEl.textContent=lyrVal;missEl.classList.add('filled');}else{missEl.textContent='[your lyrics will appear here automatically]';missEl.classList.remove('filled');}}
+  // Rhyme prompt — auto-fill feeling
+  var feelEl=document.getElementById('coach-rhyme-feeling');
+  if(feelEl){if(feeling){feelEl.textContent=feeling;feelEl.classList.add('filled');}else{feelEl.textContent='[emotional tone from Session 1 will appear here]';feelEl.classList.remove('filled');}}
+  // Hook prompt — auto-fill story context
+  var hookEl=document.getElementById('coach-hook-about');
+  if(hookEl){
+    var parts=[];
+    if(about)parts.push('About: '+about);
+    if(why)parts.push('Why: '+why);
+    if(memory)parts.push('Key moment: '+memory);
+    if(details)parts.push('Details: '+details);
+    if(feeling)parts.push('Feeling: '+feeling);
+    if(parts.length>0){hookEl.textContent=parts.join('\n');hookEl.classList.add('filled');}
+    else{hookEl.textContent='[your story context from Session 1 will appear here]';hookEl.classList.remove('filled');}
+  }
+}
+
+function showCoach(type,btn){var wasActive=btn.classList.contains('active');document.querySelectorAll('.coach-btn').forEach(function(b){b.classList.remove('active');});document.querySelectorAll('.coach-response').forEach(function(r){r.classList.remove('show');});if(!wasActive){btn.classList.add('active');var el=document.getElementById('coach-'+type);if(el)el.classList.add('show');populateCoachPrompts();}}
 
 function copyPrompt(btn,id){
   var el=document.getElementById(id);if(!el)return;
