@@ -540,6 +540,129 @@ body {
   .reveal, .reveal-stagger > *, .hero-accent, .hero-rule, .ticker-inner { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
 }
 
+
+/* ── SESSION PREVIEW BOX ── */
+.session-preview {
+  background: var(--navy-2);
+  border: 1px solid var(--bw);
+  border-top: 3px solid var(--gold);
+  padding: 20px 24px;
+  margin-bottom: 36px;
+  box-shadow: var(--sh);
+}
+.session-preview-eye {
+  font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 10px;
+}
+.session-preview h3 {
+  font-size: 1rem; font-weight: 800; color: var(--white); margin-bottom: 12px;
+}
+.session-preview ol {
+  list-style: none; padding: 0; margin: 0;
+  counter-reset: preview-counter;
+}
+.session-preview ol li {
+  counter-increment: preview-counter;
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 14px; color: var(--card); line-height: 1.6;
+  padding: 6px 0; border-bottom: 1px solid var(--bw);
+}
+.session-preview ol li:last-child { border-bottom: none; }
+.session-preview ol li::before {
+  content: counter(preview-counter);
+  min-width: 22px; height: 22px;
+  background: var(--gold); color: var(--navy);
+  font-size: 10px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+/* ── STEP PROGRESS TRACKER ── */
+.step-tracker {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 32px;
+  border: 1px solid var(--bw);
+  box-shadow: var(--sh);
+  overflow: hidden;
+}
+.step-tracker-item {
+  flex: 1; text-align: center; padding: 10px 6px;
+  background: var(--navy-2);
+  border-right: 1px solid var(--bw);
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--muted);
+  line-height: 1.4;
+}
+.step-tracker-item:last-child { border-right: none; }
+.step-tracker-item.active {
+  background: var(--navy-3);
+  color: var(--gold);
+  border-top: 2px solid var(--gold);
+}
+.step-tracker-item.done {
+  background: var(--navy-2);
+  color: var(--muted);
+  opacity: 0.5;
+}
+.step-tracker-num {
+  font-size: 1.1rem; font-weight: 800; color: var(--gold);
+  opacity: 0.3; display: block; margin-bottom: 2px;
+}
+.step-tracker-item.active .step-tracker-num { opacity: 1; }
+
+/* ── STOP AND DO THIS ── */
+.action-block {
+  background: rgba(245,166,35,0.07);
+  border: 1px solid rgba(245,166,35,0.3);
+  border-left: 4px solid var(--gold);
+  padding: 16px 20px;
+  margin: 20px 0;
+  box-shadow: var(--sh);
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.action-block-icon {
+  width: 28px; height: 28px; background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.action-block-icon svg { width: 14px; height: 14px; color: var(--navy); }
+.action-block-label {
+  font-size: 9px; font-weight: 800; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+}
+.action-block p {
+  font-size: 14px; color: var(--off-white); line-height: 1.65; margin: 0;
+}
+
+/* ── MOMENTUM CALLOUT (earned, not cheesy) ── */
+.momentum {
+  background: var(--navy-3);
+  border-left: 4px solid var(--gold);
+  border-bottom: 1px solid var(--bw);
+  border-right: 1px solid var(--bw);
+  border-top: 1px solid var(--bw);
+  padding: 14px 20px;
+  margin: 28px 0 8px;
+  box-shadow: var(--sh);
+}
+.momentum p {
+  font-size: 14px; font-weight: 500; color: var(--off-white);
+  line-height: 1.65; margin: 0; font-style: italic;
+}
+.momentum strong { color: var(--gold-light); font-style: normal; font-weight: 700; }
+
+/* ── VISUAL RHYTHM BREAKER ── */
+.rhythm-break {
+  display: flex; align-items: center; gap: 14px;
+  margin: 36px 0 28px;
+}
+.rhythm-break-line { flex: 1; height: 1px; background: var(--bw); }
+.rhythm-break-label {
+  font-size: 9px; font-weight: 800; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--muted);
+  white-space: nowrap;
+}
+
 </style>
 </head>
 <body>
@@ -567,9 +690,25 @@ body {
   <span class="ticker-text">Make It. Release It.</span>
 </div>
 <div class="body-wrap">
+<div class="session-preview reveal">
+  <div class="session-preview-eye">The Premiere</div>
+  <h3>You made it through the whole studio</h3>
+  <ol>
+    <li>Review everything you built across all five sessions</li>
+    <li>Decide what comes next for your song and your creative practice</li>
+  </ol>
+</div>
+
 
 <div class="pq"><p>You came in with an idea. You leave with a song, a music video, and a process you can repeat. That is not a small thing. Most people who say "I want to make a song someday" never do. <strong>You did.</strong></p></div>
 
+<div class="step-tracker reveal">
+  <div class="step-tracker-item done"><span class="step-tracker-num">01</span>THE CONCEPT</div>
+  <div class="step-tracker-item done"><span class="step-tracker-num">02</span>WRITING ROOM</div>
+  <div class="step-tracker-item done"><span class="step-tracker-num">03</span>RECORDING</div>
+  <div class="step-tracker-item done"><span class="step-tracker-num">04</span>VISUALS</div>
+  <div class="step-tracker-item done"><span class="step-tracker-num">05</span>RELEASE</div>
+</div>
 <div class="sh"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Your Studio Journey</div><h2>Every Session, Completed</h2></div></div>
 <div class="jr">
   <div class="jr-step done"><div class="jr-num">01</div><div class="jr-label">The Concept</div><div class="jr-check">&#10003;</div></div>
