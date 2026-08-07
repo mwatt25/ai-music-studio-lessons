@@ -40,7 +40,7 @@ body {
 .hero-bg { position: absolute; inset: 0; background-image: url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/GxOhZnRhIOoScchN.jpg'); background-size: cover; background-position: center 20%; filter: brightness(0.25) saturate(0.6); }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(8,14,26,0.65) 55%, var(--navy) 100%); }
 .hero-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--gold); z-index: 3; }
-.hero-content { position: relative; z-index: 2; padding: 32px 48px 40px 48px; }
+.hero-content { position: relative; z-index: 2; padding: 28px 48px 36px 48px; }
 .brand-row { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
 .brand-logo { height: 32px; width: auto;  }
 .brand-sep { width: 1px; height: 22px; background: var(--muted); }
@@ -61,7 +61,7 @@ body {
 .ticker-sep { width: 4px; height: 4px; background: var(--navy); opacity: 0.35; flex-shrink: 0; }
 
 /* BODY */
-.body-wrap { max-width: 900px; margin: 0 auto; padding: 52px 48px 80px; box-sizing: border-box; }
+.body-wrap { max-width: 900px; margin: 0 auto; padding: 48px 48px 80px; box-sizing: border-box; }
 
 /* SECTION HEAD — Inter Bold, not condensed */
 .sh { margin: 52px 0 22px; display: flex; align-items: flex-start; gap: 16px; }
@@ -95,8 +95,22 @@ body {
 .pb { background: #050B15; border: 1px solid var(--bw); margin: 16px 0; box-shadow: var(--sh); }
 .pb-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--navy-3); border-bottom: 1px solid var(--bw); }
 .pb-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); }
-.copy-btn { background: var(--gold); border: none; color: var(--navy); font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 7px 18px; cursor: pointer; box-shadow: 3px 3px 0 rgba(0,0,0,0.5); transition: transform 0.1s, box-shadow 0.1s; font-family: 'Inter', sans-serif; border-left: 3px solid rgba(0,0,0,0.2); }
-.copy-btn:hover { transform: translate(1px, 1px); box-shadow: 2px 2px 0 rgba(0,0,0,0.5); }
+/* ── COPY PROMPT BUTTON ── */
+.copy-btn {
+  background: var(--navy);
+  border: 1px solid var(--gold);
+  border-left: 3px solid var(--gold);
+  color: var(--gold);
+  font-size: 10px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 7px 16px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 rgba(245,166,35,0.3);
+  transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
+  font-family: 'Inter', sans-serif;
+  display: flex; align-items: center; gap: 7px;
+}
+.copy-btn::before { content: '⊕'; font-size: 12px; opacity: 0.7; }
+.copy-btn:hover { background: var(--gold); color: var(--navy); transform: translate(1px, 1px); box-shadow: 2px 2px 0 rgba(0,0,0,0.5); }
 /* PROMPT TEXT — Inter Mono, 14px, well-spaced — NOT Courier */
 .pb-text { padding: 18px 20px; font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; font-size: 14px; color: var(--off-white); line-height: 1.85; white-space: pre-wrap; }
 
@@ -105,7 +119,7 @@ body {
 .cl li { display: flex; align-items: flex-start; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--bw); background: var(--navy-2); font-size: 15px; color: var(--card); transition: background 0.15s; }
 .cl li:last-child { border-bottom: none; }
 .cl li:hover { background: var(--navy-3); }
-.cl li input[type=checkbox] { width: 17px; height: 17px; accent-color: var(--gold); margin-top: 3px; flex-shrink: 0; cursor: pointer; }
+.cl li input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--gold); margin-top: 3px; flex-shrink: 0; cursor: pointer; border: 1px solid var(--gold); }
 .cl li label { cursor: pointer; line-height: 1.6; }
 
 /* COMPARE */
@@ -129,9 +143,9 @@ body {
 .cg-card p { font-size: 15px; color: var(--card); line-height: 1.65; margin-top: 8px; }
 
 /* TAG ROW */
-.tags { display: flex; flex-wrap: wrap; gap: 0; margin: 12px 0; }
-.tag { background: var(--navy-3); border: 1px solid var(--bw); color: var(--off-white); font-size: 14px; font-weight: 500; padding: 6px 14px; margin: -1px -1px 0 0; }
-.tag.gold { background: rgba(245,166,35,0.08); border-color: var(--bg); color: var(--gold); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.tag { background: var(--navy-3); border: 1px solid rgba(255,255,255,0.12); color: var(--off-white); font-size: 13px; font-weight: 500; padding: 5px 13px; margin: 0 6px 6px 0; display: inline-block; }
+.tag.gold { background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.4); color: var(--gold); }
 
 /* VIDEO PLACEHOLDER */
 .vid-placeholder { background: var(--navy-2); border: 1px solid var(--bw); border-left: 4px solid var(--gold); padding: 16px 20px; margin: 20px 0; display: flex; align-items: center; gap: 16px; box-shadow: var(--sh); }
@@ -140,10 +154,47 @@ body {
 .vid-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
 /* TOOL BUTTON */
-.tbtn { display: inline-flex; align-items: center; gap: 12px; background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; padding: 13px 26px; margin: 12px 10px 0 0; box-shadow: 5px 5px 0 rgba(0,0,0,0.6); transition: transform 0.1s, box-shadow 0.1s; font-family: 'Inter', sans-serif; border-left: 4px solid rgba(0,0,0,0.2); }
-.tbtn:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 rgba(0,0,0,0.6); }
-.tbtn svg { width: 15px; height: 15px; flex-shrink: 0; }
-.tbtn.out { background: transparent; color: var(--gold); border: 2px solid var(--gold); border-left: 4px solid var(--gold); box-shadow: 5px 5px 0 rgba(245,166,35,0.25); }
+/* ── BRAND TOOL BUTTONS ── */
+.tbtn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
+  text-decoration: none;
+  padding: 0 22px 0 0;
+  margin: 14px 12px 0 0;
+  box-shadow: 4px 4px 0 #000;
+  transition: transform 0.1s, box-shadow 0.1s;
+  font-family: 'Inter', sans-serif;
+  height: 44px;
+  position: relative;
+  overflow: hidden;
+}
+.tbtn::before {
+  content: '';
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  background: rgba(0,0,0,0.18);
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+.tbtn-icon {
+  position: absolute; left: 0; top: 0;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.18);
+  flex-shrink: 0;
+}
+.tbtn-icon svg { width: 18px; height: 18px; }
+.tbtn-label { padding-left: 56px; }
+.tbtn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
+.tbtn.out {
+  background: transparent; color: var(--gold);
+  border: 2px solid var(--gold);
+  box-shadow: 4px 4px 0 rgba(245,166,35,0.3);
+}
+.tbtn.out::before { background: rgba(245,166,35,0.12); }
+.tbtn.out:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 rgba(245,166,35,0.3); }
 
 /* DISTROKID */
 .dk { background: var(--navy-3); border: 1px solid var(--bg); border-left: 4px solid var(--gold); padding: 24px 26px; margin: 20px 0; box-shadow: var(--sh); }
@@ -264,7 +315,10 @@ body {
   <div class="vid-icon">&#9654;</div>
   <div class="vid-label">Video Demo</div>
   <div class="vid-desc">Demo video: Suno interface overview — coming soon</div>
-</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>Suno generates complete songs with vocals, instruments, and production from a text prompt and optional lyrics. It works best when you give it a clear style description AND formatted lyrics with section tags.</p></div><div class="cg"><div class="cg-card"><div class="cg-title">Style Prompt</div><p>Describes the sound: genre, mood, tempo, vocal style, instrumentation. This is separate from your lyrics.</p></div><div class="cg-card"><div class="cg-title">Lyrics Input</div><p>Your actual words, formatted with [Verse 1], [Chorus], [Bridge] tags so Suno knows the structure.</p></div><div class="cg-card"><div class="cg-title">Custom Mode</div><p>Use Custom Mode in Suno to input both your style prompt AND your lyrics separately for maximum control.</p></div></div><a class="tbtn" href="https://suno.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Open Suno</a></div>
+</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>Suno generates complete songs with vocals, instruments, and production from a text prompt and optional lyrics. It works best when you give it a clear style description AND formatted lyrics with section tags.</p></div><div class="cg"><div class="cg-card"><div class="cg-title">Style Prompt</div><p>Describes the sound: genre, mood, tempo, vocal style, instrumentation. This is separate from your lyrics.</p></div><div class="cg-card"><div class="cg-title">Lyrics Input</div><p>Your actual words, formatted with [Verse 1], [Chorus], [Bridge] tags so Suno knows the structure.</p></div><div class="cg-card"><div class="cg-title">Custom Mode</div><p>Use Custom Mode in Suno to input both your style prompt AND your lyrics separately for maximum control.</p></div></div><a href="https://suno.com" class="tbtn" target="_blank">
+  <span class="tbtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+  <span class="tbtn-label">Open Suno</span>
+</a></div>
 </div>
 
 <div class="lb">
@@ -289,7 +343,10 @@ My song details:
 - Reference artists (optional): [e.g., sounds like early Beyonce]
 
 Generate a Suno style prompt that is 15 to 25 words, comma-separated, specific and evocative. Do not use sentences.</div>
-</div><div class="ch3">Example Style Prompts</div><div class="tp" style="margin-bottom:10px;"><div class="tp-eye">R&amp;B Love Song</div><p>soulful R&amp;B, warm female vocals, mid-tempo, piano-led, lush strings, intimate production, emotional, cinematic, polished</p></div><div class="tp"><div class="tp-eye">Upbeat Celebration</div><p>upbeat pop, bright female vocals, celebratory, acoustic guitar, clapping percussion, radio-ready, joyful, summer feel</p></div><a class="tbtn" href="https://chat.openai.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Open ChatGPT</a></div>
+</div><div class="ch3">Example Style Prompts</div><div class="tp" style="margin-bottom:10px;"><div class="tp-eye">R&amp;B Love Song</div><p>soulful R&amp;B, warm female vocals, mid-tempo, piano-led, lush strings, intimate production, emotional, cinematic, polished</p></div><div class="tp"><div class="tp-eye">Upbeat Celebration</div><p>upbeat pop, bright female vocals, celebratory, acoustic guitar, clapping percussion, radio-ready, joyful, summer feel</p></div><a href="https://chat.openai.com" class="tbtn" target="_blank">
+  <span class="tbtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></span>
+  <span class="tbtn-label">Open ChatGPT</span>
+</a></div>
 </div>
 
 <div class="lb">
@@ -312,7 +369,10 @@ Format rules:
 - Add a blank line between sections
 - Do not change any of the words
 - If a section repeats, label it [Chorus] each time</div>
-</div><a class="tbtn" href="https://chat.openai.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Open ChatGPT</a></div>
+</div><a href="https://chat.openai.com" class="tbtn" target="_blank">
+  <span class="tbtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></span>
+  <span class="tbtn-label">Open ChatGPT</span>
+</a></div>
 </div>
 
 <div class="lb">
@@ -324,7 +384,10 @@ Format rules:
   <div class="vid-icon">&#9654;</div>
   <div class="vid-label">Video Demo</div>
   <div class="vid-desc">Demo video: Generating and comparing versions in Suno — coming soon</div>
-</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>Always generate at least 2 versions. Suno is probabilistic. The same prompt can produce very different results. Your job is to listen, compare, and pick the one that serves your song.</p></div><ul class="cl"><li><input type="checkbox" id="c0"><label for="c0">Open Suno and select Custom Mode</label></li><li><input type="checkbox" id="c1"><label for="c1">Paste your style prompt in the Style field</label></li><li><input type="checkbox" id="c2"><label for="c2">Paste your formatted lyrics in the Lyrics field</label></li><li><input type="checkbox" id="c3"><label for="c3">Generate at least 2 versions</label></li><li><input type="checkbox" id="c4"><label for="c4">Listen to both fully before deciding</label></li></ul><a class="tbtn" href="https://suno.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Open Suno</a></div>
+</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>Always generate at least 2 versions. Suno is probabilistic. The same prompt can produce very different results. Your job is to listen, compare, and pick the one that serves your song.</p></div><ul class="cl"><li><input type="checkbox" id="c0"><label for="c0">Open Suno and select Custom Mode</label></li><li><input type="checkbox" id="c1"><label for="c1">Paste your style prompt in the Style field</label></li><li><input type="checkbox" id="c2"><label for="c2">Paste your formatted lyrics in the Lyrics field</label></li><li><input type="checkbox" id="c3"><label for="c3">Generate at least 2 versions</label></li><li><input type="checkbox" id="c4"><label for="c4">Listen to both fully before deciding</label></li></ul><a href="https://suno.com" class="tbtn" target="_blank">
+  <span class="tbtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+  <span class="tbtn-label">Open Suno</span>
+</a></div>
 </div>
 
 <div class="lb">
