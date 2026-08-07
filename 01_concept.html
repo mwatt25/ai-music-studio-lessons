@@ -8,16 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#0D1117;--navy-2:#131A22;--navy-3:#1A2332;--navy-4:#0A0E14;
-  --gold:#F5A623;--gold-lt:#FBCF7A;--gold-dim:rgba(245,166,35,0.12);
-  --blue:#4A9EBF;--blue-dim:rgba(74,158,191,0.1);
-  --green:#27AE60;--green-dim:rgba(39,174,96,0.1);
+  --navy:#0D1117;--navy-2:#131A22;--navy-3:#1A2332;--navy-4:#080C12;
+  --gold:#F5A623;--gold-lt:#FBCF7A;--gold-dim:rgba(245,166,35,0.1);
+  --blue:#4A9EBF;--blue-dim:rgba(74,158,191,0.08);
+  --green:#27AE60;--green-dim:rgba(39,174,96,0.08);
   --white:#FFFFFF;--off:#E8EDF2;--card:#B0BEC8;--muted:#6B7A8A;
   --bw:rgba(255,255,255,0.07);--bw2:rgba(255,255,255,0.12);
-  --sh:4px 4px 0 rgba(0,0,0,0.5);--sh-sm:2px 2px 0 rgba(0,0,0,0.4);
+  --sh:4px 4px 0 rgba(0,0,0,0.6);--sh-sm:2px 2px 0 rgba(0,0,0,0.5);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;}
+body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;}
 
 /* ── BRAND BAR ── */
 .brand-bar{display:flex;align-items:center;gap:10px;padding:10px 20px;background:var(--navy-2);border-bottom:1px solid var(--bw);}
@@ -32,7 +32,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .hero-session{display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;margin-bottom:12px;box-shadow:var(--sh);}
 .hero-title{font-size:clamp(2.2rem,5vw,3.2rem);font-weight:900;color:var(--white);line-height:1.05;margin-bottom:8px;}
 .hero-tagline{font-size:1rem;font-style:italic;color:var(--gold);margin-bottom:16px;}
-.meta-row{display:flex;flex-wrap:wrap;gap:0;}
+.meta-row{display:flex;flex-wrap:wrap;}
 .meta-chip{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:5px 14px;border-right:1px solid var(--bw);}
 .meta-chip:first-child{padding-left:0;}
 
@@ -51,42 +51,34 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .st-item.active .st-num{color:var(--gold);}
 
 /* ── BODY ── */
-.body-wrap{max-width:860px;margin:0 auto;padding:0 48px 60px;}
+.body-wrap{max-width:900px;margin:0 auto;padding:0 48px 80px;}
 
-/* ── SECTION RHYTHM: full-bleed bands ── */
-.band{padding:36px 0;border-bottom:1px solid var(--bw);}
-.band:last-child{border-bottom:none;}
-.band-choose{background:transparent;}
-.band-create{background:var(--navy-4);margin:0 -48px;padding:40px 48px;border-top:1px solid var(--bw);border-bottom:1px solid var(--bw);}
-.band-ai{background:var(--navy-2);margin:0 -48px;padding:36px 48px;border-top:1px solid var(--bw);border-bottom:1px solid var(--bw);}
-.band-review{background:transparent;padding:36px 0;}
-.band-complete{background:var(--green-dim);margin:0 -48px;padding:36px 48px;border-top:2px solid var(--green);border-bottom:1px solid rgba(39,174,96,0.2);}
+/* ── EDITORIAL OPENING: oversized session number ── */
+.session-opening{position:relative;padding:48px 0 0;overflow:hidden;}
+.session-bg-num{
+  position:absolute;top:-20px;right:-20px;
+  font-size:clamp(160px,22vw,260px);font-weight:900;
+  color:rgba(245,166,35,0.04);line-height:1;
+  pointer-events:none;user-select:none;letter-spacing:-0.04em;
+  z-index:0;
+}
+.session-opening-content{position:relative;z-index:1;}
+.session-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.session-eyebrow::after{content:'';flex:1;height:1px;background:var(--bw);}
+.session-big-q{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:10px;letter-spacing:-.02em;}
+.session-sub{font-size:15px;color:var(--card);margin-bottom:32px;line-height:1.6;}
 
-/* ── MOMENT LABELS ── */
-.moment-label{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
-.moment-badge{font-size:9px;font-weight:900;letter-spacing:3px;text-transform:uppercase;padding:4px 10px;box-shadow:var(--sh-sm);}
-.mb-choose{background:var(--gold);color:var(--navy);}
-.mb-create{background:var(--navy-3);color:var(--gold);border:1px solid rgba(245,166,35,0.4);}
-.mb-ai{background:var(--blue);color:var(--navy);}
-.mb-review{background:var(--white);color:var(--navy);}
-.mb-complete{background:var(--green);color:var(--white);}
-.moment-title{font-size:13px;color:var(--card);}
-
-/* ── BIG QUESTION HEADING ── */
-.big-q{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:8px;}
-.big-q-sub{font-size:15px;color:var(--card);margin-bottom:28px;line-height:1.6;}
-
-/* ── CHOICE CARDS (3-col, taller, more presence) ── */
+/* ── CHOICE CARDS — expanded state ── */
 .sp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:0;}
 .sp-card{
   background:var(--navy-2);border-right:1px solid var(--bw2);
-  padding:28px 22px 24px;cursor:pointer;
-  transition:background .18s,border-color .18s,box-shadow .18s;
+  padding:28px 22px 26px;cursor:pointer;
+  transition:background .18s;
   user-select:none;display:flex;flex-direction:column;gap:14px;
   position:relative;
 }
 .sp-card:last-child{border-right:none;}
-.sp-card:hover{background:var(--navy-3);box-shadow:inset 0 0 0 1px rgba(245,166,35,0.15);}
+.sp-card:hover{background:var(--navy-3);}
 .sp-card.selected{
   background:rgba(245,166,35,0.07);
   border-top:3px solid var(--gold);
@@ -94,51 +86,134 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   border-right:1px solid rgba(245,166,35,0.3);
   border-bottom:1px solid rgba(245,166,35,0.3);
 }
-.sp-card.selected::after{
-  content:'SELECTED';position:absolute;top:10px;right:10px;
-  font-size:8px;font-weight:900;letter-spacing:2px;
-  color:var(--gold);opacity:.7;
-}
-.sp-icon{display:flex;align-items:center;height:38px;color:var(--gold);}
+.sp-icon{display:flex;align-items:center;height:40px;color:var(--gold);}
 .sp-card.selected .sp-icon{color:var(--gold-lt);}
-.sp-title{font-size:15px;font-weight:900;color:var(--white);line-height:1.25;letter-spacing:-.01em;}
+.sp-title{font-size:15px;font-weight:900;color:var(--white);line-height:1.2;letter-spacing:-.01em;}
 .sp-card.selected .sp-title{color:var(--gold);}
-.sp-sub{font-size:12px;color:var(--muted);line-height:1.6;}
+.sp-sub{font-size:12px;color:var(--muted);line-height:1.65;font-style:italic;}
+.sp-card.selected .sp-sub{color:var(--card);}
+
+/* ── COLLAPSED SELECTOR (after selection) ── */
+.sp-collapsed{
+  display:none;
+  align-items:center;gap:14px;
+  padding:10px 16px;
+  background:var(--gold-dim);
+  border:1px solid rgba(245,166,35,0.25);
+  border-left:3px solid var(--gold);
+  margin-bottom:0;
+  cursor:pointer;
+}
+.sp-collapsed:hover{background:rgba(245,166,35,0.14);}
+.sp-collapsed-icon{color:var(--gold);flex-shrink:0;}
+.sp-collapsed-label{font-size:11px;font-weight:800;color:var(--gold);letter-spacing:1px;text-transform:uppercase;}
+.sp-collapsed-change{font-size:11px;color:var(--muted);margin-left:auto;text-decoration:underline;text-underline-offset:3px;}
 
 /* ── PATH PANELS ── */
 .path-panel{display:none;opacity:0;transform:translateY(12px);transition:opacity .35s ease,transform .35s ease;}
 .path-panel.show{display:block;}
 .path-panel.visible{opacity:1;transform:none;}
 
+/* ── STUDIO SECTION HEADER ── */
+.studio-section{padding:40px 0 0;position:relative;}
+.studio-label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:9px;font-weight:900;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:6px;
+}
+.studio-label::before{content:'';width:20px;height:2px;background:var(--gold);}
+.studio-heading{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:6px;letter-spacing:-.02em;}
+.studio-sub{font-size:13px;color:var(--card);margin-bottom:24px;line-height:1.6;}
+
+/* ── HANDWRITTEN ANNOTATION ── */
+.annotation{
+  font-family:'Courier New',monospace;
+  font-size:11px;color:rgba(245,166,35,0.55);
+  transform:rotate(-1.5deg);display:inline-block;
+  margin-bottom:4px;letter-spacing:.5px;
+}
+.annotation-right{float:right;transform:rotate(1deg);margin-top:-8px;}
+
 /* ── VIDEO PLACEHOLDER ── */
-.vid-slot{background:var(--navy-3);border:1px solid var(--bw);border-left:3px solid var(--muted);padding:12px 16px;margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.vid-slot{background:var(--navy-3);border:1px solid var(--bw);border-left:3px solid var(--muted);padding:12px 16px;margin-bottom:28px;display:flex;align-items:center;gap:12px;}
 .vid-slot svg{width:16px;height:16px;color:var(--muted);flex-shrink:0;}
 .vid-slot p{font-size:12px;color:var(--muted);margin:0;font-style:italic;}
 
+/* ── LYRIC SHEET WORKSPACE ── */
+.lyric-sheet{
+  background:var(--navy-4);
+  border:1px solid var(--bw2);
+  border-top:2px solid rgba(245,166,35,0.4);
+  margin-bottom:24px;
+  position:relative;
+  overflow:hidden;
+}
+.lyric-sheet::before{
+  content:'';position:absolute;top:0;left:48px;bottom:0;width:1px;
+  background:rgba(245,166,35,0.08);pointer-events:none;z-index:0;
+}
+.lyric-sheet-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px 10px 16px;
+  border-bottom:1px solid var(--bw);
+  background:rgba(245,166,35,0.04);
+}
+.lyric-sheet-title{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;}
+.lyric-sheet-title::before{content:'';width:6px;height:6px;background:var(--gold);opacity:.6;}
+.lyric-sheet-meta{font-size:10px;color:var(--muted);font-family:'Courier New',monospace;}
+.lyric-sheet-body{position:relative;z-index:1;}
+.lyric-textarea{
+  width:100%;min-height:260px;
+  background:transparent;border:none;
+  color:var(--white);
+  font-family:'Courier New',monospace;font-size:14px;
+  line-height:2.1;padding:16px 16px 16px 64px;
+  outline:none;resize:vertical;
+  transition:none;
+}
+.lyric-textarea::placeholder{color:rgba(107,122,138,0.6);font-style:italic;font-size:13px;line-height:1.8;}
+.lyric-sheet-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 16px;border-top:1px solid var(--bw);
+  background:rgba(0,0,0,0.2);
+}
+.lyric-sheet-footer-note{font-size:10px;color:var(--muted);font-family:'Courier New',monospace;}
+
 /* ── STORY BANK WORKSPACE ── */
-.workspace{background:var(--navy-3);border:1px solid var(--bw2);border-top:2px solid rgba(245,166,35,0.5);padding:24px;margin-bottom:0;position:relative;}
-.workspace-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:8px;}
-.workspace-label::after{content:'';flex:1;height:1px;background:rgba(245,166,35,0.2);}
+.story-bank{
+  background:var(--navy-4);
+  border:1px solid var(--bw2);
+  border-top:2px solid rgba(245,166,35,0.4);
+  padding:0;margin-bottom:24px;
+  position:relative;overflow:hidden;
+}
+.story-bank-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;border-bottom:1px solid var(--bw);
+  background:rgba(245,166,35,0.04);
+}
+.story-bank-title{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;}
+.story-bank-title::before{content:'';width:6px;height:6px;background:var(--gold);opacity:.6;}
+.story-bank-body{padding:20px 20px 8px;}
 
 /* ── FIELDS ── */
-.field{margin-bottom:16px;}
-.field label{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--card);margin-bottom:6px;}
+.field{margin-bottom:18px;}
+.field label{display:block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
 .field input,.field textarea{
-  width:100%;background:var(--navy-2);
-  border:none;border-bottom:2px solid rgba(255,255,255,0.1);
+  width:100%;background:transparent;
+  border:none;border-bottom:1px solid rgba(255,255,255,0.1);
   color:var(--white);font-family:'Inter',sans-serif;font-size:14px;
-  padding:10px 0;outline:none;resize:vertical;transition:border-color .2s;
-  line-height:1.6;
+  padding:8px 0;outline:none;resize:vertical;transition:border-color .2s;line-height:1.6;
 }
 .field input:focus,.field textarea:focus{border-bottom-color:var(--gold);}
-.field input::placeholder,.field textarea::placeholder{color:var(--muted);font-style:italic;font-size:13px;}
-.field textarea{min-height:68px;padding:10px 0;}
+.field input::placeholder,.field textarea::placeholder{color:rgba(107,122,138,0.7);font-style:italic;font-size:13px;}
+.field textarea{min-height:64px;}
 .field-hint{font-size:11px;color:var(--muted);margin-top:4px;font-style:italic;}
 
 /* ── EXAMPLE TOGGLE ── */
 .example-toggle{display:flex;align-items:center;gap:8px;background:none;border:none;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;padding:6px 0;margin-bottom:14px;text-decoration:underline;text-underline-offset:3px;font-family:'Inter',sans-serif;}
 .example-toggle:hover{color:var(--card);}
-.example-box{display:none;border:1px solid var(--bw);margin-bottom:16px;overflow:hidden;}
+.example-box{display:none;border:1px solid var(--bw);margin-bottom:18px;overflow:hidden;}
 .example-box.open{display:block;}
 .ex-row{display:grid;grid-template-columns:1fr 1fr;}
 .ex-cell{padding:12px 14px;font-size:13px;line-height:1.6;border-right:1px solid var(--bw);background:var(--navy-3);}
@@ -148,26 +223,27 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .ex-label.strong{color:var(--green);}
 .ex-cell p{color:var(--card);margin:0;}
 
+/* ── WAVEFORM DIVIDER ── */
+.wave-divider{display:flex;align-items:center;gap:3px;padding:28px 0;opacity:.25;}
+.wave-bar{width:2px;background:var(--gold);border-radius:1px;}
+
 /* ── TAG SELECTOR ── */
-.tag-section{margin-bottom:24px;}
-.tag-section-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--card);margin-bottom:10px;}
-.tag-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0;}
-.tag-btn{
-  background:var(--navy-3);border:1px solid var(--bw2);color:var(--card);
-  font-size:12px;font-weight:600;padding:8px 16px;cursor:pointer;
-  transition:all .15s;user-select:none;font-family:'Inter',sans-serif;
-}
+.tag-section{margin-bottom:28px;}
+.tag-section-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.tag-section-label::after{content:'';flex:1;height:1px;background:var(--bw);}
+.tag-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.tag-btn{background:var(--navy-3);border:1px solid var(--bw2);color:var(--card);font-size:12px;font-weight:600;padding:8px 16px;cursor:pointer;transition:all .15s;user-select:none;font-family:'Inter',sans-serif;}
 .tag-btn:hover{border-color:var(--gold);color:var(--gold);}
 .tag-btn.selected{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:800;}
 .tag-btn.not-sure{border-style:dashed;}
 .tag-btn.not-sure.selected{background:var(--muted);border-color:var(--muted);color:white;}
 
 /* ── CHEAT SHEET ── */
-.cheat-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;background:transparent;border:none;border-top:1px solid var(--bw);padding:12px 0;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:4px;}
+.cheat-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;background:transparent;border:none;border-top:1px solid var(--bw);padding:12px 0;cursor:pointer;font-family:'Inter',sans-serif;}
 .cheat-toggle-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
 .cheat-toggle-icon{font-size:14px;color:var(--muted);transition:transform .2s;}
 .cheat-toggle.open .cheat-toggle-icon{transform:rotate(180deg);}
-.cheat-body{display:none;padding:12px 0 4px;margin-bottom:16px;}
+.cheat-body{display:none;padding:12px 0 4px;}
 .cheat-body.open{display:block;}
 .cheat-row{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid var(--bw);}
 .cheat-row:last-of-type{border-bottom:none;}
@@ -175,25 +251,38 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .cheat-def{font-size:13px;color:var(--card);}
 .cheat-note{font-size:12px;color:var(--muted);font-style:italic;margin-top:10px;}
 
-/* ── AI PROMPT CONSOLE ── */
-.prompt-console{background:var(--navy-4);border:1px solid var(--bw2);border-top:2px solid var(--blue);margin-bottom:16px;overflow:hidden;}
-.prompt-console-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--bw);background:rgba(74,158,191,0.06);}
+/* ── PROMPT CONSOLE ── */
+.prompt-console{
+  background:var(--navy-4);
+  border:1px solid var(--bw2);
+  border-top:2px solid var(--blue);
+  margin-bottom:16px;overflow:hidden;
+}
+.prompt-console-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;border-bottom:1px solid var(--bw);
+  background:var(--blue-dim);
+}
 .prompt-console-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;}
-.prompt-console-label::before{content:'';width:6px;height:6px;background:var(--blue);border-radius:50%;display:inline-block;}
-.prompt-console-status{font-size:10px;font-weight:700;color:var(--muted);}
+.prompt-console-label::before{content:'';width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.prompt-console-status{font-size:10px;font-weight:700;color:var(--muted);font-family:'Courier New',monospace;}
 .prompt-console-body{font-family:'Courier New',monospace;font-size:12px;color:var(--off);line-height:1.9;padding:16px;white-space:pre-wrap;}
 .ph{color:var(--muted);font-style:italic;}
 .ph.filled{color:var(--gold-lt);font-style:normal;font-weight:500;}
 .prompt-actions{display:flex;align-items:center;gap:10px;padding:12px 16px;border-top:1px solid var(--bw);background:rgba(74,158,191,0.04);flex-wrap:wrap;}
 
-/* ── COPY BUTTON ── */
+/* ── BUTTONS ── */
 .copy-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:var(--navy);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:9px 18px;border:none;cursor:pointer;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;transition:all .15s;}
-.copy-btn:hover{background:var(--gold);color:var(--navy);}
+.copy-btn:hover{background:var(--gold);}
 .copy-btn.copied{background:var(--green);color:white;}
-
-/* ── OPEN CHATGPT BUTTON ── */
 .chatgpt-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:9px 18px;border:1px solid var(--blue);cursor:pointer;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;text-decoration:none;transition:all .15s;}
 .chatgpt-btn:hover{background:var(--blue);color:var(--navy);}
+.primary-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:13px 26px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .1s,box-shadow .1s;}
+.primary-btn:hover{transform:translateY(-1px);box-shadow:6px 6px 0 rgba(0,0,0,.6);}
+.green-btn{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:var(--white);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:12px 22px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .1s;}
+.green-btn:hover{transform:translateY(-1px);}
+.outline-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--gold);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:10px 18px;border:1px solid var(--gold);box-shadow:var(--sh-sm);cursor:pointer;font-family:'Inter',sans-serif;}
 
 /* ── PICK IT / FIX IT ── */
 .pifi{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:12px;}
@@ -215,14 +304,6 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .fix-chip:hover{border-color:rgba(245,166,35,0.4);color:var(--gold);}
 .fix-chip.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);font-weight:700;}
 
-/* ── WRITING WORKSPACE ── */
-.writing-ws{background:var(--navy-3);border:1px solid var(--bw2);border-top:2px solid rgba(245,166,35,0.5);padding:24px;margin-bottom:20px;}
-.writing-ws-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.writing-ws-label::after{content:'';flex:1;height:1px;background:rgba(245,166,35,0.2);}
-.writing-area{width:100%;min-height:240px;background:var(--navy-2);border:none;border-bottom:2px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Courier New',monospace;font-size:14px;line-height:2;padding:16px;outline:none;resize:vertical;transition:border-color .2s;}
-.writing-area:focus{border-bottom-color:var(--gold);}
-.writing-area::placeholder{color:var(--muted);font-style:italic;font-size:13px;line-height:1.8;}
-
 /* ── COACHING TOOLS ── */
 .coach-strip{margin-top:16px;padding-top:14px;border-top:1px solid var(--bw);}
 .coach-strip-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
@@ -230,16 +311,10 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .coach-btn{background:transparent;border:1px solid var(--bw);color:var(--muted);font-size:11px;font-weight:700;padding:7px 14px;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;}
 .coach-btn:hover{border-color:var(--blue);color:var(--blue);}
 .coach-btn.active{border-color:var(--blue);color:var(--blue);background:var(--blue-dim);}
-.coach-response{display:none;background:var(--navy-2);border:1px solid var(--bw);border-left:3px solid var(--blue);padding:16px 18px;margin-top:14px;font-size:13px;color:var(--card);line-height:1.75;}
+.coach-response{display:none;background:var(--navy-3);border:1px solid var(--bw);border-left:3px solid var(--blue);padding:16px 18px;margin-top:14px;font-size:13px;color:var(--card);line-height:1.75;}
 .coach-response.show{display:block;}
 .coach-response strong{color:var(--blue);}
 .coach-response em{color:var(--off);font-style:italic;}
-
-/* ── LYRICS ENTRY (Path C) ── */
-.lyrics-entry{background:var(--navy-3);border:1px solid var(--bw2);border-top:2px solid rgba(245,166,35,0.5);padding:24px;margin-bottom:20px;}
-.lyrics-entry-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
-.lyrics-entry-label::after{content:'';flex:1;height:1px;background:rgba(245,166,35,0.2);}
-.lyrics-entry-sub{font-size:13px;color:var(--muted);margin-bottom:14px;}
 
 /* ── KEEP / POLISH ── */
 .kp-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:12px;}
@@ -250,28 +325,16 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .kp-label{font-size:15px;font-weight:900;color:var(--white);margin-bottom:4px;letter-spacing:-.01em;}
 .kp-btn.sel .kp-label{color:var(--gold);}
 .kp-sub{font-size:12px;color:var(--muted);line-height:1.5;}
-
-/* ── POLISH PANEL ── */
 .polish-reveal{display:none;margin-top:16px;border-top:1px solid var(--bw);padding-top:16px;}
 .polish-reveal.show{display:block;}
 
-/* ── SECTION RULE ── */
-.section-rule{display:flex;align-items:center;gap:16px;margin:32px 0;}
-.section-rule-line{flex:1;height:1px;background:var(--bw);}
-.section-rule-dot{width:6px;height:6px;background:var(--gold);opacity:.5;flex-shrink:0;}
-
-/* ── BUTTONS ── */
-.primary-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:13px 26px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .1s,box-shadow .1s;}
-.primary-btn:hover{transform:translateY(-1px);box-shadow:6px 6px 0 rgba(0,0,0,.5);}
-.green-btn{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:var(--white);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:12px 22px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .1s;}
-.green-btn:hover{transform:translateY(-1px);}
-.outline-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--gold);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:10px 18px;border:1px solid var(--gold);box-shadow:var(--sh-sm);cursor:pointer;font-family:'Inter',sans-serif;}
-
 /* ── CONVERGENCE ── */
-.convergence{display:none;background:var(--green-dim);border:1px solid rgba(39,174,96,0.25);border-top:3px solid var(--green);padding:32px 28px;box-shadow:var(--sh);margin-top:32px;}
+.convergence{display:none;background:var(--green-dim);border:1px solid rgba(39,174,96,0.2);border-top:3px solid var(--green);padding:36px 32px;box-shadow:var(--sh);margin-top:40px;position:relative;overflow:hidden;}
+.convergence::before{content:'01';position:absolute;right:-10px;bottom:-20px;font-size:140px;font-weight:900;color:rgba(39,174,96,0.04);line-height:1;pointer-events:none;}
 .convergence.show{display:block;}
-.convergence-title{font-size:clamp(1.3rem,3vw,1.8rem);font-weight:900;color:var(--white);margin-bottom:8px;line-height:1.2;}
-.convergence-sub{font-size:14px;color:var(--card);line-height:1.65;margin-bottom:24px;}
+.convergence-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:12px;}
+.convergence-title{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:900;color:var(--white);margin-bottom:10px;line-height:1.15;letter-spacing:-.02em;}
+.convergence-sub{font-size:14px;color:var(--card);line-height:1.65;margin-bottom:28px;}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;}
@@ -281,8 +344,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 /* ── RESPONSIVE ── */
 @media(max-width:820px){
   .hero-content{padding:28px 28px 28px;}
-  .body-wrap{padding:0 28px 48px;}
-  .band-create,.band-ai,.band-complete{margin:0 -28px;padding:36px 28px;}
+  .body-wrap{padding:0 28px 60px;}
 }
 @media(max-width:660px){
   .sp-grid{grid-template-columns:1fr;}
@@ -290,17 +352,18 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   .sp-card:last-child{border-bottom:none;}
   .pifi{grid-template-columns:1fr 1fr;}.kp-grid{grid-template-columns:1fr 1fr;}
   .ex-row{grid-template-columns:1fr;}.ex-cell{border-right:none;border-bottom:1px solid var(--bw);}
+  .wave-divider{display:none;}
 }
 @media(max-width:560px){
   .hero{min-height:0!important;}.hero-bg{display:none!important;}.hero-overlay{display:none!important;}
   .hero-content{background:var(--navy-2);border-bottom:3px solid var(--gold);padding:18px 16px 20px;}
   .hero-title{font-size:1.9rem;}.hero-tagline{font-size:.9rem;}
-  .body-wrap{padding:0 16px 40px;}.step-tracker{display:none;}
-  .band-create,.band-ai,.band-complete{margin:0 -16px;padding:28px 16px;}
-  .writing-area{min-height:180px;font-size:13px;}
+  .body-wrap{padding:0 16px 48px;}.step-tracker{display:none;}
+  .lyric-textarea{padding-left:20px;font-size:13px;min-height:200px;}
+  .lyric-sheet::before{display:none;}
   .primary-btn,.green-btn{width:100%;justify-content:center;}
-  .big-q{font-size:1.4rem;}
-  .sp-card.selected::after{display:none;}
+  .session-bg-num{font-size:120px;}
+  .session-big-q{font-size:1.5rem;}
 }
 </style>
 </head>
@@ -346,49 +409,61 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 
 <div class="body-wrap">
 
-  <!-- ══ CHOOSE MOMENT ══════════════════════════════ -->
-  <div class="band band-choose">
-    <div class="moment-label reveal">
-      <div class="moment-badge mb-choose">Choose</div>
-      <span class="moment-title">Your starting point</span>
+  <!-- ── EDITORIAL OPENING ── -->
+  <div class="session-opening reveal">
+    <div class="session-bg-num">01</div>
+    <div class="session-opening-content">
+      <div class="session-eyebrow">The Concept &nbsp;/&nbsp; Session 01</div>
+      <div class="session-big-q">What do you have so far?</div>
+      <div class="session-sub">Start wherever you are. We will take it from there.</div>
     </div>
-    <div class="big-q reveal">What do you have so far?</div>
-    <div class="big-q-sub reveal">Start wherever you are. We will take it from there.</div>
+  </div>
 
-    <div class="sp-grid reveal">
+  <!-- ── CHOICE CARDS (expanded) ── -->
+  <div id="sp-expanded" class="reveal">
+    <div class="sp-grid">
 
       <div class="sp-card" id="card-idea" onclick="selectStart('idea',this)">
         <div class="sp-icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 21h6"/><path d="M12 3a6 6 0 0 1 6 6c0 2.4-1.4 4.5-3.5 5.6V17H9.5v-2.4C7.4 13.5 6 11.4 6 9a6 6 0 0 1 6-6z"/>
           </svg>
         </div>
         <div class="sp-title">I Have an Idea</div>
-        <div class="sp-sub">Help me turn what's in my head into lyrics.</div>
+        <div class="sp-sub">It's in my head. That's about as far as we've gotten.</div>
       </div>
 
       <div class="sp-card" id="card-write" onclick="selectStart('write',this)">
         <div class="sp-icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
           </svg>
         </div>
         <div class="sp-title">I Want to Write the Lyrics</div>
-        <div class="sp-sub">The words are mine. Help me when I need it.</div>
+        <div class="sp-sub">My words. My story. AI can help when I ask.</div>
       </div>
 
       <div class="sp-card" id="card-ready" onclick="selectStart('ready',this)">
         <div class="sp-icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/>
           </svg>
         </div>
         <div class="sp-title">My Lyrics Are Ready</div>
-        <div class="sp-sub">I have my lyrics. Let's make the song.</div>
+        <div class="sp-sub">Look at you coming prepared. Let's make them sound like a song.</div>
       </div>
 
     </div>
-  </div><!-- /band-choose -->
+  </div>
+
+  <!-- ── COLLAPSED SELECTOR (shown after selection) ── -->
+  <div id="sp-collapsed" class="sp-collapsed" onclick="expandSelector()">
+    <div class="sp-collapsed-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="collapsed-icon"></svg>
+    </div>
+    <div class="sp-collapsed-label" id="collapsed-label">Selected</div>
+    <div class="sp-collapsed-change">change</div>
+  </div>
 
 
   <!-- ══════════════════════════════════════════════
@@ -396,17 +471,14 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   ══════════════════════════════════════════════ -->
   <div class="path-panel" id="path-idea">
 
-    <!-- CREATE MOMENT: Story Bank -->
-    <div class="band-create">
+    <div class="studio-section">
       <div class="vid-slot">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
         <p>WATCH ME: From Story Bank to Song Blueprint — 2 to 3 min demo — coming soon</p>
       </div>
-      <div class="moment-label">
-        <div class="moment-badge mb-create">Create</div>
-        <span class="moment-title">Your Story Bank</span>
-      </div>
-      <p style="font-size:14px;color:var(--card);margin-bottom:20px;line-height:1.65;">The more specific you are here, the more your song will sound like yours.</p>
+      <div class="studio-label">Story Bank</div>
+      <div class="studio-heading">Tell me about the song.</div>
+      <div class="studio-sub">The more specific you are here, the more your song will sound like yours.</div>
 
       <button class="example-toggle" onclick="toggleExample(this)">
         <span>See the difference specificity makes</span><span>▾</span>
@@ -418,24 +490,30 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
         </div>
       </div>
 
-      <div class="workspace">
-        <div class="workspace-label">Story Bank</div>
-        <div class="field"><label>Who or what is this song about?</label><input type="text" id="sb-about" placeholder="e.g. My mom, my best friend, a chapter of my life..." oninput="updateBlueprint();ls('sb_about',this.value)"></div>
-        <div class="field"><label>Why are you making this song?</label><input type="text" id="sb-why" placeholder="e.g. Her 70th birthday, a breakup I never processed, just because..." oninput="updateBlueprint();ls('sb_why',this.value)"></div>
-        <div class="field"><label>2 to 3 details only you would know</label><textarea id="sb-details" placeholder="e.g. She always burned the toast but made it anyway. She called everyone 'baby.' She never missed a single game." oninput="updateBlueprint();ls('sb_details',this.value)"></textarea><div class="field-hint">These are the details that keep ChatGPT from writing Generic Love Song #8,472.</div></div>
-        <div class="field"><label>A memory, phrase, place, joke, or moment that belongs in this song</label><textarea id="sb-memory" placeholder="e.g. The last time we danced in the kitchen. The road trip where everything went wrong. 'Just keep going.'" oninput="updateBlueprint();ls('sb_memory',this.value)"></textarea></div>
-        <div class="field"><label>How should this song feel?</label><input type="text" id="sb-feeling" placeholder="e.g. Nostalgic, proud, celebratory, bittersweet, joyful..." oninput="updateBlueprint();ls('sb_feeling',this.value)"></div>
-        <div class="field"><label>Anything you absolutely do not want</label><input type="text" id="sb-avoid" placeholder="e.g. No sad endings, no clichés, nothing too slow..." oninput="updateBlueprint();ls('sb_avoid',this.value)"></div>
+      <div class="story-bank">
+        <div class="story-bank-header">
+          <div class="story-bank-title">Story Bank</div>
+          <div style="font-size:10px;color:var(--muted);font-family:'Courier New',monospace;">RAW MATERIAL</div>
+        </div>
+        <div class="story-bank-body">
+          <div class="field"><label>Who or what is this song about?</label><input type="text" id="sb-about" placeholder="e.g. My mom, my best friend, a chapter of my life..." oninput="updateBlueprint();ls('sb_about',this.value)"></div>
+          <div class="field"><label>Why are you making this song?</label><input type="text" id="sb-why" placeholder="e.g. Her 70th birthday, a breakup I never processed, just because..." oninput="updateBlueprint();ls('sb_why',this.value)"></div>
+          <div class="field"><label>2 to 3 details only you would know</label><textarea id="sb-details" placeholder="e.g. She always burned the toast but made it anyway. She called everyone 'baby.' She never missed a single game." oninput="updateBlueprint();ls('sb_details',this.value)"></textarea><div class="field-hint">These are the details that keep ChatGPT from writing Generic Love Song #8,472.</div></div>
+          <div class="field"><label>A memory, phrase, place, joke, or moment that belongs in this song</label><textarea id="sb-memory" placeholder="e.g. The last time we danced in the kitchen. The road trip where everything went wrong. 'Just keep going.'" oninput="updateBlueprint();ls('sb_memory',this.value)"></textarea></div>
+          <div class="field"><label>How should this song feel?</label><input type="text" id="sb-feeling" placeholder="e.g. Nostalgic, proud, celebratory, bittersweet, joyful..." oninput="updateBlueprint();ls('sb_feeling',this.value)"></div>
+          <div class="field" style="margin-bottom:4px;"><label>Anything you absolutely do not want</label><input type="text" id="sb-avoid" placeholder="e.g. No sad endings, no clichés, nothing too slow..." oninput="updateBlueprint();ls('sb_avoid',this.value)"></div>
+        </div>
       </div>
-    </div><!-- /band-create -->
+    </div>
 
-    <!-- CHOOSE MOMENT: Sound and Mood -->
-    <div class="band band-choose" style="padding-top:32px;">
-      <div class="moment-label">
-        <div class="moment-badge mb-choose">Choose</div>
-        <span class="moment-title">Your sound and mood</span>
-      </div>
-      <p style="font-size:14px;color:var(--card);margin-bottom:20px;">Not sure? Choose "Not Sure Yet" — ChatGPT can help you decide.</p>
+    <!-- Waveform divider -->
+    <div class="wave-divider" id="wave1"></div>
+
+    <!-- CHOOSE SOUND -->
+    <div>
+      <div class="studio-label">Your Sound</div>
+      <div class="studio-heading">How should this sound?</div>
+      <p style="font-size:13px;color:var(--card);margin-bottom:24px;">Not sure? Choose "Not Sure Yet" — ChatGPT can help you decide.</p>
       <div class="tag-section">
         <div class="tag-section-label">Genre</div>
         <div class="tag-grid" id="genre-grid">
@@ -477,15 +555,16 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
         <div class="cheat-row"><span class="cheat-term">Bridge</span><span class="cheat-def">Optional. A change-up before the final chorus.</span></div>
         <p class="cheat-note">Do not worry about memorizing these. ChatGPT will help you structure the song.</p>
       </div>
-    </div><!-- /band-choose sound -->
+    </div>
 
-    <!-- AI ACTION MOMENT: Blueprint Prompt -->
-    <div class="band-ai">
-      <div class="moment-label">
-        <div class="moment-badge mb-ai">Build It</div>
-        <span class="moment-title">Copy your Blueprint prompt</span>
-      </div>
-      <p style="font-size:14px;color:var(--card);margin-bottom:20px;">Your answers fill in as you type. Copy and paste into ChatGPT.</p>
+    <!-- Waveform divider -->
+    <div class="wave-divider" id="wave2"></div>
+
+    <!-- BUILD BLUEPRINT PROMPT -->
+    <div>
+      <div class="studio-label">Blueprint Prompt</div>
+      <div class="studio-heading">Copy this into ChatGPT.</div>
+      <p style="font-size:13px;color:var(--card);margin-bottom:20px;">Your answers fill in as you type.</p>
 
       <div class="prompt-console" id="blueprint-pb">
         <div class="prompt-console-header">
@@ -522,14 +601,17 @@ Please create a Song Blueprint that includes:
           </a>
         </div>
       </div>
-    </div><!-- /band-ai blueprint -->
+    </div>
 
-    <!-- REVIEW MOMENT: Pick It or Fix It -->
-    <div class="band band-review">
-      <div class="moment-label">
-        <div class="moment-badge mb-review">Review</div>
-        <span class="moment-title">Does ChatGPT's concept sound like your song?</span>
-      </div>
+    <!-- Waveform divider -->
+    <div class="wave-divider" id="wave3"></div>
+
+    <!-- PICK IT OR FIX IT -->
+    <div>
+      <div class="studio-label">Review</div>
+      <div class="studio-heading">Does this sound like your song?</div>
+      <p style="font-size:13px;color:var(--card);margin-bottom:20px;">Read what ChatGPT gave you. Trust your gut.</p>
+
       <div class="pifi">
         <button class="pifi-btn" onclick="pickBlueprint('pick',this)">
           <div class="pifi-icon">✓</div>
@@ -545,8 +627,8 @@ Please create a Song Blueprint that includes:
 
       <div class="pifi-result" id="pifi-fix-panel">
         <div class="field" style="margin-bottom:14px;">
-          <label style="color:var(--off);font-size:12px;letter-spacing:1px;">Paste ChatGPT's Blueprint here</label>
-          <textarea id="fix-blueprint-paste" rows="5" placeholder="Paste the Song Blueprint ChatGPT gave you..." oninput="updateFixRevision()" style="font-size:13px;width:100%;background:var(--navy-2);border:none;border-bottom:2px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Courier New',monospace;padding:10px 0;outline:none;resize:vertical;"></textarea>
+          <label style="color:var(--off);font-size:11px;letter-spacing:1.5px;">Paste ChatGPT's Blueprint here</label>
+          <textarea id="fix-blueprint-paste" rows="5" placeholder="Paste the Song Blueprint ChatGPT gave you..." oninput="updateFixRevision()" style="font-size:13px;width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Courier New',monospace;padding:8px 0;outline:none;resize:vertical;"></textarea>
         </div>
         <div style="margin-bottom:14px;">
           <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">What needs to change?</div>
@@ -559,7 +641,7 @@ Please create a Song Blueprint that includes:
             <button class="fix-chip" onclick="toggleChip(this,'Don\'t like the title or hook')">Don't like the title or hook</button>
             <button class="fix-chip" onclick="toggleChip(this,'Something else')">Something else</button>
           </div>
-          <textarea id="fix-note-input" placeholder="Add any specific details... (optional)" oninput="updateFixRevision()" rows="2" style="font-size:13px;width:100%;background:var(--navy-2);border:none;border-bottom:2px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Inter',sans-serif;padding:10px 0;outline:none;resize:vertical;"></textarea>
+          <textarea id="fix-note-input" placeholder="Add any specific details... (optional)" oninput="updateFixRevision()" rows="2" style="font-size:13px;width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Inter',sans-serif;padding:8px 0;outline:none;resize:vertical;"></textarea>
         </div>
         <div class="prompt-console" style="margin-bottom:0;">
           <div class="prompt-console-header">
@@ -586,7 +668,7 @@ Keep everything else the same. Just update the parts I mentioned.</div>
           </div>
         </div>
         <div style="margin-top:18px;border-top:1px solid var(--bw);padding-top:16px;">
-          <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">After ChatGPT revises it:</div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">After ChatGPT revises it:</div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <button onclick="pickBlueprint('pick',this)" class="green-btn">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -599,24 +681,26 @@ Keep everything else the same. Just update the parts I mentioned.</div>
           </div>
         </div>
       </div>
-    </div><!-- /band-review -->
+    </div>
 
-    <!-- AI ACTION MOMENT: Write Lyrics -->
+    <!-- LYRICS SECTION -->
     <div id="lyrics-from-blueprint" style="display:none;">
-      <div class="band-ai">
-        <div style="background:var(--green-dim);border:1px solid rgba(39,174,96,0.2);border-left:3px solid var(--green);padding:14px 18px;margin-bottom:20px;">
-          <div style="font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);margin-bottom:4px;">Blueprint Ready</div>
-          <p style="font-size:14px;color:var(--card);line-height:1.5;">Now let's turn it into lyrics.</p>
+      <div class="wave-divider"></div>
+      <div style="background:var(--green-dim);border:1px solid rgba(39,174,96,0.2);border-left:3px solid var(--green);padding:14px 18px;margin-bottom:24px;">
+        <div style="font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:4px;">Blueprint Ready</div>
+        <p style="font-size:14px;color:var(--card);line-height:1.5;">Now let's turn it into lyrics.</p>
+      </div>
+      <div class="studio-label">Lyrics Prompt</div>
+      <div class="studio-heading">Paste your Blueprint. Copy the prompt.</div>
+      <div class="field" style="margin-bottom:20px;">
+        <label>Paste your Song Blueprint here</label>
+        <textarea id="blueprint-for-lyrics" rows="5" placeholder="Paste the Song Blueprint ChatGPT gave you..." oninput="updateLyricsPrompt()" style="font-size:13px;width:100%;background:var(--navy-3);border:none;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Courier New',monospace;padding:10px;outline:none;resize:vertical;"></textarea>
+      </div>
+      <div class="prompt-console">
+        <div class="prompt-console-header">
+          <div class="prompt-console-label">ChatGPT Prompt: Write My Lyrics</div>
         </div>
-        <div class="field" style="margin-bottom:16px;">
-          <label>Paste your Song Blueprint here</label>
-          <textarea id="blueprint-for-lyrics" rows="5" placeholder="Paste the Song Blueprint ChatGPT gave you..." oninput="updateLyricsPrompt()" style="font-size:13px;width:100%;background:var(--navy-3);border:none;border-bottom:2px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Courier New',monospace;padding:10px 0;outline:none;resize:vertical;"></textarea>
-        </div>
-        <div class="prompt-console">
-          <div class="prompt-console-header">
-            <div class="prompt-console-label">ChatGPT Prompt: Write My Lyrics</div>
-          </div>
-          <div class="prompt-console-body" id="lyrics-prompt">Here is my Song Blueprint:
+        <div class="prompt-console-body" id="lyrics-prompt">Here is my Song Blueprint:
 
 <span id="lyrics-blueprint-echo" style="color:var(--muted);font-style:italic;">[Paste your Blueprint above]</span>
 
@@ -636,49 +720,52 @@ Rules:
 - Match the emotional tone I described
 - Avoid the things I said I do not want
 - Write in first person unless the Blueprint says otherwise</div>
-          <div class="prompt-actions">
-            <button class="copy-btn" onclick="copyPrompt(this,'lyrics-prompt')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              Copy Prompt
-            </button>
-            <a class="chatgpt-btn" href="https://chat.openai.com" target="_blank">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              Open ChatGPT
-            </a>
-          </div>
-        </div>
-      </div><!-- /band-ai lyrics -->
-
-      <!-- REVIEW MOMENT: Keep or Change Lyrics -->
-      <div class="band band-review">
-        <div class="moment-label">
-          <div class="moment-badge mb-review">Review</div>
-          <span class="moment-title">How do the lyrics feel?</span>
-        </div>
-        <div class="field" style="margin-bottom:16px;">
-          <label>Paste your lyrics here when ChatGPT responds</label>
-          <textarea id="lyrics-from-ai" rows="8" placeholder="Paste the lyrics ChatGPT wrote for you..." oninput="ls('lyrics',this.value);updateChangePrompt()" style="font-size:13px;width:100%;background:var(--navy-3);border:none;border-bottom:2px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Courier New',monospace;padding:10px 0;outline:none;resize:vertical;line-height:1.9;"></textarea>
-        </div>
-        <div class="kp-grid" id="keep-or-change">
-          <button class="kp-btn" onclick="keepOrChange('keep',this)">
-            <div class="kp-label">These Work</div>
-            <div class="kp-sub">I am happy with what ChatGPT wrote.</div>
+        <div class="prompt-actions">
+          <button class="copy-btn" onclick="copyPrompt(this,'lyrics-prompt')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy Prompt
           </button>
-          <button class="kp-btn" onclick="keepOrChange('change',this)">
-            <div class="kp-label">I Want to Change Something</div>
-            <div class="kp-sub">Help me make targeted revisions.</div>
-          </button>
+          <a class="chatgpt-btn" href="https://chat.openai.com" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Open ChatGPT
+          </a>
         </div>
-        <div id="change-panel" style="display:none;margin-top:16px;">
-          <div class="field">
-            <label>What specifically needs to change?</label>
-            <textarea id="change-note" rows="2" placeholder="e.g. The chorus feels too generic. The bridge doesn't match the tone." oninput="updateChangePrompt()" style="font-size:13px;width:100%;background:var(--navy-3);border:none;border-bottom:2px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Inter',sans-serif;padding:10px 0;outline:none;resize:vertical;"></textarea>
+      </div>
+      <div class="studio-label" style="margin-top:28px;">Your Lyrics</div>
+      <div class="studio-heading">Paste what ChatGPT wrote.</div>
+      <div class="lyric-sheet" style="margin-top:16px;">
+        <div class="lyric-sheet-header">
+          <div class="lyric-sheet-title">Lyrics Draft</div>
+          <div class="lyric-sheet-meta">v1.0 — AI GENERATED</div>
+        </div>
+        <div class="lyric-sheet-body">
+          <textarea class="lyric-textarea" id="lyrics-from-ai" placeholder="Paste the lyrics ChatGPT wrote for you..." oninput="ls('lyrics',this.value);updateChangePrompt()"></textarea>
+        </div>
+        <div class="lyric-sheet-footer">
+          <div class="lyric-sheet-footer-note">your words go here</div>
+          <div class="annotation" style="transform:rotate(1.5deg);opacity:.6;">We can work with this. ↑</div>
+        </div>
+      </div>
+      <div class="kp-grid" id="keep-or-change">
+        <button class="kp-btn" onclick="keepOrChange('keep',this)">
+          <div class="kp-label">These Work</div>
+          <div class="kp-sub">I am happy with what ChatGPT wrote.</div>
+        </button>
+        <button class="kp-btn" onclick="keepOrChange('change',this)">
+          <div class="kp-label">I Want to Change Something</div>
+          <div class="kp-sub">Help me make targeted revisions.</div>
+        </button>
+      </div>
+      <div id="change-panel" style="display:none;margin-top:16px;">
+        <div class="field">
+          <label>What specifically needs to change?</label>
+          <textarea id="change-note" rows="2" placeholder="e.g. The chorus feels too generic. The bridge doesn't match the tone." oninput="updateChangePrompt()" style="font-size:13px;width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Inter',sans-serif;padding:8px 0;outline:none;resize:vertical;"></textarea>
+        </div>
+        <div class="prompt-console">
+          <div class="prompt-console-header">
+            <div class="prompt-console-label">ChatGPT Prompt: Targeted Revision</div>
           </div>
-          <div class="prompt-console">
-            <div class="prompt-console-header">
-              <div class="prompt-console-label">ChatGPT Prompt: Targeted Revision</div>
-            </div>
-            <div class="prompt-console-body" id="change-prompt">Here are my current lyrics:
+          <div class="prompt-console-body" id="change-prompt">Here are my current lyrics:
 
 <span id="change-lyrics-echo" style="color:var(--muted);font-style:italic;">[Paste lyrics above]</span>
 
@@ -687,26 +774,25 @@ Here is what I want to change:
 <span id="change-note-echo" style="color:var(--muted);font-style:italic;">[Describe the change above]</span>
 
 Please revise only the parts I mentioned. Keep everything else exactly as it is. Do not rewrite the whole song.</div>
-            <div class="prompt-actions">
-              <button class="copy-btn" onclick="copyPrompt(this,'change-prompt')">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                Copy Revision Prompt
-              </button>
-              <a class="chatgpt-btn" href="https://chat.openai.com" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                Open ChatGPT
-              </a>
-            </div>
-          </div>
-          <div style="margin-top:16px;">
-            <button onclick="lyricsReady()" class="green-btn">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              My Lyrics Are Ready
+          <div class="prompt-actions">
+            <button class="copy-btn" onclick="copyPrompt(this,'change-prompt')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Revision Prompt
             </button>
+            <a class="chatgpt-btn" href="https://chat.openai.com" target="_blank">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              Open ChatGPT
+            </a>
           </div>
         </div>
-      </div><!-- /band-review lyrics -->
-    </div><!-- /lyrics-from-blueprint -->
+        <div style="margin-top:16px;">
+          <button onclick="lyricsReady()" class="green-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            My Lyrics Are Ready
+          </button>
+        </div>
+      </div>
+    </div>
 
   </div><!-- /path-idea -->
 
@@ -716,58 +802,67 @@ Please revise only the parts I mentioned. Keep everything else exactly as it is.
   ══════════════════════════════════════════════ -->
   <div class="path-panel" id="path-write">
 
-    <div class="band-create">
-      <div class="moment-label">
-        <div class="moment-badge mb-create">Write</div>
-        <span class="moment-title">Your lyrics</span>
-      </div>
-      <p style="font-size:14px;color:var(--card);margin-bottom:20px;line-height:1.65;">Start wherever you are — a line, a chorus idea, a feeling, a few rough verses. You can always add more.</p>
+    <div class="studio-section">
+      <div class="studio-label">Writing Studio</div>
+      <div class="studio-heading">Your lyrics. Your voice.</div>
+      <p style="font-size:13px;color:var(--card);margin-bottom:24px;line-height:1.65;">Start wherever you are — a line, a chorus idea, a feeling, a few rough verses. You can always add more.</p>
 
-      <div class="writing-ws">
-        <div class="writing-ws-label">Your Lyrics</div>
-        <textarea class="writing-area" id="own-lyrics" placeholder="Write here..." oninput="ls('lyrics',this.value)"></textarea>
-
-        <div class="coach-strip">
-          <div class="coach-strip-label">Optional help</div>
-          <div class="coach-tools">
-            <button class="coach-btn" onclick="showCoach('line',this)">Help With a Line</button>
-            <button class="coach-btn" onclick="showCoach('rhyme',this)">Find a Rhyme</button>
-            <button class="coach-btn" onclick="showCoach('structure',this)">Help With Structure</button>
-            <button class="coach-btn" onclick="showCoach('hook',this)">Brainstorm a Hook</button>
-            <button class="coach-btn" onclick="showCoach('feedback',this)">Get Feedback</button>
-          </div>
-          <div class="coach-response" id="coach-line">
-            <strong>Help With a Line</strong><br><br>
-            Copy the line you are stuck on, then paste it into ChatGPT with this:<br><br>
-            <em>"Here is a line from a song I am writing: [YOUR LINE]. Help me make it more specific and emotionally honest without changing the meaning."</em>
-          </div>
-          <div class="coach-response" id="coach-rhyme">
-            <strong>Find a Rhyme</strong><br><br>
-            Paste this into ChatGPT:<br><br>
-            <em>"I need a word or phrase that rhymes with [YOUR WORD] and fits this emotional tone: [DESCRIBE THE FEELING]. Give me 5 to 10 options."</em>
-          </div>
-          <div class="coach-response" id="coach-structure">
-            <strong>Help With Structure</strong><br><br>
-            Paste this into ChatGPT:<br><br>
-            <em>"Here are my lyrics so far: [YOUR LYRICS]. Help me organize them into a song structure with [Verse 1], [Chorus], [Verse 2], [Bridge], [Final Chorus]. Keep my exact words wherever they work. Only fill in what is genuinely missing."</em>
-          </div>
-          <div class="coach-response" id="coach-hook">
-            <strong>Brainstorm a Hook</strong><br><br>
-            Paste this into ChatGPT:<br><br>
-            <em>"Here is what my song is about: [DESCRIBE YOUR SONG]. Give me 5 possible hook lines — the one memorable phrase that captures the whole emotional idea. Keep them specific to my story, not generic."</em>
-          </div>
-          <div class="coach-response" id="coach-feedback">
-            <strong>Get Feedback</strong><br><br>
-            Paste this into ChatGPT:<br><br>
-            <em>"Here are my lyrics: [YOUR LYRICS]. Without rewriting anything, tell me: What is working well? What feels incomplete? What might be missing for this to feel like a complete song?"</em>
-          </div>
+      <div class="lyric-sheet">
+        <div class="lyric-sheet-header">
+          <div class="lyric-sheet-title">Lyrics</div>
+          <div class="lyric-sheet-meta">DRAFT — IN PROGRESS</div>
+        </div>
+        <div class="lyric-sheet-body">
+          <textarea class="lyric-textarea" id="own-lyrics" placeholder="Write here..." oninput="ls('lyrics',this.value)"></textarea>
+        </div>
+        <div class="lyric-sheet-footer">
+          <div class="lyric-sheet-footer-note">your words go here</div>
+          <div class="annotation" style="transform:rotate(1.5deg);opacity:.5;">Keep this. ↑</div>
         </div>
       </div>
 
-      <button onclick="lyricsReady()" class="green-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        My Lyrics Are Ready
-      </button>
+      <div class="coach-strip">
+        <div class="coach-strip-label">Optional help</div>
+        <div class="coach-tools">
+          <button class="coach-btn" onclick="showCoach('line',this)">Help With a Line</button>
+          <button class="coach-btn" onclick="showCoach('rhyme',this)">Find a Rhyme</button>
+          <button class="coach-btn" onclick="showCoach('structure',this)">Help With Structure</button>
+          <button class="coach-btn" onclick="showCoach('hook',this)">Brainstorm a Hook</button>
+          <button class="coach-btn" onclick="showCoach('feedback',this)">Get Feedback</button>
+        </div>
+        <div class="coach-response" id="coach-line">
+          <strong>Help With a Line</strong><br><br>
+          Copy the line you are stuck on, then paste it into ChatGPT with this:<br><br>
+          <em>"Here is a line from a song I am writing: [YOUR LINE]. Help me make it more specific and emotionally honest without changing the meaning."</em>
+        </div>
+        <div class="coach-response" id="coach-rhyme">
+          <strong>Find a Rhyme</strong><br><br>
+          Paste this into ChatGPT:<br><br>
+          <em>"I need a word or phrase that rhymes with [YOUR WORD] and fits this emotional tone: [DESCRIBE THE FEELING]. Give me 5 to 10 options."</em>
+        </div>
+        <div class="coach-response" id="coach-structure">
+          <strong>Help With Structure</strong><br><br>
+          Paste this into ChatGPT:<br><br>
+          <em>"Here are my lyrics so far: [YOUR LYRICS]. Help me organize them into a song structure with [Verse 1], [Chorus], [Verse 2], [Bridge], [Final Chorus]. Keep my exact words wherever they work. Only fill in what is genuinely missing."</em>
+        </div>
+        <div class="coach-response" id="coach-hook">
+          <strong>Brainstorm a Hook</strong><br><br>
+          Paste this into ChatGPT:<br><br>
+          <em>"Here is what my song is about: [DESCRIBE YOUR SONG]. Give me 5 possible hook lines — the one memorable phrase that captures the whole emotional idea. Keep them specific to my story, not generic."</em>
+        </div>
+        <div class="coach-response" id="coach-feedback">
+          <strong>Get Feedback</strong><br><br>
+          Paste this into ChatGPT:<br><br>
+          <em>"Here are my lyrics: [YOUR LYRICS]. Without rewriting anything, tell me: What is working well? What feels incomplete? What might be missing for this to feel like a complete song?"</em>
+        </div>
+      </div>
+
+      <div style="margin-top:24px;">
+        <button onclick="lyricsReady()" class="green-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          My Lyrics Are Ready
+        </button>
+      </div>
     </div>
 
   </div><!-- /path-write -->
@@ -778,16 +873,22 @@ Please revise only the parts I mentioned. Keep everything else exactly as it is.
   ══════════════════════════════════════════════ -->
   <div class="path-panel" id="path-ready">
 
-    <div class="band-create">
-      <div class="moment-label">
-        <div class="moment-badge mb-create">Bring In</div>
-        <span class="moment-title">Your lyrics</span>
-      </div>
+    <div class="studio-section">
+      <div class="studio-label">Bring In Your Lyrics</div>
+      <div class="studio-heading">Paste what you've got.</div>
 
-      <div class="lyrics-entry">
-        <div class="lyrics-entry-label">Your Lyrics</div>
-        <div class="lyrics-entry-sub">Paste the lyrics you want to use for your song.</div>
-        <textarea class="writing-area" id="ready-lyrics" placeholder="Paste your lyrics here..." oninput="ls('lyrics',this.value);updatePolishPrompts()"></textarea>
+      <div class="lyric-sheet" style="margin-bottom:20px;">
+        <div class="lyric-sheet-header">
+          <div class="lyric-sheet-title">Your Lyrics</div>
+          <div class="lyric-sheet-meta">FINAL DRAFT</div>
+        </div>
+        <div class="lyric-sheet-body">
+          <textarea class="lyric-textarea" id="ready-lyrics" placeholder="Paste your lyrics here..." oninput="ls('lyrics',this.value);updatePolishPrompts()"></textarea>
+        </div>
+        <div class="lyric-sheet-footer">
+          <div class="lyric-sheet-footer-note">your words go here</div>
+          <div class="annotation" style="transform:rotate(1.5deg);opacity:.5;">Okay, that's actually good.</div>
+        </div>
       </div>
 
       <div style="margin-bottom:20px;">
@@ -836,7 +937,7 @@ Do NOT rewrite anything yet. Just give me the feedback so I can decide what I wa
           <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Read the feedback. Decide what you want to change — if anything. You are in control.</p>
           <div class="field">
             <label>What do you want to change? (optional)</label>
-            <textarea id="polish-change" rows="2" placeholder="e.g. The second verse feels too generic. I want to add more of the specific memory I mentioned." oninput="updatePolishChangePrompt()" style="font-size:13px;width:100%;background:var(--navy-3);border:none;border-bottom:2px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Inter',sans-serif;padding:10px 0;outline:none;resize:vertical;"></textarea>
+            <textarea id="polish-change" rows="2" placeholder="e.g. The second verse feels too generic. I want to add more of the specific memory I mentioned." oninput="updatePolishChangePrompt()" style="font-size:13px;width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Inter',sans-serif;padding:8px 0;outline:none;resize:vertical;"></textarea>
           </div>
           <div id="polish-change-prompt-wrap" style="display:none;">
             <div class="prompt-console">
@@ -877,9 +978,9 @@ Please make only these changes. Keep everything else exactly as I wrote it. Do n
   </div><!-- /path-ready -->
 
 
-  <!-- ══ COMPLETION MOMENT ══════════════════════════ -->
+  <!-- ══ COMPLETION ══════════════════════════════ -->
   <div class="convergence" id="convergence">
-    <div style="font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:12px;">Session 1 Complete</div>
+    <div class="convergence-eyebrow">Session 01 — Complete</div>
     <div class="convergence-title">Your lyrics are ready.<br>Now let's decide how your song should sound.</div>
     <div class="convergence-sub">Take your lyrics into the Production Studio and generate the actual song with music.</div>
     <div style="border-top:1px solid rgba(39,174,96,0.2);padding-top:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
@@ -887,7 +988,7 @@ Please make only these changes. Keep everything else exactly as I wrote it. Do n
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         Enter the Production Studio
       </button>
-      <div style="font-size:12px;color:var(--muted);">Session 2 of 5</div>
+      <div style="font-size:11px;color:var(--muted);font-family:'Courier New',monospace;">→ Session 02</div>
     </div>
   </div>
 
@@ -898,8 +999,24 @@ Please make only these changes. Keep everything else exactly as I wrote it. Do n
 var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.05,rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);var r=el.getBoundingClientRect();if(r.top<window.innerHeight)el.classList.add('visible');});
 
+// ── WAVEFORM GENERATOR ──
+function buildWave(id){
+  var el=document.getElementById(id);if(!el)return;
+  var heights=[3,5,8,12,18,24,16,10,6,4,8,14,22,28,20,14,8,5,10,16,24,32,22,14,8,5,3,6,10,16,24,20,14,8,5,3,6,12,18,26,20,12,6,4,8,14,22,16,10,5,3,6,10,18,26,20,12,6,4,8];
+  heights.forEach(function(h){var b=document.createElement('div');b.className='wave-bar';b.style.height=h+'px';el.appendChild(b);});
+}
+['wave1','wave2','wave3'].forEach(buildWave);
+
 // ── LOCALSTORAGE ──
 function ls(k,v){try{if(v===undefined)return localStorage.getItem('ais_'+k);localStorage.setItem('ais_'+k,v);}catch(e){return null;}}
+
+// ── CARD LABELS FOR COLLAPSED STATE ──
+var cardLabels={idea:'I Have an Idea',write:'I Want to Write the Lyrics',ready:'My Lyrics Are Ready'};
+var cardIcons={
+  idea:'<path d="M9 21h6"/><path d="M12 3a6 6 0 0 1 6 6c0 2.4-1.4 4.5-3.5 5.6V17H9.5v-2.4C7.4 13.5 6 11.4 6 9a6 6 0 0 1 6-6z"/>',
+  write:'<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>',
+  ready:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/>'
+};
 
 // ── STARTING POINT SELECTOR ──
 var currentPath=null;
@@ -912,6 +1029,15 @@ function selectStart(path,card){
   card.classList.add('selected');
   currentPath=path;
   ls('start_path',path);
+  // Collapse the card grid
+  var exp=document.getElementById('sp-expanded');
+  var col=document.getElementById('sp-collapsed');
+  if(exp)exp.style.display='none';
+  if(col){
+    col.style.display='flex';
+    var lbl=document.getElementById('collapsed-label');if(lbl)lbl.textContent=cardLabels[path]||path;
+    var ico=document.getElementById('collapsed-icon');if(ico)ico.innerHTML=cardIcons[path]||'';
+  }
   var panel=document.getElementById('path-'+path);
   if(panel){
     panel.style.display='block';
@@ -924,6 +1050,18 @@ function selectStart(path,card){
     });
     restorePath(path);
   }
+}
+
+function expandSelector(){
+  var exp=document.getElementById('sp-expanded');
+  var col=document.getElementById('sp-collapsed');
+  document.querySelectorAll('.path-panel').forEach(function(p){p.classList.remove('show','visible');setTimeout(function(){if(!p.classList.contains('show'))p.style.display='none';},350);});
+  document.querySelectorAll('.sp-card').forEach(function(c){c.classList.remove('selected');});
+  if(exp)exp.style.display='block';
+  if(col)col.style.display='none';
+  currentPath=null;
+  ls('start_path','');
+  if(exp)exp.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
 function restorePath(path){
@@ -943,7 +1081,13 @@ function restorePath(path){
   if(ls('lyrics_ready')==='1'){var conv=document.getElementById('convergence');if(conv)conv.classList.add('show');}
 }
 
-(function(){var saved=ls('start_path');if(saved){var card=document.getElementById('card-'+saved);if(card)selectStart(saved,card);}})();
+(function(){
+  var saved=ls('start_path');
+  if(saved){
+    var card=document.getElementById('card-'+saved);
+    if(card)selectStart(saved,card);
+  }
+})();
 
 // ── STORY BANK → BLUEPRINT ──
 var selectedGenre='',selectedMood='';
@@ -960,7 +1104,7 @@ function updateBlueprint(){
   var mph=document.querySelector('.ph[data-field="mood"]');
   if(mph){if(selectedMood){mph.textContent=selectedMood;mph.classList.add('filled');filled++;}else{mph.textContent='[choose above]';mph.classList.remove('filled');}}
   var status=document.getElementById('fill-status');
-  if(status){if(filled===total){status.textContent='ready to copy';status.style.color='var(--green)';}else{status.textContent=filled+' of '+total+' filled';status.style.color='var(--muted)';}}
+  if(status){if(filled===total){status.textContent='ready to copy';status.style.color='var(--green)';}else{status.textContent=filled+' of '+total+' filled';}}
 }
 function selectTag(btn,group){
   btn.closest('.tag-grid').querySelectorAll('.tag-btn').forEach(function(b){b.classList.remove('selected');});
@@ -1010,7 +1154,7 @@ function updateChangePrompt(){
   if(noteEl&&noteEcho){var v=noteEl.value.trim();if(v){noteEcho.textContent=v;noteEcho.style.color='var(--off)';noteEcho.style.fontStyle='normal';}else{noteEcho.textContent='[Describe the change above]';noteEcho.style.color='var(--muted)';noteEcho.style.fontStyle='italic';}}
 }
 
-// ── COACHING TOOLS (Path B) ──
+// ── COACHING TOOLS ──
 function showCoach(type,btn){
   var wasActive=btn.classList.contains('active');
   document.querySelectorAll('.coach-btn').forEach(function(b){b.classList.remove('active');});
