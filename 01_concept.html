@@ -435,26 +435,32 @@ Please create a Song Blueprint that includes:
     <p>Your Song Blueprint is locked in. <strong>Head to Session 2.</strong></p>
   </div>
   <div class="pifi-result" id="pifi-fix">
-    <p style="margin-bottom:12px;">Tell ChatGPT exactly what to change. Copy this revision prompt:</p>
+    <p style="margin-bottom:12px;">Tell ChatGPT exactly what to change. Your Blueprint is already included — just describe what needs to be different.</p>
+    <div class="field" style="margin-bottom:12px;">
+      <label>What needs to change?</label>
+      <textarea id="fix-note-input" placeholder="e.g. The tone feels too sad. I want it to feel proud and celebratory instead." oninput="updateFixRevision()"></textarea>
+    </div>
     <div class="pb" style="margin-bottom:0;">
       <div class="pb-label">ChatGPT Prompt: Revision Request</div>
       <div class="pb-text" id="fix-prompt">Here is the Song Blueprint you just created for me:
 
-[PASTE YOUR BLUEPRINT HERE]
+<span id="fix-blueprint-echo" style="color:var(--gold-lt);font-style:italic;">[Your Blueprint will appear here as you fill in the Story Bank above]</span>
 
 I want you to revise it. Here is what needs to change:
 
-<span class="ph" data-field="fix-note">[describe what felt off]</span>
+<span class="ph" data-field="fix-note" id="fix-note-display">[describe what needs to change]</span>
 
 Keep everything else the same. Just update the parts I mentioned.</div>
-      <button class="copy-btn" onclick="copyLivePrompt(this, 'fix-prompt')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        Copy Revision Prompt
-      </button>
-    </div>
-    <div class="field" style="margin-top:12px;">
-      <label>What needs to change?</label>
-      <textarea id="fix-note-input" placeholder="e.g. The tone feels too sad. I want it to feel proud and celebratory instead." oninput="updateFixNote(this)"></textarea>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
+        <button class="copy-btn" onclick="copyLivePrompt(this, 'fix-prompt')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Revision Prompt
+        </button>
+        <a href="https://chat.openai.com" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;text-decoration:none;box-shadow:var(--sh);">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Open ChatGPT
+        </a>
+      </div>
     </div>
   </div>
 
@@ -621,15 +627,48 @@ function pickOrFix(choice, btn) {
   document.querySelectorAll('.pifi-result').forEach(function(r) { r.classList.remove('show'); });
   btn.classList.add(choice === 'pick' ? 'sel-pick' : 'sel-fix');
   document.getElementById('pifi-' + choice).classList.add('show');
+  if (choice === 'fix') { updateBlueprintEcho(); }
 }
 
-// ── FIX NOTE AUTO-FILL ──
-function updateFixNote(textarea) {
-  var ph = document.querySelector('.ph[data-field="fix-note"]');
-  if (!ph) return;
-  var val = textarea.value.trim();
-  if (val) { ph.textContent = val; ph.classList.add('filled'); }
-  else { ph.textContent = '[describe what felt off]'; ph.classList.remove('filled'); }
+// ── FIX REVISION AUTO-FILL (pulls live Blueprint + note) ──
+function updateFixRevision() {
+  var noteInput = document.getElementById('fix-note-input');
+  var noteDisplay = document.getElementById('fix-note-display');
+  var blueprintEcho = document.getElementById('fix-blueprint-echo');
+
+  // Pull the current live Blueprint text
+  var livePrompt = document.getElementById('live-prompt');
+  if (livePrompt && blueprintEcho) {
+    var bpText = livePrompt.innerText.trim();
+    // Remove the header line "Your Song Blueprint" if present
+    bpText = bpText.replace(/^Your Song Blueprint[^\n]*\n?/i, '').trim();
+    if (bpText && bpText.length > 20) {
+      blueprintEcho.textContent = bpText;
+      blueprintEcho.style.color = 'var(--off)';
+      blueprintEcho.style.fontStyle = 'normal';
+    }
+  }
+
+  // Update the note placeholder
+  if (noteDisplay && noteInput) {
+    var val = noteInput.value.trim();
+    if (val) { noteDisplay.textContent = val; noteDisplay.classList.add('filled'); }
+    else { noteDisplay.textContent = '[describe what needs to change]'; noteDisplay.classList.remove('filled'); }
+  }
+}
+
+// Also update Blueprint echo whenever the main prompt updates
+function updateBlueprintEcho() {
+  var livePrompt = document.getElementById('live-prompt');
+  var blueprintEcho = document.getElementById('fix-blueprint-echo');
+  if (!livePrompt || !blueprintEcho) return;
+  var bpText = livePrompt.innerText.trim();
+  bpText = bpText.replace(/^Your Song Blueprint[^\n]*\n?/i, '').trim();
+  if (bpText && bpText.length > 20) {
+    blueprintEcho.textContent = bpText;
+    blueprintEcho.style.color = 'var(--off)';
+    blueprintEcho.style.fontStyle = 'normal';
+  }
 }
 
 // ── CHECKLIST ──
