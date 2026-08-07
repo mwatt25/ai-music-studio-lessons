@@ -226,9 +226,8 @@ body { background: var(--navy); color: var(--off); font-family: 'Inter', sans-se
     <div class="hero-title">The Concept</div>
     <div class="hero-tagline">What am I making?</div>
     <div class="meta-row">
-      <div class="meta-chip">7 to 10 Minutes</div>
       <div class="meta-chip">ChatGPT</div>
-      <div class="meta-chip">Output: Song Blueprint</div>
+      <div class="meta-chip">Your Output: Song Blueprint</div>
     </div>
   </div>
 </div>
@@ -474,26 +473,29 @@ Keep everything else the same. Just update the parts I mentioned.</div>
   </ul>
 
   <div class="next-step reveal">
-    <p>Your Song Blueprint is done. <strong>Every prompt you run from here will reference what you just built.</strong></p>
+    <p>Your Song Blueprint is done. <strong>You will use it as the creative foundation for everything you build next.</strong></p>
   </div>
 
-  <!-- WHAT HAPPENS NEXT -->
-  <div style="margin-top:28px;background:var(--navy-2);border:1px solid var(--bw);box-shadow:var(--sh);overflow:hidden;" class="reveal">
-    <div style="background:var(--navy-3);padding:10px 18px;border-bottom:1px solid var(--bw);">
-      <span style="font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);">The Full Journey</span>
-    </div>
-    <div style="padding:0;">
-      <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(--bw);background:rgba(245,166,35,0.06);">
-        <span style="font-size:11px;font-weight:900;color:var(--gold);min-width:28px;padding-top:1px;">01</span>
-        <div><div style="font-size:12px;font-weight:800;color:var(--gold);margin-bottom:2px;">THE CONCEPT — Done</div><div style="font-size:13px;color:var(--card);">Your Song Blueprint tells AI exactly what to make.</div></div>
+  <!-- COMPLETION + NEXT STEP -->
+  <div style="margin-top:28px;background:var(--navy-2);border:1px solid var(--bw);border-top:3px solid var(--green);padding:24px;box-shadow:var(--sh);" class="reveal">
+    <div style="font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);margin-bottom:10px;">✓ Your Song Blueprint Is Ready</div>
+    <p style="font-size:14px;color:var(--card);line-height:1.65;margin-bottom:20px;">You just turned an idea into a creative direction AI can actually work with.</p>
+    <div style="border-top:1px solid var(--bw);padding-top:18px;">
+      <div style="font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Next Up: The Writing Room</div>
+      <p style="font-size:14px;color:var(--card);line-height:1.65;margin-bottom:16px;">Take your Blueprint into ChatGPT and turn it into lyrics that actually sound like your song.</p>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:12px 22px;box-shadow:var(--sh);cursor:pointer;" onclick="goNext()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Enter the Writing Room
       </div>
+    </div>
+  </div>
       <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(--bw);">
         <span style="font-size:11px;font-weight:900;color:var(--white);min-width:28px;padding-top:1px;">02</span>
         <div><div style="font-size:12px;font-weight:800;color:var(--white);margin-bottom:2px;">THE WRITING ROOM — Next</div><div style="font-size:13px;color:var(--card);">Take your Blueprint into ChatGPT and generate the actual lyrics.</div></div>
       </div>
       <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(--bw);">
         <span style="font-size:11px;font-weight:900;color:var(--muted);min-width:28px;padding-top:1px;">03</span>
-        <div><div style="font-size:12px;font-weight:800;color:var(--muted);margin-bottom:2px;">THE RECORDING STUDIO</div><div style="font-size:13px;color:var(--muted);">Put your lyrics into Suno and generate the real song with music.</div></div>
+        <div><div style="font-size:12px;font-weight:800;color:var(--muted);margin-bottom:2px;">THE PRODUCTION STUDIO</div><div style="font-size:13px;color:var(--muted);">Put your lyrics into Suno and generate the real song with music.</div></div>
       </div>
       <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(--bw);">
         <span style="font-size:11px;font-weight:900;color:var(--muted);min-width:28px;padding-top:1px;">04</span>
