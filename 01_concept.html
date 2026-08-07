@@ -377,21 +377,21 @@ body { background: var(--navy); color: var(--off); font-family: 'Inter', sans-se
     <span class="yt-desc">Copy Your Blueprint Prompt</span>
   </div>
 
-  <p style="font-size:13px;color:var(--card);margin-bottom:14px;">Fill in your Story Bank answers, then copy this prompt and paste it into ChatGPT.</p>
+  <p style="font-size:13px;color:var(--card);margin-bottom:14px;">Your answers auto-fill into the prompt below as you type. When you are done, copy and paste into ChatGPT.</p>
 
-  <div class="pb reveal">
-    <div class="pb-label">ChatGPT Prompt: Song Blueprint</div>
-    <div class="pb-text">I am creating a song using AI tools and I need your help building a Song Blueprint before I write any lyrics.
+  <div class="pb reveal" id="blueprint-pb">
+    <div class="pb-label">ChatGPT Prompt: Song Blueprint — <span id="fill-status" style="color:var(--muted);font-weight:400;letter-spacing:0;">filling in as you type...</span></div>
+    <div class="pb-text" id="live-prompt">I am creating a song using AI tools and I need your help building a Song Blueprint before I write any lyrics.
 
 Here is my raw material:
-- Who or what the song is about: [YOUR ANSWER]
-- Why I am making it: [YOUR ANSWER]
-- 2 to 3 details only I would know: [YOUR ANSWER]
-- A memory, phrase, or moment that belongs in it: [YOUR ANSWER]
-- How it should feel: [YOUR ANSWER]
-- What to avoid: [YOUR ANSWER]
-- Genre (if I know): [YOUR ANSWER]
-- Mood: [YOUR ANSWER]
+- Who or what the song is about: <span class="ph" data-field="about">[fill in above]</span>
+- Why I am making it: <span class="ph" data-field="why">[fill in above]</span>
+- 2 to 3 details only I would know: <span class="ph" data-field="details">[fill in above]</span>
+- A memory, phrase, or moment that belongs in it: <span class="ph" data-field="memory">[fill in above]</span>
+- How it should feel: <span class="ph" data-field="feeling">[fill in above]</span>
+- What to avoid: <span class="ph" data-field="avoid">[fill in above]</span>
+- Genre: <span class="ph" data-field="genre">[choose above]</span>
+- Mood: <span class="ph" data-field="mood">[choose above]</span>
 
 Please create a Song Blueprint that includes:
 1. A working title
@@ -400,7 +400,7 @@ Please create a Song Blueprint that includes:
 4. A brief description of what each section should accomplish
 5. Three possible hook and title options
 6. Key words and phrases to use throughout</div>
-    <button class="copy-btn" onclick="copyPrompt(this)">
+    <button class="copy-btn" id="copy-blueprint" onclick="copyLivePrompt(this)">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
       Copy Prompt
     </button>
@@ -436,7 +436,27 @@ Please create a Song Blueprint that includes:
     <p>Your Song Blueprint is locked in. <strong>Head to Session 2.</strong></p>
   </div>
   <div class="pifi-result" id="pifi-fix">
-    <p>Tell ChatGPT exactly what to change. Be specific — "the tone feels too sad, I want it to feel proud instead" works better than "make it better." Revise, then come back and Pick It.</p>
+    <p style="margin-bottom:12px;">Tell ChatGPT exactly what to change. Copy this revision prompt:</p>
+    <div class="pb" style="margin-bottom:0;">
+      <div class="pb-label">ChatGPT Prompt: Revision Request</div>
+      <div class="pb-text" id="fix-prompt">Here is the Song Blueprint you just created for me:
+
+[PASTE YOUR BLUEPRINT HERE]
+
+I want you to revise it. Here is what needs to change:
+
+<span class="ph" data-field="fix-note">[describe what felt off]</span>
+
+Keep everything else the same. Just update the parts I mentioned.</div>
+      <button class="copy-btn" onclick="copyLivePrompt(this, 'fix-prompt')">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Revision Prompt
+      </button>
+    </div>
+    <div class="field" style="margin-top:12px;">
+      <label>What needs to change?</label>
+      <textarea id="fix-note-input" placeholder="e.g. The tone feels too sad. I want it to feel proud and celebratory instead." oninput="updateFixNote(this)"></textarea>
+    </div>
   </div>
 
   <div class="div"></div>
@@ -459,8 +479,12 @@ Please create a Song Blueprint that includes:
 
 </div>
 
+<style>
+.ph { color: var(--muted); font-style: italic; }
+.ph.filled { color: var(--gold-lt); font-style: normal; font-weight: 500; }
+</style>
 <script>
-// Reveal on scroll
+// ── REVEAL ON SCROLL ──
 var obs = new IntersectionObserver(function(e) {
   e.forEach(function(x) { if (x.isIntersecting) x.target.classList.add('visible'); });
 }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
@@ -470,27 +494,97 @@ document.querySelectorAll('.reveal').forEach(function(el) {
   if (r.top < window.innerHeight) el.classList.add('visible');
 });
 
-// Tag selector
+// ── FIELD MAP: input id → placeholder span data-field ──
+var fieldMap = [
+  { inputSel: '.ic .field:nth-child(2) input',    field: 'about' },
+  { inputSel: '.ic .field:nth-child(3) input',    field: 'why' },
+  { inputSel: '.ic .field:nth-child(4) textarea', field: 'details' },
+  { inputSel: '.ic .field:nth-child(5) textarea', field: 'memory' },
+  { inputSel: '.ic .field:nth-child(6) input',    field: 'feeling' },
+  { inputSel: '.ic .field:nth-child(7) input',    field: 'avoid' }
+];
+
+var selectedGenre = '';
+var selectedMood = '';
+
+function updatePrompt() {
+  var filled = 0;
+  var total = 8;
+  fieldMap.forEach(function(m) {
+    var el = document.querySelector(m.inputSel);
+    var ph = document.querySelector('.ph[data-field="' + m.field + '"]');
+    if (!el || !ph) return;
+    var val = el.value.trim();
+    if (val) {
+      ph.textContent = val;
+      ph.classList.add('filled');
+      filled++;
+    } else {
+      ph.textContent = '[fill in above]';
+      ph.classList.remove('filled');
+    }
+  });
+  // Genre
+  var gph = document.querySelector('.ph[data-field="genre"]');
+  if (gph) {
+    if (selectedGenre) { gph.textContent = selectedGenre; gph.classList.add('filled'); filled++; }
+    else { gph.textContent = '[choose above]'; gph.classList.remove('filled'); }
+  }
+  // Mood
+  var mph = document.querySelector('.ph[data-field="mood"]');
+  if (mph) {
+    if (selectedMood) { mph.textContent = selectedMood; mph.classList.add('filled'); filled++; }
+    else { mph.textContent = '[choose above]'; mph.classList.remove('filled'); }
+  }
+  // Status
+  var status = document.getElementById('fill-status');
+  if (status) {
+    if (filled === total) {
+      status.textContent = 'ready to copy';
+      status.style.color = 'var(--green)';
+    } else {
+      status.textContent = filled + ' of ' + total + ' filled';
+      status.style.color = 'var(--muted)';
+    }
+  }
+}
+
+// Wire up all text inputs and textareas in the Story Bank
+document.addEventListener('DOMContentLoaded', function() {
+  fieldMap.forEach(function(m) {
+    var el = document.querySelector(m.inputSel);
+    if (el) el.addEventListener('input', updatePrompt);
+  });
+});
+// Also wire immediately in case DOM is already ready
+fieldMap.forEach(function(m) {
+  var el = document.querySelector(m.inputSel);
+  if (el) el.addEventListener('input', updatePrompt);
+});
+
+// ── TAG SELECTOR ──
 function selectTag(btn, group) {
   btn.closest('.tag-grid').querySelectorAll('.tag-btn').forEach(function(b) { b.classList.remove('selected'); });
   btn.classList.add('selected');
+  if (group === 'genre') selectedGenre = btn.textContent.trim();
+  if (group === 'mood') selectedMood = btn.textContent.trim();
+  updatePrompt();
 }
 
-// Example toggle
+// ── EXAMPLE TOGGLE ──
 function toggleExample(btn) {
   var box = btn.nextElementSibling;
   box.classList.toggle('open');
   btn.querySelector('span:last-child').textContent = box.classList.contains('open') ? '▴' : '▾';
 }
 
-// Cheat sheet toggle
+// ── CHEAT SHEET TOGGLE ──
 function toggleCheat(btn) {
   btn.classList.toggle('open');
-  var body = btn.nextElementSibling;
-  body.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
 }
 
-// Pick It or Fix It
+// ── PICK IT OR FIX IT ──
 function pickOrFix(choice, btn) {
   document.querySelectorAll('.pifi-btn').forEach(function(b) { b.classList.remove('sel-pick','sel-fix'); });
   document.querySelectorAll('.pifi-result').forEach(function(r) { r.classList.remove('show'); });
@@ -498,19 +592,35 @@ function pickOrFix(choice, btn) {
   document.getElementById('pifi-' + choice).classList.add('show');
 }
 
-// Checklist
+// ── FIX NOTE AUTO-FILL ──
+function updateFixNote(textarea) {
+  var ph = document.querySelector('.ph[data-field="fix-note"]');
+  if (!ph) return;
+  var val = textarea.value.trim();
+  if (val) { ph.textContent = val; ph.classList.add('filled'); }
+  else { ph.textContent = '[describe what felt off]'; ph.classList.remove('filled'); }
+}
+
+// ── CHECKLIST ──
 function toggleCheck(li) { li.classList.toggle('checked'); }
 
-// Copy prompt
-function copyPrompt(btn) {
-  var text = btn.closest('.pb').querySelector('.pb-text').innerText;
+// ── COPY LIVE PROMPT ──
+function copyLivePrompt(btn, promptId) {
+  var id = promptId || 'live-prompt';
+  var el = document.getElementById(id);
+  var text = el ? el.innerText : '';
   navigator.clipboard.writeText(text).then(function() {
+    var orig = btn.innerHTML;
     btn.classList.add('copied');
     btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
-    setTimeout(function() {
-      btn.classList.remove('copied');
-      btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt';
-    }, 2000);
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+  }).catch(function() {
+    // Fallback: select text
+    var range = document.createRange();
+    range.selectNodeContents(el);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
   });
 }
 </script>
