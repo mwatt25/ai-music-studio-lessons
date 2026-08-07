@@ -3,1128 +3,500 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Visual Studio — The AI Music Studio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Session 4: The Visual Studio — AI Music Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ais_shared.css">
+<script src="ais_project.js"></script>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --gold: #F5A623; --gold-light: #FFB84D;
-  --navy: #080E1A; --navy-2: #0D1525; --navy-3: #111D30; --navy-4: #16243A;
-  --white: #FFFFFF; --off-white: #D8E0EE;
-  --body: #C4D0E2; --card: #B8C6D8;
-  --muted: #7A8EA8;
-  --bw: rgba(255,255,255,0.1); --bg: rgba(245,166,35,0.35);
-  --sh: 6px 6px 0 rgba(0,0,0,0.55);
+:root{
+  --navy:#0D1117;--navy-2:#131A22;--navy-3:#1A2332;--navy-4:#080C12;
+  --gold:#F5A623;--gold-lt:#FBCF7A;--gold-dim:rgba(245,166,35,0.1);
+  --blue:#4A9EBF;--blue-dim:rgba(74,158,191,0.08);
+  --green:#27AE60;--green-dim:rgba(39,174,96,0.08);
+  --white:#FFFFFF;--off:#E8EDF2;--card:#C4CDD6;--muted:#7A8A9A;
+  --bw:rgba(255,255,255,0.07);--bw2:rgba(255,255,255,0.12);
+  --sh:4px 4px 0 rgba(0,0,0,0.6);--sh-sm:2px 2px 0 rgba(0,0,0,0.5);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;}
+.brand-bar{display:flex;align-items:center;gap:10px;padding:10px 20px;background:var(--navy-2);border-bottom:1px solid var(--bw);}
+.brand-logo{height:24px;opacity:.9;}
+.brand-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+.hero{position:relative;width:100%;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+.hero-bg{position:absolute;inset:0;background-image:url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/GxOhZnRhIOoScchN.jpg');background-size:cover;background-position:center 20%;filter:brightness(0.18) saturate(0.4);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(13,17,23,0.97) 100%);}
+.hero-content{position:relative;z-index:2;padding:40px 48px 36px;}
+.hero-session{display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;margin-bottom:12px;box-shadow:var(--sh);}
+.hero-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--white);line-height:1.05;margin-bottom:8px;}
+.hero-tagline{font-size:1rem;font-style:italic;color:var(--gold);margin-bottom:16px;}
+.meta-row{display:flex;flex-wrap:wrap;}
+.meta-chip{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:5px 14px;border-right:1px solid var(--bw);}
+.meta-chip:first-child{padding-left:0;}
+.ticker{background:var(--gold);padding:8px 0;overflow:hidden;}
+.ticker-inner{display:flex;gap:40px;white-space:nowrap;animation:ts 20s linear infinite;}
+.ticker-text{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--navy);}
+@keyframes ts{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.step-tracker{display:flex;align-items:stretch;overflow:hidden;border-bottom:1px solid var(--bw);}
+.st-item{flex:1;text-align:center;padding:10px 4px;background:var(--navy-2);border-right:1px solid var(--bw);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);line-height:1.4;}
+.st-item:last-child{border-right:none;}
+.st-item.done{color:var(--green);border-top:3px solid var(--green);}
+.st-item.active{background:var(--navy-3);color:var(--gold);border-top:3px solid var(--gold);}
+.st-num{font-size:1rem;font-weight:900;display:block;margin-bottom:2px;}
+.st-item.active .st-num{color:var(--gold);}
+.st-item.done .st-num{color:var(--green);}
+.body-wrap{max-width:900px;margin:0 auto;padding:0 48px 80px;}
+.session-opening{position:relative;padding:52px 0 0;overflow:visible;}
+.session-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.session-eyebrow::after{content:'';flex:1;height:1px;background:var(--bw);}
+.session-big-q{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:8px;letter-spacing:-.02em;}
+.session-sub{font-size:15px;color:var(--card);margin-bottom:32px;line-height:1.6;}
+.session-bg-num{position:absolute;bottom:-40px;left:-36px;font-size:clamp(140px,20vw,220px);font-weight:900;color:rgba(245,166,35,0.03);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.04em;z-index:0;}
+.studio-label{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.studio-label::before{content:'';width:20px;height:2px;background:var(--gold);}
+.studio-heading{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:6px;letter-spacing:-.02em;}
+.wave-divider{display:flex;align-items:center;gap:3px;padding:32px 0;opacity:.2;}
+.wave-bar{width:2px;background:var(--gold);border-radius:1px;flex-shrink:0;}
+.direction-display{background:rgba(245,166,35,0.04);border:1px solid rgba(245,166,35,0.15);border-left:3px solid rgba(245,166,35,0.4);padding:14px 18px;margin-bottom:28px;}
+.dd-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(245,166,35,0.6);margin-bottom:8px;}
+.dd-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.dd-chip{font-size:12px;color:var(--card);background:var(--navy-3);padding:4px 12px;border:1px solid var(--bw);}
+.dd-chip span{color:var(--gold-lt);font-weight:700;}
+.vd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--bw2);margin-bottom:24px;}
+.vd-card{background:var(--navy-2);border-right:1px solid var(--bw2);padding:20px 18px;cursor:pointer;transition:background .15s;user-select:none;}
+.vd-card:last-child{border-right:none;}
+.vd-card:hover{background:var(--navy-3);}
+.vd-card.selected{background:rgba(245,166,35,0.07);border-top:3px solid var(--gold);}
+.vd-icon{margin-bottom:10px;color:var(--gold);}
+.vd-title{font-size:14px;font-weight:800;color:var(--white);margin-bottom:4px;line-height:1.2;}
+.vd-card.selected .vd-title{color:var(--gold);}
+.vd-sub{font-size:11px;color:var(--muted);line-height:1.5;}
+.shot-list{border:1px solid var(--bw2);border-top:2px solid var(--gold);background:var(--navy-4);margin-bottom:24px;}
+.shot-header{padding:10px 16px;border-bottom:1px solid var(--bw);background:var(--gold-dim);font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+.shot-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-bottom:1px solid var(--bw);}
+.shot-item:last-child{border-bottom:none;}
+.shot-num{font-size:1.1rem;font-weight:900;color:rgba(245,166,35,0.3);flex-shrink:0;width:24px;line-height:1.4;font-family:'Courier New',monospace;}
+.shot-input{flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Inter',sans-serif;font-size:13px;padding:6px 0;outline:none;transition:border-color .2s;line-height:1.5;}
+.shot-input:focus{border-bottom-color:var(--gold);}
+.shot-input::placeholder{color:rgba(196,205,214,0.35);font-style:italic;}
+.prompt-console{background:var(--navy-4);border:1px solid var(--bw2);border-top:2px solid var(--blue);margin-bottom:20px;overflow:hidden;}
+.prompt-console-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--bw);background:var(--blue-dim);}
+.prompt-console-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;}
+.prompt-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:.3;}50%{opacity:1;}}
+.prompt-console-body{font-family:'Courier New',monospace;font-size:13px;color:var(--off);line-height:1.9;padding:14px 16px;white-space:pre-wrap;}
+.prompt-actions{display:flex;align-items:center;gap:10px;padding:12px 16px;border-top:1px solid var(--bw);background:rgba(74,158,191,0.04);flex-wrap:wrap;}
+.link-wrap{margin-bottom:24px;}
+.link-wrap label{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--card);margin-bottom:8px;}
+.link-input{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.12);color:var(--white);font-family:'Inter',sans-serif;font-size:14px;padding:9px 0;outline:none;transition:border-color .25s;}
+.link-input:focus{border-bottom-color:var(--gold);}
+.link-input::placeholder{color:rgba(196,205,214,0.4);font-style:italic;}
+.handoff-block{background:var(--navy-3);border:1px solid var(--bw2);border-left:4px solid var(--gold);padding:18px 20px;margin-bottom:28px;}
+.handoff-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.handoff-text{font-size:14px;color:var(--card);line-height:1.65;margin-bottom:14px;}
+.handoff-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.pifi{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:12px;}
+.pifi-btn{padding:24px 20px;background:var(--navy-2);border:none;cursor:pointer;text-align:center;transition:background .15s;border-right:1px solid var(--bw2);font-family:'Inter',sans-serif;min-height:100px;}
+.pifi-btn:last-child{border-right:none;}
+.pifi-btn:hover{background:var(--navy-3);}
+.pifi-btn.sel-pick{background:var(--green-dim);border-top:3px solid var(--green);}
+.pifi-btn.sel-fix{background:var(--gold-dim);border-top:3px solid var(--gold);}
+.pifi-icon{font-size:1.6rem;margin-bottom:8px;line-height:1;}
+.pifi-label{font-size:16px;font-weight:900;color:var(--white);margin-bottom:6px;letter-spacing:-.01em;}
+.pifi-btn.sel-pick .pifi-label{color:#4CAF50;}
+.pifi-btn.sel-fix .pifi-label{color:var(--gold);}
+.pifi-sub{font-size:12px;color:var(--muted);line-height:1.5;}
+.fix-panel{display:none;border:1px solid var(--bw);border-left:4px solid var(--gold);background:var(--navy-3);padding:16px 18px;margin-bottom:20px;}
+.fix-panel.show{display:block;}
+.copy-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:var(--navy);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:none;cursor:pointer;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;transition:background .15s,transform .1s;min-height:42px;}
+.copy-btn:hover{background:var(--gold);transform:translateY(-1px);}
+.copy-btn.copied{background:var(--green);color:white;}
+.flow-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--blue);cursor:pointer;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;text-decoration:none;transition:all .15s;min-height:42px;}
+.flow-btn:hover{background:var(--blue);color:var(--navy);}
+.primary-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .12s,box-shadow .12s;min-height:48px;}
+.primary-btn:hover{transform:translateY(-2px);box-shadow:6px 6px 0 rgba(0,0,0,.6);}
+.green-btn{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:var(--white);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:12px 24px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .12s;min-height:46px;}
+.green-btn:hover{transform:translateY(-1px);}
+.completion{display:none;background:var(--green-dim);border:1px solid rgba(39,174,96,0.2);border-top:3px solid var(--green);padding:44px 32px;box-shadow:var(--sh);margin-top:48px;position:relative;overflow:hidden;}
+.completion::before{content:'04';position:absolute;right:-10px;bottom:-20px;font-size:140px;font-weight:900;color:rgba(39,174,96,0.04);line-height:1;pointer-events:none;}
+.completion.show{display:block;animation:fadeUp .5s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.completion-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:14px;}
+.completion-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;color:var(--white);margin-bottom:8px;line-height:1.1;letter-spacing:-.02em;}
+.completion-sub{font-size:14px;color:var(--card);line-height:1.65;margin-bottom:20px;font-style:italic;}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;}
+.reveal.visible{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;}}
+@media(max-width:820px){.hero-content{padding:28px 28px 28px;}.body-wrap{padding:0 28px 60px;}}
+@media(max-width:660px){
+  .session-bg-num{display:none;}
+  .vd-grid{grid-template-columns:1fr;}
+  .vd-card{border-right:none;border-bottom:1px solid var(--bw2);}
+  .vd-card:last-child{border-bottom:none;}
+  .pifi-btn{padding:20px 12px;min-height:110px;}
+  .pifi-label{font-size:15px;}
+  .prompt-actions{flex-direction:column;}
+  .prompt-actions .copy-btn,.prompt-actions .flow-btn{width:100%;}
+  .handoff-actions{flex-direction:column;}
+  .handoff-actions .flow-btn{width:100%;}
+  .completion{padding:28px 20px;}
+  .wave-divider{padding:20px 0;}
+}
+@media(max-width:560px){
+  .hero{min-height:0!important;}
+  .hero-bg{display:none!important;}
+  .hero-overlay{display:none!important;}
+  .hero-content{background:var(--navy-2);border-bottom:3px solid var(--gold);padding:18px 16px 20px;}
+  .hero-title{font-size:1.8rem;}
+  .body-wrap{padding:0 16px 48px;}
+  .step-tracker{display:none;}
+  .studio-heading{font-size:1.3rem;}
 }
-
-/* STUDIO SHELL — all dark styles scoped inside this wrapper only */
-.studio-shell {
-  background: #080E1A;
-  min-height: 0;
-  width: 100%;
-  margin: 0; padding: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  color: #C4D0E2;
-}
-
-/* ONE FONT FAMILY: Inter */
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--navy); color: var(--body);
-  line-height: 1.7; font-size: 16px;
-}
-
-/* ── HERO ── */
-.hero { position: relative; width: 100%; min-height: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
-.hero-bg { position: absolute; inset: 0; background-image: url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/GxOhZnRhIOoScchN.jpg'); background-size: cover; background-position: center 20%; filter: brightness(0.25) saturate(0.6); }
-.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(8,14,26,0.65) 55%, var(--navy) 100%); }
-.hero-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--gold); z-index: 3; }
-.hero-content { position: relative; z-index: 2; padding: 28px 48px 36px 48px; }
-.brand-row { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-.brand-logo { height: 32px; width: auto;  }
-.brand-sep { width: 1px; height: 22px; background: var(--muted); }
-.brand-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
-.session-tag { display: inline-block; background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; padding: 4px 12px; margin-bottom: 12px; }
-
-/* HERO TITLE — Inter ExtraBold, readable */
-.hero-title { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; line-height: 1.05; color: var(--white); letter-spacing: -0.5px; margin-bottom: 12px; }
-.hero-title .accent { color: var(--gold); }
-.hero-rule { width: 48px; height: 4px; background: var(--gold); margin-bottom: 12px; }
-.hero-tagline { font-size: 1.05rem; font-style: italic; color: var(--gold-light); margin-bottom: 18px; font-weight: 400; }
-.meta-row { display: flex; gap: 0; flex-wrap: wrap; }
-.meta-chip { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--off-white); opacity: 0.65; padding: 5px 14px; border: 1px solid var(--bw); margin-right: -1px; }
-
-/* TICKER */
-.ticker { background: var(--gold); padding: 9px 48px; display: flex; align-items: center; gap: 20px; overflow: hidden; }
-.ticker-text { font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--navy); white-space: nowrap; }
-.ticker-sep { width: 4px; height: 4px; background: var(--navy); opacity: 0.35; flex-shrink: 0; }
-
-/* BODY */
-.body-wrap { max-width: 900px; margin: 0 auto; padding: 48px 48px 80px; box-sizing: border-box; }
-
-/* SECTION HEAD — Inter Bold, not condensed */
-.sh { margin: 52px 0 22px; display: flex; align-items: flex-start; gap: 16px; }
-.sh-bar { width: 6px; background: var(--gold); flex-shrink: 0; align-self: stretch; min-height: 44px; }
-.sh-text .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-.sh-text h2 { font-size: 1.55rem; font-weight: 800; color: var(--white); letter-spacing: -0.3px; line-height: 1.15; }
-
-/* PULL QUOTE */
-.pq { border-left: 4px solid var(--gold); padding: 18px 24px; margin: 0 0 24px; background: var(--navy-3); box-shadow: var(--sh); }
-.pq p { font-size: 17px; font-weight: 400; color: var(--off-white); line-height: 1.8; }
-.pq strong { font-weight: 700; color: var(--gold-light); }
-.pq.plain p { font-size: 15px; color: var(--card); }
-.pq.optional { border-left-color: var(--muted); background: rgba(122,142,168,0.06); }
-.pq.optional p { font-size: 15px; color: var(--muted); }
-
-/* TEACHING POINT */
-.tp { background: var(--navy-3); border: 1px solid var(--bw); border-left: 3px solid var(--gold); padding: 18px 20px; margin: 0 0 20px; box-shadow: var(--sh); }
-.tp-eye { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-.tp p { font-size: 16px; font-weight: 400; color: var(--card); line-height: 1.75; }
-.tp em { color: var(--gold-light); font-style: italic; }
-
-/* LESSON BLOCK */
-.lb { background: var(--navy-2); border: 1px solid var(--bw); margin-bottom: -1px; box-shadow: var(--sh); }
-.lb-head { display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-left: 3px solid var(--gold); background: var(--navy-3); }
-.lb-num { width: 36px; height: 36px; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 800; color: var(--navy); flex-shrink: 0; box-shadow: 2px 2px 0 rgba(0,0,0,0.4); }
-.lb-eye { font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
-.lb-title { font-size: 1rem; font-weight: 700; color: var(--white); }
-.lb-body { padding: 22px 22px 26px; border-top: 1px solid var(--bw); }
-
-/* PROMPT BOX — Inter Mono for code, larger and readable */
-.pb { background: #050B15; border: 1px solid var(--bw); margin: 16px 0; box-shadow: var(--sh); }
-.pb-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--navy-3); border-bottom: 1px solid var(--bw); }
-.pb-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); }
-/* ── COPY PROMPT BUTTON ── */
-.copy-btn {
-  background: var(--navy);
-  border: 1px solid var(--gold);
-  border-left: 3px solid var(--gold);
-  color: var(--gold);
-  font-size: 10px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
-  padding: 7px 16px;
-  cursor: pointer;
-  box-shadow: 3px 3px 0 rgba(245,166,35,0.3);
-  transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
-  font-family: 'Inter', sans-serif;
-  display: flex; align-items: center; gap: 7px;
-}
-.copy-btn::before { content: '⊕'; font-size: 12px; opacity: 0.7; }
-.copy-btn:hover { background: var(--gold); color: var(--navy); transform: translate(1px, 1px); box-shadow: 2px 2px 0 rgba(0,0,0,0.5); }
-/* PROMPT TEXT — Inter Mono, 14px, well-spaced — NOT Courier */
-.pb-text { padding: 18px 20px; font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; font-size: 14px; color: var(--off-white); line-height: 1.85; white-space: pre-wrap; }
-
-/* CHECKLIST */
-.cl { list-style: none; border: 1px solid var(--bw); box-shadow: var(--sh); }
-.cl li { display: flex; align-items: flex-start; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--bw); background: var(--navy-2); font-size: 15px; color: var(--card); transition: background 0.15s; }
-.cl li:last-child { border-bottom: none; }
-.cl li:hover { background: var(--navy-3); }
-.cl li input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--gold); margin-top: 3px; flex-shrink: 0; cursor: pointer; border: 1px solid var(--gold); }
-.cl li label { cursor: pointer; line-height: 1.6; }
-
-/* COMPARE */
-.cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 16px 0; box-shadow: var(--sh); }
-@media (max-width: 560px) { .cmp { grid-template-columns: 1fr; } }
-.cmp-cell { background: var(--navy-2); border: 1px solid var(--bw); padding: 20px 20px; }
-.cmp-cell.warn { border-left: 3px solid #C0392B; }
-.cmp-cell.good { border-left: 3px solid #27AE60; }
-.cmp-eye { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
-.cmp-cell.warn .cmp-eye { color: #E74C3C; }
-.cmp-cell.good .cmp-eye { color: #2ECC71; }
-.cmp-cell p { font-size: 15px; color: var(--card); line-height: 1.75; }
-.cmp-cell em { color: var(--off-white); font-style: italic; }
-
-/* CARD GRID */
-.cg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; box-shadow: var(--sh); align-items: stretch; }
-.cg-card { background: var(--navy-2); border: 1px solid var(--bw); padding: 22px 18px; transition: background 0.15s; }
-.cg-card:hover { background: var(--navy-3); }
-.cg-n { font-size: 2.2rem; font-weight: 800; color: var(--gold); opacity: 0.5; line-height: 1; margin-bottom: 8px; }
-.cg-title { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--bw); }
-.cg-card p { font-size: 15px; color: var(--card); line-height: 1.65; margin-top: 8px; }
-
-/* TAG ROW */
-.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
-.tag { background: var(--navy-3); border: 1px solid rgba(255,255,255,0.12); color: var(--off-white); font-size: 13px; font-weight: 500; padding: 5px 13px; margin: 0 6px 6px 0; display: inline-block; }
-.tag.gold { background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.4); color: var(--gold); }
-
-/* VIDEO PLACEHOLDER */
-.vid-placeholder { background: var(--navy-2); border: 1px solid var(--bw); border-left: 4px solid var(--gold); padding: 16px 20px; margin: 20px 0; display: flex; align-items: center; gap: 16px; box-shadow: var(--sh); }
-.vid-icon { font-size: 1rem; opacity: 0.5; flex-shrink: 0; }
-.vid-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 0; opacity: 0.9; }
-.vid-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
-
-/* TOOL BUTTON */
-/* ── BRAND TOOL BUTTONS ── */
-.tbtn {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--gold);
-  color: var(--navy);
-  font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
-  text-decoration: none;
-  padding: 0 22px 0 0;
-  margin: 14px 12px 0 0;
-  box-shadow: 4px 4px 0 #000;
-  transition: transform 0.1s, box-shadow 0.1s;
-  font-family: 'Inter', sans-serif;
-  height: 44px;
-  position: relative;
-  overflow: hidden;
-}
-.tbtn::before {
-  content: '';
-  display: flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px;
-  background: rgba(0,0,0,0.18);
-  flex-shrink: 0;
-  margin-right: 12px;
-}
-.tbtn-icon {
-  position: absolute; left: 0; top: 0;
-  width: 44px; height: 44px;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,0.18);
-  flex-shrink: 0;
-}
-.tbtn-icon svg { width: 18px; height: 18px; }
-.tbtn-label { padding-left: 56px; }
-.tbtn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
-.tbtn.out {
-  background: transparent; color: var(--gold);
-  border: 2px solid var(--gold);
-  box-shadow: 4px 4px 0 rgba(245,166,35,0.3);
-}
-.tbtn.out::before { background: rgba(245,166,35,0.12); }
-.tbtn.out:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 rgba(245,166,35,0.3); }
-
-/* DISTROKID */
-.dk { background: var(--navy-3); border: 1px solid var(--bg); border-left: 4px solid var(--gold); padding: 24px 26px; margin: 20px 0; box-shadow: var(--sh); }
-.dk h4 { font-size: 1.05rem; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
-.dk p { font-size: 15px; color: var(--card); line-height: 1.7; margin-bottom: 12px; }
-.dk .disc { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 10px; border-top: 1px solid var(--bw); padding-top: 10px; }
-.dk-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; padding: 10px 20px; margin: 4px 6px 4px 0; box-shadow: 3px 3px 0 rgba(0,0,0,0.5); transition: opacity 0.15s; font-family: 'Inter', sans-serif; }
-.dk-btn:hover { opacity: 0.88; }
-.dk-btn.out { background: transparent; color: var(--gold); border: 2px solid var(--gold); box-shadow: 3px 3px 0 rgba(245,166,35,0.2); }
-
-/* CASE STUDY */
-.cs { background: var(--navy-2); border: 1px solid var(--bw); border-top: 4px solid var(--gold); padding: 28px 28px; margin: 20px 0; box-shadow: var(--sh); }
-.cs-eye { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-.cs h3 { font-size: 1.25rem; font-weight: 800; color: var(--white); margin-bottom: 12px; }
-.cs p { font-size: 15px; color: var(--card); line-height: 1.75; margin-bottom: 12px; }
-
-/* YOUTUBE */
-.yt { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; box-shadow: var(--sh); border: 1px solid var(--bw); margin-bottom: 8px; }
-.yt iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-.yt-cap { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); padding: 7px 0 0; opacity: 0.75; }
-
-/* WRITING PATH */
-.path-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; box-shadow: var(--sh); margin-bottom: 24px; }
-@media (max-width: 600px) { .path-grid { grid-template-columns: 1fr; } }
-.path-card { background: var(--navy-2); border: 1px solid var(--bw); border-top: 3px solid var(--gold); padding: 22px 18px; }
-.path-title { font-size: 1rem; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
-.path-desc { font-size: 14px; color: var(--card); line-height: 1.6; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--bw); }
-
-/* INLINE HEADING */
-.ch3 { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white); margin: 20px 0 10px; padding-left: 12px; border-left: 3px solid var(--gold); }
-
-/* DIVIDER */
-.div { height: 1px; background: var(--bw); margin: 48px 0; position: relative; }
-.div::after { content: ''; position: absolute; left: 0; top: 0; width: 36px; height: 1px; background: var(--gold); }
-
-/* CTA */
-.cta { margin-top: 48px; background: var(--navy-3); border: 1px solid var(--bw); border-left: 4px solid var(--gold); padding: 28px 30px; display: flex; align-items: center; gap: 22px; box-shadow: var(--sh); }
-@media (max-width: 560px) { .cta { flex-direction: column; gap: 14px; } }
-.cta-icon { width: 48px; height: 48px; background: var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 3px 3px 0 rgba(0,0,0,0.5); }
-.cta-icon svg { width: 22px; height: 22px; color: var(--navy); stroke-width: 3; }
-.cta h3 { font-size: 1.1rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
-.cta p { font-size: 15px; color: var(--body); line-height: 1.6; }
-
-/* JOURNEY RECAP */
-.jr { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--bw); box-shadow: var(--sh); }
-@media (max-width: 600px) { .jr { grid-template-columns: 1fr 1fr; } }
-.jr-step { background: var(--navy-2); border-right: 1px solid var(--bw); padding: 20px 14px; text-align: center; }
-.jr-step:last-child { border-right: none; }
-.jr-step.done { background: var(--navy-3); border-top: 3px solid var(--gold); }
-.jr-num { font-size: 2rem; font-weight: 800; color: var(--gold); opacity: 0.25; line-height: 1; margin-bottom: 6px; }
-.jr-step.done .jr-num { opacity: 0.65; }
-.jr-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--off-white); line-height: 1.3; }
-.jr-check { font-size: 18px; color: var(--gold); margin-top: 6px; }
-
-/* CLOSING */
-.closing { background: var(--navy-3); border: 1px solid var(--bg); border-top: 4px solid var(--gold); padding: 36px 36px; margin: 28px 0; box-shadow: var(--sh); text-align: center; }
-.closing-q { font-size: 1.35rem; font-weight: 700; font-style: italic; color: var(--white); line-height: 1.55; margin-bottom: 14px; }
-.closing-s { font-size: 16px; color: var(--card); line-height: 1.75; }
-.closing-s strong { color: var(--gold-light); font-weight: 700; }
-
-/* NEXT GRID */
-.ng { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; box-shadow: var(--sh); }
-@media (max-width: 560px) { .ng { grid-template-columns: 1fr; } }
-.ng-card { background: var(--navy-2); border: 1px solid var(--bw); padding: 24px 20px; transition: background 0.15s; }
-.ng-card:hover { background: var(--navy-3); }
-.ng-title { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--bw); }
-.ng-card p { font-size: 14px; color: var(--card); line-height: 1.65; margin-top: 8px; }
-
-/* FINAL CTA */
-.fcta { margin-top: 52px; background: rgba(245,166,35,0.07); border: 1px solid var(--bg); border-left: 4px solid var(--gold); padding: 32px 32px; box-shadow: var(--sh); }
-.fcta h3 { font-size: 1.4rem; font-weight: 800; color: var(--gold-light); margin-bottom: 10px; }
-.fcta p { font-size: 16px; color: var(--card); line-height: 1.75; }
-
-/* ═══════════════════════════════════════════════
-   RESPONSIVE BREAKPOINTS
-   ═══════════════════════════════════════════════ */
-
-/* TABLET (max 820px) */
-@media (max-width: 820px) {
-  .hero-content { padding: 24px 28px 32px 28px; }
-  .body-wrap { padding: 40px 28px 60px; }
-  .hero-title { font-size: clamp(1.8rem, 5vw, 2.8rem); }
-  .ticker { padding: 9px 28px; }
-  .cg { grid-template-columns: repeat(2, 1fr) !important; }
-  .jr { grid-template-columns: repeat(3, 1fr); }
-  .path-grid { grid-template-columns: 1fr 1fr; }
-  .ng { grid-template-columns: 1fr 1fr; }
-  .cta { flex-direction: column; gap: 14px; }
-  .tbtn { font-size: 11px; padding: 0 18px 0 0; height: 40px; }
-  .tbtn-icon { width: 40px; height: 40px; }
-  .tbtn-label { padding-left: 50px; }
-}
-
-/* MOBILE (max 560px) */
-@media (max-width: 560px) {
-  .hero-content { padding: 18px 16px 24px 16px; }
-  .body-wrap { padding: 32px 16px 48px; }
-  .hero-title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
-  .meta-row { flex-direction: column; gap: 0; }
-  .meta-chip { width: 100%; border-right: 1px solid var(--bw); margin-right: 0; }
-  .ticker { padding: 8px 16px; gap: 12px; }
-  .ticker-text { font-size: 10px; letter-spacing: 1.5px; }
-  .sh { margin: 36px 0 16px; }
-  .sh-text h2 { font-size: 1.25rem; }
-  /* Cards: 1-column on mobile */
-  .cg { grid-template-columns: 1fr !important; }
-  .cmp { grid-template-columns: 1fr; }
-  .jr { grid-template-columns: repeat(2, 1fr); }
-  .jr-step:last-child { border-right: none; }
-  .path-grid { grid-template-columns: 1fr; }
-  .ng { grid-template-columns: 1fr; }
-  /* Buttons: full width on mobile */
-  .tbtn { width: 100%; margin: 8px 0 0 0; justify-content: flex-start; }
-  .tbtn-label { padding-left: 52px; }
-  /* Prompt box */
-  .pb-head { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .pb-text { font-size: 13px; padding: 14px 14px; }
-  /* Pull quote */
-  .pq p { font-size: 15px; }
-  /* Lesson block */
-  .lb-head { padding: 12px 14px; gap: 12px; }
-  .lb-body { padding: 16px 14px 20px; }
-  /* Section divider */
-  .div { margin: 32px 0; }
-  /* CTA */
-  .cta { padding: 20px 16px; }
-  .cta-icon { width: 40px; height: 40px; }
-  /* Closing */
-  .closing { padding: 24px 18px; }
-  .closing-q { font-size: 1.1rem; }
-  /* Journey recap */
-  .jr-step { padding: 14px 8px; }
-  .jr-num { font-size: 1.5rem; }
-  .jr-label { font-size: 10px; }
-  /* Tags */
-  .tag { font-size: 12px; padding: 4px 10px; }
-  /* Brand row */
-  .brand-row { gap: 10px; }
-  .brand-logo { height: 26px; }
-  .brand-label { font-size: 9px; letter-spacing: 2px; }
-}
-
-
-/* ═══════════════════════════════════════════════
-   TYPOGRAPHY HIERARCHY REFINEMENTS
-   ═══════════════════════════════════════════════ */
-
-/* Desktop: refined line heights and spacing */
-.sh-text .eyebrow { line-height: 1.4; }
-.sh-text h2 { line-height: 1.2; }
-.pq p { line-height: 1.85; }
-.tp p { line-height: 1.8; }
-.lb-body p, .lb-body li { line-height: 1.75; font-size: 15px; }
-.cg-card p { line-height: 1.7; }
-
-/* Tablet typography */
-@media (max-width: 820px) {
-  .sh-text .eyebrow { font-size: 9px; letter-spacing: 2.5px; }
-  .sh-text h2 { font-size: 1.35rem; line-height: 1.25; }
-  .pq p { font-size: 15px; }
-  .cg-n { font-size: 1.8rem; }
-}
-
-/* Mobile typography */
-@media (max-width: 560px) {
-  /* Eyebrow labels — reduce letter spacing to prevent wrapping */
-  .sh-text .eyebrow { font-size: 9px; letter-spacing: 1.8px; }
-  .sh-text h2 { font-size: 1.2rem; line-height: 1.3; }
-  /* Card numbers smaller on mobile */
-  .cg-n { font-size: 1.5rem; margin-bottom: 6px; }
-  .cg-title { font-size: 0.8rem; letter-spacing: 1px; }
-  /* Pull quote */
-  .pq p { font-size: 14px; line-height: 1.75; }
-  .pq { padding: 14px 16px; }
-  /* Teaching point */
-  .tp p { font-size: 14px; }
-  .tp { padding: 14px 14px; }
-  /* Body text */
-  body { font-size: 15px; line-height: 1.7; }
-  /* Lesson block */
-  .lb-title { font-size: 0.95rem; }
-  .lb-num { width: 30px; height: 30px; font-size: 0.8rem; }
-  /* Journey tracker — single column on mobile */
-  .jr { grid-template-columns: 1fr !important; }
-  .jr-step { border-right: none !important; border-bottom: 1px solid var(--bw); text-align: left; display: flex; align-items: center; gap: 14px; padding: 12px 14px; }
-  .jr-step:last-child { border-bottom: none; }
-  .jr-num { font-size: 1.4rem; margin-bottom: 0; flex-shrink: 0; width: 36px; }
-  .jr-label { font-size: 12px; letter-spacing: 0.5px; }
-  .jr-check { margin-top: 0; margin-left: auto; }
-  /* Section heading bar */
-  .sh-bar { min-height: 36px; }
-  /* Prompt box text */
-  .pb-text { font-size: 12px; line-height: 1.8; }
-  /* Checklist */
-  .cl li { font-size: 14px; padding: 11px 14px; }
-  /* Compare cells */
-  .cmp-cell { padding: 16px 14px; }
-  .cmp-cell p { font-size: 14px; }
-  /* DK button */
-  .dk-btn { width: 100%; margin: 6px 0 0 0; justify-content: center; }
-  /* Section divider gold accent */
-  .div::after { width: 28px; }
-}
-
-
-/* ═══════════════════════════════════════════════
-   ANIMATIONS & VISUAL ENERGY
-   ═══════════════════════════════════════════════ */
-
-/* Hero accent bar pulse */
-@keyframes accent-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-.hero-accent { animation: accent-pulse 3s ease-in-out infinite; }
-
-/* Gold rule shimmer */
-@keyframes rule-shimmer {
-  0% { width: 48px; opacity: 1; }
-  50% { width: 72px; opacity: 0.7; }
-  100% { width: 48px; opacity: 1; }
-}
-.hero-rule { animation: rule-shimmer 4s ease-in-out infinite; }
-
-/* Ticker scroll animation */
-@keyframes ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.ticker-inner {
-  display: flex;
-  gap: 40px;
-  animation: ticker-scroll 18s linear infinite;
-  white-space: nowrap;
-  width: max-content;
-}
-.ticker { overflow: hidden; padding: 9px 0; }
-
-/* Scroll-reveal: sections fade up on enter */
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Staggered children */
-.reveal-stagger > * {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1), transform 0.45s cubic-bezier(0.22,1,0.36,1);
-}
-.reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
-.reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.08s; }
-.reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
-.reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.24s; }
-.reveal-stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.32s; }
-.reveal-stagger.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.40s; }
-
-/* Card hover lift */
-.cg-card {
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s !important;
-}
-.cg-card:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 6px 9px 0 rgba(0,0,0,0.6) !important;
-  border-color: rgba(245,166,35,0.4) !important;
-}
-
-/* Lesson block hover */
-.lb {
-  transition: border-color 0.2s;
-}
-.lb:hover {
-  border-color: rgba(245,166,35,0.3);
-}
-
-/* Checklist checked state animation */
-.cl li.checked {
-  background: rgba(245,166,35,0.06);
-}
-.cl li.checked label {
-  text-decoration: line-through;
-  color: var(--muted);
-  transition: color 0.3s, text-decoration 0.3s;
-}
-
-/* Copy button flash confirmation */
-@keyframes copy-flash {
-  0% { background: var(--gold); color: var(--navy); }
-  30% { background: #2ECC71; color: #fff; }
-  100% { background: var(--navy); color: var(--gold); }
-}
-.copy-btn.copied {
-  animation: copy-flash 0.8s ease forwards;
-}
-
-/* Section heading bar slide in */
-@keyframes bar-slide {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
-}
-.sh-bar {
-  transform-origin: top;
-  animation: bar-slide 0.4s cubic-bezier(0.22,1,0.36,1) both;
-  animation-play-state: paused;
-}
-.reveal.visible .sh-bar {
-  animation-play-state: running;
-}
-
-/* Tool button press feel */
-.tbtn {
-  transition: transform 0.1s, box-shadow 0.1s !important;
-}
-.tbtn:active {
-  transform: translate(4px, 4px) !important;
-  box-shadow: 0 0 0 rgba(0,0,0,0.6) !important;
-}
-
-/* Path card hover */
-.path-card {
-  transition: background 0.2s, border-color 0.2s;
-}
-.path-card:hover {
-  background: var(--navy-3);
-  border-top-color: var(--gold-light);
-}
-
-/* Journey step hover */
-.jr-step {
-  transition: background 0.2s;
-}
-.jr-step:hover {
-  background: var(--navy-3);
-}
-
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-stagger > *, .hero-accent, .hero-rule, .ticker-inner { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
-}
-
-
-/* ── SESSION PREVIEW BOX ── */
-.session-preview {
-  background: var(--navy-2);
-  border: 1px solid var(--bw);
-  border-top: 3px solid var(--gold);
-  padding: 20px 24px;
-  margin-bottom: 36px;
-  box-shadow: var(--sh);
-}
-.session-preview-eye {
-  font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 10px;
-}
-.session-preview h3 {
-  font-size: 1rem; font-weight: 800; color: var(--white); margin-bottom: 12px;
-}
-.session-preview ol {
-  list-style: none; padding: 0; margin: 0;
-  counter-reset: preview-counter;
-}
-.session-preview ol li {
-  counter-increment: preview-counter;
-  display: flex; align-items: flex-start; gap: 12px;
-  font-size: 14px; color: var(--card); line-height: 1.6;
-  padding: 6px 0; border-bottom: 1px solid var(--bw);
-}
-.session-preview ol li:last-child { border-bottom: none; }
-.session-preview ol li::before {
-  content: counter(preview-counter);
-  min-width: 22px; height: 22px;
-  background: var(--gold); color: var(--navy);
-  font-size: 10px; font-weight: 800;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 1px;
-}
-
-/* ── STEP PROGRESS TRACKER ── */
-.step-tracker {
-  display: flex; align-items: center; gap: 0;
-  margin-bottom: 32px;
-  border: 1px solid var(--bw);
-  box-shadow: var(--sh);
-  overflow: hidden;
-}
-.step-tracker-item {
-  flex: 1; text-align: center; padding: 10px 6px;
-  background: var(--navy-2);
-  border-right: 1px solid var(--bw);
-  font-size: 10px; font-weight: 700; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--muted);
-  line-height: 1.4;
-}
-.step-tracker-item:last-child { border-right: none; }
-.step-tracker-item.active {
-  background: var(--navy-3);
-  color: var(--gold);
-  border-top: 2px solid var(--gold);
-}
-.step-tracker-item.done {
-  background: var(--navy-2);
-  color: var(--muted);
-  opacity: 0.5;
-}
-.step-tracker-num {
-  font-size: 1.1rem; font-weight: 800; color: var(--gold);
-  opacity: 0.3; display: block; margin-bottom: 2px;
-}
-.step-tracker-item.active .step-tracker-num { opacity: 1; }
-
-/* ── STOP AND DO THIS ── */
-.action-block {
-  background: rgba(245,166,35,0.07);
-  border: 1px solid rgba(245,166,35,0.3);
-  border-left: 4px solid var(--gold);
-  padding: 16px 20px;
-  margin: 20px 0;
-  box-shadow: var(--sh);
-  display: flex; align-items: flex-start; gap: 14px;
-}
-.action-block-icon {
-  width: 28px; height: 28px; background: var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 1px;
-}
-.action-block-icon svg { width: 14px; height: 14px; color: var(--navy); }
-.action-block-label {
-  font-size: 9px; font-weight: 800; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
-}
-.action-block p {
-  font-size: 14px; color: var(--off-white); line-height: 1.65; margin: 0;
-}
-
-/* ── MOMENTUM CALLOUT (earned, not cheesy) ── */
-.momentum {
-  background: var(--navy-3);
-  border-left: 4px solid var(--gold);
-  border-bottom: 1px solid var(--bw);
-  border-right: 1px solid var(--bw);
-  border-top: 1px solid var(--bw);
-  padding: 14px 20px;
-  margin: 28px 0 8px;
-  box-shadow: var(--sh);
-}
-.momentum p {
-  font-size: 14px; font-weight: 500; color: var(--off-white);
-  line-height: 1.65; margin: 0; font-style: italic;
-}
-.momentum strong { color: var(--gold-light); font-style: normal; font-weight: 700; }
-
-/* ── VISUAL RHYTHM BREAKER ── */
-.rhythm-break {
-  display: flex; align-items: center; gap: 14px;
-  margin: 36px 0 28px;
-}
-.rhythm-break-line { flex: 1; height: 1px; background: var(--bw); }
-.rhythm-break-label {
-  font-size: 9px; font-weight: 800; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--muted);
-  white-space: nowrap;
-}
-
-
-/* ═══════════════════════════════════════════════
-   MOBILE UX FIXES & COLOR VARIETY
-   ═══════════════════════════════════════════════ */
-
-/* ── COLOR VARIETY: Teaching points get a cool blue tint ── */
-.tp {
-  border-left-color: #4A9EBF !important;
-  background: rgba(74,158,191,0.06) !important;
-}
-.tp-eye { color: #4A9EBF !important; }
-
-/* ── COLOR VARIETY: Action blocks stay gold ── */
-.action-block { border-left-color: var(--gold); }
-
-/* ── COLOR VARIETY: Optional/muted blocks get a teal tint ── */
-.pq.optional { border-left-color: #3A8A7A; background: rgba(58,138,122,0.06) !important; }
-
-/* ── COLOR VARIETY: Compare cells ── */
-.cmp-cell.warn { background: rgba(192,57,43,0.06); }
-.cmp-cell.good { background: rgba(39,174,96,0.06); }
-
-/* ── HOW THIS WORKS: compact icon-row style ── */
-.how-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: 1px solid var(--bw);
-  box-shadow: var(--sh);
-  margin: 16px 0;
-}
-.how-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 14px 18px;
-  background: var(--navy-2);
-  border-bottom: 1px solid var(--bw);
-}
-.how-item:last-child { border-bottom: none; }
-.how-icon {
-  width: 32px; height: 32px;
-  background: var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 1px;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
-}
-.how-icon svg { width: 15px; height: 15px; color: var(--navy); }
-.how-label {
-  font-size: 11px; font-weight: 800; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 3px;
-}
-.how-desc {
-  font-size: 14px; color: var(--card); line-height: 1.6; margin: 0;
-}
-
-/* ── YOUTUBE: mobile fallback ── */
-.yt-fallback {
-  display: none;
-  background: var(--navy-2);
-  border: 1px solid var(--bw);
-  border-left: 4px solid var(--gold);
-  padding: 14px 18px;
-  margin-bottom: 8px;
-  box-shadow: var(--sh);
-}
-.yt-fallback a {
-  display: inline-flex; align-items: center; gap: 10px;
-  color: var(--gold); font-size: 13px; font-weight: 700;
-  text-decoration: none;
-}
-.yt-fallback a:hover { text-decoration: underline; }
-@media (max-width: 560px) {
-  /* On mobile, hide iframe and show fallback link */
-  .yt { display: none !important; }
-  .yt-fallback { display: block !important; }
-  .yt-cap { display: none; }
-}
-
-/* ── MOBILE: reduce card/block padding significantly ── */
-@media (max-width: 560px) {
-  .cg-card { padding: 14px 12px; }
-  .cg-n { font-size: 1.3rem; margin-bottom: 4px; }
-  .cg-title { font-size: 0.75rem; }
-  .cg-card p { font-size: 13px; }
-  .lb-body { padding: 14px 12px 16px; }
-  .lb-head { padding: 10px 12px; gap: 10px; }
-  .tp { padding: 12px 12px; }
-  .tp p { font-size: 13px; }
-  .pq { padding: 12px 14px; }
-  .pq p { font-size: 13px; }
-  .session-preview { padding: 14px 16px; }
-  .session-preview ol li { font-size: 13px; padding: 5px 0; }
-  .step-tracker-item { padding: 8px 4px; font-size: 9px; }
-  .step-tracker-num { font-size: 0.9rem; }
-  .momentum { padding: 12px 14px; }
-  .momentum p { font-size: 13px; }
-  .how-item { padding: 12px 14px; gap: 12px; }
-  .how-icon { width: 28px; height: 28px; }
-  .how-icon svg { width: 13px; height: 13px; }
-  .how-desc { font-size: 13px; }
-  .pb-text { font-size: 11px; padding: 12px 12px; }
-  .copy-btn { font-size: 9px; padding: 6px 12px; }
-  .tbtn { height: 38px; font-size: 10px; }
-  .tbtn-icon { width: 38px; height: 38px; }
-  .tbtn-label { padding-left: 46px; }
-  .dk { padding: 16px 14px; }
-  .dk p { font-size: 13px; }
-  .cs { padding: 18px 14px; }
-  .cs p { font-size: 13px; }
-  .closing { padding: 18px 14px; }
-  .closing-q { font-size: 1rem; }
-  .closing-s { font-size: 13px; }
-  .tags { gap: 4px; }
-  .tag { font-size: 11px; padding: 4px 8px; }
-}
-
-
-/* ═══════════════════════════════════════════════
-   HERO MOBILE FIX — eliminate blank space
-   ═══════════════════════════════════════════════ */
-@media (max-width: 560px) {
-  /* Studio shell: no min-height on mobile */
-  .studio-shell { min-height: 0 !important; }
-
-  /* Hero: compact on mobile — no tall background image area */
-  .hero {
-    min-height: 0 !important;
-    height: auto !important;
-  }
-  /* Hide the background image on mobile — it just creates blank space */
-  .hero-bg { display: none !important; }
-  .hero-overlay { display: none !important; }
-  .hero-accent { display: none !important; }
-
-  /* Hero content: flat dark panel, no background image needed */
-  .hero-content {
-    background: var(--navy-2) !important;
-    border-bottom: 3px solid var(--gold) !important;
-    padding: 20px 16px 20px 16px !important;
-    position: relative !important;
-  }
-
-  /* Brand row: tighten up */
-  .brand-row { margin-bottom: 10px; }
-  .brand-logo { height: 22px; }
-
-  /* Hero title: smaller on mobile */
-  .hero-title {
-    font-size: 1.8rem !important;
-    line-height: 1.1 !important;
-    margin-bottom: 6px !important;
-  }
-
-  /* Hero rule: hide the animated gold line */
-  .hero-rule { display: none !important; }
-
-  /* Hero tagline: tighter */
-  .hero-tagline {
-    font-size: 0.9rem !important;
-    margin-bottom: 10px !important;
-  }
-
-  /* Meta row: horizontal scroll if needed */
-  .meta-row {
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 6px !important;
-  }
-  .meta-chip {
-    font-size: 9px !important;
-    padding: 4px 10px !important;
-    border-right: none !important;
-    border: 1px solid var(--bw) !important;
-  }
-
-  /* Ticker: tighter on mobile */
-  .ticker { padding: 7px 16px !important; }
-  .ticker-text { font-size: 10px !important; letter-spacing: 1.5px !important; }
-
-  /* Body wrap: tighter top padding */
-  .body-wrap { padding-top: 24px !important; }
-
-  /* Video demo placeholder: shorter on mobile */
-  .vid-placeholder { min-height: 60px !important; padding: 14px 14px !important; }
-  .vid-placeholder p { font-size: 12px !important; }
-}
-
-@media (max-width: 820px) {
-  /* Tablet: reduce hero height */
-  .hero { min-height: 0 !important; }
-  .hero-content { padding: 22px 28px 28px 28px !important; }
-  .hero-title { font-size: clamp(1.6rem, 4vw, 2.4rem) !important; }
-}
-
-
-/* Session preview and step tracker always visible - no fade in */
-.session-preview, .step-tracker {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
 </style>
 </head>
 <body>
-<div class="studio-shell">
-<div class="hero">
-  <div class="hero-bg"></div><div class="hero-overlay"></div><div class="hero-accent"></div>
-  <div class="hero-content">
-    <div class="brand-row">
-      <img class="brand-logo" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/heMUaEGiQuGCzfpG.png" alt="Imagine That AI">
-      <div class="brand-sep"></div>
-      <span class="brand-label">An Imagine That AI Creative Experience</span>
-    </div>
-    <div class="session-tag">Session 4 of 5</div>
-    <div class="hero-title">The Visual Studio</div>
-    <div class="hero-rule"></div>
-    <div class="hero-tagline">What should it look like?</div>
-    <div class="meta-row"><div class="meta-chip">12 to 15 Minutes</div><div class="meta-chip">Google Flow + CapCut</div><div class="meta-chip">Output: Music Video Sample</div></div>
-  </div>
-</div>
-<div class="ticker">
-  <span class="ticker-text">Session 4 of 5</span>
-  <div class="ticker-sep"></div>
-  <span class="ticker-text">The AI Music Studio</span>
-  <div class="ticker-sep"></div>
-  <span class="ticker-text">Make It. Release It.</span>
-</div>
-<div class="body-wrap">
-<div class="session-preview">
-  <div class="session-preview-eye">Session 4 — 12 to 15 Minutes</div>
-  <h3>In this session you will</h3>
-  <ol>
-    <li>Define the visual identity of your song before generating anything</li>
-    <li>Build five video shots using Google Flow</li>
-    <li>Edit and assemble your music video in CapCut</li>
-    <li>Complete the Premiere Checklist before the release session</li>
-  </ol>
+
+<div class="brand-bar">
+  <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/NHEGRhlODnmTUAVf.png" alt="Imagine That AI" class="brand-logo">
+  <span class="brand-label">An Imagine That AI Creative Experience</span>
 </div>
 
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-session">Session 4 of 5</div>
+    <div class="hero-title">The Visual Studio</div>
+    <div class="hero-tagline">What does your song look like?</div>
+    <div class="meta-row">
+      <div class="meta-chip">Google Flow</div>
+      <div class="meta-chip">Your Output: A Music Video</div>
+    </div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-text">Session 4 of 5</span><span class="ticker-text">·</span>
+    <span class="ticker-text">The Visual Studio</span><span class="ticker-text">·</span>
+    <span class="ticker-text">What Does Your Song Look Like?</span><span class="ticker-text">·</span>
+    <span class="ticker-text">Session 4 of 5</span><span class="ticker-text">·</span>
+    <span class="ticker-text">The Visual Studio</span><span class="ticker-text">·</span>
+    <span class="ticker-text">What Does Your Song Look Like?</span><span class="ticker-text">·</span>
+  </div>
+</div>
 
 <div class="step-tracker">
-  <div class="step-tracker-item done"><span class="step-tracker-num">01</span>THE CONCEPT</div>
-  <div class="step-tracker-item done"><span class="step-tracker-num">02</span>WRITING ROOM</div>
-  <div class="step-tracker-item done"><span class="step-tracker-num">03</span>RECORDING</div>
-  <div class="step-tracker-item active"><span class="step-tracker-num">04</span>VISUALS</div>
-  <div class="step-tracker-item"><span class="step-tracker-num">05</span>RELEASE</div>
+  <div class="st-item done"><span class="st-num">01</span>CONCEPT</div>
+  <div class="st-item done"><span class="st-num">02</span>WRITING</div>
+  <div class="st-item done"><span class="st-num">03</span>PRODUCTION</div>
+  <div class="st-item active"><span class="st-num">04</span>VISUALS</div>
+  <div class="st-item"><span class="st-num">05</span>RELEASE</div>
 </div>
-<div class="sh"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Session Goal</div><h2>Creating Your Music Video</h2></div></div>
-<div class="vid-placeholder">
-  <div class="vid-icon">&#9654;</div>
-  <div class="vid-label">Video Demo</div>
-  <div class="vid-desc">Demo video: Full Google Flow walkthrough — coming soon</div>
-</div>
-<div class="pq"><p>Your song exists. Now it needs a visual identity. In this session, you will use Google Flow or an equivalent AI video tool to create a 20 to 30 second music video sample that matches the mood, story, and feel of your song.</p></div>
 
-<div class="div"></div>
-<div class="sh"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Lessons 4A through 4D</div><h2>The Visual Sessions</h2></div></div>
+<div class="body-wrap">
 
-<div class="lb">
-  <div class="lb-head">
-    <div class="lb-num">4A</div>
-    <div><div class="lb-eye">Lesson 4A</div><div class="lb-title">Visual Direction: What Should It Look Like?</div></div>
+  <div class="session-opening reveal">
+    <div class="session-bg-num">04</div>
+    <div class="session-eyebrow">The Visual Studio &nbsp;/&nbsp; Session 04</div>
+    <div class="session-big-q">Now let's give your song a world.</div>
+    <div class="session-sub">Your song exists. Now you are going to build the visual story that goes with it.</div>
+    <div id="ssf-card-container"></div>
   </div>
-  <div class="lb-body"><div class="vid-placeholder">
-  <div class="vid-icon">&#9654;</div>
-  <div class="vid-label">Video Demo</div>
-  <div class="vid-desc">Demo video: Defining your visual direction — coming soon</div>
-</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>The best music videos do not illustrate the lyrics literally. They evoke the same emotion through imagery. Think about what the song <em>feels like</em>, not just what it says.</p></div><div class="ch3">Visual Direction Questions</div><ul class="cl"><li><input type="checkbox" id="c0"><label for="c0">What time of day or lighting feels right for this song?</label></li><li><input type="checkbox" id="c1"><label for="c1">What setting or environment matches the emotional tone?</label></li><li><input type="checkbox" id="c2"><label for="c2">What color palette feels right? (warm, cool, muted, vibrant)</label></li><li><input type="checkbox" id="c3"><label for="c3">Is there a person, place, or object that anchors the visual story?</label></li><li><input type="checkbox" id="c4"><label for="c4">What camera movement feels right? (slow, dynamic, still)</label></li></ul></div>
-</div>
 
-<div class="lb">
-  <div class="lb-head">
-    <div class="lb-num">4B</div>
-    <div><div class="lb-eye">Lesson 4B</div><div class="lb-title">Build Your Visual Prompt</div></div>
+  <div class="reveal" style="margin-bottom:28px;">
+    <button onclick="toggleWatchMe()" style="display:flex;align-items:center;gap:12px;background:transparent;border:none;border-left:3px solid var(--bw);padding:10px 14px;cursor:pointer;font-family:'Inter',sans-serif;text-align:left;width:100%;" onmouseover="this.style.borderLeftColor='var(--gold)'" onmouseout="this.style.borderLeftColor='var(--bw)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+      <div>
+        <div style="font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:2px;">Need to see it?</div>
+        <div style="font-size:13px;font-weight:700;color:var(--card);">Watch me build a music video in Google Flow &nbsp;·&nbsp; 3 min</div>
+      </div>
+      <svg id="watchme-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" style="margin-left:auto;flex-shrink:0;transition:transform .2s;"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div id="watchme-body" style="display:none;border:1px solid var(--bw);border-top:none;padding:16px;">
+      <p style="font-size:12px;color:var(--muted);font-style:italic;">Demo video coming soon.</p>
+    </div>
   </div>
-  <div class="lb-body"><div class="vid-placeholder">
-  <div class="vid-icon">&#9654;</div>
-  <div class="vid-label">Video Demo</div>
-  <div class="vid-desc">Demo video: Building video prompts in ChatGPT and using Google Flow — coming soon</div>
-</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>A strong video prompt describes the scene like a cinematographer would: setting, lighting, subject, movement, and mood. Use ChatGPT to build it from your song's emotional core.</p></div><div class="pb">
-  <div class="pb-head"><span class="pb-label">ChatGPT Prompt: Generate Video Prompts</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
-  <div class="pb-text">I need video prompts for a music video I am creating with Google Flow (AI video generator).
 
-My song details:
-- Song title: [TITLE]
-- Genre and mood: [GENRE AND MOOD]
-- Core emotional message: [FROM YOUR BLUEPRINT]
-- Visual direction notes: [YOUR ANSWERS FROM LESSON 4A]
-
-Create 5 distinct video scene prompts. Each prompt should:
-- Be 2 to 3 sentences describing a specific scene
-- Include: setting, lighting, subject or action, camera movement, and mood
-- Evoke the emotion of the song without illustrating the lyrics literally
-- Be formatted for an AI video generator like Google Flow or Runway
-
-Label each as Scene 1, Scene 2, etc.</div>
-</div><a href="https://chat.openai.com" class="tbtn" target="_blank">
-  <span class="tbtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></span>
-  <span class="tbtn-label">Open ChatGPT</span>
-</a><a href="https://labs.google/flow" class="tbtn out" target="_blank">
-  <span class="tbtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg></span>
-  <span class="tbtn-label">Open Google Flow</span>
-</a></div>
-</div>
-
-<div class="lb">
-  <div class="lb-head">
-    <div class="lb-num">4C</div>
-    <div><div class="lb-eye">Lesson 4C</div><div class="lb-title">The Five-Shot Challenge</div></div>
+  <div class="direction-display reveal" id="direction-display" style="display:none;">
+    <div class="dd-label">Your song's creative direction</div>
+    <div class="dd-chips" id="direction-chips"></div>
   </div>
-  <div class="lb-body"><div class="vid-placeholder">
-  <div class="vid-icon">&#9654;</div>
-  <div class="vid-label">Video Demo</div>
-  <div class="vid-desc">Demo video: Generating all 5 shots in Google Flow — coming soon</div>
-</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>You do not need a full music video. You need 5 strong shots that, when edited together, create an emotional arc.</p></div><div class="cg"><div class="cg-card"><div class="cg-n">01</div><div class="cg-title">Establishing Shot</div><p>Sets the world of the song. Wide, atmospheric, mood-defining.</p></div><div class="cg-card"><div class="cg-n">02</div><div class="cg-title">Emotional Close-Up</div><p>A face, hands, or detail that carries the emotional weight of the song.</p></div><div class="cg-card"><div class="cg-n">03</div><div class="cg-title">Movement Shot</div><p>Something in motion: walking, turning, light shifting. Creates energy.</p></div><div class="cg-card"><div class="cg-n">04</div><div class="cg-title">Story Beat</div><p>A moment that connects to the specific story in your lyrics.</p></div><div class="cg-card"><div class="cg-n">05</div><div class="cg-title">Closing Image</div><p>The final visual impression. Should feel like the emotional resolution of the song.</p></div></div><div class="ch3" style="margin-top:20px;">Five-Shot Checklist</div><ul class="cl"><li><input type="checkbox" id="c0"><label for="c0">Generated Shot 1: Establishing</label></li><li><input type="checkbox" id="c1"><label for="c1">Generated Shot 2: Emotional Close-Up</label></li><li><input type="checkbox" id="c2"><label for="c2">Generated Shot 3: Movement</label></li><li><input type="checkbox" id="c3"><label for="c3">Generated Shot 4: Story Beat</label></li><li><input type="checkbox" id="c4"><label for="c4">Generated Shot 5: Closing Image</label></li></ul><a href="https://labs.google/flow" class="tbtn" target="_blank">
-  <span class="tbtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg></span>
-  <span class="tbtn-label">Open Google Flow</span>
-</a></div>
-</div>
 
-<div class="lb">
-  <div class="lb-head">
-    <div class="lb-num">4D</div>
-    <div><div class="lb-eye">Lesson 4D</div><div class="lb-title">Assemble Your Video</div></div>
+  <div class="wave-divider" id="wave1"></div>
+
+  <div class="studio-label reveal">Pick Your Moment</div>
+  <div class="studio-heading reveal">What moment in your song do you want people to feel?</div>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Think about the line or moment that hits hardest. That is the emotional anchor of your video.</p>
+
+  <div class="reveal" style="margin-bottom:24px;">
+    <label style="display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--card);margin-bottom:8px;">The moment or line</label>
+    <input type="text" class="link-input" id="key-moment" placeholder="e.g. The chorus — 'you loved me to the moon'..." oninput="AISProject.update('visuals.concept',this.value);buildVideoPrompt()">
   </div>
-  <div class="lb-body"><div class="vid-placeholder">
-  <div class="vid-icon">&#9654;</div>
-  <div class="vid-label">Video Demo</div>
-  <div class="vid-desc">Demo video: Assembling the video in CapCut — coming soon</div>
-</div><div class="tp"><div class="tp-eye">Teaching Point</div><p>You have 5 shots and a song. Now combine them. CapCut, iMovie, or even Google Slides can do this. The goal is a 20 to 30 second sample, not a full production.</p></div><div class="pq plain"><p><strong style="color:var(--gold-light);">Simple Assembly Method:</strong> Import your 5 video clips into CapCut or iMovie. Add your Suno song as the audio track. Trim each clip to 4 to 6 seconds. Export at 1080p. That is your music video sample.</p></div><div class="tp" style="border-left-color:var(--gold-light);margin-top:16px;"><div class="tp-eye">Pro Tip: Lip Sync</div><p>Notice that the mouth movement in the sample video at the start of this experience is not perfectly synced to the song. That is completely fixable using CapCut's lip sync feature. We cover that technique in depth in the Advanced AI Music Studio creative experience.</p></div><ul class="cl"><li><input type="checkbox" id="c0"><label for="c0">All 5 video clips downloaded and ready</label></li><li><input type="checkbox" id="c1"><label for="c1">Song audio file downloaded from Suno</label></li><li><input type="checkbox" id="c2"><label for="c2">Clips assembled in order with audio synced</label></li><li><input type="checkbox" id="c3"><label for="c3">Video exported and saved (20 to 30 seconds)</label></li></ul><a href="https://capcut.com" class="tbtn" target="_blank">
-  <span class="tbtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="6" width="20" height="12" rx="0"/><path d="M8 6v12M16 6v12"/></svg></span>
-  <span class="tbtn-label">Open CapCut</span>
-</a></div>
+
+  <div class="wave-divider" id="wave2"></div>
+
+  <div class="studio-label reveal">Pick Your World</div>
+  <div class="studio-heading reveal">What does your song look like?</div>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Choose the visual direction that fits the feeling of your song.</p>
+
+  <div class="vd-grid reveal">
+    <div class="vd-card" onclick="selectVisualDir(this,'Cinematic — real locations, natural light, emotional close-ups')">
+      <div class="vd-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="7" width="20" height="15" rx="1"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+      <div class="vd-title">Cinematic</div>
+      <div class="vd-sub">Real locations, natural light, emotional close-ups</div>
+    </div>
+    <div class="vd-card" onclick="selectVisualDir(this,'Animated — illustrated or motion-graphic style, stylized visuals')">
+      <div class="vd-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <div class="vd-title">Animated</div>
+      <div class="vd-sub">Illustrated or motion-graphic style, stylized visuals</div>
+    </div>
+    <div class="vd-card" onclick="selectVisualDir(this,'Abstract — color, texture, movement, mood-driven visuals')">
+      <div class="vd-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12 Q10 8 12 12 Q14 16 16 12"/></svg></div>
+      <div class="vd-title">Abstract</div>
+      <div class="vd-sub">Color, texture, movement, mood-driven visuals</div>
+    </div>
+    <div class="vd-card" onclick="selectVisualDir(this,'Documentary — candid, personal, real moments and memories')">
+      <div class="vd-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div>
+      <div class="vd-title">Documentary</div>
+      <div class="vd-sub">Candid, personal, real moments and memories</div>
+    </div>
+    <div class="vd-card" onclick="selectVisualDir(this,'Performance — artist in frame, stage or studio energy')">
+      <div class="vd-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+      <div class="vd-title">Performance</div>
+      <div class="vd-sub">Artist in frame, stage or studio energy</div>
+    </div>
+    <div class="vd-card" onclick="selectVisualDir(this,'Narrative — a story told in scenes, characters, a beginning and end')">
+      <div class="vd-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <div class="vd-title">Narrative</div>
+      <div class="vd-sub">A story told in scenes, characters, a beginning and end</div>
+    </div>
+  </div>
+
+  <div class="wave-divider" id="wave3"></div>
+
+  <div class="studio-label reveal">Five-Shot Challenge</div>
+  <div class="studio-heading reveal">Plan five moments.</div>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Describe five shots or scenes — one line each. They do not have to be in order.</p>
+
+  <div class="shot-list reveal">
+    <div class="shot-header">Five Shots</div>
+    <div class="shot-item"><div class="shot-num">01</div><input type="text" class="shot-input" id="shot-1" placeholder="e.g. Close-up of hands on a kitchen counter, late afternoon light..." oninput="saveShots();buildVideoPrompt()"></div>
+    <div class="shot-item"><div class="shot-num">02</div><input type="text" class="shot-input" id="shot-2" placeholder="e.g. An empty chair at the dinner table..." oninput="saveShots();buildVideoPrompt()"></div>
+    <div class="shot-item"><div class="shot-num">03</div><input type="text" class="shot-input" id="shot-3" placeholder="e.g. Someone looking up at the moon through a window..." oninput="saveShots();buildVideoPrompt()"></div>
+    <div class="shot-item"><div class="shot-num">04</div><input type="text" class="shot-input" id="shot-4" placeholder="e.g. Old photographs spread across a table..." oninput="saveShots();buildVideoPrompt()"></div>
+    <div class="shot-item"><div class="shot-num">05</div><input type="text" class="shot-input" id="shot-5" placeholder="e.g. A person walking outside at dusk, head tilted up..." oninput="saveShots();buildVideoPrompt()"></div>
+  </div>
+
+  <div class="wave-divider" id="wave4"></div>
+
+  <div class="studio-label reveal">Generate</div>
+  <div class="studio-heading reveal">Your video prompt for Google Flow.</div>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Built from your song's emotional direction and your five shots. Copy it into Google Flow to generate your video clips.</p>
+
+  <div class="prompt-console reveal">
+    <div class="prompt-console-header">
+      <div class="prompt-console-label"><div class="prompt-dot"></div>Video Generation Prompt</div>
+    </div>
+    <div class="prompt-console-body" id="video-prompt">[Fill in your key moment and five shots above to build your video prompt]</div>
+    <div class="prompt-actions">
+      <button class="copy-btn" onclick="copyPrompt(this,'video-prompt')">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Prompt
+      </button>
+      <a class="flow-btn" href="https://flow.google" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Open Google Flow
+      </a>
+    </div>
+  </div>
+
+  <div class="handoff-block reveal">
+    <div class="handoff-label">Out → Create → Come Back</div>
+    <div class="handoff-text">Generate your video clips in Google Flow. Come back with the version you want to use.</div>
+    <div class="handoff-actions">
+      <a class="flow-btn" href="https://flow.google" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Open Google Flow
+      </a>
+    </div>
+  </div>
+
+  <div class="wave-divider" id="wave5"></div>
+
+  <div class="studio-label reveal">First Watch</div>
+  <div class="studio-heading reveal">Does this feel like your song?</div>
+  <p class="reveal" style="font-size:14px;font-weight:600;color:var(--off);margin-bottom:6px;line-height:1.65;">Watch it all the way through once before you decide.</p>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Paste a link to your video or note the version you want to keep.</p>
+
+  <div class="link-wrap reveal">
+    <label>Your Video Link or Reference</label>
+    <input type="text" class="link-input" id="video-link" placeholder="Paste your Google Flow video link or note the version..." oninput="AISProject.update('visuals.videoLink',this.value)">
+  </div>
+
+  <div class="pifi reveal">
+    <button class="pifi-btn" onclick="pickVideo('pick',this)">
+      <div class="pifi-icon">✓</div>
+      <div class="pifi-label">Pick It</div>
+      <div class="pifi-sub">Yes. This is the one.</div>
+    </button>
+    <button class="pifi-btn" onclick="pickVideo('fix',this)">
+      <div class="pifi-icon">↩</div>
+      <div class="pifi-label">Fix It</div>
+      <div class="pifi-sub">Almost. I want to adjust something.</div>
+    </button>
+  </div>
+
+  <div class="fix-panel" id="fix-panel">
+    <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">What needs to change?</div>
+    <p style="font-size:13px;color:var(--card);line-height:1.75;margin-bottom:14px;">Go back to your Five Shots above, update the descriptions, and rebuild the prompt. Or try adjusting the visual direction and regenerating a specific clip in Google Flow.</p>
+    <div style="margin-top:14px;border-top:1px solid var(--bw);padding-top:14px;">
+      <button onclick="pickVideo('pick',this)" class="green-btn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Done Adjusting
+      </button>
+    </div>
+  </div>
+
+  <div class="wave-divider" id="wave6"></div>
+
+  <div class="studio-label reveal">Cover Art</div>
+  <div class="studio-heading reveal">One image that represents your song.</div>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Optional but powerful. A strong cover image makes your song look like it belongs on a streaming platform.</p>
+
+  <div class="prompt-console reveal">
+    <div class="prompt-console-header">
+      <div class="prompt-console-label"><div class="prompt-dot"></div>Cover Art Prompt</div>
+    </div>
+    <div class="prompt-console-body" id="cover-prompt">[Your cover art prompt will appear here based on your visual direction and song concept]</div>
+    <div class="prompt-actions">
+      <button class="copy-btn" onclick="copyPrompt(this,'cover-prompt')">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Prompt
+      </button>
+      <a class="flow-btn" href="https://gemini.google.com" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Open Gemini
+      </a>
+    </div>
+  </div>
+
+  <div class="link-wrap reveal" style="margin-top:16px;">
+    <label>Cover Art Link or Note (optional)</label>
+    <input type="text" class="link-input" id="cover-art-link" placeholder="Paste a link to your cover art or note where it is saved..." oninput="AISProject.update('visuals.coverArt',this.value)">
+  </div>
+
+  <div class="completion" id="completion">
+    <div class="completion-eyebrow">Session 04 — Complete</div>
+    <div class="completion-title">Your song has a world.</div>
+    <div class="completion-sub">You built the visual story. Now let's decide what happens with it.</div>
+    <div id="completion-ssf"></div>
+    <div style="border-top:1px solid rgba(39,174,96,0.2);padding-top:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <button class="primary-btn" onclick="goNext()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Enter the Release Room
+      </button>
+      <div style="font-size:11px;color:var(--muted);font-family:'Courier New',monospace;">→ Session 05</div>
+    </div>
+  </div>
+
 </div>
 
-<div class="div"></div>
-<div class="sh"><div class="sh-bar"></div><div class="sh-text"><div class="eyebrow">Before You Move On</div><h2>Premiere Checklist</h2></div></div>
-<ul class="cl"><li><input type="checkbox" id="c0"><label for="c0">I have a finished song (audio) from Suno</label></li><li><input type="checkbox" id="c1"><label for="c1">I have a 20 to 30 second music video sample</label></li><li><input type="checkbox" id="c2"><label for="c2">The visuals match the emotional tone of the song</label></li><li><input type="checkbox" id="c3"><label for="c3">I would share this with someone I care about</label></li></ul>
-
-<div class="div"></div>
-<div class="cta"><div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><h3>Session 4 Complete</h3><p>You have a song AND a music video. Head to Session 5: The Release Room, or skip ahead to The Premiere if you are ready to celebrate what you made.</p></div></div>
-
-</div>
 <script>
-function copyPrompt(btn) {
-  var text = btn.closest('.pb').querySelector('.pb-text').innerText;
-  navigator.clipboard.writeText(text).then(function(){
-    btn.textContent = 'COPIED!';
-    setTimeout(function(){ btn.textContent = 'COPY PROMPT'; }, 2000);
-  });
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.05,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);var r=el.getBoundingClientRect();if(r.top<window.innerHeight)el.classList.add('visible');});
+function buildWave(id){var el=document.getElementById(id);if(!el)return;var h=[3,5,8,12,18,24,16,10,6,4,8,14,22,28,20,14,8,5,10,16,24,32,22,14,8,5,3,6,10,16,24,20,14,8,5,3,6,12,18,26,20,12,6,4,8,14,22,16,10,5,3,6,10,18,26,20,12,6,4,8];h.forEach(function(v){var b=document.createElement('div');b.className='wave-bar';b.style.height=v+'px';el.appendChild(b);});}
+['wave1','wave2','wave3','wave4','wave5','wave6'].forEach(buildWave);
+var selectedVisualDir='';
+(function(){
+  var p=AISProject.get();
+  AISProject.renderSongCard('ssf-card-container',['concept','lyrics','production'],'Now let\'s give your song a world.');
+  var genre=p.concept.genre,mood=p.concept.mood,feeling=p.concept.feeling,songRef=p.production.selectedVersion;
+  var chips=[];
+  if(genre)chips.push('<div class="dd-chip">Genre: <span>'+escHtml(genre)+'</span></div>');
+  if(mood)chips.push('<div class="dd-chip">Mood: <span>'+escHtml(mood)+'</span></div>');
+  if(feeling)chips.push('<div class="dd-chip">Feeling: <span>'+escHtml(feeling)+'</span></div>');
+  if(songRef)chips.push('<div class="dd-chip">Song: <span>Ready</span></div>');
+  if(chips.length>0){var dd=document.getElementById('direction-display');var dc=document.getElementById('direction-chips');if(dd)dd.style.display='block';if(dc)dc.innerHTML=chips.join('');}
+  var vis=p.visuals;
+  if(vis.concept){var el=document.getElementById('key-moment');if(el)el.value=vis.concept;}
+  if(vis.direction){
+    selectedVisualDir=vis.direction;
+    document.querySelectorAll('.vd-card').forEach(function(c){
+      var t=c.querySelector('.vd-title');
+      if(t&&vis.direction.indexOf(t.textContent)!==-1)c.classList.add('selected');
+    });
+  }
+  if(vis.storyboard){try{var shots=JSON.parse(vis.storyboard);for(var i=0;i<shots.length;i++){var el=document.getElementById('shot-'+(i+1));if(el)el.value=shots[i]||'';}}catch(e){}}
+  if(vis.videoLink){var el=document.getElementById('video-link');if(el)el.value=vis.videoLink;}
+  if(vis.coverArt){var el=document.getElementById('cover-art-link');if(el)el.value=vis.coverArt;}
+  buildVideoPrompt();buildCoverPrompt();
+})();
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function selectVisualDir(card,direction){
+  document.querySelectorAll('.vd-card').forEach(function(c){c.classList.remove('selected');});
+  card.classList.add('selected');selectedVisualDir=direction;
+  AISProject.update('visuals.direction',direction);buildVideoPrompt();buildCoverPrompt();
 }
+function saveShots(){
+  var shots=[];for(var i=1;i<=5;i++){var el=document.getElementById('shot-'+i);shots.push(el?el.value.trim():'');}
+  AISProject.update('visuals.storyboard',JSON.stringify(shots));
+}
+function buildVideoPrompt(){
+  var p=AISProject.get();
+  var moment=(document.getElementById('key-moment')||{}).value||p.visuals.concept||'';
+  var dir=selectedVisualDir||p.visuals.direction||'';
+  var genre=p.concept.genre||'',mood=p.concept.mood||'',feeling=p.concept.feeling||'';
+  var shots=[];for(var i=1;i<=5;i++){var el=document.getElementById('shot-'+i);var v=el?el.value.trim():'';if(v)shots.push(v);}
+  if(!moment&&!dir&&shots.length===0){var el=document.getElementById('video-prompt');if(el)el.textContent='[Fill in your key moment and five shots above to build your video prompt]';return;}
+  var parts=[];
+  if(dir)parts.push('Visual style: '+dir);
+  if(genre||mood)parts.push('Song direction: '+[genre,mood].filter(Boolean).join(', '));
+  if(feeling)parts.push('Emotional tone: '+feeling);
+  if(moment)parts.push('Key moment to capture: '+moment);
+  if(shots.length>0){parts.push('Scenes to generate:');shots.forEach(function(s,i){parts.push('  '+(i+1)+'. '+s);});}
+  parts.push('');
+  parts.push('Generate cinematic video clips that match this emotional and visual direction. Each clip should feel like it belongs in the same music video. Keep the color palette consistent and the pacing matched to the song\'s mood.');
+  var prompt=parts.join('\n');
+  var el=document.getElementById('video-prompt');if(el)el.textContent=prompt;
+  AISProject.update('visuals.generationPrompts',[prompt]);
+}
+function buildCoverPrompt(){
+  var p=AISProject.get();
+  var dir=selectedVisualDir||p.visuals.direction||'';
+  var genre=p.concept.genre||'',mood=p.concept.mood||'',feeling=p.concept.feeling||'',about=p.concept.about||'';
+  var bp=AISProject.approvedBlueprint();var titleLine='';
+  if(bp){var m=bp.match(/working title[:\s]+([^\n]+)/i);if(m)titleLine=m[1].trim().replace(/^["']|["']$/g,'');}
+  var parts=[];
+  parts.push('Create a music cover art image for a song'+(titleLine?' called "'+titleLine+'"':'')+'.');
+  if(about)parts.push('The song is about: '+about);
+  if(feeling)parts.push('The emotional tone is: '+feeling);
+  if(genre||mood)parts.push('Genre and mood: '+[genre,mood].filter(Boolean).join(', '));
+  if(dir)parts.push('Visual style: '+dir.split('—')[0].trim());
+  parts.push('The image should feel like professional streaming cover art — square format, visually striking, no text or lyrics in the image.');
+  var el=document.getElementById('cover-prompt');if(el)el.textContent=parts.join(' ');
+}
+function pickVideo(choice,btn){
+  document.querySelectorAll('.pifi-btn').forEach(function(b){b.classList.remove('sel-pick','sel-fix');});
+  var fp=document.getElementById('fix-panel');
+  if(choice==='fix'){btn.classList.add('sel-fix');if(fp)fp.classList.add('show');}
+  else{btn.classList.add('sel-pick');if(fp)fp.classList.remove('show');var linkEl=document.getElementById('video-link');AISProject.update('visuals.videoLink',linkEl?linkEl.value.trim():'selected');showCompletion();}
+}
+function showCompletion(){
+  var comp=document.getElementById('completion');if(!comp)return;
+  comp.classList.add('show');
+  AISProject.renderSongCard('completion-ssf',['concept','lyrics','production','visuals'],'Now let\'s decide what happens with it.');
+  setTimeout(function(){comp.scrollIntoView({behavior:'smooth',block:'nearest'});},100);
+}
+function toggleWatchMe(){
+  var body=document.getElementById('watchme-body');var chevron=document.getElementById('watchme-chevron');
+  if(!body)return;var open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  if(chevron)chevron.style.transform=open?'':'rotate(180deg)';
+}
+function copyPrompt(btn,id){
+  var el=document.getElementById(id);if(!el)return;
+  var text=el.innerText||el.textContent;var orig=btn.innerHTML;
+  function ok(){btn.classList.add('copied');btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!';setTimeout(function(){btn.classList.remove('copied');btn.innerHTML=orig;},2500);}
+  function fb(){btn.innerHTML='Selected — press Ctrl+C / Cmd+C';setTimeout(function(){btn.innerHTML=orig;},4000);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok).catch(function(){doFallback(text,ok,fb);});}else{doFallback(text,ok,fb);}
+}
+function doFallback(text,ok,fb){var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0;';document.body.appendChild(ta);ta.focus();ta.select();var res=false;try{res=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);if(res){ok();}else{fb();}}
+function goNext(){try{window.parent.postMessage({action:'teachable_next'},'*');}catch(e){}}
 </script>
-</div><!-- /studio-shell -->
-
-<script>
-// ── SCROLL REVEAL ──────────────────────────────────────────────────────────
-(function() {
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  // Immediately show elements already in viewport on load
-  document.querySelectorAll('.reveal, .reveal-stagger > *').forEach(function(el) {
-    var rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      el.classList.add('visible');
-    }
-  });
-
-  function initReveal() {
-    // Add reveal class to all major sections
-    document.querySelectorAll('.sh, .pq, .tp, .lb, .cg, .cmp, .cl, .vid-placeholder, .tbtn, .cta, .closing, .jr, .path-grid, .ng, .fcta, .dk, .cs, .yt').forEach(function(el) {
-      if (!el.classList.contains('reveal') && !el.classList.contains('reveal-stagger')) {
-        el.classList.add('reveal');
-        observer.observe(el);
-      }
-    });
-    // Stagger card grids
-    document.querySelectorAll('.cg, .ng, .path-grid').forEach(function(el) {
-      el.classList.add('reveal-stagger');
-      el.classList.remove('reveal');
-      observer.observe(el);
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initReveal);
-  } else {
-    initReveal();
-  }
-})();
-
-// ── TICKER ANIMATION ───────────────────────────────────────────────────────
-(function() {
-  function initTicker() {
-    var ticker = document.querySelector('.ticker');
-    if (!ticker) return;
-    var inner = ticker.innerHTML;
-    // Wrap in scrolling inner div and duplicate for seamless loop
-    ticker.innerHTML = '<div class="ticker-inner">' + inner + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + inner + '</div>';
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTicker);
-  } else {
-    initTicker();
-  }
-})();
-
-// ── CHECKLIST INTERACTIONS ─────────────────────────────────────────────────
-(function() {
-  function initChecklists() {
-    document.querySelectorAll('.cl li input[type=checkbox]').forEach(function(cb) {
-      cb.addEventListener('change', function() {
-        var li = cb.closest('li');
-        if (cb.checked) {
-          li.classList.add('checked');
-        } else {
-          li.classList.remove('checked');
-        }
-      });
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initChecklists);
-  } else {
-    initChecklists();
-  }
-})();
-
-// ── COPY BUTTON FLASH ──────────────────────────────────────────────────────
-(function() {
-  function initCopyBtns() {
-    document.querySelectorAll('.copy-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var pb = btn.closest('.pb');
-        var text = pb ? (pb.querySelector('.pb-text') || {}).innerText : '';
-        if (navigator.clipboard && text) {
-          navigator.clipboard.writeText(text.trim()).then(function() {
-            var orig = btn.textContent;
-            btn.textContent = 'COPIED';
-            btn.classList.add('copied');
-            setTimeout(function() {
-              btn.textContent = orig;
-              btn.classList.remove('copied');
-            }, 1800);
-          });
-        }
-      });
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCopyBtns);
-  } else {
-    initCopyBtns();
-  }
-})();
-</script>
-
 </body>
 </html>
