@@ -249,10 +249,19 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
     <div id="ssf-card-container"></div>
   </div>
 
-  <!-- Video placeholder -->
-  <div class="vid-slot reveal">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
-    <p>WATCH ME: From Lyrics to Song in Suno — demo video coming soon</p>
+  <!-- Video placeholder (collapsible) -->
+  <div class="reveal" style="margin-bottom:28px;">
+    <button onclick="toggleWatchMe(this)" style="display:flex;align-items:center;gap:12px;background:transparent;border:none;border-left:3px solid var(--bw);padding:10px 14px;cursor:pointer;font-family:'Inter',sans-serif;text-align:left;width:100%;" onmouseover="this.style.borderLeftColor='var(--gold)'" onmouseout="this.style.borderLeftColor='var(--bw)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+      <div>
+        <div style="font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:2px;">Need to see it?</div>
+        <div style="font-size:13px;font-weight:700;color:var(--card);">Watch me go from lyrics to Suno &nbsp;·&nbsp; 3 min</div>
+      </div>
+      <svg id="watchme-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" style="margin-left:auto;flex-shrink:0;transition:transform .2s;"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div id="watchme-body" style="display:none;border:1px solid var(--bw);border-top:none;padding:16px;">
+      <p style="font-size:12px;color:var(--muted);font-style:italic;">Demo video coming soon — check back when you are ready to create.</p>
+    </div>
   </div>
 
   <!-- Established direction from Session 1 -->
@@ -276,7 +285,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
       <div class="sb-section-label">Energy</div>
       <div class="tag-grid" id="energy-grid">
         <button class="tag-btn" onclick="selectTag(this,'energy','Mellow')">Mellow</button>
-        <button class="tag-btn" onclick="selectTag(this,'energy','Mid')">Mid</button>
+        <button class="tag-btn" onclick="selectTag(this,'energy','Moderate')">Moderate</button>
         <button class="tag-btn" onclick="selectTag(this,'energy','Upbeat')">Upbeat</button>
         <button class="tag-btn" onclick="selectTag(this,'energy','Intense')">Intense</button>
       </div>
@@ -376,6 +385,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <!-- STAGE 5: FIRST LISTEN + PICK IT / FIX IT -->
   <div class="studio-label reveal">First Listen</div>
   <div class="studio-heading reveal">Is this your song?</div>
+  <p class="reveal" style="font-size:14px;font-weight:600;color:var(--off);margin-bottom:6px;line-height:1.65;">You made a song. Listen all the way through once before you decide.</p>
   <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Paste a link to the version you want to work with, then decide.</p>
 
   <div class="song-link-wrap reveal">
@@ -436,13 +446,13 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
       <strong style="color:var(--blue);">Something else</strong><br><br>
       Update your Sound Board selections above to better match what you are hearing in your head, rebuild your Style description, and generate a new version. If you are not sure what to change, try generating 2 to 3 more versions with the same settings — Suno produces variations each time.
     </div>
-    <div style="margin-top:18px;border-top:1px solid var(--bw);padding-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+    <div style="margin-top:18px;border-top:1px solid var(--bw);padding-top:16px;">
       <button onclick="pickSong('pick',this)" class="green-btn">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        That's It
+        Done Adjusting
       </button>
+      <div style="margin-top:10px;font-size:11px;color:var(--muted);line-height:1.6;">Made another version? Compare them below.</div>
     </div>
-    <div style="margin-top:12px;font-size:11px;color:var(--muted);line-height:1.6;">Made a second version? Use <strong style="color:var(--card);">Compare My Versions</strong> below to pick the one you want.</div>
   </div>
 
   <!-- OPTIONAL: COMPARE VERSIONS -->
@@ -705,6 +715,15 @@ function copyBlock(btn, id){
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok).catch(function(){doFallback(text,ok,fb);});}else{doFallback(text,ok,fb);}
 }
 function doFallback(text,ok,fb){var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0;';document.body.appendChild(ta);ta.focus();ta.select();var res=false;try{res=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);if(res){ok();}else{fb();}}
+
+function toggleWatchMe(btn){
+  var body = document.getElementById('watchme-body');
+  var chevron = document.getElementById('watchme-chevron');
+  if(!body) return;
+  var open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  if(chevron) chevron.style.transform = open ? '' : 'rotate(180deg)';
+}
 
 function goNext(){try{window.parent.postMessage({action:'teachable_next'},'*');}catch(e){}}
 </script>
