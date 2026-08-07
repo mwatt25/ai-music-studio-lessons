@@ -200,41 +200,50 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   .body-wrap{padding:0 28px 52px;}
 }
 
+/* ── 2-COLUMN TILE GRID (mobile) ── */
+.starter-tile{
+  display:none; /* hidden by default; shown in mobile breakpoint */
+}
+
 @media(max-width:660px){
-  /* Hide desktop grid, show mobile stack */
+  /* Hide desktop grid, show mobile tile grid */
   .starter-grid{display:none !important;}
-  .starter-mobile-stack{display:flex !important;flex-direction:column;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);position:relative;z-index:1;}
+  .starter-mobile-stack{
+    display:grid !important;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--bw2);
+    box-shadow:var(--sh);
+    position:relative;z-index:1;
+  }
   .starter-bg-glyph{display:none;}
   .starter-composition::before,.starter-composition::after{display:none;}
 
-  /* Mobile horizontal cards */
-  .starter-mobile-card{
-    display:flex;align-items:center;gap:14px;
-    padding:16px 18px;background:var(--navy-2);
-    border-bottom:1px solid var(--bw2);cursor:pointer;
-    transition:background .18s;position:relative;min-height:68px;
+  /* Tile styles */
+  .starter-tile{
+    display:flex;flex-direction:column;align-items:flex-start;
+    gap:8px;padding:16px 14px;
+    background:var(--navy-2);
+    border-right:1px solid var(--bw2);
+    border-bottom:1px solid var(--bw2);
+    cursor:pointer;transition:background .18s;
+    min-height:90px;position:relative;
   }
-  .starter-mobile-card:last-child{border-bottom:none;}
-  .starter-mobile-card:hover{background:var(--navy-3);}
-  .starter-mobile-card.selected{
-    background:rgba(245,166,35,0.07);
-    border-left:3px solid var(--gold);padding-left:15px;
+  .starter-tile:nth-child(even){border-right:none;}
+  .starter-tile:nth-child(7),.starter-tile:nth-child(8){border-bottom:none;}
+  .starter-tile:hover{background:var(--navy-3);}
+  .starter-tile.selected{
+    background:rgba(245,166,35,0.09);
+    border-top:2px solid var(--gold);
+    border-left:1px solid rgba(245,166,35,0.35);
+    border-right:1px solid rgba(245,166,35,0.35);
+    border-bottom:1px solid rgba(245,166,35,0.35);
   }
-  .smc-icon{color:var(--gold);flex-shrink:0;display:flex;align-items:center;}
-  .starter-mobile-card.selected .smc-icon{color:var(--gold-lt);}
-  .smc-text{flex:1;}
-  .smc-title{font-size:14px;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:1px;}
-  .starter-mobile-card.selected .smc-title{color:var(--gold);}
-  .smc-sub{font-size:11px;color:var(--muted);line-height:1.4;}
-  .smc-arrow{color:var(--muted);flex-shrink:0;transition:color .15s;}
-  .starter-mobile-card.selected .smc-arrow{color:var(--gold);}
-
-  /* Journey: vertical on mobile */
-  .journey-strip{flex-direction:column;}
-  .j-step{border-right:none;border-bottom:1px solid var(--bw2);text-align:left;padding:10px 16px;display:flex;align-items:center;gap:12px;}
-  .j-step:last-child{border-bottom:none;}
-  .j-step::after{display:none;}
-  .j-num{margin-bottom:0;min-width:20px;}
+  .st-icon{color:var(--gold);display:flex;align-items:center;}
+  .starter-tile.selected .st-icon{color:var(--gold-lt);}
+  .st-label{font-size:12px;font-weight:800;color:var(--white);line-height:1.3;}
+  .starter-tile.selected .st-label{color:var(--gold);}
+  .st-sub{font-size:10px;color:var(--muted);line-height:1.4;}
 
   .wave-divider{padding:20px 0;}
 }
@@ -272,7 +281,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">The AI Music Studio</div>
-    <div class="hero-title">You came here with an idea.<br>You are leaving with something you made.</div>
+    <div class="hero-title">You came here with an idea.<br>You're leaving with something you made.</div>
     <div class="hero-sub">No music or video experience needed. <strong>Just bring the idea.</strong></div>
   </div>
 </div>
@@ -293,7 +302,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <!-- ── WATCH WHAT'S POSSIBLE ── -->
   <div class="studio-section reveal">
     <div class="studio-label">Watch What's Possible</div>
-    <div class="studio-heading">This is where you are going.</div>
+    <div class="studio-heading">This is where you're going.</div>
   </div>
 
   <div class="yt-wrap reveal">
@@ -371,84 +380,70 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
       </div>
     </div>
 
-    <!-- Mobile horizontal stack -->
+    <!-- Mobile 2-column tile grid -->
     <div class="starter-mobile-stack" id="starter-mobile-stack">
-      <div class="starter-mobile-card" onclick="pick(this,'birthday','mobile')">
-        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="0"/><path d="M21 12v9H3v-9"/><path d="M12 8v13"/><path d="M8 8c0-2 1.5-4 4-4s4 2 4 4"/></svg></div>
-        <div class="smc-text"><div class="smc-title">Birthday or Milestone</div><div class="smc-sub">Celebrating someone</div></div>
-        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      <div class="starter-tile" onclick="pick(this,'birthday','mobile')">
+        <div class="st-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="0"/><path d="M21 12v9H3v-9"/><path d="M12 8v13"/><path d="M8 8c0-2 1.5-4 4-4s4 2 4 4"/></svg></div>
+        <div class="st-label">Birthday or Milestone</div>
+        <div class="st-sub">Celebrating someone</div>
       </div>
-      <div class="starter-mobile-card" onclick="pick(this,'anniversary','mobile')">
-        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-        <div class="smc-text"><div class="smc-title">Love or Anniversary</div><div class="smc-sub">A relationship or person</div></div>
-        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      <div class="starter-tile" onclick="pick(this,'anniversary','mobile')">
+        <div class="st-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="st-label">Love or Anniversary</div>
+        <div class="st-sub">A relationship or person</div>
       </div>
-      <div class="starter-mobile-card" onclick="pick(this,'tribute','mobile')">
-        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c0 0-1 1.5-1 3s1 2 1 2 1-.5 1-2-1-3-1-3z"/><rect x="9" y="7" width="6" height="13" rx="0"/><path d="M9 20h6"/><path d="M8 20c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2"/></svg></div>
-        <div class="smc-text"><div class="smc-title">Tribute or Memory</div><div class="smc-sub">Honoring someone</div></div>
-        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      <div class="starter-tile" onclick="pick(this,'tribute','mobile')">
+        <div class="st-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c0 0-1 1.5-1 3s1 2 1 2 1-.5 1-2-1-3-1-3z"/><rect x="9" y="7" width="6" height="13" rx="0"/><path d="M9 20h6"/><path d="M8 20c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2"/></svg></div>
+        <div class="st-label">Tribute or Memory</div>
+        <div class="st-sub">Honoring someone</div>
       </div>
-      <div class="starter-mobile-card" onclick="pick(this,'funny','mobile')">
-        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2.5"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2.5"/></svg></div>
-        <div class="smc-text"><div class="smc-title">Funny or Playful</div><div class="smc-sub">Light, humorous, fun</div></div>
-        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      <div class="starter-tile" onclick="pick(this,'funny','mobile')">
+        <div class="st-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2.5"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2.5"/></svg></div>
+        <div class="st-label">Funny or Playful</div>
+        <div class="st-sub">Light, humorous, fun</div>
       </div>
-      <div class="starter-mobile-card" onclick="pick(this,'personal','mobile')">
-        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-        <div class="smc-text"><div class="smc-title">Personal Story</div><div class="smc-sub">Something I went through</div></div>
-        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      <div class="starter-tile" onclick="pick(this,'personal','mobile')">
+        <div class="st-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <div class="st-label">Personal Story</div>
+        <div class="st-sub">Something I went through</div>
       </div>
-      <div class="starter-mobile-card" onclick="pick(this,'celebration','mobile')">
-        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        <div class="smc-text"><div class="smc-title">Celebration</div><div class="smc-sub">Achievement, graduation, win</div></div>
-        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      <div class="starter-tile" onclick="pick(this,'celebration','mobile')">
+        <div class="st-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="st-label">Celebration</div>
+        <div class="st-sub">Achievement, graduation, win</div>
       </div>
-      <div class="starter-mobile-card" onclick="pick(this,'justbecause','mobile')">
-        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-        <div class="smc-text"><div class="smc-title">Just Because</div><div class="smc-sub">I have an idea. That is enough.</div></div>
-        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      <div class="starter-tile" onclick="pick(this,'justbecause','mobile')">
+        <div class="st-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <div class="st-label">Just Because</div>
+        <div class="st-sub">I have an idea. That's enough.</div>
       </div>
-      <div class="starter-mobile-card" onclick="pick(this,'notsure','mobile')">
-        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg></div>
-        <div class="smc-text"><div class="smc-title">Not Sure Yet</div><div class="smc-sub">Session 1 will help me figure it out.</div></div>
-        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      <div class="starter-tile" onclick="pick(this,'notsure','mobile')">
+        <div class="st-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg></div>
+        <div class="st-label">Not Sure Yet</div>
+        <div class="st-sub">Session 1 will help</div>
       </div>
     </div>
   </div><!-- /starter-composition -->
 
   <!-- Starter responses -->
-  <div class="starter-response" id="sr-birthday"><div class="sr-text">Okay. We are making a <strong>birthday song.</strong> Let's make sure it sounds like yours.</div></div>
-  <div class="starter-response" id="sr-anniversary"><div class="sr-text">Okay. We are making a <strong>love song.</strong> Let's make sure it sounds like yours.</div></div>
-  <div class="starter-response" id="sr-tribute"><div class="sr-text">Okay. We are making a <strong>tribute.</strong> Let's make sure it sounds like theirs.</div></div>
-  <div class="starter-response" id="sr-funny"><div class="sr-text">Okay. We are making something <strong>funny.</strong> Let's make sure it lands.</div></div>
-  <div class="starter-response" id="sr-personal"><div class="sr-text">Okay. We are making a <strong>personal story song.</strong> Let's make sure it sounds like you.</div></div>
-  <div class="starter-response" id="sr-celebration"><div class="sr-text">Okay. We are making a <strong>celebration song.</strong> Let's make it feel earned.</div></div>
-  <div class="starter-response" id="sr-justbecause"><div class="sr-text">Okay. We are making something. <strong>That is enough.</strong> Let's go build it.</div></div>
-  <div class="starter-response" id="sr-notsure"><div class="sr-text">That is completely fine. <strong>Session 1 will help you figure it out.</strong> Let's go.</div></div>
-
-  <!-- Waveform divider -->
-  <div class="wave-divider" id="wave-journey"></div>
-
-  <!-- ── JOURNEY ── -->
-  <div class="studio-label reveal">The Journey</div>
-  <div class="journey-strip reveal">
-    <div class="j-step"><div class="j-num">01</div><div class="j-label">Idea</div></div>
-    <div class="j-step"><div class="j-num">02</div><div class="j-label">Lyrics</div></div>
-    <div class="j-step"><div class="j-num">03</div><div class="j-label">Song</div></div>
-    <div class="j-step"><div class="j-num">04</div><div class="j-label">Video</div></div>
-    <div class="j-step opt"><div class="j-num">05</div><div class="j-label">Release</div></div>
-  </div>
-  <div class="j-note reveal">Release is optional. You can stop at any point and keep it personal.</div>
+  <div class="starter-response" id="sr-birthday"><div class="sr-text">Okay. We're making a <strong>birthday song.</strong> Let's make sure it sounds like yours.</div></div>
+  <div class="starter-response" id="sr-anniversary"><div class="sr-text">Okay. We're making a <strong>love song.</strong> Let's make sure it sounds like yours.</div></div>
+  <div class="starter-response" id="sr-tribute"><div class="sr-text">Okay. We're making a <strong>tribute.</strong> Let's make sure it sounds like theirs.</div></div>
+  <div class="starter-response" id="sr-funny"><div class="sr-text">Okay. We're making something <strong>funny.</strong> Let's make sure it lands.</div></div>
+  <div class="starter-response" id="sr-personal"><div class="sr-text">Okay. We're making a <strong>personal story song.</strong> Let's make sure it sounds like you.</div></div>
+  <div class="starter-response" id="sr-celebration"><div class="sr-text">Okay. We're making a <strong>celebration song.</strong> Let's make it feel earned.</div></div>
+  <div class="starter-response" id="sr-justbecause"><div class="sr-text">Okay. We're making something. <strong>That's enough.</strong> Let's go build it.</div></div>
+  <div class="starter-response" id="sr-notsure"><div class="sr-text">That's completely fine. <strong>Session 1 will help you figure it out.</strong> Let's go.</div></div>
 
   <!-- ── CTA ── -->
   <div class="cta-block reveal">
-    <div class="cta-eyebrow">Ready?</div>
-    <div class="cta-text" id="cta-text">Your song is waiting.<br>Let's go build it.</div>
+    <div class="cta-eyebrow" id="cta-eyebrow">You're Ready</div>
+    <div class="cta-text" id="cta-text">Let's make your song.<br><span style="font-size:.85em;font-weight:600;color:var(--card);">Session 1 starts with whatever you have right now.</span></div>
     <button class="cta-btn" onclick="enterStudio(event)">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       Enter the Studio
     </button>
-    <div class="cta-note">Start with Session 1: The Concept.</div>
+    <div class="cta-note" id="cta-note">Start with Session 1: The Concept.</div>
   </div>
 
 </div><!-- /body-wrap -->
@@ -480,16 +475,16 @@ var ctaMsg={
 var labels={birthday:"Birthday Song",anniversary:"Love Song",tribute:"Tribute",funny:"Funny Song",personal:"Personal Story Song",celebration:"Celebration Song",justbecause:"Just Because",notsure:"Still Figuring It Out"};
 
 function pick(card,type,mode){
-  // Deselect all desktop + mobile cards
-  document.querySelectorAll('.starter-card,.starter-mobile-card').forEach(function(c){c.classList.remove('selected');});
+  // Deselect all desktop + mobile cards + tiles
+  document.querySelectorAll('.starter-card,.starter-mobile-card,.starter-tile').forEach(function(c){c.classList.remove('selected');});
   // Select both desktop and mobile version
   var desktopCards=document.querySelectorAll('.starter-card');
-  var mobileCards=document.querySelectorAll('.starter-mobile-card');
+  var mobileTiles=document.querySelectorAll('.starter-tile');
   var typeMap={birthday:0,anniversary:1,tribute:2,funny:3,personal:4,celebration:5,justbecause:6,notsure:7};
   var idx=typeMap[type];
   if(idx!==undefined){
     if(desktopCards[idx])desktopCards[idx].classList.add('selected');
-    if(mobileCards[idx])mobileCards[idx].classList.add('selected');
+    if(mobileTiles[idx])mobileTiles[idx].classList.add('selected');
   }
   // Show response
   document.querySelectorAll('.starter-response').forEach(function(r){r.classList.remove('show');});
@@ -497,7 +492,14 @@ function pick(card,type,mode){
   if(resp){resp.classList.add('show');resp.scrollIntoView({behavior:'smooth',block:'nearest'});}
   // Update CTA
   var ctaEl=document.getElementById('cta-text');
-  if(ctaEl&&ctaMsg[type])ctaEl.innerHTML=ctaMsg[type];
+  var ctaNoteEl=document.getElementById('cta-note');
+  if(type==='notsure'){
+    if(ctaEl)ctaEl.innerHTML="That's completely fine.<br><span style='font-size:.85em;font-weight:600;color:var(--card);'>Session 1 will help you figure it out.</span>";
+    if(ctaNoteEl)ctaNoteEl.textContent="Start with Session 1: The Concept.";
+  }else{
+    if(ctaEl&&ctaMsg[type])ctaEl.innerHTML=ctaMsg[type];
+    if(ctaNoteEl)ctaNoteEl.textContent="Start with Session 1: The Concept.";
+  }
   // Persist
   try{localStorage.setItem('ais_song_type',type);localStorage.setItem('ais_song_label',labels[type]||type);}catch(e){}
 }
@@ -511,11 +513,16 @@ function pick(card,type,mode){
       var idx=typeMap[saved];
       if(idx!==undefined){
         var desktopCards=document.querySelectorAll('.starter-card');
-        var mobileCards=document.querySelectorAll('.starter-mobile-card');
+        var mobileTiles=document.querySelectorAll('.starter-tile');
         if(desktopCards[idx])desktopCards[idx].classList.add('selected');
-        if(mobileCards[idx])mobileCards[idx].classList.add('selected');
+        if(mobileTiles[idx])mobileTiles[idx].classList.add('selected');
         var resp=document.getElementById('sr-'+saved);if(resp)resp.classList.add('show');
-        var ctaEl=document.getElementById('cta-text');if(ctaEl&&ctaMsg[saved])ctaEl.innerHTML=ctaMsg[saved];
+        var ctaEl=document.getElementById('cta-text');
+        if(saved==='notsure'){
+          if(ctaEl)ctaEl.innerHTML="That's completely fine.<br><span style='font-size:.85em;font-weight:600;color:var(--card);'>Session 1 will help you figure it out.</span>";
+        }else if(ctaEl&&ctaMsg[saved]){
+          ctaEl.innerHTML=ctaMsg[saved];
+        }
       }
     }
   }catch(e){}
