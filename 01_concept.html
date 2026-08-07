@@ -469,8 +469,8 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 
 @media(max-width:660px){
   /* Hide desktop grid, show mobile stack */
-  .sp-grid{display:none;}
-  .sp-mobile-stack{display:flex;flex-direction:column;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);}
+  .sp-grid{display:none !important;}
+  .sp-mobile-stack{display:flex !important;flex-direction:column;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);}
   /* Lyric artifact: hidden on mobile, too noisy */
   .lyric-artifact{display:none;}
   .sp-bg-num{display:none;}
@@ -671,7 +671,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
       </div>
 
       <!-- Mobile horizontal stack (hidden on desktop via CSS) -->
-      <div class="sp-mobile-stack" id="sp-mobile-stack">
+      <div class="sp-mobile-stack" id="sp-mobile-stack" style="display:none;">
         <div class="sp-mobile-card" id="mob-card-idea" onclick="selectStart('idea',this)">
           <div class="sp-mobile-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
