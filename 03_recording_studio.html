@@ -780,6 +780,84 @@ body {
   .tag { font-size: 11px; padding: 4px 8px; }
 }
 
+
+/* ═══════════════════════════════════════════════
+   HERO MOBILE FIX — eliminate blank space
+   ═══════════════════════════════════════════════ */
+@media (max-width: 560px) {
+  /* Studio shell: no min-height on mobile */
+  .studio-shell { min-height: 0 !important; }
+
+  /* Hero: compact on mobile — no tall background image area */
+  .hero {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+  /* Hide the background image on mobile — it just creates blank space */
+  .hero-bg { display: none !important; }
+  .hero-overlay { display: none !important; }
+  .hero-accent { display: none !important; }
+
+  /* Hero content: flat dark panel, no background image needed */
+  .hero-content {
+    background: var(--navy-2) !important;
+    border-bottom: 3px solid var(--gold) !important;
+    padding: 20px 16px 20px 16px !important;
+    position: relative !important;
+  }
+
+  /* Brand row: tighten up */
+  .brand-row { margin-bottom: 10px; }
+  .brand-logo { height: 22px; }
+
+  /* Hero title: smaller on mobile */
+  .hero-title {
+    font-size: 1.8rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* Hero rule: hide the animated gold line */
+  .hero-rule { display: none !important; }
+
+  /* Hero tagline: tighter */
+  .hero-tagline {
+    font-size: 0.9rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* Meta row: horizontal scroll if needed */
+  .meta-row {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .meta-chip {
+    font-size: 9px !important;
+    padding: 4px 10px !important;
+    border-right: none !important;
+    border: 1px solid var(--bw) !important;
+  }
+
+  /* Ticker: tighter on mobile */
+  .ticker { padding: 7px 16px !important; }
+  .ticker-text { font-size: 10px !important; letter-spacing: 1.5px !important; }
+
+  /* Body wrap: tighter top padding */
+  .body-wrap { padding-top: 24px !important; }
+
+  /* Video demo placeholder: shorter on mobile */
+  .vid-placeholder { min-height: 60px !important; padding: 14px 14px !important; }
+  .vid-placeholder p { font-size: 12px !important; }
+}
+
+@media (max-width: 820px) {
+  /* Tablet: reduce hero height */
+  .hero { min-height: 0 !important; }
+  .hero-content { padding: 22px 28px 28px 28px !important; }
+  .hero-title { font-size: clamp(1.6rem, 4vw, 2.4rem) !important; }
+}
+
 </style>
 </head>
 <body>
