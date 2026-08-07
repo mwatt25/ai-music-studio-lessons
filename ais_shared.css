@@ -1,0 +1,59 @@
+/* ── AIS SHARED STYLES ──────────────────────────────────────────────────── */
+/* Included by all session pages. Requires CSS variables from the host page. */
+
+/* ── YOUR SONG SO FAR CARD ── */
+.ssf-card{
+  background:rgba(245,166,35,0.04);
+  border:1px solid rgba(245,166,35,0.18);
+  border-left:3px solid var(--gold,#F5A623);
+  padding:18px 20px;
+  margin-bottom:32px;
+}
+.ssf-eyebrow{
+  font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(245,166,35,0.6);margin-bottom:8px;
+}
+.ssf-title{
+  font-size:1.25rem;font-weight:900;color:var(--white,#fff);
+  line-height:1.15;margin-bottom:4px;letter-spacing:-.01em;
+}
+.ssf-meta{
+  font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  color:var(--muted,#7A8A9A);margin-bottom:12px;
+}
+.ssf-checks{
+  display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;
+}
+.ssf-check{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;color:var(--green,#27AE60);
+  letter-spacing:.5px;
+}
+.ssf-check svg{color:var(--green,#27AE60);flex-shrink:0;}
+.ssf-next{
+  font-size:13px;font-weight:700;color:var(--card,#C4CDD6);
+  border-top:1px solid rgba(255,255,255,0.07);padding-top:10px;margin-top:4px;
+}
+
+/* ── SAVE / RESTORE UI ── */
+.sr-wrap{
+  background:var(--navy-2,#131A22);
+  border:1px solid rgba(255,255,255,0.07);
+  padding:20px 22px;
+}
+.sr-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold,#F5A623);margin-bottom:6px;
+}
+.sr-desc{
+  font-size:13px;color:var(--card,#C4CDD6);line-height:1.65;margin-bottom:10px;
+}
+.sr-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;border:1px solid var(--gold,#F5A623);
+  color:var(--gold,#F5A623);font-size:10px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;padding:9px 18px;
+  cursor:pointer;font-family:'Inter',sans-serif;
+  transition:background .15s,color .15s;min-height:38px;
+}
+.sr-btn:hover{background:var(--gold,#F5A623);color:#0D1117;}

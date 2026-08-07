@@ -6,6 +6,8 @@
 <title>Session 2: The Writing Room — AI Music Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ais_shared.css">
+<script src="ais_project.js"></script>
 <style>
 :root{
   --navy:#0D1117;--navy-2:#131A22;--navy-3:#1A2332;--navy-4:#080C12;
@@ -515,7 +517,32 @@ document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);var r=
 function buildWave(id){var el=document.getElementById(id);if(!el)return;var h=[3,5,8,12,18,24,16,10,6,4,8,14,22,28,20,14,8,5,10,16,24,32,22,14,8,5,3,6,10,16,24,20,14,8,5,3,6,12,18,26,20,12,6,4,8,14,22,16,10,5,3,6,10,18,26,20,12,6,4,8];h.forEach(function(v){var b=document.createElement('div');b.className='wave-bar';b.style.height=v+'px';el.appendChild(b);});}
 ['wave-a','wave-review'].forEach(buildWave);
 
-function ls(k,v){try{if(v===undefined)return localStorage.getItem('ais_'+k);localStorage.setItem('ais_'+k,v);}catch(e){return null;}}
+var _lsMap2={
+  'start_path':'project.startingRoute',
+  'sb_about':'concept.about','sb_why':'concept.why','sb_details':'concept.details',
+  'sb_memory':'concept.memory','sb_feeling':'concept.feeling','sb_avoid':'concept.avoid',
+  'genre':'concept.genre','mood':'concept.mood',
+  'blueprint_for_lyrics':'blueprint.approved',
+  'lyrics':'lyrics.working',
+  'lyrics_ready':'lyrics.ready'
+};
+function ls(k,v){
+  var path=_lsMap2[k];
+  try{
+    if(v===undefined){
+      if(path){var val=AISProject.field(path);if(val!==''&&val!==null&&val!==undefined)return val===true?'1':String(val);}
+      return localStorage.getItem('ais_'+k);
+    } else {
+      if(path){
+        var writeVal=v;
+        if(path==='lyrics.ready')writeVal=(v==='1'||v===true);
+        AISProject.update(path,writeVal);
+        if(path==='lyrics.working'){AISProject.update('lyrics.approved',writeVal);}
+      }
+      localStorage.setItem('ais_'+k,v);
+    }
+  }catch(e){return null;}
+}
 function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').substring(0,60)+(s.length>60?'…':'');}
 
 // ── SILENT PATH DETECTION ──
