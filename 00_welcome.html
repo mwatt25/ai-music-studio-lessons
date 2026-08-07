@@ -7,91 +7,263 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy:#0D1117; --navy-2:#131A22; --navy-3:#1A2332;
-  --gold:#F5A623; --gold-lt:#FBCF7A;
-  --green:#27AE60; --white:#FFFFFF; --off:#E8EDF2;
-  --card:#B0BEC8; --muted:#6B7A8A;
-  --bw:rgba(255,255,255,0.08); --sh:4px 4px 0 rgba(0,0,0,0.5);
+:root{
+  --navy:#0D1117;--navy-2:#131A22;--navy-3:#1A2332;--navy-4:#080C12;
+  --gold:#F5A623;--gold-lt:#FBCF7A;--gold-dim:rgba(245,166,35,0.1);
+  --blue:#4A9EBF;--blue-dim:rgba(74,158,191,0.08);
+  --green:#27AE60;--green-dim:rgba(39,174,96,0.08);
+  --white:#FFFFFF;--off:#E8EDF2;--card:#C4CDD6;--muted:#7A8A9A;
+  --bw:rgba(255,255,255,0.07);--bw2:rgba(255,255,255,0.12);
+  --sh:4px 4px 0 rgba(0,0,0,0.6);--sh-sm:2px 2px 0 rgba(0,0,0,0.5);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;}
+
+/* ── BRAND BAR ── */
 .brand-bar{display:flex;align-items:center;gap:10px;padding:10px 20px;background:var(--navy-2);border-bottom:1px solid var(--bw);}
 .brand-logo{height:24px;opacity:.9;}
 .brand-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+
+/* ── HERO ── */
 .hero{position:relative;width:100%;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
 .hero-bg{position:absolute;inset:0;background-image:url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/GxOhZnRhIOoScchN.jpg');background-size:cover;background-position:center 20%;filter:brightness(.18) saturate(.5);}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 20%,rgba(13,17,23,.97) 100%);}
 .hero-content{position:relative;z-index:2;padding:60px 48px 44px;}
-.hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
-.hero-title{font-size:clamp(2.4rem,6vw,3.8rem);font-weight:900;color:var(--white);line-height:1.05;margin-bottom:18px;}
-.hero-sub{font-size:1.05rem;color:var(--card);line-height:1.65;max-width:500px;}
+.hero-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.hero-eyebrow::after{content:'';flex:1;height:1px;background:rgba(245,166,35,0.2);}
+.hero-title{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:900;color:var(--white);line-height:1.05;margin-bottom:18px;letter-spacing:-.02em;}
+.hero-sub{font-size:1rem;color:var(--card);line-height:1.65;max-width:500px;}
 .hero-sub strong{color:var(--gold-lt);font-weight:700;}
+
+/* ── TICKER ── */
 .ticker{background:var(--gold);padding:8px 0;overflow:hidden;}
 .ticker-inner{display:flex;gap:40px;white-space:nowrap;animation:ts 22s linear infinite;}
 .ticker-text{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--navy);}
-@keyframes ts{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.body-wrap{max-width:860px;margin:0 auto;padding:40px 48px 56px;}
-.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
-.div{height:1px;background:var(--bw);margin:28px 0;}
-.yt-wrap{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;background:#000;margin-bottom:10px;box-shadow:var(--sh);}
+@keyframes ts{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ── BODY ── */
+.body-wrap{max-width:900px;margin:0 auto;padding:0 48px 64px;}
+
+/* ── STUDIO SECTION HEADER ── */
+.studio-section{padding:44px 0 0;}
+.studio-label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:9px;font-weight:900;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:6px;
+}
+.studio-label::before{content:'';width:20px;height:2px;background:var(--gold);}
+.studio-heading{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:6px;letter-spacing:-.02em;}
+.studio-sub{font-size:13px;color:var(--card);margin-bottom:24px;line-height:1.6;}
+
+/* ── YOUTUBE ── */
+.yt-wrap{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;background:#000;box-shadow:var(--sh);}
 .yt-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
-.yt-cap{font-size:13px;color:var(--card);margin-bottom:28px;line-height:1.6;}
+.yt-cap{font-size:14px;color:var(--off);line-height:1.7;padding:14px 18px;border-left:3px solid var(--gold);margin-top:12px;margin-bottom:0;}
+.yt-cap strong{color:var(--gold-lt);font-weight:700;}
 .yt-mobile-link{display:none;}
-.starter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--bw);box-shadow:var(--sh);margin-bottom:14px;overflow:hidden;}
-.starter-card{background:var(--navy-2);border-right:1px solid var(--bw);border-bottom:1px solid var(--bw);padding:16px 10px;cursor:pointer;transition:background .15s;text-align:center;user-select:none;}
+
+/* ── WAVEFORM DIVIDER ── */
+.wave-divider{display:flex;align-items:center;gap:3px;padding:32px 0;opacity:.2;}
+.wave-bar{width:2px;background:var(--gold);border-radius:1px;flex-shrink:0;}
+
+/* ── SONG STARTER: DESKTOP 4-COL GRID ── */
+.starter-composition{position:relative;margin-bottom:0;}
+/* Ghost "?" behind the grid */
+.starter-bg-glyph{
+  position:absolute;bottom:-40px;left:-28px;
+  font-size:clamp(120px,18vw,200px);font-weight:900;
+  color:rgba(245,166,35,0.025);line-height:1;
+  pointer-events:none;user-select:none;letter-spacing:-0.04em;z-index:0;
+  font-style:italic;
+}
+/* Crop marks */
+.starter-composition::before,.starter-composition::after{
+  content:'';position:absolute;width:12px;height:12px;
+  border-color:rgba(245,166,35,0.2);border-style:solid;
+  pointer-events:none;z-index:10;
+}
+.starter-composition::before{top:-6px;left:-6px;border-width:1px 0 0 1px;}
+.starter-composition::after{top:-6px;right:-6px;border-width:1px 1px 0 0;}
+
+.starter-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);
+  position:relative;z-index:1;
+}
+.starter-card{
+  background:var(--navy-2);border-right:1px solid var(--bw2);
+  padding:20px 14px 18px;cursor:pointer;
+  transition:background .18s;
+  user-select:none;display:flex;flex-direction:column;align-items:center;gap:10px;
+  text-align:center;position:relative;overflow:hidden;
+}
+/* Row 1: cards 1-4 have bottom border */
+.starter-card:nth-child(-n+4){border-bottom:1px solid var(--bw2);}
+/* Last in each row: no right border */
+.starter-card:nth-child(4),.starter-card:nth-child(8){border-right:none;}
 .starter-card:hover{background:var(--navy-3);}
-.starter-card.selected{background:rgba(245,166,35,0.07);border-top:3px solid var(--gold);border-left:1px solid rgba(245,166,35,0.3);border-right:1px solid rgba(245,166,35,0.3);border-bottom:1px solid rgba(245,166,35,0.3);}
-.sc-icon{display:flex;align-items:center;justify-content:center;height:32px;margin-bottom:8px;color:var(--gold);}
-.sc-label{font-size:12px;font-weight:700;color:var(--white);line-height:1.3;}
-.sc-sub{font-size:10px;color:var(--muted);margin-top:3px;}
-.starter-card.selected .sc-label{color:var(--gold);}.starter-card.selected .sc-icon{color:var(--gold-lt);}
-.starter-response{display:none;background:var(--navy-3);border:1px solid var(--bw);border-left:4px solid var(--gold);padding:16px 18px;margin-bottom:20px;}
+/* Hover annotation */
+.sc-hover-note{
+  position:absolute;bottom:6px;right:6px;
+  font-family:'Courier New',monospace;font-size:8px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;color:var(--gold);
+  opacity:0;transform:rotate(-1.5deg) translateY(3px);
+  transition:opacity .25s,transform .25s;pointer-events:none;white-space:nowrap;
+}
+.starter-card:hover .sc-hover-note{opacity:.6;transform:rotate(-1.5deg) translateY(0);}
+.starter-card.selected .sc-hover-note{opacity:0;}
+.starter-card.selected{
+  background:rgba(245,166,35,0.07);
+  border-top:3px solid var(--gold);
+  border-left:1px solid rgba(245,166,35,0.3);
+  border-right:1px solid rgba(245,166,35,0.3);
+  border-bottom:1px solid rgba(245,166,35,0.3);
+}
+.sc-icon{display:flex;align-items:center;justify-content:center;height:32px;color:var(--gold);}
+.starter-card.selected .sc-icon{color:var(--gold-lt);}
+.sc-label{font-size:12px;font-weight:800;color:var(--white);line-height:1.3;}
+.starter-card.selected .sc-label{color:var(--gold);}
+.sc-sub{font-size:10px;color:var(--muted);line-height:1.4;}
+
+/* ── STARTER RESPONSE ── */
+.starter-response{
+  display:none;
+  border:1px solid var(--bw);border-left:4px solid var(--gold);
+  padding:14px 18px;margin-top:12px;margin-bottom:0;
+  background:var(--navy-3);
+}
 .starter-response.show{display:block;}
 .sr-text{font-size:14px;color:var(--off);line-height:1.7;}
 .sr-text strong{color:var(--gold-lt);font-weight:700;}
-.journey{display:flex;align-items:stretch;border:1px solid var(--bw);box-shadow:var(--sh);margin-bottom:8px;overflow:hidden;}
-.j-step{flex:1;padding:12px 8px;background:var(--navy-2);border-right:1px solid var(--bw);text-align:center;position:relative;}
+
+/* ── JOURNEY STRIP ── */
+.journey-strip{
+  display:flex;align-items:stretch;
+  border:1px solid var(--bw2);box-shadow:var(--sh);
+  overflow:hidden;position:relative;
+}
+.j-step{
+  flex:1;padding:14px 8px;background:var(--navy-2);
+  border-right:1px solid var(--bw2);text-align:center;position:relative;
+}
 .j-step:last-child{border-right:none;}
-.j-step::after{content:'→';position:absolute;right:-9px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--muted);z-index:1;}
+.j-step::after{
+  content:'→';position:absolute;right:-9px;top:50%;
+  transform:translateY(-50%);font-size:12px;color:var(--muted);z-index:1;
+}
 .j-step:last-child::after{display:none;}
 .j-num{font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
 .j-label{font-size:11px;font-weight:800;color:var(--white);line-height:1.3;}
 .j-step.opt .j-label{color:var(--muted);}
-.j-note{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:28px;}
-.cta-block{background:var(--navy-2);border:1px solid var(--bw);border-top:3px solid var(--gold);padding:28px 24px;box-shadow:var(--sh);text-align:center;}
-.cta-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
-.cta-text{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:20px;line-height:1.4;}
-.cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;box-shadow:var(--sh);transition:transform .1s,box-shadow .1s;cursor:pointer;border:none;font-family:'Inter',sans-serif;}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:6px 6px 0 rgba(0,0,0,.5);}
+.j-note{font-size:12px;color:var(--muted);font-style:italic;margin-top:10px;font-family:'Courier New',monospace;}
+
+/* ── CTA ── */
+.cta-block{
+  background:var(--navy-2);border:1px solid var(--bw2);
+  border-top:3px solid var(--gold);padding:32px 28px;
+  box-shadow:var(--sh);text-align:center;
+  position:relative;overflow:hidden;margin-top:40px;
+}
+.cta-block::before{
+  content:'GO';position:absolute;right:-10px;bottom:-20px;
+  font-size:130px;font-weight:900;color:rgba(245,166,35,0.03);
+  line-height:1;pointer-events:none;letter-spacing:-.04em;
+}
+.cta-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.cta-text{font-size:clamp(1.1rem,2.5vw,1.4rem);font-weight:900;color:var(--white);margin-bottom:22px;line-height:1.3;letter-spacing:-.01em;}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gold);color:var(--navy);
+  font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;
+  padding:14px 28px;box-shadow:var(--sh);
+  transition:transform .12s,box-shadow .12s;cursor:pointer;
+  border:none;font-family:'Inter',sans-serif;min-height:48px;
+}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:6px 6px 0 rgba(0,0,0,.6);}
 .cta-btn:active{transform:translateY(2px);box-shadow:2px 2px 0 rgba(0,0,0,.4);}
-.cta-note{font-size:12px;color:var(--muted);margin-top:14px;}
+.cta-note{font-size:11px;color:var(--muted);margin-top:14px;font-family:'Courier New',monospace;}
+
+/* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;}
 .reveal.visible{opacity:1;transform:none;}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;}}
-@media(max-width:820px){.hero-content{padding:40px 28px 32px;}.body-wrap{padding:32px 28px 48px;}.starter-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ══════════════════════════════════════════════
+   MOBILE
+══════════════════════════════════════════════ */
+@media(max-width:820px){
+  .hero-content{padding:40px 28px 32px;}
+  .body-wrap{padding:0 28px 52px;}
+}
+
+@media(max-width:660px){
+  /* Hide desktop grid, show mobile stack */
+  .starter-grid{display:none;}
+  .starter-mobile-stack{display:flex;flex-direction:column;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);position:relative;z-index:1;}
+  .starter-bg-glyph{display:none;}
+  .starter-composition::before,.starter-composition::after{display:none;}
+
+  /* Mobile horizontal cards */
+  .starter-mobile-card{
+    display:flex;align-items:center;gap:14px;
+    padding:16px 18px;background:var(--navy-2);
+    border-bottom:1px solid var(--bw2);cursor:pointer;
+    transition:background .18s;position:relative;min-height:68px;
+  }
+  .starter-mobile-card:last-child{border-bottom:none;}
+  .starter-mobile-card:hover{background:var(--navy-3);}
+  .starter-mobile-card.selected{
+    background:rgba(245,166,35,0.07);
+    border-left:3px solid var(--gold);padding-left:15px;
+  }
+  .smc-icon{color:var(--gold);flex-shrink:0;display:flex;align-items:center;}
+  .starter-mobile-card.selected .smc-icon{color:var(--gold-lt);}
+  .smc-text{flex:1;}
+  .smc-title{font-size:14px;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:1px;}
+  .starter-mobile-card.selected .smc-title{color:var(--gold);}
+  .smc-sub{font-size:11px;color:var(--muted);line-height:1.4;}
+  .smc-arrow{color:var(--muted);flex-shrink:0;transition:color .15s;}
+  .starter-mobile-card.selected .smc-arrow{color:var(--gold);}
+
+  /* Journey: vertical on mobile */
+  .journey-strip{flex-direction:column;}
+  .j-step{border-right:none;border-bottom:1px solid var(--bw2);text-align:left;padding:10px 16px;display:flex;align-items:center;gap:12px;}
+  .j-step:last-child{border-bottom:none;}
+  .j-step::after{display:none;}
+  .j-num{margin-bottom:0;min-width:20px;}
+
+  .wave-divider{padding:20px 0;}
+}
+
 @media(max-width:560px){
-  .hero{min-height:0!important;}.hero-bg{display:none!important;}.hero-overlay{display:none!important;}
+  .hero{min-height:0!important;}
+  .hero-bg{display:none!important;}
+  .hero-overlay{display:none!important;}
   .hero-content{background:var(--navy-2);border-bottom:3px solid var(--gold);padding:22px 16px 24px;}
-  .hero-title{font-size:2rem;}.hero-sub{font-size:.95rem;}
-  .body-wrap{padding:24px 16px 40px;}
+  .hero-title{font-size:2rem;}
+  .hero-sub{font-size:.95rem;}
+  .body-wrap{padding:0 16px 44px;}
   .yt-wrap{display:none;}
-  .yt-mobile-link{display:flex;align-items:center;gap:10px;background:var(--navy-2);border:1px solid var(--bw);border-left:3px solid var(--gold);padding:12px 16px;margin-bottom:10px;text-decoration:none;}
+  .yt-mobile-link{
+    display:flex;align-items:center;gap:10px;
+    background:var(--navy-2);border:1px solid var(--bw);border-left:3px solid var(--gold);
+    padding:12px 16px;text-decoration:none;
+  }
   .yt-mobile-link svg{width:18px;height:18px;color:var(--gold);flex-shrink:0;}
   .yt-mobile-link span{font-size:13px;font-weight:600;color:var(--white);}
-  .journey{flex-direction:column;}
-  .j-step{border-right:none;border-bottom:1px solid var(--bw);text-align:left;padding:10px 16px;display:flex;align-items:center;gap:12px;}
-  .j-step:last-child{border-bottom:none;}.j-step::after{display:none;}.j-num{margin-bottom:0;min-width:20px;}
-  .starter-grid{grid-template-columns:1fr 1fr;}
   .cta-btn{width:100%;justify-content:center;}
+  .studio-heading{font-size:1.3rem;}
 }
 </style>
 </head>
 <body>
+
 <div class="brand-bar">
   <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/NHEGRhlODnmTUAVf.png" alt="Imagine That AI" class="brand-logo">
   <span class="brand-label">An Imagine That AI Creative Experience</span>
 </div>
+
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
@@ -101,6 +273,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
     <div class="hero-sub">No music or video experience needed. <strong>Just bring the idea.</strong></div>
   </div>
 </div>
+
 <div class="ticker">
   <div class="ticker-inner">
     <span class="ticker-text">The AI Music Studio</span><span class="ticker-text">·</span>
@@ -111,9 +284,15 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
     <span class="ticker-text">An Imagine That AI Creative Experience</span><span class="ticker-text">·</span>
   </div>
 </div>
+
 <div class="body-wrap">
 
-  <div class="sec-label reveal">Watch What's Possible</div>
+  <!-- ── WATCH WHAT'S POSSIBLE ── -->
+  <div class="studio-section reveal">
+    <div class="studio-label">Watch What's Possible</div>
+    <div class="studio-heading">This is where you are going.</div>
+  </div>
+
   <div class="yt-wrap reveal">
     <iframe src="https://www.youtube.com/embed/1kWbI1c4g3I" title="My Kind of Man" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
   </div>
@@ -121,34 +300,135 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
     <span>Watch "My Kind of Man" on YouTube</span>
   </a>
-  <div class="yt-cap reveal" style="font-size:14px;color:var(--off);line-height:1.7;padding:12px 16px;background:var(--navy-3);border-left:3px solid var(--gold);margin-top:10px;"><strong style='color:var(--gold-lt);'>This started as an idea.</strong> It became a song, a music video, and a streaming release. Now you'll build yours.</div>
+  <div class="yt-cap reveal"><strong>This started as an idea.</strong> It became a song, a music video, and a streaming release. Now you'll build yours.</div>
 
-  <div class="div"></div>
+  <!-- Waveform divider -->
+  <div class="wave-divider reveal" id="wave-welcome"></div>
 
-  <div class="sec-label reveal">What Are You Making?</div>
-  <div class="starter-grid reveal">
-    <div class="starter-card" onclick="pick(this,'birthday')"><div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="0"/><path d="M21 12v9H3v-9"/><path d="M12 8v13"/><path d="M8 8c0-2 1.5-4 4-4s4 2 4 4"/></svg></div><div class="sc-label">Birthday or Milestone</div><div class="sc-sub">Celebrating someone</div></div>
-    <div class="starter-card" onclick="pick(this,'anniversary')"><div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="sc-label">Love or Anniversary</div><div class="sc-sub">A relationship or person</div></div>
-    <div class="starter-card" onclick="pick(this,'tribute')"><div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c0 0-1 1.5-1 3s1 2 1 2 1-.5 1-2-1-3-1-3z"/><rect x="9" y="7" width="6" height="13" rx="0"/><path d="M9 20h6"/><path d="M8 20c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2"/></svg></div><div class="sc-label">Tribute or Memory</div><div class="sc-sub">Honoring someone</div></div>
-    <div class="starter-card" onclick="pick(this,'funny')"><div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2.5"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2.5"/></svg></div><div class="sc-label">Funny or Playful</div><div class="sc-sub">Light, humorous, fun</div></div>
-    <div class="starter-card" onclick="pick(this,'personal')"><div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div><div class="sc-label">Personal Story</div><div class="sc-sub">Something I went through</div></div>
-    <div class="starter-card" onclick="pick(this,'celebration')"><div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="sc-label">Celebration</div><div class="sc-sub">Achievement, graduation, win</div></div>
-    <div class="starter-card" onclick="pick(this,'justbecause')"><div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="sc-label">Just Because</div><div class="sc-sub">I have an idea, that is enough</div></div>
-    <div class="starter-card" onclick="pick(this,'notsure')"><div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg></div><div class="sc-label">Not Sure Yet</div><div class="sc-sub">Session 1 will help me figure it out</div></div>
+  <!-- ── WHAT ARE YOU MAKING ── -->
+  <div class="studio-section reveal" style="padding-top:0;">
+    <div class="studio-label">Your Song</div>
+    <div class="studio-heading">What are you making?</div>
+    <p style="font-size:14px;color:var(--card);margin-bottom:24px;line-height:1.65;">Tap the one that fits. This helps Session 1 feel like it was made for you.</p>
   </div>
 
-  <div class="starter-response" id="sr-birthday"><div class="sr-text">Okay, we are making a <strong>birthday song.</strong> 🎧 Let's make sure it sounds like yours.</div></div>
-  <div class="starter-response" id="sr-anniversary"><div class="sr-text">Okay, we are making a <strong>love song.</strong> 🎧 Let's make sure it sounds like yours.</div></div>
-  <div class="starter-response" id="sr-tribute"><div class="sr-text">Okay, we are making a <strong>tribute.</strong> 🎧 Let's make sure it sounds like theirs.</div></div>
-  <div class="starter-response" id="sr-funny"><div class="sr-text">Okay, we are making something <strong>funny.</strong> 🎧 Let's make sure it lands.</div></div>
-  <div class="starter-response" id="sr-personal"><div class="sr-text">Okay, we are making a <strong>personal story song.</strong> 🎧 Let's make sure it sounds like you.</div></div>
-  <div class="starter-response" id="sr-celebration"><div class="sr-text">Okay, we are making a <strong>celebration song.</strong> 🎧 Let's make it feel earned.</div></div>
-  <div class="starter-response" id="sr-justbecause"><div class="sr-text">Okay, we are making something. 🎧 <strong>That is enough.</strong> Let's go build it.</div></div>
-  <div class="starter-response" id="sr-notsure"><div class="sr-text">That is completely fine. 🎧 <strong>Session 1 will help you figure it out.</strong> Let's go.</div></div>
+  <!-- Desktop 4-col grid + mobile stack in one composition -->
+  <div class="starter-composition reveal">
+    <div class="starter-bg-glyph">?</div>
 
-  <div class="div"></div>
+    <!-- Desktop grid -->
+    <div class="starter-grid">
+      <div class="starter-card" onclick="pick(this,'birthday','desktop')">
+        <div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="0"/><path d="M21 12v9H3v-9"/><path d="M12 8v13"/><path d="M8 8c0-2 1.5-4 4-4s4 2 4 4"/></svg></div>
+        <div class="sc-label">Birthday or Milestone</div>
+        <div class="sc-sub">Celebrating someone</div>
+        <div class="sc-hover-note">LET'S MAKE IT THEIRS.</div>
+      </div>
+      <div class="starter-card" onclick="pick(this,'anniversary','desktop')">
+        <div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="sc-label">Love or Anniversary</div>
+        <div class="sc-sub">A relationship or person</div>
+        <div class="sc-hover-note">MAKE THEM FEEL IT.</div>
+      </div>
+      <div class="starter-card" onclick="pick(this,'tribute','desktop')">
+        <div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c0 0-1 1.5-1 3s1 2 1 2 1-.5 1-2-1-3-1-3z"/><rect x="9" y="7" width="6" height="13" rx="0"/><path d="M9 20h6"/><path d="M8 20c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2"/></svg></div>
+        <div class="sc-label">Tribute or Memory</div>
+        <div class="sc-sub">Honoring someone</div>
+        <div class="sc-hover-note">THEY DESERVE THIS.</div>
+      </div>
+      <div class="starter-card" onclick="pick(this,'funny','desktop')">
+        <div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2.5"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2.5"/></svg></div>
+        <div class="sc-label">Funny or Playful</div>
+        <div class="sc-sub">Light, humorous, fun</div>
+        <div class="sc-hover-note">ONLY YOUR PEOPLE GET IT.</div>
+      </div>
+      <div class="starter-card" onclick="pick(this,'personal','desktop')">
+        <div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <div class="sc-label">Personal Story</div>
+        <div class="sc-sub">Something I went through</div>
+        <div class="sc-hover-note">YOUR STORY. YOUR VOICE.</div>
+      </div>
+      <div class="starter-card" onclick="pick(this,'celebration','desktop')">
+        <div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="sc-label">Celebration</div>
+        <div class="sc-sub">Achievement, graduation, win</div>
+        <div class="sc-hover-note">THIS MOMENT EARNED IT.</div>
+      </div>
+      <div class="starter-card" onclick="pick(this,'justbecause','desktop')">
+        <div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <div class="sc-label">Just Because</div>
+        <div class="sc-sub">I have an idea. That is enough.</div>
+        <div class="sc-hover-note">ENOUGH REASON. LET'S GO.</div>
+      </div>
+      <div class="starter-card" onclick="pick(this,'notsure','desktop')">
+        <div class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg></div>
+        <div class="sc-label">Not Sure Yet</div>
+        <div class="sc-sub">Session 1 will help me figure it out.</div>
+        <div class="sc-hover-note">SESSION 1 HAS YOU.</div>
+      </div>
+    </div>
 
-  <div class="journey reveal">
+    <!-- Mobile horizontal stack -->
+    <div class="starter-mobile-stack" id="starter-mobile-stack">
+      <div class="starter-mobile-card" onclick="pick(this,'birthday','mobile')">
+        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="0"/><path d="M21 12v9H3v-9"/><path d="M12 8v13"/><path d="M8 8c0-2 1.5-4 4-4s4 2 4 4"/></svg></div>
+        <div class="smc-text"><div class="smc-title">Birthday or Milestone</div><div class="smc-sub">Celebrating someone</div></div>
+        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+      <div class="starter-mobile-card" onclick="pick(this,'anniversary','mobile')">
+        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="smc-text"><div class="smc-title">Love or Anniversary</div><div class="smc-sub">A relationship or person</div></div>
+        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+      <div class="starter-mobile-card" onclick="pick(this,'tribute','mobile')">
+        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c0 0-1 1.5-1 3s1 2 1 2 1-.5 1-2-1-3-1-3z"/><rect x="9" y="7" width="6" height="13" rx="0"/><path d="M9 20h6"/><path d="M8 20c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2"/></svg></div>
+        <div class="smc-text"><div class="smc-title">Tribute or Memory</div><div class="smc-sub">Honoring someone</div></div>
+        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+      <div class="starter-mobile-card" onclick="pick(this,'funny','mobile')">
+        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2.5"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2.5"/></svg></div>
+        <div class="smc-text"><div class="smc-title">Funny or Playful</div><div class="smc-sub">Light, humorous, fun</div></div>
+        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+      <div class="starter-mobile-card" onclick="pick(this,'personal','mobile')">
+        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <div class="smc-text"><div class="smc-title">Personal Story</div><div class="smc-sub">Something I went through</div></div>
+        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+      <div class="starter-mobile-card" onclick="pick(this,'celebration','mobile')">
+        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="smc-text"><div class="smc-title">Celebration</div><div class="smc-sub">Achievement, graduation, win</div></div>
+        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+      <div class="starter-mobile-card" onclick="pick(this,'justbecause','mobile')">
+        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <div class="smc-text"><div class="smc-title">Just Because</div><div class="smc-sub">I have an idea. That is enough.</div></div>
+        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+      <div class="starter-mobile-card" onclick="pick(this,'notsure','mobile')">
+        <div class="smc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg></div>
+        <div class="smc-text"><div class="smc-title">Not Sure Yet</div><div class="smc-sub">Session 1 will help me figure it out.</div></div>
+        <div class="smc-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+    </div>
+  </div><!-- /starter-composition -->
+
+  <!-- Starter responses -->
+  <div class="starter-response" id="sr-birthday"><div class="sr-text">Okay. We are making a <strong>birthday song.</strong> Let's make sure it sounds like yours.</div></div>
+  <div class="starter-response" id="sr-anniversary"><div class="sr-text">Okay. We are making a <strong>love song.</strong> Let's make sure it sounds like yours.</div></div>
+  <div class="starter-response" id="sr-tribute"><div class="sr-text">Okay. We are making a <strong>tribute.</strong> Let's make sure it sounds like theirs.</div></div>
+  <div class="starter-response" id="sr-funny"><div class="sr-text">Okay. We are making something <strong>funny.</strong> Let's make sure it lands.</div></div>
+  <div class="starter-response" id="sr-personal"><div class="sr-text">Okay. We are making a <strong>personal story song.</strong> Let's make sure it sounds like you.</div></div>
+  <div class="starter-response" id="sr-celebration"><div class="sr-text">Okay. We are making a <strong>celebration song.</strong> Let's make it feel earned.</div></div>
+  <div class="starter-response" id="sr-justbecause"><div class="sr-text">Okay. We are making something. <strong>That is enough.</strong> Let's go build it.</div></div>
+  <div class="starter-response" id="sr-notsure"><div class="sr-text">That is completely fine. <strong>Session 1 will help you figure it out.</strong> Let's go.</div></div>
+
+  <!-- Waveform divider -->
+  <div class="wave-divider" id="wave-journey"></div>
+
+  <!-- ── JOURNEY ── -->
+  <div class="studio-label reveal">The Journey</div>
+  <div class="journey-strip reveal">
     <div class="j-step"><div class="j-num">01</div><div class="j-label">Idea</div></div>
     <div class="j-step"><div class="j-num">02</div><div class="j-label">Lyrics</div></div>
     <div class="j-step"><div class="j-num">03</div><div class="j-label">Song</div></div>
@@ -157,8 +437,9 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   </div>
   <div class="j-note reveal">Release is optional. You can stop at any point and keep it personal.</div>
 
+  <!-- ── CTA ── -->
   <div class="cta-block reveal">
-    <div class="cta-label">Ready?</div>
+    <div class="cta-eyebrow">Ready?</div>
     <div class="cta-text" id="cta-text">Your song is waiting.<br>Let's go build it.</div>
     <button class="cta-btn" onclick="enterStudio(event)">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -167,11 +448,22 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
     <div class="cta-note">Start with Session 1: The Concept.</div>
   </div>
 
-</div>
+</div><!-- /body-wrap -->
+
 <script>
+// ── SCROLL REVEAL ──
 var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.05,rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);var r=el.getBoundingClientRect();if(r.top<window.innerHeight)el.classList.add('visible');});
 
+// ── WAVEFORM GENERATOR ──
+function buildWave(id){
+  var el=document.getElementById(id);if(!el)return;
+  var h=[3,5,8,12,18,24,16,10,6,4,8,14,22,28,20,14,8,5,10,16,24,32,22,14,8,5,3,6,10,16,24,20,14,8,5,3,6,12,18,26,20,12,6,4,8,14,22,16,10,5,3,6,10,18,26,20,12,6,4,8];
+  h.forEach(function(v){var b=document.createElement('div');b.className='wave-bar';b.style.height=v+'px';el.appendChild(b);});
+}
+buildWave('wave-welcome');buildWave('wave-journey');
+
+// ── SONG STARTER ──
 var ctaMsg={
   birthday:"Let's turn that birthday idea into a song that's actually about <em>them</em>.",
   anniversary:"Let's turn what you know about this relationship into something they'll never forget.",
@@ -184,17 +476,49 @@ var ctaMsg={
 };
 var labels={birthday:"Birthday Song",anniversary:"Love Song",tribute:"Tribute",funny:"Funny Song",personal:"Personal Story Song",celebration:"Celebration Song",justbecause:"Just Because",notsure:"Still Figuring It Out"};
 
-function pick(card,type){
-  document.querySelectorAll('.starter-card').forEach(function(c){c.classList.remove('selected');});
+function pick(card,type,mode){
+  // Deselect all desktop + mobile cards
+  document.querySelectorAll('.starter-card,.starter-mobile-card').forEach(function(c){c.classList.remove('selected');});
+  // Select both desktop and mobile version
+  var desktopCards=document.querySelectorAll('.starter-card');
+  var mobileCards=document.querySelectorAll('.starter-mobile-card');
+  var typeMap={birthday:0,anniversary:1,tribute:2,funny:3,personal:4,celebration:5,justbecause:6,notsure:7};
+  var idx=typeMap[type];
+  if(idx!==undefined){
+    if(desktopCards[idx])desktopCards[idx].classList.add('selected');
+    if(mobileCards[idx])mobileCards[idx].classList.add('selected');
+  }
+  // Show response
   document.querySelectorAll('.starter-response').forEach(function(r){r.classList.remove('show');});
-  card.classList.add('selected');
   var resp=document.getElementById('sr-'+type);
   if(resp){resp.classList.add('show');resp.scrollIntoView({behavior:'smooth',block:'nearest'});}
+  // Update CTA
   var ctaEl=document.getElementById('cta-text');
   if(ctaEl&&ctaMsg[type])ctaEl.innerHTML=ctaMsg[type];
+  // Persist
   try{localStorage.setItem('ais_song_type',type);localStorage.setItem('ais_song_label',labels[type]||type);}catch(e){}
 }
 
+// ── RESTORE SAVED SELECTION ──
+(function(){
+  try{
+    var saved=localStorage.getItem('ais_song_type');
+    if(saved){
+      var typeMap={birthday:0,anniversary:1,tribute:2,funny:3,personal:4,celebration:5,justbecause:6,notsure:7};
+      var idx=typeMap[saved];
+      if(idx!==undefined){
+        var desktopCards=document.querySelectorAll('.starter-card');
+        var mobileCards=document.querySelectorAll('.starter-mobile-card');
+        if(desktopCards[idx])desktopCards[idx].classList.add('selected');
+        if(mobileCards[idx])mobileCards[idx].classList.add('selected');
+        var resp=document.getElementById('sr-'+saved);if(resp)resp.classList.add('show');
+        var ctaEl=document.getElementById('cta-text');if(ctaEl&&ctaMsg[saved])ctaEl.innerHTML=ctaMsg[saved];
+      }
+    }
+  }catch(e){}
+})();
+
+// ── ENTER STUDIO ──
 function enterStudio(e){
   var btn=e.currentTarget;var orig=btn.innerHTML;
   try{var nb=window.parent.document.querySelector('button[data-testid="next-lesson"],.next-lesson-button,[aria-label*="Next"],[aria-label*="next"]');if(nb){nb.click();return;}}catch(err){}
