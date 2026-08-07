@@ -474,7 +474,36 @@ Keep everything else the same. Just update the parts I mentioned.</div>
   </ul>
 
   <div class="next-step reveal">
-    <p>Your Song Blueprint is done. <strong>Every prompt you run from here will reference what you just built.</strong> Next: The Writing Room.</p>
+    <p>Your Song Blueprint is done. <strong>Every prompt you run from here will reference what you just built.</strong></p>
+  </div>
+
+  <!-- WHAT HAPPENS NEXT -->
+  <div style="margin-top:28px;background:var(--navy-2);border:1px solid var(--bw);box-shadow:var(--sh);overflow:hidden;" class="reveal">
+    <div style="background:var(--navy-3);padding:10px 18px;border-bottom:1px solid var(--bw);">
+      <span style="font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);">The Full Journey</span>
+    </div>
+    <div style="padding:0;">
+      <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(--bw);background:rgba(245,166,35,0.06);">
+        <span style="font-size:11px;font-weight:900;color:var(--gold);min-width:28px;padding-top:1px;">01</span>
+        <div><div style="font-size:12px;font-weight:800;color:var(--gold);margin-bottom:2px;">THE CONCEPT — Done</div><div style="font-size:13px;color:var(--card);">Your Song Blueprint tells AI exactly what to make.</div></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(--bw);">
+        <span style="font-size:11px;font-weight:900;color:var(--white);min-width:28px;padding-top:1px;">02</span>
+        <div><div style="font-size:12px;font-weight:800;color:var(--white);margin-bottom:2px;">THE WRITING ROOM — Next</div><div style="font-size:13px;color:var(--card);">Take your Blueprint into ChatGPT and generate the actual lyrics.</div></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(--bw);">
+        <span style="font-size:11px;font-weight:900;color:var(--muted);min-width:28px;padding-top:1px;">03</span>
+        <div><div style="font-size:12px;font-weight:800;color:var(--muted);margin-bottom:2px;">THE RECORDING STUDIO</div><div style="font-size:13px;color:var(--muted);">Put your lyrics into Suno and generate the real song with music.</div></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(--bw);">
+        <span style="font-size:11px;font-weight:900;color:var(--muted);min-width:28px;padding-top:1px;">04</span>
+        <div><div style="font-size:12px;font-weight:800;color:var(--muted);margin-bottom:2px;">THE VISUAL STUDIO</div><div style="font-size:13px;color:var(--muted);">Turn the song into a music video using Google Flow and CapCut.</div></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 18px;">
+        <span style="font-size:11px;font-weight:900;color:var(--muted);min-width:28px;padding-top:1px;">05</span>
+        <div><div style="font-size:12px;font-weight:800;color:var(--muted);margin-bottom:2px;">THE RELEASE ROOM</div><div style="font-size:13px;color:var(--muted);">Decide whether to keep it personal or put it out into the world.</div></div>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -608,20 +637,54 @@ function toggleCheck(li) { li.classList.toggle('checked'); }
 function copyLivePrompt(btn, promptId) {
   var id = promptId || 'live-prompt';
   var el = document.getElementById(id);
-  var text = el ? el.innerText : '';
-  navigator.clipboard.writeText(text).then(function() {
-    var orig = btn.innerHTML;
+  if (!el) return;
+  var text = el.innerText;
+  var orig = btn.innerHTML;
+
+  function showCopied() {
     btn.classList.add('copied');
     btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
-    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
-  }).catch(function() {
-    // Fallback: select text
-    var range = document.createRange();
-    range.selectNodeContents(el);
-    var sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-  });
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2500);
+  }
+
+  function showSelected() {
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Selected — press Ctrl+C / Cmd+C';
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 4000);
+  }
+
+  // Try clipboard API first
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(showCopied).catch(function() {
+      selectAndNotify();
+    });
+  } else {
+    selectAndNotify();
+  }
+
+  function selectAndNotify() {
+    // Try execCommand fallback (works in most iframes)
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.top = '-9999px';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+    if (ok) { showCopied(); } else {
+      // Last resort: visually select the prompt text
+      var range = document.createRange();
+      range.selectNodeContents(el);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      showSelected();
+    }
+  }
 }
 </script>
 </body>
