@@ -875,6 +875,21 @@ Please create a Song Blueprint that includes:
     <!-- Waveform divider -->
     <div class="wave-divider" id="wave3"></div>
 
+    <!-- BRING BACK THE BLUEPRINT -->
+    <div style="margin-bottom:36px;">
+      <div class="studio-label">Come Back Here</div>
+      <div class="studio-heading">Paste what ChatGPT gave you.</div>
+      <p style="font-size:13px;color:var(--card);margin-bottom:6px;line-height:1.65;">Keep ChatGPT open. Copy the Song Blueprint it created and paste it here.</p>
+      <p style="font-size:11px;color:var(--muted);margin-bottom:16px;">This saves your Blueprint so you never have to re-enter it.</p>
+      <div style="background:var(--navy-4);border:1px solid var(--bw2);border-top:2px solid rgba(245,166,35,0.4);">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--bw);background:rgba(245,166,35,0.04);">
+          <div style="font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);">Song Blueprint</div>
+          <div style="font-size:10px;color:var(--muted);font-family:'Courier New',monospace;" id="blueprint-save-status">not saved yet</div>
+        </div>
+        <textarea id="blueprint-paste-back" rows="8" placeholder="Paste the Song Blueprint ChatGPT gave you..." oninput="saveBlueprintBack(this.value)" style="width:100%;background:transparent;border:none;color:var(--white);font-family:'Courier New',monospace;font-size:13px;padding:14px 16px;outline:none;resize:vertical;line-height:1.8;"></textarea>
+      </div>
+    </div>
+
     <!-- PICK IT OR FIX IT -->
     <div>
       <div class="studio-label">Review</div>
@@ -1241,6 +1256,18 @@ function buildWave(id){
 // ── LOCALSTORAGE ──
 function ls(k,v){try{if(v===undefined)return localStorage.getItem('ais_'+k);localStorage.setItem('ais_'+k,v);}catch(e){return null;}}
 
+function saveBlueprintBack(val){
+  ls('blueprint_for_lyrics',val);
+  var status=document.getElementById('blueprint-save-status');
+  if(status){
+    if(val.trim()){status.textContent='saved';status.style.color='var(--green)';}
+    else{status.textContent='not saved yet';status.style.color='var(--muted)';}
+  }
+  // Also sync to the blueprint-for-lyrics field in the lyrics section if it exists
+  var lyrBp=document.getElementById('blueprint-for-lyrics');
+  if(lyrBp&&!lyrBp.value){lyrBp.value=val;updateLyricsPrompt();}
+}
+
 // ── CARD METADATA ──
 var cardLabels={idea:'I Have an Idea',write:'I Want to Write the Lyrics',ready:'My Lyrics Are Ready'};
 var cardIcons={
@@ -1303,7 +1330,12 @@ function restorePath(path){
     if(g)document.querySelectorAll('#genre-grid .tag-btn').forEach(function(b){if(b.textContent.trim()===g){b.classList.add('selected');selectedGenre=g;}});
     if(m)document.querySelectorAll('#mood-grid .tag-btn').forEach(function(b){if(b.textContent.trim()===m){b.classList.add('selected');selectedMood=m;}});
     updateBlueprint();
-    var bl=ls('blueprint_for_lyrics');if(bl){var el=document.getElementById('blueprint-for-lyrics');if(el)el.value=bl;updateLyricsPrompt();}
+    var bl=ls('blueprint_for_lyrics');
+    if(bl){
+      var el=document.getElementById('blueprint-for-lyrics');if(el){el.value=bl;updateLyricsPrompt();}
+      var pb=document.getElementById('blueprint-paste-back');if(pb)pb.value=bl;
+      var status=document.getElementById('blueprint-save-status');if(status){status.textContent='saved';status.style.color='var(--green)';}
+    }
     var lyr=ls('lyrics');if(lyr){var el=document.getElementById('lyrics-from-ai');if(el)el.value=lyr;}
   }
   if(path==='write'){var lyr=ls('lyrics');if(lyr){var el=document.getElementById('own-lyrics');if(el)el.value=lyr;}}
