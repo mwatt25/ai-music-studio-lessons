@@ -67,6 +67,9 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .wave-divider{display:flex;align-items:center;gap:3px;padding:32px 0;opacity:.2;}
 .wave-bar{width:2px;background:var(--gold);border-radius:1px;flex-shrink:0;}
 
+/* ── SONG STARTER: mobile stack hidden by default ── */
+.starter-mobile-stack{display:none;}
+
 /* ── SONG STARTER: DESKTOP 4-COL GRID ── */
 .starter-composition{position:relative;margin-bottom:0;}
 /* Ghost "?" behind the grid */
@@ -199,8 +202,8 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 
 @media(max-width:660px){
   /* Hide desktop grid, show mobile stack */
-  .starter-grid{display:none;}
-  .starter-mobile-stack{display:flex;flex-direction:column;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);position:relative;z-index:1;}
+  .starter-grid{display:none !important;}
+  .starter-mobile-stack{display:flex !important;flex-direction:column;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);position:relative;z-index:1;}
   .starter-bg-glyph{display:none;}
   .starter-composition::before,.starter-composition::after{display:none;}
 
