@@ -155,7 +155,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <div class="premiere-hero-content">
     <div class="premiere-eyebrow">The AI Music Studio &nbsp;/&nbsp; The Finale</div>
     <div class="premiere-title">The<br><span>Premiere.</span></div>
-    <div class="premiere-sub">You started with an idea. You built the whole thing.</div>
+    <div class="premiere-sub">You started with an idea. You made your song.</div>
   </div>
 </div>
 
@@ -276,12 +276,16 @@ function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').
   var stages=['concept','lyrics','production'];
   if(hasVideo)stages.push('visuals');
   stages.push('release');
-  AISProject.renderSongCard('ssf-card-container',stages,'You built the whole thing.');
+  AISProject.renderSongCard('ssf-card-container',stages,'You made your song.');
 
-  // Journey grid — dim visuals step if skipped
+  // Journey grid — show SKIPPED for visuals if not completed
   if(!hasVideo){
     var jv=document.getElementById('journey-visuals');
-    if(jv){jv.style.opacity='0.35';jv.style.borderTopColor='rgba(255,255,255,0.1)';}
+    if(jv){
+      jv.style.borderTopColor='rgba(255,255,255,0.08)';
+      var jcheck=jv.querySelector('.journey-check');
+      if(jcheck){jcheck.textContent='SKIPPED';jcheck.style.fontSize='8px';jcheck.style.letterSpacing='1.5px';jcheck.style.fontWeight='700';jcheck.style.textTransform='uppercase';jcheck.style.color='var(--muted)';}
+    }
   }
 
   // NOW PLAY IT
