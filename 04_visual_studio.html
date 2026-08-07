@@ -51,18 +51,19 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .session-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
 .session-eyebrow::after{content:'';flex:1;height:1px;background:var(--bw);}
 .session-big-q{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:8px;letter-spacing:-.02em;}
-.session-sub{font-size:15px;color:var(--card);margin-bottom:32px;line-height:1.6;}
+.session-sub{font-size:15px;color:var(--card);margin-bottom:12px;line-height:1.6;}
 .session-bg-num{position:absolute;bottom:-40px;left:-36px;font-size:clamp(140px,20vw,220px);font-weight:900;color:rgba(245,166,35,0.03);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.04em;z-index:0;}
 .studio-label{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
 .studio-label::before{content:'';width:20px;height:2px;background:var(--gold);}
 .studio-heading{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:6px;letter-spacing:-.02em;}
 .wave-divider{display:flex;align-items:center;gap:3px;padding:32px 0;opacity:.2;}
 .wave-bar{width:2px;background:var(--gold);border-radius:1px;flex-shrink:0;}
-.direction-display{background:rgba(245,166,35,0.04);border:1px solid rgba(245,166,35,0.15);border-left:3px solid rgba(245,166,35,0.4);padding:14px 18px;margin-bottom:28px;}
-.dd-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(245,166,35,0.6);margin-bottom:8px;}
-.dd-chips{display:flex;flex-wrap:wrap;gap:8px;}
-.dd-chip{font-size:12px;color:var(--card);background:var(--navy-3);padding:4px 12px;border:1px solid var(--bw);}
-.dd-chip span{color:var(--gold-lt);font-weight:700;}
+
+/* ── SKIP LINK ── */
+.skip-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;margin-bottom:28px;}
+.skip-link:hover{color:var(--card);border-bottom-color:var(--bw2);}
+
+/* ── VISUAL DIRECTION CARDS ── */
 .vd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--bw2);margin-bottom:24px;}
 .vd-card{background:var(--navy-2);border-right:1px solid var(--bw2);padding:20px 18px;cursor:pointer;transition:background .15s;user-select:none;}
 .vd-card:last-child{border-right:none;}
@@ -72,30 +73,49 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .vd-title{font-size:14px;font-weight:800;color:var(--white);margin-bottom:4px;line-height:1.2;}
 .vd-card.selected .vd-title{color:var(--gold);}
 .vd-sub{font-size:11px;color:var(--muted);line-height:1.5;}
-.shot-list{border:1px solid var(--bw2);border-top:2px solid var(--gold);background:var(--navy-4);margin-bottom:24px;}
-.shot-header{padding:10px 16px;border-bottom:1px solid var(--bw);background:var(--gold-dim);font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
-.shot-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-bottom:1px solid var(--bw);}
-.shot-item:last-child{border-bottom:none;}
-.shot-num{font-size:1.1rem;font-weight:900;color:rgba(245,166,35,0.3);flex-shrink:0;width:24px;line-height:1.4;font-family:'Courier New',monospace;}
-.shot-input{flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Inter',sans-serif;font-size:13px;padding:6px 0;outline:none;transition:border-color .2s;line-height:1.5;}
-.shot-input:focus{border-bottom-color:var(--gold);}
-.shot-input::placeholder{color:rgba(196,205,214,0.35);font-style:italic;}
-.prompt-console{background:var(--navy-4);border:1px solid var(--bw2);border-top:2px solid var(--blue);margin-bottom:20px;overflow:hidden;}
-.prompt-console-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--bw);background:var(--blue-dim);}
-.prompt-console-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;}
+
+/* ── THREE MOMENTS ── */
+.moments-block{border:1px solid var(--bw2);border-top:2px solid var(--gold);background:var(--navy-4);margin-bottom:24px;}
+.moments-header{padding:10px 16px;border-bottom:1px solid var(--bw);background:var(--gold-dim);display:flex;align-items:center;justify-content:space-between;}
+.moments-header-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+.moments-header-hint{font-size:10px;color:var(--muted);font-style:italic;}
+.moment-row{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-bottom:1px solid var(--bw);}
+.moment-row:last-child{border-bottom:none;}
+.moment-num{font-size:1.1rem;font-weight:900;color:rgba(245,166,35,0.3);flex-shrink:0;width:24px;line-height:1.4;font-family:'Courier New',monospace;}
+.moment-input{flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'Inter',sans-serif;font-size:13px;padding:6px 0;outline:none;transition:border-color .2s;line-height:1.5;}
+.moment-input:focus{border-bottom-color:var(--gold);}
+.moment-input::placeholder{color:rgba(196,205,214,0.35);font-style:italic;}
+
+/* ── CLIP PROMPTS ── */
+.clip-block{background:var(--navy-4);border:1px solid var(--bw2);border-top:2px solid var(--blue);margin-bottom:12px;overflow:hidden;}
+.clip-block-header{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--bw);background:var(--blue-dim);cursor:pointer;user-select:none;}
+.clip-block-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;}
 .prompt-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulse 1.4s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:.3;}50%{opacity:1;}}
-.prompt-console-body{font-family:'Courier New',monospace;font-size:13px;color:var(--off);line-height:1.9;padding:14px 16px;white-space:pre-wrap;}
-.prompt-actions{display:flex;align-items:center;gap:10px;padding:12px 16px;border-top:1px solid var(--bw);background:rgba(74,158,191,0.04);flex-wrap:wrap;}
+.clip-chevron{color:var(--muted);transition:transform .2s;}
+.clip-block-body{font-family:'Courier New',monospace;font-size:13px;color:var(--off);line-height:1.9;padding:14px 16px;white-space:pre-wrap;}
+.clip-block-actions{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid var(--bw);background:rgba(74,158,191,0.04);flex-wrap:wrap;}
+
+/* ── HANDOFF BLOCK ── */
+.handoff-block{background:var(--navy-3);border:1px solid var(--bw2);border-left:4px solid var(--gold);padding:18px 20px;margin-bottom:28px;}
+.handoff-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.handoff-text{font-size:14px;color:var(--card);line-height:1.65;margin-bottom:14px;}
+.handoff-actions{display:flex;gap:10px;flex-wrap:wrap;}
+
+/* ── PUT IT TOGETHER ── */
+.pit-block{background:var(--navy-3);border:1px solid var(--bw2);border-left:4px solid var(--green);padding:22px 22px;margin-bottom:24px;}
+.pit-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.pit-heading{font-size:1.1rem;font-weight:900;color:var(--white);margin-bottom:10px;line-height:1.2;}
+.pit-body{font-size:14px;color:var(--card);line-height:1.75;}
+
+/* ── LINK INPUT ── */
 .link-wrap{margin-bottom:24px;}
 .link-wrap label{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--card);margin-bottom:8px;}
 .link-input{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.12);color:var(--white);font-family:'Inter',sans-serif;font-size:14px;padding:9px 0;outline:none;transition:border-color .25s;}
 .link-input:focus{border-bottom-color:var(--gold);}
 .link-input::placeholder{color:rgba(196,205,214,0.4);font-style:italic;}
-.handoff-block{background:var(--navy-3);border:1px solid var(--bw2);border-left:4px solid var(--gold);padding:18px 20px;margin-bottom:28px;}
-.handoff-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
-.handoff-text{font-size:14px;color:var(--card);line-height:1.65;margin-bottom:14px;}
-.handoff-actions{display:flex;gap:10px;flex-wrap:wrap;}
+
+/* ── PIFI ── */
 .pifi{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:12px;}
 .pifi-btn{padding:24px 20px;background:var(--navy-2);border:none;cursor:pointer;text-align:center;transition:background .15s;border-right:1px solid var(--bw2);font-family:'Inter',sans-serif;min-height:100px;}
 .pifi-btn:last-child{border-right:none;}
@@ -109,6 +129,30 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .pifi-sub{font-size:12px;color:var(--muted);line-height:1.5;}
 .fix-panel{display:none;border:1px solid var(--bw);border-left:4px solid var(--gold);background:var(--navy-3);padding:16px 18px;margin-bottom:20px;}
 .fix-panel.show{display:block;}
+.fix-chip{background:var(--navy-4);border:1px solid var(--bw2);color:var(--card);font-size:12px;font-weight:600;padding:8px 14px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s,border-color .15s;text-align:left;}
+.fix-chip:hover,.fix-chip.active{background:var(--gold-dim);border-color:rgba(245,166,35,0.4);color:var(--gold);}
+.fix-guidance{display:none;background:var(--blue-dim);border:1px solid rgba(74,158,191,0.2);border-left:3px solid var(--blue);padding:12px 14px;margin-top:10px;font-size:13px;color:var(--card);line-height:1.75;}
+.fix-guidance.show{display:block;}
+
+/* ── COVER ART ── */
+.cover-optional-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.cover-optional-label::before{content:'OPTIONAL';background:var(--navy-3);border:1px solid var(--bw2);color:var(--muted);font-size:8px;padding:2px 6px;letter-spacing:2px;}
+
+/* ── PROMPT CONSOLE ── */
+.prompt-console{background:var(--navy-4);border:1px solid var(--bw2);border-top:2px solid var(--blue);margin-bottom:20px;overflow:hidden;}
+.prompt-console-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--bw);background:var(--blue-dim);}
+.prompt-console-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;}
+.prompt-console-body{font-family:'Courier New',monospace;font-size:13px;color:var(--off);line-height:1.9;padding:14px 16px;white-space:pre-wrap;}
+.prompt-actions{display:flex;align-items:center;gap:10px;padding:12px 16px;border-top:1px solid var(--bw);background:rgba(74,158,191,0.04);flex-wrap:wrap;}
+
+/* ── DIRECTION DISPLAY ── */
+.direction-display{background:rgba(245,166,35,0.04);border:1px solid rgba(245,166,35,0.15);border-left:3px solid rgba(245,166,35,0.4);padding:14px 18px;margin-bottom:28px;}
+.dd-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(245,166,35,0.6);margin-bottom:8px;}
+.dd-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.dd-chip{font-size:12px;color:var(--card);background:var(--navy-3);padding:4px 12px;border:1px solid var(--bw);}
+.dd-chip span{color:var(--gold-lt);font-weight:700;}
+
+/* ── BUTTONS ── */
 .copy-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:var(--navy);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:none;cursor:pointer;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;transition:background .15s,transform .1s;min-height:42px;}
 .copy-btn:hover{background:var(--gold);transform:translateY(-1px);}
 .copy-btn.copied{background:var(--green);color:white;}
@@ -118,6 +162,8 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .primary-btn:hover{transform:translateY(-2px);box-shadow:6px 6px 0 rgba(0,0,0,.6);}
 .green-btn{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:var(--white);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:12px 24px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .12s;min-height:46px;}
 .green-btn:hover{transform:translateY(-1px);}
+
+/* ── COMPLETION ── */
 .completion{display:none;background:var(--green-dim);border:1px solid rgba(39,174,96,0.2);border-top:3px solid var(--green);padding:44px 32px;box-shadow:var(--sh);margin-top:48px;position:relative;overflow:hidden;}
 .completion::before{content:'04';position:absolute;right:-10px;bottom:-20px;font-size:140px;font-weight:900;color:rgba(39,174,96,0.04);line-height:1;pointer-events:none;}
 .completion.show{display:block;animation:fadeUp .5s ease;}
@@ -125,9 +171,13 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .completion-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:14px;}
 .completion-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;color:var(--white);margin-bottom:8px;line-height:1.1;letter-spacing:-.02em;}
 .completion-sub{font-size:14px;color:var(--card);line-height:1.65;margin-bottom:20px;font-style:italic;}
+
+/* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;}
 .reveal.visible{opacity:1;transform:none;}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;}}
+
+/* ── MOBILE ── */
 @media(max-width:820px){.hero-content{padding:28px 28px 28px;}.body-wrap{padding:0 28px 60px;}}
 @media(max-width:660px){
   .session-bg-num{display:none;}
@@ -136,8 +186,8 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   .vd-card:last-child{border-bottom:none;}
   .pifi-btn{padding:20px 12px;min-height:110px;}
   .pifi-label{font-size:15px;}
-  .prompt-actions{flex-direction:column;}
-  .prompt-actions .copy-btn,.prompt-actions .flow-btn{width:100%;}
+  .clip-block-actions{flex-direction:column;}
+  .clip-block-actions .copy-btn,.clip-block-actions .flow-btn{width:100%;}
   .handoff-actions{flex-direction:column;}
   .handoff-actions .flow-btn{width:100%;}
   .completion{padding:28px 20px;}
@@ -168,10 +218,11 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <div class="hero-content">
     <div class="hero-session">Session 4 of 5</div>
     <div class="hero-title">The Visual Studio</div>
-    <div class="hero-tagline">What does your song look like?</div>
+    <div class="hero-tagline">Want to see your song come to life?</div>
     <div class="meta-row">
       <div class="meta-chip">Google Flow</div>
-      <div class="meta-chip">Your Output: A Music Video</div>
+      <div class="meta-chip">Optional</div>
+      <div class="meta-chip">Your Output: A Visual Sample</div>
     </div>
   </div>
 </div>
@@ -180,10 +231,10 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <div class="ticker-inner">
     <span class="ticker-text">Session 4 of 5</span><span class="ticker-text">·</span>
     <span class="ticker-text">The Visual Studio</span><span class="ticker-text">·</span>
-    <span class="ticker-text">What Does Your Song Look Like?</span><span class="ticker-text">·</span>
+    <span class="ticker-text">Optional Creative Extension</span><span class="ticker-text">·</span>
     <span class="ticker-text">Session 4 of 5</span><span class="ticker-text">·</span>
     <span class="ticker-text">The Visual Studio</span><span class="ticker-text">·</span>
-    <span class="ticker-text">What Does Your Song Look Like?</span><span class="ticker-text">·</span>
+    <span class="ticker-text">Optional Creative Extension</span><span class="ticker-text">·</span>
   </div>
 </div>
 
@@ -201,16 +252,23 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
     <div class="session-bg-num">04</div>
     <div class="session-eyebrow">The Visual Studio &nbsp;/&nbsp; Session 04</div>
     <div class="session-big-q">Now let's give your song a world.</div>
-    <div class="session-sub">Your song exists. Now you are going to build the visual story that goes with it.</div>
+    <div class="session-sub">Your song exists. Create a short visual sample to go with it.</div>
     <div id="ssf-card-container"></div>
   </div>
 
+  <!-- Skip link -->
+  <a href="05_release_room.html" class="skip-link reveal">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    Not making a video? Skip to Session 5
+  </a>
+
+  <!-- Collapsible demo -->
   <div class="reveal" style="margin-bottom:28px;">
     <button onclick="toggleWatchMe()" style="display:flex;align-items:center;gap:12px;background:transparent;border:none;border-left:3px solid var(--bw);padding:10px 14px;cursor:pointer;font-family:'Inter',sans-serif;text-align:left;width:100%;" onmouseover="this.style.borderLeftColor='var(--gold)'" onmouseout="this.style.borderLeftColor='var(--bw)'">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
       <div>
         <div style="font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:2px;">Need to see it?</div>
-        <div style="font-size:13px;font-weight:700;color:var(--card);">Watch me build a music video in Google Flow &nbsp;·&nbsp; 3 min</div>
+        <div style="font-size:13px;font-weight:700;color:var(--card);">Watch this demo.</div>
       </div>
       <svg id="watchme-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" style="margin-left:auto;flex-shrink:0;transition:transform .2s;"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
@@ -219,6 +277,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
     </div>
   </div>
 
+  <!-- Direction from previous sessions -->
   <div class="direction-display reveal" id="direction-display" style="display:none;">
     <div class="dd-label">Your song's creative direction</div>
     <div class="dd-chips" id="direction-chips"></div>
@@ -226,17 +285,19 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 
   <div class="wave-divider" id="wave1"></div>
 
+  <!-- PICK YOUR MOMENT -->
   <div class="studio-label reveal">Pick Your Moment</div>
-  <div class="studio-heading reveal">What moment in your song do you want people to feel?</div>
-  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Think about the line or moment that hits hardest. That is the emotional anchor of your video.</p>
+  <div class="studio-heading reveal">What part of your song do you want people to see?</div>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Choose about 20 to 30 seconds. A chorus, favorite lyric, or moment that feels worth seeing.</p>
 
   <div class="reveal" style="margin-bottom:24px;">
-    <label style="display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--card);margin-bottom:8px;">The moment or line</label>
-    <input type="text" class="link-input" id="key-moment" placeholder="e.g. The chorus — 'you loved me to the moon'..." oninput="AISProject.update('visuals.concept',this.value);buildVideoPrompt()">
+    <label style="display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--card);margin-bottom:8px;">The section or lyric</label>
+    <input type="text" class="link-input" id="key-moment" placeholder="e.g. The chorus — 'you loved me to the moon'..." oninput="AISProject.update('visuals.concept',this.value);buildClipPrompts()">
   </div>
 
   <div class="wave-divider" id="wave2"></div>
 
+  <!-- PICK YOUR WORLD -->
   <div class="studio-label reveal">Pick Your World</div>
   <div class="studio-heading reveal">What does your song look like?</div>
   <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Choose the visual direction that fits the feeling of your song.</p>
@@ -276,43 +337,36 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 
   <div class="wave-divider" id="wave3"></div>
 
-  <div class="studio-label reveal">Five-Shot Challenge</div>
-  <div class="studio-heading reveal">Plan five moments.</div>
-  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Describe five shots or scenes — one line each. They do not have to be in order.</p>
+  <!-- YOUR VIDEO PLAN — 3 MOMENTS -->
+  <div class="studio-label reveal">Your Video Plan</div>
+  <div class="studio-heading reveal">Plan 3 moments.</div>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:6px;line-height:1.65;">Here is a starting visual plan for your song. Make it yours.</p>
+  <p class="reveal" style="font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.65;font-style:italic;">Edit any of these or leave them as-is.</p>
 
-  <div class="shot-list reveal">
-    <div class="shot-header">Five Shots</div>
-    <div class="shot-item"><div class="shot-num">01</div><input type="text" class="shot-input" id="shot-1" placeholder="e.g. Close-up of hands on a kitchen counter, late afternoon light..." oninput="saveShots();buildVideoPrompt()"></div>
-    <div class="shot-item"><div class="shot-num">02</div><input type="text" class="shot-input" id="shot-2" placeholder="e.g. An empty chair at the dinner table..." oninput="saveShots();buildVideoPrompt()"></div>
-    <div class="shot-item"><div class="shot-num">03</div><input type="text" class="shot-input" id="shot-3" placeholder="e.g. Someone looking up at the moon through a window..." oninput="saveShots();buildVideoPrompt()"></div>
-    <div class="shot-item"><div class="shot-num">04</div><input type="text" class="shot-input" id="shot-4" placeholder="e.g. Old photographs spread across a table..." oninput="saveShots();buildVideoPrompt()"></div>
-    <div class="shot-item"><div class="shot-num">05</div><input type="text" class="shot-input" id="shot-5" placeholder="e.g. A person walking outside at dusk, head tilted up..." oninput="saveShots();buildVideoPrompt()"></div>
+  <div class="moments-block reveal">
+    <div class="moments-header">
+      <div class="moments-header-label">Three Moments</div>
+      <div class="moments-header-hint">Edit to make them yours</div>
+    </div>
+    <div class="moment-row"><div class="moment-num">01</div><input type="text" class="moment-input" id="moment-1" placeholder="Generating a suggestion..." oninput="saveMoments();buildClipPrompts()"></div>
+    <div class="moment-row"><div class="moment-num">02</div><input type="text" class="moment-input" id="moment-2" placeholder="Generating a suggestion..." oninput="saveMoments();buildClipPrompts()"></div>
+    <div class="moment-row"><div class="moment-num">03</div><input type="text" class="moment-input" id="moment-3" placeholder="Generating a suggestion..." oninput="saveMoments();buildClipPrompts()"></div>
   </div>
 
   <div class="wave-divider" id="wave4"></div>
 
-  <div class="studio-label reveal">Generate</div>
-  <div class="studio-heading reveal">Your video prompt for Google Flow.</div>
-  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Built from your song's emotional direction and your five shots. Copy it into Google Flow to generate your video clips.</p>
+  <!-- CREATE YOUR CLIPS -->
+  <div class="studio-label reveal">Create Your Clips</div>
+  <div class="studio-heading reveal">Three prompts. Three clips.</div>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Copy each prompt into Google Flow to generate your three video clips. Then combine them with your song.</p>
 
-  <div class="prompt-console reveal">
-    <div class="prompt-console-header">
-      <div class="prompt-console-label"><div class="prompt-dot"></div>Video Generation Prompt</div>
-    </div>
-    <div class="prompt-console-body" id="video-prompt">[Fill in your key moment and five shots above to build your video prompt]</div>
-    <div class="prompt-actions">
-      <button class="copy-btn" onclick="copyPrompt(this,'video-prompt')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Prompt
-      </button>
-      <a class="flow-btn" href="https://flow.google" target="_blank">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Open Google Flow
-      </a>
-    </div>
+  <div id="clip-blocks" class="reveal">
+    <!-- Clip blocks rendered by JS -->
   </div>
 
   <div class="handoff-block reveal">
     <div class="handoff-label">Out → Create → Come Back</div>
-    <div class="handoff-text">Generate your video clips in Google Flow. Come back with the version you want to use.</div>
+    <div class="handoff-text">Generate your three clips in Google Flow. Come back when you have them ready to put together.</div>
     <div class="handoff-actions">
       <a class="flow-btn" href="https://flow.google" target="_blank">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Open Google Flow
@@ -322,14 +376,42 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 
   <div class="wave-divider" id="wave5"></div>
 
+  <!-- PUT IT TOGETHER -->
+  <div class="studio-label reveal">Put It Together</div>
+  <div class="studio-heading reveal">Your song is ready. Your clips are ready.</div>
+
+  <div class="pit-block reveal">
+    <div class="pit-label">Assembly</div>
+    <div class="pit-heading">Now make your sample.</div>
+    <div class="pit-body">Add your three clips and song excerpt to your favorite video editor. Trim them to the music and export your sample.</div>
+  </div>
+
+  <!-- Assembly demo -->
+  <div class="reveal" style="margin-bottom:28px;">
+    <button onclick="toggleAssemblyDemo()" style="display:flex;align-items:center;gap:12px;background:transparent;border:none;border-left:3px solid var(--bw);padding:10px 14px;cursor:pointer;font-family:'Inter',sans-serif;text-align:left;width:100%;" onmouseover="this.style.borderLeftColor='var(--gold)'" onmouseout="this.style.borderLeftColor='var(--bw)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+      <div>
+        <div style="font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:2px;">Need to see it?</div>
+        <div style="font-size:13px;font-weight:700;color:var(--card);">Watch this demo.</div>
+      </div>
+      <svg id="assembly-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" style="margin-left:auto;flex-shrink:0;transition:transform .2s;"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div id="assembly-body" style="display:none;border:1px solid var(--bw);border-top:none;padding:16px;">
+      <p style="font-size:12px;color:var(--muted);font-style:italic;">Demo video coming soon.</p>
+    </div>
+  </div>
+
+  <div class="wave-divider" id="wave6"></div>
+
+  <!-- FIRST WATCH -->
   <div class="studio-label reveal">First Watch</div>
   <div class="studio-heading reveal">Does this feel like your song?</div>
-  <p class="reveal" style="font-size:14px;font-weight:600;color:var(--off);margin-bottom:6px;line-height:1.65;">Watch it all the way through once before you decide.</p>
-  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Paste a link to your video or note the version you want to keep.</p>
+  <p class="reveal" style="font-size:14px;font-weight:600;color:var(--off);margin-bottom:6px;line-height:1.65;">Watch the whole sample once before you decide.</p>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Paste a link to your sample or note the version you want to keep.</p>
 
   <div class="link-wrap reveal">
-    <label>Your Video Link or Reference</label>
-    <input type="text" class="link-input" id="video-link" placeholder="Paste your Google Flow video link or note the version..." oninput="AISProject.update('visuals.videoLink',this.value)">
+    <label>Your Sample Link or Reference</label>
+    <input type="text" class="link-input" id="video-link" placeholder="Paste your video link or note where it is saved..." oninput="AISProject.update('visuals.videoLink',this.value)">
   </div>
 
   <div class="pifi reveal">
@@ -341,25 +423,37 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
     <button class="pifi-btn" onclick="pickVideo('fix',this)">
       <div class="pifi-icon">↩</div>
       <div class="pifi-label">Fix It</div>
-      <div class="pifi-sub">Almost. I want to adjust something.</div>
+      <div class="pifi-sub">Almost. I want to change something.</div>
     </button>
   </div>
 
   <div class="fix-panel" id="fix-panel">
-    <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">What needs to change?</div>
-    <p style="font-size:13px;color:var(--card);line-height:1.75;margin-bottom:14px;">Go back to your Five Shots above, update the descriptions, and rebuild the prompt. Or try adjusting the visual direction and regenerating a specific clip in Google Flow.</p>
-    <div style="margin-top:14px;border-top:1px solid var(--bw);padding-top:14px;">
+    <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">What needs to change?</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+      <button class="fix-chip" onclick="showFix('clip',this)">Change a clip</button>
+      <button class="fix-chip" onclick="showFix('style',this)">Change the visual style</button>
+      <button class="fix-chip" onclick="showFix('section',this)">Change the song section</button>
+      <button class="fix-chip" onclick="showFix('order',this)">Change the order</button>
+      <button class="fix-chip" onclick="showFix('other',this)">Something else</button>
+    </div>
+    <div class="fix-guidance" id="fix-clip">Go back to Your Video Plan above, update the moment you want to change, and rebuild that clip's prompt. Generate a new clip in Google Flow and swap it in.</div>
+    <div class="fix-guidance" id="fix-style">Go back to Pick Your World above, choose a different visual direction, and rebuild your clip prompts. The new style will update all three prompts automatically.</div>
+    <div class="fix-guidance" id="fix-section">Go back to Pick Your Moment above, choose a different section of your song, and let the moments and prompts rebuild from there.</div>
+    <div class="fix-guidance" id="fix-order">Try reordering your three clips in your video editor. Sometimes a different sequence changes the whole feel of the sample.</div>
+    <div class="fix-guidance" id="fix-other">Update your visual moments above, rebuild the prompts, and generate new clips. Small changes to the prompt description can produce very different results in Google Flow.</div>
+    <div style="margin-top:16px;border-top:1px solid var(--bw);padding-top:14px;">
       <button onclick="pickVideo('pick',this)" class="green-btn">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Done Adjusting
       </button>
     </div>
   </div>
 
-  <div class="wave-divider" id="wave6"></div>
+  <div class="wave-divider" id="wave7"></div>
 
-  <div class="studio-label reveal">Cover Art</div>
+  <!-- COVER ART — OPTIONAL -->
+  <div class="cover-optional-label reveal">Cover Art</div>
   <div class="studio-heading reveal">One image that represents your song.</div>
-  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Optional but powerful. A strong cover image makes your song look like it belongs on a streaming platform.</p>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">If you plan to release your song, a strong cover image makes it look like it belongs on a streaming platform. Skip this if you are not releasing.</p>
 
   <div class="prompt-console reveal">
     <div class="prompt-console-header">
@@ -381,6 +475,7 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
     <input type="text" class="link-input" id="cover-art-link" placeholder="Paste a link to your cover art or note where it is saved..." oninput="AISProject.update('visuals.coverArt',this.value)">
   </div>
 
+  <!-- COMPLETION -->
   <div class="completion" id="completion">
     <div class="completion-eyebrow">Session 04 — Complete</div>
     <div class="completion-title">Your song has a world.</div>
@@ -400,11 +495,62 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.05,rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);var r=el.getBoundingClientRect();if(r.top<window.innerHeight)el.classList.add('visible');});
 function buildWave(id){var el=document.getElementById(id);if(!el)return;var h=[3,5,8,12,18,24,16,10,6,4,8,14,22,28,20,14,8,5,10,16,24,32,22,14,8,5,3,6,10,16,24,20,14,8,5,3,6,12,18,26,20,12,6,4,8,14,22,16,10,5,3,6,10,18,26,20,12,6,4,8];h.forEach(function(v){var b=document.createElement('div');b.className='wave-bar';b.style.height=v+'px';el.appendChild(b);});}
-['wave1','wave2','wave3','wave4','wave5','wave6'].forEach(buildWave);
+['wave1','wave2','wave3','wave4','wave5','wave6','wave7'].forEach(buildWave);
+
 var selectedVisualDir='';
+
+// ── GENERATE AI-SUGGESTED MOMENTS ──
+function generateSuggestedMoments(p){
+  var about=p.concept.about||'';
+  var feeling=p.concept.feeling||'';
+  var memory=p.concept.memory||'';
+  var genre=p.concept.genre||'';
+  var mood=p.concept.mood||'';
+  var dir=selectedVisualDir||p.visuals.direction||'';
+  var dirBase=dir.split('—')[0].trim().toLowerCase();
+  var moment=p.visuals.concept||'';
+
+  // Build contextual suggestions based on what we know
+  var suggestions=['','',''];
+
+  if(dirBase==='cinematic'){
+    suggestions[0]=about?'Close-up of hands or a meaningful object connected to '+about:'A quiet, intimate close-up that sets the emotional tone';
+    suggestions[1]=memory?'A visual echo of: '+memory:'A slow pan across a meaningful location';
+    suggestions[2]=feeling?'A final image that captures the feeling of '+feeling:'Someone alone, looking out — a moment of reflection';
+  } else if(dirBase==='animated'){
+    suggestions[0]=about?'An illustrated figure representing '+about+', surrounded by symbolic imagery':'An illustrated character in a world that reflects the song\'s emotion';
+    suggestions[1]='Abstract shapes and colors that pulse and shift with the music\'s energy';
+    suggestions[2]=feeling?'A final animated moment that resolves into the feeling of '+feeling:'A slow zoom out revealing the full illustrated world';
+  } else if(dirBase==='abstract'){
+    suggestions[0]=(genre||mood)?'Flowing color and texture that evokes '+[genre,mood].filter(Boolean).join(' and '):'Flowing color and texture that shifts with the emotional arc of the song';
+    suggestions[1]='Light and shadow moving in rhythm — no literal imagery, pure feeling';
+    suggestions[2]=feeling?'A final visual state that settles into '+feeling:'A slow fade to stillness — the emotion after the song ends';
+  } else if(dirBase==='documentary'){
+    suggestions[0]=about?'A real, candid moment connected to '+about:'A genuine, unposed moment — the kind you would normally not film';
+    suggestions[1]=memory?'A visual reference to: '+memory:'An everyday object or place that carries emotional weight';
+    suggestions[2]='A quiet ending — someone alone, a door closing, a light going out';
+  } else if(dirBase==='performance'){
+    suggestions[0]='The artist or performer in frame, lit dramatically, at the emotional peak of the song';
+    suggestions[1]='A close-up of hands, face, or instrument during the most intense moment';
+    suggestions[2]='A wide shot that shows the full performance space — then a slow pull back to black';
+  } else if(dirBase==='narrative'){
+    suggestions[0]=about?'The opening scene — introduce the world and the character connected to '+about:'The opening scene — establish the world and the central character';
+    suggestions[1]=memory?'The emotional turning point — a visual version of: '+memory:'The emotional turning point — the moment everything changes';
+    suggestions[2]=feeling?'The resolution — a final image that leaves the viewer with '+feeling:'The resolution — a final image that closes the story';
+  } else {
+    // Generic fallback
+    suggestions[0]=about?'An opening image that introduces the world of '+about:'An opening image that sets the emotional tone of the song';
+    suggestions[1]=memory||feeling?'A visual moment that captures: '+(memory||feeling):'The emotional core — the moment the song is really about';
+    suggestions[2]='A closing image — quiet, final, and true to the song\'s feeling';
+  }
+  return suggestions;
+}
+
 (function(){
   var p=AISProject.get();
-  AISProject.renderSongCard('ssf-card-container',['concept','lyrics','production'],'Now let\'s give your song a world.');
+  AISProject.renderSongCard('ssf-card-container',['concept','lyrics','production'],'Your song exists. Want to see it come to life?');
+
+  // Direction display
   var genre=p.concept.genre,mood=p.concept.mood,feeling=p.concept.feeling,songRef=p.production.selectedVersion;
   var chips=[];
   if(genre)chips.push('<div class="dd-chip">Genre: <span>'+escHtml(genre)+'</span></div>');
@@ -412,49 +558,127 @@ var selectedVisualDir='';
   if(feeling)chips.push('<div class="dd-chip">Feeling: <span>'+escHtml(feeling)+'</span></div>');
   if(songRef)chips.push('<div class="dd-chip">Song: <span>Ready</span></div>');
   if(chips.length>0){var dd=document.getElementById('direction-display');var dc=document.getElementById('direction-chips');if(dd)dd.style.display='block';if(dc)dc.innerHTML=chips.join('');}
+
   var vis=p.visuals;
   if(vis.concept){var el=document.getElementById('key-moment');if(el)el.value=vis.concept;}
   if(vis.direction){
     selectedVisualDir=vis.direction;
-    document.querySelectorAll('.vd-card').forEach(function(c){
-      var t=c.querySelector('.vd-title');
-      if(t&&vis.direction.indexOf(t.textContent)!==-1)c.classList.add('selected');
-    });
+    document.querySelectorAll('.vd-card').forEach(function(c){var t=c.querySelector('.vd-title');if(t&&vis.direction.indexOf(t.textContent)!==-1)c.classList.add('selected');});
   }
-  if(vis.storyboard){try{var shots=JSON.parse(vis.storyboard);for(var i=0;i<shots.length;i++){var el=document.getElementById('shot-'+(i+1));if(el)el.value=shots[i]||'';}}catch(e){}}
+
+  // Restore or generate moments
+  var momentsSet=false;
+  if(vis.storyboard){
+    try{
+      var saved=JSON.parse(vis.storyboard);
+      if(saved&&saved.length>0&&saved[0]){
+        for(var i=0;i<3;i++){var el=document.getElementById('moment-'+(i+1));if(el)el.value=saved[i]||'';}
+        momentsSet=true;
+      }
+    }catch(e){}
+  }
+  if(!momentsSet){
+    // Generate suggestions
+    var suggestions=generateSuggestedMoments(p);
+    for(var i=0;i<3;i++){var el=document.getElementById('moment-'+(i+1));if(el)el.value=suggestions[i]||'';}
+    saveMoments();
+  }
+
   if(vis.videoLink){var el=document.getElementById('video-link');if(el)el.value=vis.videoLink;}
   if(vis.coverArt){var el=document.getElementById('cover-art-link');if(el)el.value=vis.coverArt;}
-  buildVideoPrompt();buildCoverPrompt();
+
+  buildClipPrompts();
+  buildCoverPrompt();
 })();
+
 function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
 function selectVisualDir(card,direction){
   document.querySelectorAll('.vd-card').forEach(function(c){c.classList.remove('selected');});
   card.classList.add('selected');selectedVisualDir=direction;
-  AISProject.update('visuals.direction',direction);buildVideoPrompt();buildCoverPrompt();
-}
-function saveShots(){
-  var shots=[];for(var i=1;i<=5;i++){var el=document.getElementById('shot-'+i);shots.push(el?el.value.trim():'');}
-  AISProject.update('visuals.storyboard',JSON.stringify(shots));
-}
-function buildVideoPrompt(){
+  AISProject.update('visuals.direction',direction);
+
+  // Regenerate moment suggestions if moments are still the default
   var p=AISProject.get();
-  var moment=(document.getElementById('key-moment')||{}).value||p.visuals.concept||'';
+  var suggestions=generateSuggestedMoments(p);
+  for(var i=0;i<3;i++){
+    var el=document.getElementById('moment-'+(i+1));
+    if(el&&(!el.value||el.value===el.getAttribute('data-suggested'))){
+      el.value=suggestions[i]||'';
+      el.setAttribute('data-suggested',suggestions[i]||'');
+    }
+  }
+  saveMoments();
+  buildClipPrompts();
+  buildCoverPrompt();
+}
+
+function saveMoments(){
+  var moments=[];for(var i=1;i<=3;i++){var el=document.getElementById('moment-'+i);moments.push(el?el.value.trim():'');}
+  AISProject.update('visuals.storyboard',JSON.stringify(moments));
+}
+
+function buildClipPrompts(){
+  var p=AISProject.get();
   var dir=selectedVisualDir||p.visuals.direction||'';
   var genre=p.concept.genre||'',mood=p.concept.mood||'',feeling=p.concept.feeling||'';
-  var shots=[];for(var i=1;i<=5;i++){var el=document.getElementById('shot-'+i);var v=el?el.value.trim():'';if(v)shots.push(v);}
-  if(!moment&&!dir&&shots.length===0){var el=document.getElementById('video-prompt');if(el)el.textContent='[Fill in your key moment and five shots above to build your video prompt]';return;}
-  var parts=[];
-  if(dir)parts.push('Visual style: '+dir);
-  if(genre||mood)parts.push('Song direction: '+[genre,mood].filter(Boolean).join(', '));
-  if(feeling)parts.push('Emotional tone: '+feeling);
-  if(moment)parts.push('Key moment to capture: '+moment);
-  if(shots.length>0){parts.push('Scenes to generate:');shots.forEach(function(s,i){parts.push('  '+(i+1)+'. '+s);});}
-  parts.push('');
-  parts.push('Generate cinematic video clips that match this emotional and visual direction. Each clip should feel like it belongs in the same music video. Keep the color palette consistent and the pacing matched to the song\'s mood.');
-  var prompt=parts.join('\n');
-  var el=document.getElementById('video-prompt');if(el)el.textContent=prompt;
-  AISProject.update('visuals.generationPrompts',[prompt]);
+  var moment=p.visuals.concept||'';
+  var dirBase=dir.split('—')[0].trim();
+  var styleDesc=[dirBase,genre,mood,feeling].filter(Boolean).join(', ');
+
+  var moments=[];
+  for(var i=1;i<=3;i++){var el=document.getElementById('moment-'+i);moments.push(el?el.value.trim():'');}
+
+  var container=document.getElementById('clip-blocks');
+  if(!container)return;
+
+  var prompts=[];
+  for(var i=0;i<3;i++){
+    var m=moments[i]||'A visual moment for the song';
+    var p_text='Visual style: '+(dirBase||'cinematic')+'\n';
+    if(genre||mood)p_text+='Song direction: '+[genre,mood].filter(Boolean).join(', ')+'\n';
+    if(feeling)p_text+='Emotional tone: '+feeling+'\n';
+    p_text+='Scene: '+m+'\n';
+    p_text+='\nGenerate a short video clip (5 to 10 seconds) that matches this scene and emotional direction. Keep the color palette consistent with the other clips. No text or titles in the clip.';
+    prompts.push(p_text);
+  }
+
+  AISProject.update('visuals.generationPrompts',prompts);
+
+  // Render clip blocks
+  var html='';
+  for(var i=0;i<3;i++){
+    var id='clip-prompt-'+i;
+    html+='<div class="clip-block" style="margin-bottom:12px;">';
+    html+='<div class="clip-block-header" onclick="toggleClip('+i+')">';
+    html+='<div class="clip-block-label"><div class="prompt-dot"></div>Clip 0'+(i+1)+'</div>';
+    html+='<svg class="clip-chevron" id="clip-chev-'+i+'" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
+    html+='</div>';
+    html+='<div class="clip-block-body" id="'+id+'" style="'+(i===0?'':'display:none;')+'">'+escHtml(prompts[i])+'</div>';
+    html+='<div class="clip-block-actions" id="clip-actions-'+i+'" style="'+(i===0?'':'display:none;')+'"><button class="copy-btn" onclick="copyPrompt(this,\''+id+'\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Prompt</button><a class="flow-btn" href="https://flow.google" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Open Google Flow</a></div>';
+    html+='</div>';
+  }
+  container.innerHTML=html;
 }
+
+function toggleClip(idx){
+  for(var i=0;i<3;i++){
+    var body=document.getElementById('clip-prompt-'+i);
+    var actions=document.getElementById('clip-actions-'+i);
+    var chev=document.getElementById('clip-chev-'+i);
+    if(i===idx){
+      var open=body&&body.style.display!=='none';
+      if(body)body.style.display=open?'none':'block';
+      if(actions)actions.style.display=open?'none':'flex';
+      if(chev)chev.style.transform=open?'':'rotate(180deg)';
+    } else {
+      if(body)body.style.display='none';
+      if(actions)actions.style.display='none';
+      if(chev)chev.style.transform='';
+    }
+  }
+}
+
 function buildCoverPrompt(){
   var p=AISProject.get();
   var dir=selectedVisualDir||p.visuals.direction||'';
@@ -470,24 +694,39 @@ function buildCoverPrompt(){
   parts.push('The image should feel like professional streaming cover art — square format, visually striking, no text or lyrics in the image.');
   var el=document.getElementById('cover-prompt');if(el)el.textContent=parts.join(' ');
 }
+
 function pickVideo(choice,btn){
   document.querySelectorAll('.pifi-btn').forEach(function(b){b.classList.remove('sel-pick','sel-fix');});
   var fp=document.getElementById('fix-panel');
   if(choice==='fix'){btn.classList.add('sel-fix');if(fp)fp.classList.add('show');}
   else{btn.classList.add('sel-pick');if(fp)fp.classList.remove('show');var linkEl=document.getElementById('video-link');AISProject.update('visuals.videoLink',linkEl?linkEl.value.trim():'selected');showCompletion();}
 }
+
+function showFix(type,btn){
+  document.querySelectorAll('.fix-chip').forEach(function(c){c.classList.remove('active');});
+  document.querySelectorAll('.fix-guidance').forEach(function(g){g.classList.remove('show');});
+  btn.classList.add('active');
+  var g=document.getElementById('fix-'+type);if(g)g.classList.add('show');
+}
+
 function showCompletion(){
   var comp=document.getElementById('completion');if(!comp)return;
   comp.classList.add('show');
   AISProject.renderSongCard('completion-ssf',['concept','lyrics','production','visuals'],'Now let\'s decide what happens with it.');
   setTimeout(function(){comp.scrollIntoView({behavior:'smooth',block:'nearest'});},100);
 }
+
 function toggleWatchMe(){
   var body=document.getElementById('watchme-body');var chevron=document.getElementById('watchme-chevron');
   if(!body)return;var open=body.style.display!=='none';
-  body.style.display=open?'none':'block';
-  if(chevron)chevron.style.transform=open?'':'rotate(180deg)';
+  body.style.display=open?'none':'block';if(chevron)chevron.style.transform=open?'':'rotate(180deg)';
 }
+function toggleAssemblyDemo(){
+  var body=document.getElementById('assembly-body');var chevron=document.getElementById('assembly-chevron');
+  if(!body)return;var open=body.style.display!=='none';
+  body.style.display=open?'none':'block';if(chevron)chevron.style.transform=open?'':'rotate(180deg)';
+}
+
 function copyPrompt(btn,id){
   var el=document.getElementById(id);if(!el)return;
   var text=el.innerText||el.textContent;var orig=btn.innerHTML;
