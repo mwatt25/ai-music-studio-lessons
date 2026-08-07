@@ -399,6 +399,147 @@ body {
   .div::after { width: 28px; }
 }
 
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS & VISUAL ENERGY
+   ═══════════════════════════════════════════════ */
+
+/* Hero accent bar pulse */
+@keyframes accent-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.hero-accent { animation: accent-pulse 3s ease-in-out infinite; }
+
+/* Gold rule shimmer */
+@keyframes rule-shimmer {
+  0% { width: 48px; opacity: 1; }
+  50% { width: 72px; opacity: 0.7; }
+  100% { width: 48px; opacity: 1; }
+}
+.hero-rule { animation: rule-shimmer 4s ease-in-out infinite; }
+
+/* Ticker scroll animation */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-inner {
+  display: flex;
+  gap: 40px;
+  animation: ticker-scroll 18s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+.ticker { overflow: hidden; padding: 9px 0; }
+
+/* Scroll-reveal: sections fade up on enter */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1), transform 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
+.reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.08s; }
+.reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
+.reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.24s; }
+.reveal-stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.32s; }
+.reveal-stagger.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.40s; }
+
+/* Card hover lift */
+.cg-card {
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s !important;
+}
+.cg-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 6px 9px 0 rgba(0,0,0,0.6) !important;
+  border-color: rgba(245,166,35,0.4) !important;
+}
+
+/* Lesson block hover */
+.lb {
+  transition: border-color 0.2s;
+}
+.lb:hover {
+  border-color: rgba(245,166,35,0.3);
+}
+
+/* Checklist checked state animation */
+.cl li.checked {
+  background: rgba(245,166,35,0.06);
+}
+.cl li.checked label {
+  text-decoration: line-through;
+  color: var(--muted);
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+/* Copy button flash confirmation */
+@keyframes copy-flash {
+  0% { background: var(--gold); color: var(--navy); }
+  30% { background: #2ECC71; color: #fff; }
+  100% { background: var(--navy); color: var(--gold); }
+}
+.copy-btn.copied {
+  animation: copy-flash 0.8s ease forwards;
+}
+
+/* Section heading bar slide in */
+@keyframes bar-slide {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+.sh-bar {
+  transform-origin: top;
+  animation: bar-slide 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  animation-play-state: paused;
+}
+.reveal.visible .sh-bar {
+  animation-play-state: running;
+}
+
+/* Tool button press feel */
+.tbtn {
+  transition: transform 0.1s, box-shadow 0.1s !important;
+}
+.tbtn:active {
+  transform: translate(4px, 4px) !important;
+  box-shadow: 0 0 0 rgba(0,0,0,0.6) !important;
+}
+
+/* Path card hover */
+.path-card {
+  transition: background 0.2s, border-color 0.2s;
+}
+.path-card:hover {
+  background: var(--navy-3);
+  border-top-color: var(--gold-light);
+}
+
+/* Journey step hover */
+.jr-step {
+  transition: background 0.2s;
+}
+.jr-step:hover {
+  background: var(--navy-3);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-stagger > *, .hero-accent, .hero-rule, .ticker-inner { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+}
+
 </style>
 </head>
 <body>
@@ -498,5 +639,107 @@ function copyPrompt(btn) {
 }
 </script>
 </div><!-- /studio-shell -->
+
+<script>
+// ── SCROLL REVEAL ──────────────────────────────────────────────────────────
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  function initReveal() {
+    // Add reveal class to all major sections
+    document.querySelectorAll('.sh, .pq, .tp, .lb, .cg, .cmp, .cl, .vid-placeholder, .tbtn, .cta, .closing, .jr, .path-grid, .ng, .fcta, .dk, .cs, .yt').forEach(function(el) {
+      if (!el.classList.contains('reveal') && !el.classList.contains('reveal-stagger')) {
+        el.classList.add('reveal');
+        observer.observe(el);
+      }
+    });
+    // Stagger card grids
+    document.querySelectorAll('.cg, .ng, .path-grid').forEach(function(el) {
+      el.classList.add('reveal-stagger');
+      el.classList.remove('reveal');
+      observer.observe(el);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReveal);
+  } else {
+    initReveal();
+  }
+})();
+
+// ── TICKER ANIMATION ───────────────────────────────────────────────────────
+(function() {
+  function initTicker() {
+    var ticker = document.querySelector('.ticker');
+    if (!ticker) return;
+    var inner = ticker.innerHTML;
+    // Wrap in scrolling inner div and duplicate for seamless loop
+    ticker.innerHTML = '<div class="ticker-inner">' + inner + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + inner + '</div>';
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTicker);
+  } else {
+    initTicker();
+  }
+})();
+
+// ── CHECKLIST INTERACTIONS ─────────────────────────────────────────────────
+(function() {
+  function initChecklists() {
+    document.querySelectorAll('.cl li input[type=checkbox]').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var li = cb.closest('li');
+        if (cb.checked) {
+          li.classList.add('checked');
+        } else {
+          li.classList.remove('checked');
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initChecklists);
+  } else {
+    initChecklists();
+  }
+})();
+
+// ── COPY BUTTON FLASH ──────────────────────────────────────────────────────
+(function() {
+  function initCopyBtns() {
+    document.querySelectorAll('.copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var pb = btn.closest('.pb');
+        var text = pb ? (pb.querySelector('.pb-text') || {}).innerText : '';
+        if (navigator.clipboard && text) {
+          navigator.clipboard.writeText(text.trim()).then(function() {
+            var orig = btn.textContent;
+            btn.textContent = 'COPIED';
+            btn.classList.add('copied');
+            setTimeout(function() {
+              btn.textContent = orig;
+              btn.classList.remove('copied');
+            }, 1800);
+          });
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCopyBtns);
+  } else {
+    initCopyBtns();
+  }
+})();
+</script>
+
 </body>
 </html>
