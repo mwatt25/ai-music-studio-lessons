@@ -33,8 +33,10 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .hero-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
 .hero-eyebrow::after{content:'';flex:1;height:1px;background:rgba(245,166,35,0.2);}
 .hero-title{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:900;color:var(--white);line-height:1.05;margin-bottom:18px;letter-spacing:-.02em;}
-.hero-sub{font-size:1rem;color:var(--card);line-height:1.65;max-width:500px;}
+.hero-sub{font-size:1rem;color:var(--card);line-height:1.65;max-width:500px;margin-top:10px;}
 .hero-sub strong{color:var(--gold-lt);font-weight:700;}
+/* Hero headline second line — editorial separation */
+.hero-title-line2{color:var(--gold-lt);display:inline;}
 
 /* ── TICKER ── */
 .ticker{background:var(--gold);padding:8px 0;overflow:hidden;}
@@ -245,8 +247,8 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">The AI Music Studio</div>
-    <div class="hero-title">You came here with an idea.<br>You're leaving with something you made.</div>
-    <div class="hero-sub">No music or video experience needed. <strong>Just bring the idea.</strong></div>
+    <div class="hero-title">Let's make your story<br>a song.<span class="hero-title-line2"><br>Then turn that song<br>into a video.</span></div>
+    <div class="hero-sub">No songwriting, music, or video experience needed. <strong>AI helps you create it step by step.</strong></div>
   </div>
 </div>
 
