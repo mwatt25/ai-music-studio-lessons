@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 3: The Production Studio — AI Music Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ais_shared.css">
+<script src="ais_project.js"></script>
+<style>
+:root{
+  --navy:#0D1117;--navy-2:#131A22;--navy-3:#1A2332;--navy-4:#080C12;
+  --gold:#F5A623;--gold-lt:#FBCF7A;--gold-dim:rgba(245,166,35,0.1);
+  --blue:#4A9EBF;--blue-dim:rgba(74,158,191,0.08);
+  --green:#27AE60;--green-dim:rgba(39,174,96,0.08);
+  --white:#FFFFFF;--off:#E8EDF2;--card:#C4CDD6;--muted:#7A8A9A;
+  --bw:rgba(255,255,255,0.07);--bw2:rgba(255,255,255,0.12);
+  --sh:4px 4px 0 rgba(0,0,0,0.6);--sh-sm:2px 2px 0 rgba(0,0,0,0.5);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;}
+.brand-bar{display:flex;align-items:center;gap:10px;padding:10px 20px;background:var(--navy-2);border-bottom:1px solid var(--bw);}
+.brand-logo{height:24px;opacity:.9;}
+.brand-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+.hero{position:relative;width:100%;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+.hero-bg{position:absolute;inset:0;background-image:url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/GxOhZnRhIOoScchN.jpg');background-size:cover;background-position:center 20%;filter:brightness(0.18) saturate(0.4);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(13,17,23,0.97) 100%);}
+.hero-content{position:relative;z-index:2;padding:40px 48px 36px;}
+.hero-session{display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;margin-bottom:12px;box-shadow:var(--sh);}
+.hero-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--white);line-height:1.05;margin-bottom:8px;}
+.hero-tagline{font-size:1rem;font-style:italic;color:var(--gold);margin-bottom:16px;}
+.meta-row{display:flex;flex-wrap:wrap;}
+.meta-chip{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:5px 14px;border-right:1px solid var(--bw);}
+.meta-chip:first-child{padding-left:0;}
+.ticker{background:var(--gold);padding:8px 0;overflow:hidden;}
+.ticker-inner{display:flex;gap:40px;white-space:nowrap;animation:ts 20s linear infinite;}
+.ticker-text{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--navy);}
+@keyframes ts{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.step-tracker{display:flex;align-items:stretch;overflow:hidden;border-bottom:1px solid var(--bw);}
+.st-item{flex:1;text-align:center;padding:10px 4px;background:var(--navy-2);border-right:1px solid var(--bw);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);line-height:1.4;}
+.st-item:last-child{border-right:none;}
+.st-item.done{color:var(--green);border-top:3px solid var(--green);}
+.st-item.active{background:var(--navy-3);color:var(--gold);border-top:3px solid var(--gold);}
+.st-num{font-size:1rem;font-weight:900;display:block;margin-bottom:2px;}
+.st-item.active .st-num{color:var(--gold);}
+.st-item.done .st-num{color:var(--green);}
+.body-wrap{max-width:900px;margin:0 auto;padding:0 48px 80px;}
+.session-opening{position:relative;padding:52px 0 0;overflow:visible;}
+.session-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.session-eyebrow::after{content:'';flex:1;height:1px;background:var(--bw);}
+.session-big-q{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:8px;letter-spacing:-.02em;}
+.session-sub{font-size:15px;color:var(--card);margin-bottom:32px;line-height:1.6;}
+.session-bg-num{position:absolute;bottom:-40px;left:-36px;font-size:clamp(140px,20vw,220px);font-weight:900;color:rgba(245,166,35,0.03);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.04em;z-index:0;}
+.studio-label{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.studio-label::before{content:'';width:20px;height:2px;background:var(--gold);}
+.studio-heading{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:6px;letter-spacing:-.02em;}
+.wave-divider{display:flex;align-items:center;gap:3px;padding:32px 0;opacity:.2;}
+.wave-bar{width:2px;background:var(--gold);border-radius:1px;flex-shrink:0;}
+.vid-slot{border:1px solid var(--bw);border-left:3px solid var(--muted);padding:12px 16px;margin-bottom:28px;display:flex;align-items:center;gap:12px;}
+.vid-slot svg{width:16px;height:16px;color:var(--muted);flex-shrink:0;}
+.vid-slot p{font-size:12px;color:var(--muted);margin:0;font-style:italic;}
+
+/* ── DIRECTION DISPLAY ── */
+.direction-display{
+  background:rgba(245,166,35,0.04);border:1px solid rgba(245,166,35,0.15);
+  border-left:3px solid rgba(245,166,35,0.4);padding:14px 18px;margin-bottom:28px;
+}
+.dd-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(245,166,35,0.6);margin-bottom:8px;}
+.dd-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.dd-chip{font-size:12px;color:var(--card);background:var(--navy-3);padding:4px 12px;border:1px solid var(--bw);}
+.dd-chip span{color:var(--gold-lt);font-weight:700;}
+
+/* ── SOUND BOARD ── */
+.sound-board{background:var(--navy-4);border:1px solid var(--bw2);border-top:2px solid var(--gold);margin-bottom:24px;overflow:hidden;}
+.sb-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--bw);background:var(--gold-dim);}
+.sb-header-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+.sb-section{padding:16px 16px 8px;}
+.sb-section-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--card);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.sb-section-label::after{content:'';flex:1;height:1px;background:var(--bw);}
+.tag-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.tag-btn{background:var(--navy-3);border:1px solid var(--bw);color:var(--muted);font-size:12px;font-weight:600;padding:7px 14px;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;min-height:36px;}
+.tag-btn:hover{border-color:rgba(245,166,35,0.4);color:var(--card);}
+.tag-btn.selected{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);font-weight:700;}
+
+/* ── SUNO INPUTS ── */
+.suno-inputs{margin-bottom:24px;}
+.suno-block{background:var(--navy-4);border:1px solid var(--bw2);margin-bottom:12px;overflow:hidden;}
+.suno-block-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--bw);background:rgba(74,158,191,0.06);}
+.suno-block-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);}
+.suno-block-body{font-family:'Courier New',monospace;font-size:13px;color:var(--off);line-height:1.9;padding:14px 16px;white-space:pre-wrap;min-height:60px;}
+.suno-block-body.editable{outline:none;cursor:text;}
+.suno-block-body.editable:focus{background:rgba(74,158,191,0.04);}
+.suno-block-actions{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid var(--bw);background:rgba(74,158,191,0.04);flex-wrap:wrap;}
+.suno-note{font-size:11px;color:var(--muted);padding:8px 16px 12px;line-height:1.6;}
+
+/* ── HANDOFF BLOCK ── */
+.handoff-block{
+  background:var(--navy-3);border:1px solid var(--bw2);border-left:4px solid var(--gold);
+  padding:18px 20px;margin-bottom:28px;
+}
+.handoff-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.handoff-text{font-size:14px;color:var(--card);line-height:1.65;margin-bottom:14px;}
+.handoff-actions{display:flex;gap:10px;flex-wrap:wrap;}
+
+/* ── SONG LINK INPUT ── */
+.song-link-wrap{margin-bottom:24px;}
+.song-link-wrap label{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--card);margin-bottom:8px;}
+.song-link-input{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.12);color:var(--white);font-family:'Inter',sans-serif;font-size:14px;padding:9px 0;outline:none;transition:border-color .25s;}
+.song-link-input:focus{border-bottom-color:var(--gold);}
+.song-link-input::placeholder{color:rgba(196,205,214,0.4);font-style:italic;}
+
+/* ── PICK IT / FIX IT ── */
+.pifi{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--bw2);box-shadow:var(--sh);margin-bottom:12px;}
+.pifi-btn{padding:24px 20px;background:var(--navy-2);border:none;cursor:pointer;text-align:center;transition:background .15s;border-right:1px solid var(--bw2);font-family:'Inter',sans-serif;min-height:100px;}
+.pifi-btn:last-child{border-right:none;}
+.pifi-btn:hover{background:var(--navy-3);}
+.pifi-btn.sel-pick{background:var(--green-dim);border-top:3px solid var(--green);}
+.pifi-btn.sel-fix{background:var(--gold-dim);border-top:3px solid var(--gold);}
+.pifi-icon{font-size:1.6rem;margin-bottom:8px;line-height:1;}
+.pifi-label{font-size:16px;font-weight:900;color:var(--white);margin-bottom:6px;letter-spacing:-.01em;}
+.pifi-btn.sel-pick .pifi-label{color:#4CAF50;}
+.pifi-btn.sel-fix .pifi-label{color:var(--gold);}
+.pifi-sub{font-size:12px;color:var(--muted);line-height:1.5;}
+.fix-panel{display:none;border:1px solid var(--bw);border-left:4px solid var(--gold);background:var(--navy-3);padding:16px 18px;margin-bottom:20px;}
+.fix-panel.show{display:block;}
+.fix-chip{background:var(--navy-3);border:1px solid var(--bw);color:var(--card);font-size:12px;font-weight:600;padding:8px 14px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;min-height:38px;}
+.fix-chip:hover{border-color:rgba(245,166,35,0.4);color:var(--gold);}
+.fix-chip.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);font-weight:700;}
+.fix-guidance{display:none;background:var(--navy-4);border:1px solid var(--bw);border-left:3px solid var(--blue);padding:14px 16px;margin-top:12px;font-size:13px;color:var(--card);line-height:1.75;}
+.fix-guidance.show{display:block;}
+
+/* ── COMPARE VERSIONS ── */
+.compare-toggle{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--bw);color:var(--muted);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:16px;transition:all .15s;}
+.compare-toggle:hover{border-color:var(--gold);color:var(--gold);}
+.compare-panel{display:none;background:var(--navy-3);border:1px solid var(--bw2);padding:18px;margin-bottom:20px;}
+.compare-panel.show{display:block;}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.compare-version{background:var(--navy-4);border:1px solid var(--bw);padding:14px;}
+.cv-label{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.cv-input{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--white);font-size:13px;padding:6px 0;outline:none;font-family:'Inter',sans-serif;}
+.cv-input::placeholder{color:rgba(196,205,214,0.35);font-style:italic;}
+.cv-pick-btn{width:100%;margin-top:10px;background:transparent;border:1px solid var(--bw);color:var(--muted);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:8px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
+.cv-pick-btn:hover{border-color:var(--green);color:var(--green);}
+.cv-pick-btn.selected{background:var(--green-dim);border-color:var(--green);color:var(--green);}
+
+/* ── BUTTONS ── */
+.copy-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:var(--navy);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:none;cursor:pointer;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;transition:background .15s,transform .1s;min-height:42px;}
+.copy-btn:hover{background:var(--gold);transform:translateY(-1px);}
+.copy-btn.copied{background:var(--green);color:white;}
+.suno-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--blue);cursor:pointer;box-shadow:var(--sh-sm);font-family:'Inter',sans-serif;text-decoration:none;transition:all .15s;min-height:42px;}
+.suno-btn:hover{background:var(--blue);color:var(--navy);}
+.primary-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .12s,box-shadow .12s;min-height:48px;}
+.primary-btn:hover{transform:translateY(-2px);box-shadow:6px 6px 0 rgba(0,0,0,.6);}
+.green-btn{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:var(--white);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:12px 24px;border:none;box-shadow:var(--sh);cursor:pointer;font-family:'Inter',sans-serif;transition:transform .12s;min-height:46px;}
+.green-btn:hover{transform:translateY(-1px);}
+
+/* ── COMPLETION ── */
+.completion{display:none;background:var(--green-dim);border:1px solid rgba(39,174,96,0.2);border-top:3px solid var(--green);padding:44px 32px;box-shadow:var(--sh);margin-top:48px;position:relative;overflow:hidden;}
+.completion::before{content:'03';position:absolute;right:-10px;bottom:-20px;font-size:140px;font-weight:900;color:rgba(39,174,96,0.04);line-height:1;pointer-events:none;}
+.completion.show{display:block;animation:fadeUp .5s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.completion-eyebrow{font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:14px;}
+.completion-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;color:var(--white);margin-bottom:8px;line-height:1.1;letter-spacing:-.02em;}
+.completion-sub{font-size:14px;color:var(--card);line-height:1.65;margin-bottom:20px;font-style:italic;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;}
+.reveal.visible{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;}}
+
+/* ── MOBILE ── */
+@media(max-width:820px){.hero-content{padding:28px 28px 28px;}.body-wrap{padding:0 28px 60px;}}
+@media(max-width:660px){
+  .session-bg-num{display:none;}
+  .pifi-btn{padding:20px 12px;min-height:110px;}
+  .pifi-label{font-size:15px;}
+  .fix-chip{padding:9px 12px;font-size:11px;}
+  .copy-btn,.suno-btn{flex:1;justify-content:center;}
+  .suno-block-actions{flex-direction:column;}
+  .suno-block-actions .copy-btn,.suno-block-actions .suno-btn{width:100%;}
+  .compare-grid{grid-template-columns:1fr;}
+  .handoff-actions{flex-direction:column;}
+  .handoff-actions .copy-btn,.handoff-actions .suno-btn{width:100%;}
+  .completion{padding:28px 20px;}
+  .wave-divider{padding:20px 0;}
+}
+@media(max-width:560px){
+  .hero{min-height:0!important;}
+  .hero-bg{display:none!important;}
+  .hero-overlay{display:none!important;}
+  .hero-content{background:var(--navy-2);border-bottom:3px solid var(--gold);padding:18px 16px 20px;}
+  .hero-title{font-size:1.8rem;}
+  .body-wrap{padding:0 16px 48px;}
+  .step-tracker{display:none;}
+  .studio-heading{font-size:1.3rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="brand-bar">
+  <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663685328713/NHEGRhlODnmTUAVf.png" alt="Imagine That AI" class="brand-logo">
+  <span class="brand-label">An Imagine That AI Creative Experience</span>
+</div>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-session">Session 3 of 5</div>
+    <div class="hero-title">The Production Studio</div>
+    <div class="hero-tagline">What should it sound like?</div>
+    <div class="meta-row">
+      <div class="meta-chip">Suno</div>
+      <div class="meta-chip">Your Output: A Song</div>
+    </div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-text">Session 3 of 5</span><span class="ticker-text">·</span>
+    <span class="ticker-text">The Production Studio</span><span class="ticker-text">·</span>
+    <span class="ticker-text">What Should It Sound Like?</span><span class="ticker-text">·</span>
+    <span class="ticker-text">Session 3 of 5</span><span class="ticker-text">·</span>
+    <span class="ticker-text">The Production Studio</span><span class="ticker-text">·</span>
+    <span class="ticker-text">What Should It Sound Like?</span><span class="ticker-text">·</span>
+  </div>
+</div>
+
+<div class="step-tracker">
+  <div class="st-item done"><span class="st-num">01</span>CONCEPT</div>
+  <div class="st-item done"><span class="st-num">02</span>WRITING</div>
+  <div class="st-item active"><span class="st-num">03</span>PRODUCTION</div>
+  <div class="st-item"><span class="st-num">04</span>VISUALS</div>
+  <div class="st-item"><span class="st-num">05</span>RELEASE</div>
+</div>
+
+<div class="body-wrap">
+
+  <!-- STAGE 1: YOUR SONG SO FAR -->
+  <div class="session-opening reveal">
+    <div class="session-bg-num">03</div>
+    <div class="session-eyebrow">The Production Studio &nbsp;/&nbsp; Session 03</div>
+    <div class="session-big-q">Now let's hear it.</div>
+    <div class="session-sub">Your lyrics are ready. Let's decide what your song should sound like and bring it to life in Suno.</div>
+    <div id="ssf-card-container"></div>
+  </div>
+
+  <!-- Video placeholder -->
+  <div class="vid-slot reveal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+    <p>WATCH ME: From Lyrics to Song in Suno — demo video coming soon</p>
+  </div>
+
+  <!-- Established direction from Session 1 -->
+  <div class="direction-display reveal" id="direction-display" style="display:none;">
+    <div class="dd-label">Your creative direction from Session 1</div>
+    <div class="dd-chips" id="direction-chips"></div>
+  </div>
+
+  <div class="wave-divider" id="wave1"></div>
+
+  <!-- STAGE 2: SOUND BOARD -->
+  <div class="studio-label reveal">Sound Board</div>
+  <div class="studio-heading reveal">Refine the sound.</div>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Your genre and mood are already set. These three choices add the final layer of direction before Suno builds your song.</p>
+
+  <div class="sound-board reveal">
+    <div class="sb-header">
+      <div class="sb-header-label">Sound Board</div>
+      <div id="sb-fill-status" style="font-size:10px;color:var(--muted);font-family:'Courier New',monospace;">0 of 3 selected</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-label">Energy</div>
+      <div class="tag-grid" id="energy-grid">
+        <button class="tag-btn" onclick="selectTag(this,'energy','Mellow')">Mellow</button>
+        <button class="tag-btn" onclick="selectTag(this,'energy','Mid')">Mid</button>
+        <button class="tag-btn" onclick="selectTag(this,'energy','Upbeat')">Upbeat</button>
+        <button class="tag-btn" onclick="selectTag(this,'energy','Intense')">Intense</button>
+      </div>
+      <div class="sb-section-label">Production Feel</div>
+      <div class="tag-grid" id="feel-grid">
+        <button class="tag-btn" onclick="selectTag(this,'feel','Polished')">Polished</button>
+        <button class="tag-btn" onclick="selectTag(this,'feel','Acoustic')">Acoustic</button>
+        <button class="tag-btn" onclick="selectTag(this,'feel','Live Band')">Live Band</button>
+        <button class="tag-btn" onclick="selectTag(this,'feel','Minimal')">Minimal</button>
+        <button class="tag-btn" onclick="selectTag(this,'feel','Cinematic')">Cinematic</button>
+        <button class="tag-btn" onclick="selectTag(this,'feel','Vintage')">Vintage</button>
+        <button class="tag-btn" onclick="selectTag(this,'feel','Electronic')">Electronic</button>
+        <button class="tag-btn" onclick="selectTag(this,'feel','Other')">Other</button>
+      </div>
+      <div class="sb-section-label">Vocal Feel</div>
+      <div class="tag-grid" id="vocal-grid">
+        <button class="tag-btn" onclick="selectTag(this,'vocal','Intimate')">Intimate</button>
+        <button class="tag-btn" onclick="selectTag(this,'vocal','Smooth')">Smooth</button>
+        <button class="tag-btn" onclick="selectTag(this,'vocal','Powerful')">Powerful</button>
+        <button class="tag-btn" onclick="selectTag(this,'vocal','Soulful')">Soulful</button>
+        <button class="tag-btn" onclick="selectTag(this,'vocal','Airy')">Airy</button>
+        <button class="tag-btn" onclick="selectTag(this,'vocal','Raspy')">Raspy</button>
+        <button class="tag-btn" onclick="selectTag(this,'vocal','Playful')">Playful</button>
+        <button class="tag-btn" onclick="selectTag(this,'vocal','Dramatic')">Dramatic</button>
+        <button class="tag-btn" onclick="selectTag(this,'vocal','Harmonized')">Harmonized</button>
+        <button class="tag-btn" onclick="selectTag(this,'vocal','Other')">Other</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wave-divider" id="wave2"></div>
+
+  <!-- STAGE 3: SUNO INPUTS -->
+  <div class="studio-label reveal">Suno Inputs</div>
+  <div class="studio-heading reveal">Three things to copy into Suno.</div>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Suno's Custom Mode has three separate fields. Copy each one and paste it where it belongs. The video shows exactly where.</p>
+
+  <div class="suno-inputs reveal">
+    <!-- Lyrics -->
+    <div class="suno-block">
+      <div class="suno-block-header">
+        <div class="suno-block-label">1 — Lyrics</div>
+      </div>
+      <div class="suno-block-body" id="suno-lyrics-display">[Your approved lyrics will appear here]</div>
+      <div class="suno-note">Paste this into the <strong>Lyrics</strong> field in Suno Custom Mode.</div>
+      <div class="suno-block-actions">
+        <button class="copy-btn" onclick="copyBlock(this,'suno-lyrics-display')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Lyrics
+        </button>
+      </div>
+    </div>
+    <!-- Style -->
+    <div class="suno-block">
+      <div class="suno-block-header">
+        <div class="suno-block-label">2 — Style</div>
+      </div>
+      <div class="suno-block-body" id="suno-style-display">[Select Energy, Production Feel, and Vocal Feel above to build your style description]</div>
+      <div class="suno-note">Paste this into the <strong>Style of Music</strong> field in Suno Custom Mode.</div>
+      <div class="suno-block-actions">
+        <button class="copy-btn" onclick="copyBlock(this,'suno-style-display')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Style
+        </button>
+      </div>
+    </div>
+    <!-- Title -->
+    <div class="suno-block">
+      <div class="suno-block-header">
+        <div class="suno-block-label">3 — Title</div>
+      </div>
+      <div class="suno-block-body" id="suno-title-display" contenteditable="true" class="suno-block-body editable">[Your working title will appear here — edit if needed]</div>
+      <div class="suno-note">Paste this into the <strong>Title</strong> field in Suno Custom Mode.</div>
+      <div class="suno-block-actions">
+        <button class="copy-btn" onclick="copyBlock(this,'suno-title-display')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Title
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 4: HANDOFF TO SUNO -->
+  <div class="handoff-block reveal">
+    <div class="handoff-label">Out → Create → Come Back</div>
+    <div class="handoff-text">Create your song in Suno. Listen to the versions it gives you, then come back when you have one you want to work with.</div>
+    <div class="handoff-actions">
+      <a class="suno-btn" href="https://suno.com" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Open Suno
+      </a>
+    </div>
+  </div>
+
+  <div class="wave-divider" id="wave3"></div>
+
+  <!-- STAGE 5: FIRST LISTEN + PICK IT / FIX IT -->
+  <div class="studio-label reveal">First Listen</div>
+  <div class="studio-heading reveal">Is this your song?</div>
+  <p class="reveal" style="font-size:13px;color:var(--card);margin-bottom:20px;line-height:1.65;">Paste a link to the version you want to work with, then decide.</p>
+
+  <div class="song-link-wrap reveal">
+    <label>Your Suno Song Link</label>
+    <input type="url" class="song-link-input" id="song-link-a" placeholder="Paste your Suno song link here..." oninput="saveSongLink(this.value,'a')">
+  </div>
+
+  <div class="pifi reveal">
+    <button class="pifi-btn" onclick="pickSong('pick',this)">
+      <div class="pifi-icon">✓</div>
+      <div class="pifi-label">Pick It</div>
+      <div class="pifi-sub">Yes. This is the one.</div>
+    </button>
+    <button class="pifi-btn" onclick="pickSong('fix',this)">
+      <div class="pifi-icon">↩</div>
+      <div class="pifi-label">Fix It</div>
+      <div class="pifi-sub">Almost. I want to change something.</div>
+    </button>
+  </div>
+
+  <!-- FIX IT PANEL -->
+  <div class="fix-panel" id="fix-panel">
+    <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">What needs to change?</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+      <button class="fix-chip" onclick="showFixGuidance('vocals',this)">Vocals</button>
+      <button class="fix-chip" onclick="showFixGuidance('energy',this)">Energy or tempo</button>
+      <button class="fix-chip" onclick="showFixGuidance('production',this)">Instrumentation or production</button>
+      <button class="fix-chip" onclick="showFixGuidance('intro',this)">Intro or ending</button>
+      <button class="fix-chip" onclick="showFixGuidance('section',this)">A specific section</button>
+      <button class="fix-chip" onclick="showFixGuidance('lyrics',this)">Lyrics or pronunciation</button>
+      <button class="fix-chip" onclick="showFixGuidance('other',this)">Something else</button>
+    </div>
+    <div class="fix-guidance" id="fix-vocals">
+      <strong style="color:var(--blue);">Vocals</strong><br><br>
+      In Suno, you can try a different vocal style by updating the Style field and regenerating. Try adding or changing the vocal feel descriptor (e.g. swap "Smooth" for "Raspy" or "Powerful"). If the pronunciation of a specific word is off, you can use Suno's <strong>Remix/Edit</strong> to adjust that section.
+    </div>
+    <div class="fix-guidance" id="fix-energy">
+      <strong style="color:var(--blue);">Energy or tempo</strong><br><br>
+      Update your Energy selection above, rebuild your Style description, and generate a new version. If the tempo is close but not quite right, try adding "slow tempo," "mid-tempo," or "uptempo" directly to your Style field in Suno.
+    </div>
+    <div class="fix-guidance" id="fix-production">
+      <strong style="color:var(--blue);">Instrumentation or production</strong><br><br>
+      Update your Production Feel selection above and regenerate. You can also be more specific in Suno's Style field — for example: "acoustic guitar, no drums" or "piano-led, orchestral strings." The more specific, the better.
+    </div>
+    <div class="fix-guidance" id="fix-intro">
+      <strong style="color:var(--blue);">Intro or ending</strong><br><br>
+      Suno's <strong>Extend</strong> tool lets you add to the beginning or end of a song. For paid users, <strong>Replace Section</strong> lets you regenerate just the intro or outro while keeping the rest. Check your Suno plan for available editing tools.
+    </div>
+    <div class="fix-guidance" id="fix-section">
+      <strong style="color:var(--blue);">A specific section</strong><br><br>
+      Suno's <strong>Replace Section</strong> (available on some plans) lets you select and regenerate a specific part of the song — a verse, chorus, or bridge — without changing the rest. If that is not available on your plan, try regenerating the full song with a more specific Style description.
+    </div>
+    <div class="fix-guidance" id="fix-lyrics">
+      <strong style="color:var(--blue);">Lyrics or pronunciation</strong><br><br>
+      Go back to Session 2 to revise your lyrics, then return here with the updated version. For pronunciation of a specific word, you can use Suno's <strong>Remix/Edit</strong> to adjust that section, or try adding phonetic spelling in brackets in the lyrics (e.g. [pro-nun-see-AY-shun]).
+    </div>
+    <div class="fix-guidance" id="fix-other">
+      <strong style="color:var(--blue);">Something else</strong><br><br>
+      Update your Sound Board selections above to better match what you are hearing in your head, rebuild your Style description, and generate a new version. If you are not sure what to change, try generating 2 to 3 more versions with the same settings — Suno produces variations each time.
+    </div>
+    <div style="margin-top:18px;border-top:1px solid var(--bw);padding-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button onclick="pickSong('pick',this)" class="green-btn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        That's It
+      </button>
+    </div>
+  </div>
+
+  <!-- OPTIONAL: COMPARE VERSIONS -->
+  <button class="compare-toggle" onclick="toggleCompare()">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+    Compare My Versions
+  </button>
+  <div class="compare-panel" id="compare-panel">
+    <p style="font-size:13px;color:var(--card);margin-bottom:16px;line-height:1.65;">Paste links to two versions and pick the one that feels like your song.</p>
+    <div class="compare-grid">
+      <div class="compare-version">
+        <div class="cv-label">Version A</div>
+        <input type="url" class="cv-input" id="compare-a" placeholder="Suno link..." oninput="saveCompareLink('a',this.value)">
+        <button class="cv-pick-btn" id="cv-pick-a" onclick="pickVersion('a')">This is the one</button>
+      </div>
+      <div class="compare-version">
+        <div class="cv-label">Version B</div>
+        <input type="url" class="cv-input" id="compare-b" placeholder="Suno link..." oninput="saveCompareLink('b',this.value)">
+        <button class="cv-pick-btn" id="cv-pick-b" onclick="pickVersion('b')">This is the one</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLETION -->
+  <div class="completion" id="completion">
+    <div class="completion-eyebrow">Session 03 — Complete</div>
+    <div class="completion-title">Your song exists.</div>
+    <div class="completion-sub">You started with words. Now you can press play.</div>
+    <div id="completion-ssf"></div>
+    <div style="border-top:1px solid rgba(39,174,96,0.2);padding-top:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <button class="primary-btn" onclick="goNext()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Enter the Visual Studio
+      </button>
+      <div style="font-size:11px;color:var(--muted);font-family:'Courier New',monospace;">→ Session 04</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── SCROLL REVEAL ──
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.05,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);var r=el.getBoundingClientRect();if(r.top<window.innerHeight)el.classList.add('visible');});
+
+// ── WAVEFORM ──
+function buildWave(id){var el=document.getElementById(id);if(!el)return;var h=[3,5,8,12,18,24,16,10,6,4,8,14,22,28,20,14,8,5,10,16,24,32,22,14,8,5,3,6,10,16,24,20,14,8,5,3,6,12,18,26,20,12,6,4,8,14,22,16,10,5,3,6,10,18,26,20,12,6,4,8];h.forEach(function(v){var b=document.createElement('div');b.className='wave-bar';b.style.height=v+'px';el.appendChild(b);});}
+['wave1','wave2','wave3'].forEach(buildWave);
+
+// ── SOUND BOARD STATE ──
+var selectedEnergy='', selectedFeel='', selectedVocal='';
+
+// ── LOAD FROM PROJECT ──
+(function(){
+  var p = AISProject.get();
+
+  // Song So Far card
+  AISProject.renderSongCard('ssf-card-container', ['concept','lyrics'], 'Now let\'s hear it.');
+
+  // Direction display
+  var genre = p.concept.genre;
+  var mood  = p.concept.mood;
+  var feeling = p.concept.feeling;
+  var chips = [];
+  if(genre) chips.push('<div class="dd-chip">Genre: <span>'+escHtml(genre)+'</span></div>');
+  if(mood)  chips.push('<div class="dd-chip">Mood: <span>'+escHtml(mood)+'</span></div>');
+  if(feeling) chips.push('<div class="dd-chip">Feeling: <span>'+escHtml(feeling)+'</span></div>');
+  if(chips.length > 0){
+    var dd = document.getElementById('direction-display');
+    var dc = document.getElementById('direction-chips');
+    if(dd) dd.style.display = 'block';
+    if(dc) dc.innerHTML = chips.join('');
+  }
+
+  // Restore Sound Board selections
+  var prod = p.production;
+  if(prod.soundDirection){
+    var parts = prod.soundDirection.split('|');
+    if(parts[0]){restoreTag('energy-grid', parts[0].trim()); selectedEnergy=parts[0].trim();}
+    if(parts[1]){restoreTag('feel-grid', parts[1].trim()); selectedFeel=parts[1].trim();}
+    if(parts[2]){restoreTag('vocal-grid', parts[2].trim()); selectedVocal=parts[2].trim();}
+    updateSbStatus();
+  }
+
+  // Restore lyrics display
+  var lyrics = AISProject.approvedLyrics();
+  var lyrEl = document.getElementById('suno-lyrics-display');
+  if(lyrEl && lyrics){lyrEl.textContent = lyrics;}
+
+  // Restore title
+  var titleLine = extractTitle(AISProject.approvedBlueprint());
+  var titleEl = document.getElementById('suno-title-display');
+  if(titleEl && titleLine){titleEl.textContent = titleLine;}
+
+  // Restore style if already built
+  if(prod.sunoPrompt){
+    var styleEl = document.getElementById('suno-style-display');
+    if(styleEl) styleEl.textContent = prod.sunoPrompt;
+  } else {
+    buildStyleDescription();
+  }
+
+  // Restore song links
+  if(prod.songLinks && prod.songLinks.length > 0){
+    var linkA = document.getElementById('song-link-a');
+    if(linkA) linkA.value = prod.songLinks[0] || '';
+  }
+
+  // If already completed
+  if(prod.selectedVersion){
+    showCompletion();
+  }
+})();
+
+function extractTitle(bp){
+  if(!bp) return '';
+  var m = bp.match(/working title[:\s]+([^\n]+)/i);
+  if(m) return m[1].trim().replace(/^["']|["']$/g,'');
+  return '';
+}
+
+function restoreTag(gridId, value){
+  var grid = document.getElementById(gridId);
+  if(!grid) return;
+  grid.querySelectorAll('.tag-btn').forEach(function(b){
+    if(b.textContent.trim() === value) b.classList.add('selected');
+  });
+}
+
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+// ── TAG SELECTION ──
+function selectTag(btn, group, value){
+  btn.closest('.tag-grid').querySelectorAll('.tag-btn').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+  if(group==='energy') selectedEnergy = value;
+  if(group==='feel')   selectedFeel   = value;
+  if(group==='vocal')  selectedVocal  = value;
+  updateSbStatus();
+  buildStyleDescription();
+  saveSoundBoard();
+}
+
+function updateSbStatus(){
+  var count = [selectedEnergy,selectedFeel,selectedVocal].filter(Boolean).length;
+  var el = document.getElementById('sb-fill-status');
+  if(el){
+    el.textContent = count + ' of 3 selected';
+    el.style.color = count === 3 ? 'var(--green)' : 'var(--muted)';
+  }
+}
+
+function buildStyleDescription(){
+  var p = AISProject.get();
+  var parts = [];
+  if(p.concept.genre)  parts.push(p.concept.genre);
+  if(p.concept.mood)   parts.push(p.concept.mood);
+  if(selectedEnergy)   parts.push(selectedEnergy);
+  if(selectedFeel)     parts.push(selectedFeel + ' production');
+  if(selectedVocal)    parts.push(selectedVocal + ' vocals');
+  if(p.concept.feeling) parts.push(p.concept.feeling);
+  if(p.concept.avoid)   parts.push('avoid: ' + p.concept.avoid);
+
+  var style = parts.join(', ');
+  var el = document.getElementById('suno-style-display');
+  if(el){
+    if(style){el.textContent = style;}
+    else{el.textContent = '[Select Energy, Production Feel, and Vocal Feel above to build your style description]';}
+  }
+  // Save to project
+  AISProject.update('production.sunoPrompt', style);
+}
+
+function saveSoundBoard(){
+  var direction = [selectedEnergy, selectedFeel, selectedVocal].filter(Boolean).join(' | ');
+  AISProject.update('production.soundDirection', direction);
+}
+
+// ── SONG LINKS ──
+function saveSongLink(val, slot){
+  var p = AISProject.get();
+  if(!p.production.songLinks) p.production.songLinks = [];
+  if(slot === 'a') p.production.songLinks[0] = val;
+  if(slot === 'b') p.production.songLinks[1] = val;
+  AISProject.save(p);
+}
+
+function saveCompareLink(slot, val){
+  saveSongLink(val, slot);
+}
+
+// ── PICK IT / FIX IT ──
+function pickSong(choice, btn){
+  document.querySelectorAll('.pifi-btn').forEach(function(b){b.classList.remove('sel-pick','sel-fix');});
+  var fp = document.getElementById('fix-panel');
+  if(choice === 'fix'){
+    btn.classList.add('sel-fix');
+    if(fp) fp.classList.add('show');
+  } else {
+    btn.classList.add('sel-pick');
+    if(fp) fp.classList.remove('show');
+    // Save selected version
+    var linkA = document.getElementById('song-link-a');
+    var selectedLink = linkA ? linkA.value.trim() : '';
+    AISProject.update('production.selectedVersion', selectedLink || 'selected');
+    showCompletion();
+  }
+}
+
+function showFixGuidance(type, btn){
+  var wasActive = btn.classList.contains('active');
+  document.querySelectorAll('.fix-chip').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.fix-guidance').forEach(function(g){g.classList.remove('show');});
+  if(!wasActive){
+    btn.classList.add('active');
+    var el = document.getElementById('fix-'+type);
+    if(el) el.classList.add('show');
+  }
+}
+
+// ── COMPARE VERSIONS ──
+function toggleCompare(){
+  var panel = document.getElementById('compare-panel');
+  if(panel) panel.classList.toggle('show');
+}
+
+function pickVersion(slot){
+  document.querySelectorAll('.cv-pick-btn').forEach(function(b){b.classList.remove('selected');});
+  var btn = document.getElementById('cv-pick-'+slot);
+  if(btn) btn.classList.add('selected');
+  var input = document.getElementById('compare-'+slot);
+  var link = input ? input.value.trim() : '';
+  AISProject.update('production.selectedVersion', link || 'version-'+slot);
+  showCompletion();
+}
+
+// ── COMPLETION ──
+function showCompletion(){
+  var comp = document.getElementById('completion');
+  if(!comp) return;
+  comp.classList.add('show');
+  AISProject.renderSongCard('completion-ssf', ['concept','lyrics','production'], 'Now let\'s give your song a world.');
+  setTimeout(function(){comp.scrollIntoView({behavior:'smooth',block:'nearest'});}, 100);
+}
+
+// ── COPY ──
+function copyBlock(btn, id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  var text = el.innerText || el.textContent;
+  var orig = btn.innerHTML;
+  function ok(){btn.classList.add('copied');btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!';setTimeout(function(){btn.classList.remove('copied');btn.innerHTML=orig;},2500);}
+  function fb(){btn.innerHTML='Selected — press Ctrl+C / Cmd+C';setTimeout(function(){btn.innerHTML=orig;},4000);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok).catch(function(){doFallback(text,ok,fb);});}else{doFallback(text,ok,fb);}
+}
+function doFallback(text,ok,fb){var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0;';document.body.appendChild(ta);ta.focus();ta.select();var res=false;try{res=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);if(res){ok();}else{fb();}}
+
+function goNext(){try{window.parent.postMessage({action:'teachable_next'},'*');}catch(e){}}
+</script>
+</body>
+</html>
