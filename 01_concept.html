@@ -1329,8 +1329,10 @@ function selectStart(path,card){
   // Deselect all desktop + mobile cards
   document.querySelectorAll('.sp-card,.sp-mobile-card').forEach(function(c){c.classList.remove('selected');});
   document.querySelectorAll('.path-panel').forEach(function(p){
-    p.classList.remove('show','visible');
-    setTimeout(function(){if(!p.classList.contains('show'))p.style.display='none';},350);
+    if(p.id!=='path-'+path){
+      p.classList.remove('show','visible');
+      setTimeout(function(){if(!p.classList.contains('show'))p.style.display='none';},350);
+    }
   });
   // Select both desktop and mobile version of the same card
   var desktopCard=document.getElementById('card-'+path);
