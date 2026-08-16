@@ -171,10 +171,16 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
 .studio-heading{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:6px;letter-spacing:-.02em;}
 .studio-sub{font-size:13px;color:var(--card);margin-bottom:24px;line-height:1.6;}
 
-/* ── VIDEO PLACEHOLDER ── */
-.vid-slot{border:1px solid var(--bw);border-left:3px solid var(--muted);padding:12px 16px;margin-bottom:28px;display:flex;align-items:center;gap:12px;}
-.vid-slot svg{width:16px;height:16px;color:var(--muted);flex-shrink:0;}
-.vid-slot p{font-size:12px;color:var(--muted);margin:0;font-style:italic;}
+/* ── SESSION DEMO VIDEO ── */
+.session-demo{border:1px solid var(--bw2);border-top:2px solid var(--gold);background:var(--navy-4);box-shadow:var(--sh);margin-bottom:32px;overflow:hidden;}
+.session-demo-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 16px;border-bottom:1px solid var(--bw);background:rgba(245,166,35,0.05);}
+.session-demo-label{font-size:9px;font-weight:900;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;}
+.session-demo-label::before{content:'';width:7px;height:7px;background:var(--gold);box-shadow:0 0 0 3px rgba(245,166,35,0.12);}
+.session-demo-runtime{font-size:10px;font-family:'Courier New',monospace;color:var(--muted);white-space:nowrap;}
+.session-demo-frame{position:relative;width:100%;aspect-ratio:16 / 9;background:#080C12;}
+.session-demo-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;}
+.session-demo-note{margin:0;padding:11px 16px 13px;color:var(--card);font-size:12px;line-height:1.55;}
+@media(max-width:560px){.session-demo{margin-bottom:28px;}.session-demo-header{padding:10px 12px;}.session-demo-note{padding:10px 12px 12px;font-size:11px;}.session-demo-label{font-size:8px;letter-spacing:2px;}.session-demo-runtime{font-size:9px;}}
 
 /* ── EXAMPLE TOGGLE ── */
 .example-toggle{display:flex;align-items:center;gap:8px;background:none;border:none;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;padding:6px 0;margin-bottom:14px;text-decoration:underline;text-underline-offset:3px;font-family:'Inter',sans-serif;}
@@ -737,10 +743,16 @@ body{background:var(--navy);color:var(--off);font-family:'Inter',sans-serif;font
   <div class="path-panel" id="path-idea">
 
     <div class="studio-section">
-      <div class="vid-slot">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
-        <p>WATCH ME: From Story Bank to Song Blueprint — 2 to 3 min demo — coming soon</p>
-      </div>
+      <section class="session-demo" aria-label="Session 1 demonstration video">
+        <div class="session-demo-header">
+          <div class="session-demo-label">Watch Me: From Story Bank to Song Blueprint</div>
+          <div class="session-demo-runtime">SESSION 01 DEMO</div>
+        </div>
+        <div class="session-demo-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/mYTjMF-cji0?rel=0" title="Watch Me: From Story Bank to Song Blueprint" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <p class="session-demo-note">Watch the workflow once, then make it yours. Keep ChatGPT open as you work.</p>
+      </section>
       <div class="studio-label">Tell me about the song</div>
       <div class="studio-heading">What's this song about?</div>
       <p style="font-size:14px;color:var(--card);margin-bottom:20px;line-height:1.65;">The more specific you are, the more your song will sound like yours.</p>
