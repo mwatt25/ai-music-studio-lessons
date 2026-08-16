@@ -1331,7 +1331,7 @@ function selectStart(path,card){
   document.querySelectorAll('.path-panel').forEach(function(p){
     if(p.id!=='path-'+path){
       p.classList.remove('show','visible');
-      setTimeout(function(){if(!p.classList.contains('show'))p.style.display='none';},350);
+      p.style.display='none';
     }
   });
   // Select both desktop and mobile version of the same card
@@ -1352,11 +1352,8 @@ function selectStart(path,card){
   var panel=document.getElementById('path-'+path);
   if(panel){
     panel.style.display='block';
-    requestAnimationFrame(function(){requestAnimationFrame(function(){
-      panel.classList.add('show');
-      setTimeout(function(){panel.classList.add('visible');},10);
-      panel.scrollIntoView({behavior:'smooth',block:'nearest'});
-    });});
+    panel.classList.add('show');
+    requestAnimationFrame(function(){panel.classList.add('visible');});
     restorePath(path);
   }
 }
@@ -1364,7 +1361,7 @@ function selectStart(path,card){
 function expandSelector(){
   var exp=document.getElementById('sp-expanded');
   var col=document.getElementById('sp-collapsed');
-  document.querySelectorAll('.path-panel').forEach(function(p){p.classList.remove('show','visible');setTimeout(function(){if(!p.classList.contains('show'))p.style.display='none';},350);});
+  document.querySelectorAll('.path-panel').forEach(function(p){p.classList.remove('show','visible');p.style.display='none';});
   document.querySelectorAll('.sp-card,.sp-mobile-card').forEach(function(c){c.classList.remove('selected');});
   if(exp)exp.style.display='block';
   if(col)col.style.display='none';
